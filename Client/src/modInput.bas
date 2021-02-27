@@ -63,49 +63,98 @@ Continue:
         End If
     End If
 
-    'Move Up
-    If GetKeyState(vbKeyUp) < 0 Then
-        DirUp = True
-        DirDown = False
-        DirLeft = False
-        DirRight = False
-        Exit Sub
+    If frmMain.optWOn.value = True Then
+        If frmMain.txtMyChat.Visible = False Then
+            'Move Up
+            If GetKeyState(vbKeyW) < 0 Then
+                DirUp = True
+                DirDown = False
+                DirLeft = False
+                DirRight = False
+                Exit Sub
+            Else
+                DirUp = False
+            End If
+
+            'Move Right
+            If GetKeyState(vbKeyD) < 0 Then
+                DirUp = False
+                DirDown = False
+                DirLeft = False
+                DirRight = True
+                Exit Sub
+            Else
+                DirRight = False
+            End If
+
+            'Move down
+            If GetKeyState(vbKeyS) < 0 Then
+                DirUp = False
+                DirDown = True
+                DirLeft = False
+                DirRight = False
+                Exit Sub
+            Else
+                DirDown = False
+            End If
+
+            'Move left
+            If GetKeyState(vbKeyA) < 0 Then
+                DirUp = False
+                DirDown = False
+                DirLeft = True
+                DirRight = False
+                Exit Sub
+            Else
+                DirLeft = False
+            End If
+        End If
     Else
-        DirUp = False
+        'Move Up
+        If GetKeyState(vbKeyUp) < 0 Then
+            DirUp = True
+            DirDown = False
+            DirLeft = False
+            DirRight = False
+            Exit Sub
+        Else
+            DirUp = False
+        End If
+
+        'Move Right
+        If GetKeyState(vbKeyRight) < 0 Then
+            DirUp = False
+            DirDown = False
+            DirLeft = False
+            DirRight = True
+            Exit Sub
+        Else
+            DirRight = False
+        End If
+
+        'Move down
+        If GetKeyState(vbKeyDown) < 0 Then
+            DirUp = False
+            DirDown = True
+            DirLeft = False
+            DirRight = False
+            Exit Sub
+        Else
+            DirDown = False
+        End If
+
+        'Move left
+        If GetKeyState(vbKeyLeft) < 0 Then
+            DirUp = False
+            DirDown = False
+            DirLeft = True
+            DirRight = False
+            Exit Sub
+        Else
+            DirLeft = False
+        End If
     End If
 
-    'Move Right
-    If GetKeyState(vbKeyRight) < 0 Then
-        DirUp = False
-        DirDown = False
-        DirLeft = False
-        DirRight = True
-        Exit Sub
-    Else
-        DirRight = False
-    End If
-
-    'Move down
-    If GetKeyState(vbKeyDown) < 0 Then
-        DirUp = False
-        DirDown = True
-        DirLeft = False
-        DirRight = False
-        Exit Sub
-    Else
-        DirDown = False
-    End If
-
-    'Move left
-    If GetKeyState(vbKeyLeft) < 0 Then
-        DirUp = False
-        DirDown = False
-        DirLeft = True
-        DirRight = False
-        Exit Sub
-    Else
-        DirLeft = False
-    End If
 
     ' Error handler
     Exit Sub

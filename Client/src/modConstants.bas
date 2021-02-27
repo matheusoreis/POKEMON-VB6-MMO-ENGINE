@@ -54,15 +54,15 @@ Public Const BankColumns As Long = 13
 ' spells constants
 Public Const SpellTop As Long = 24
 Public Const SpellLeft As Long = 12
-Public Const SpellOffsetY As Long = 3
-Public Const SpellOffsetX As Long = 3
+Public Const SpellOffsetY As Long = 49
+Public Const SpellOffsetX As Long = 50
 Public Const SpellColumns As Long = 5
 
 ' shop constants
-Public Const ShopTop As Long = 6
-Public Const ShopLeft As Long = 8
-Public Const ShopOffsetY As Long = 2
-Public Const ShopOffsetX As Long = 4
+Public Const ShopTop As Long = 9
+Public Const ShopLeft As Long = 9
+Public Const ShopOffsetY As Long = 8
+Public Const ShopOffsetX As Long = 8
 Public Const ShopColumns As Long = 5
 
 ' Character consts

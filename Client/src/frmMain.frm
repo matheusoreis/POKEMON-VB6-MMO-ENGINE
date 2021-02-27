@@ -49,7 +49,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   109
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   214
-      TabIndex        =   236
+      TabIndex        =   229
       Top             =   12480
       Visible         =   0   'False
       Width           =   3210
@@ -80,7 +80,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   202
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   257
-      TabIndex        =   215
+      TabIndex        =   208
       Top             =   5640
       Visible         =   0   'False
       Width           =   3855
@@ -96,18 +96,17 @@ Begin VB.Form frmMain
          ScaleHeight     =   96.043
          ScaleMode       =   0  'User
          ScaleWidth      =   94
-         TabIndex        =   216
+         TabIndex        =   209
          Top             =   285
          Width           =   1410
          Begin VB.Label lblPokeInfoDesc 
             Alignment       =   2  'Center
             BackStyle       =   0  'Transparent
-            Caption         =   "Spell: "
             ForeColor       =   &H00FFFFFF&
             Height          =   195
             Index           =   6
             Left            =   120
-            TabIndex        =   232
+            TabIndex        =   225
             Top             =   29
             Width           =   1155
          End
@@ -120,7 +119,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   2
          Left            =   2040
-         TabIndex        =   231
+         TabIndex        =   224
          Top             =   1545
          Width           =   510
       End
@@ -132,7 +131,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   1
          Left            =   2040
-         TabIndex        =   230
+         TabIndex        =   223
          Top             =   1320
          Width           =   975
       End
@@ -153,7 +152,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   0
          Left            =   2010
-         TabIndex        =   229
+         TabIndex        =   222
          Top             =   300
          Width           =   1785
       End
@@ -165,7 +164,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   3
          Left            =   2040
-         TabIndex        =   228
+         TabIndex        =   221
          Top             =   1095
          Width           =   450
       End
@@ -177,7 +176,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   4
          Left            =   2040
-         TabIndex        =   227
+         TabIndex        =   220
          Top             =   645
          Width           =   360
       End
@@ -189,7 +188,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   5
          Left            =   2040
-         TabIndex        =   226
+         TabIndex        =   219
          Top             =   870
          Width           =   375
       End
@@ -200,7 +199,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   8
          Left            =   2040
-         TabIndex        =   225
+         TabIndex        =   218
          Top             =   1770
          Width           =   1575
       End
@@ -211,7 +210,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   9
          Left            =   2040
-         TabIndex        =   224
+         TabIndex        =   217
          Top             =   2220
          Width           =   1455
       End
@@ -222,7 +221,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   10
          Left            =   2040
-         TabIndex        =   223
+         TabIndex        =   216
          Top             =   2445
          Width           =   1335
       End
@@ -234,7 +233,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   11
          Left            =   2040
-         TabIndex        =   222
+         TabIndex        =   215
          Top             =   2670
          Width           =   540
       End
@@ -246,55 +245,51 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   12
          Left            =   2040
-         TabIndex        =   221
+         TabIndex        =   214
          Top             =   1995
          Width           =   405
       End
       Begin VB.Label lblPokeInfoDesc 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   "Spell: "
          ForeColor       =   &H00FFFFFF&
          Height          =   195
          Index           =   13
          Left            =   225
-         TabIndex        =   220
+         TabIndex        =   213
          Top             =   1875
          Width           =   1635
       End
       Begin VB.Label lblPokeInfoDesc 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   "Spell: "
          ForeColor       =   &H00FFFFFF&
          Height          =   195
          Index           =   14
          Left            =   225
-         TabIndex        =   219
+         TabIndex        =   212
          Top             =   2100
          Width           =   1635
       End
       Begin VB.Label lblPokeInfoDesc 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   "Spell: "
          ForeColor       =   &H00FFFFFF&
          Height          =   195
          Index           =   15
          Left            =   225
-         TabIndex        =   218
+         TabIndex        =   211
          Top             =   2325
          Width           =   1635
       End
       Begin VB.Label lblPokeInfoDesc 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   "Spell:"
          ForeColor       =   &H00FFFFFF&
          Height          =   195
          Index           =   16
          Left            =   225
-         TabIndex        =   217
+         TabIndex        =   210
          Top             =   2550
          Width           =   1575
       End
@@ -313,7 +308,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
-      TabIndex        =   211
+      TabIndex        =   204
       Top             =   3075
       Width           =   2670
       Begin VB.Label lblPokeSpell 
@@ -334,7 +329,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   4
          Left            =   105
-         TabIndex        =   212
+         TabIndex        =   205
          Top             =   60
          Width           =   2445
       End
@@ -353,7 +348,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
-      TabIndex        =   209
+      TabIndex        =   202
       Top             =   2550
       Width           =   2670
       Begin VB.Label lblPokeSpell 
@@ -374,7 +369,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   3
          Left            =   105
-         TabIndex        =   210
+         TabIndex        =   203
          Top             =   60
          Width           =   2445
       End
@@ -393,7 +388,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
-      TabIndex        =   207
+      TabIndex        =   200
       Top             =   2025
       Width           =   2670
       Begin VB.Label lblPokeSpell 
@@ -414,7 +409,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   2
          Left            =   105
-         TabIndex        =   208
+         TabIndex        =   201
          Top             =   60
          Width           =   2445
       End
@@ -431,7 +426,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   333
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   160
-      TabIndex        =   204
+      TabIndex        =   197
       Top             =   3600
       Visible         =   0   'False
       Width           =   2400
@@ -478,7 +473,7 @@ Begin VB.Form frmMain
       End
       Begin VB.Image imgButton 
          Height          =   465
-         Index           =   5
+         Index           =   7
          Left            =   60
          Picture         =   "frmMain.frx":7B9A6
          Top             =   2445
@@ -527,7 +522,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   186
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   376
-      TabIndex        =   198
+      TabIndex        =   191
       Top             =   120
       Visible         =   0   'False
       Width           =   5640
@@ -541,7 +536,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   64
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   64
-         TabIndex        =   202
+         TabIndex        =   195
          Top             =   585
          Width           =   960
       End
@@ -553,7 +548,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   105
-         TabIndex        =   233
+         TabIndex        =   226
          Top             =   1560
          Width           =   1215
       End
@@ -582,7 +577,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   2
          Left            =   15
-         TabIndex        =   201
+         TabIndex        =   194
          Top             =   2295
          Width           =   1335
       End
@@ -603,14 +598,13 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   1
          Left            =   15
-         TabIndex        =   200
+         TabIndex        =   193
          Top             =   1920
          Width           =   1335
       End
       Begin VB.Label lblGym 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":C5C73
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9
@@ -624,7 +618,7 @@ Begin VB.Form frmMain
          Height          =   1920
          Index           =   0
          Left            =   1515
-         TabIndex        =   199
+         TabIndex        =   192
          Top             =   600
          Width           =   3855
       End
@@ -646,8 +640,8 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   2400
-      Left            =   34800
-      Picture         =   "frmMain.frx":C5D8B
+      Left            =   36240
+      Picture         =   "frmMain.frx":C5C73
       ScaleHeight     =   160
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   180
@@ -655,16 +649,56 @@ Begin VB.Form frmMain
       Top             =   16080
       Visible         =   0   'False
       Width           =   2700
+      Begin VB.OptionButton optWOff 
+         Appearance      =   0  'Flat
+         BackColor       =   &H00000000&
+         Caption         =   "Off"
+         BeginProperty Font 
+            Name            =   "Georgia"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
+         Left            =   1680
+         TabIndex        =   249
+         Top             =   2760
+         Width           =   735
+      End
+      Begin VB.OptionButton optWOn 
+         Appearance      =   0  'Flat
+         BackColor       =   &H00000000&
+         Caption         =   "On"
+         BeginProperty Font 
+            Name            =   "Georgia"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
+         Left            =   1680
+         TabIndex        =   248
+         Top             =   2520
+         Width           =   735
+      End
       Begin VB.PictureBox PicDesconect 
          AutoSize        =   -1  'True
          BorderStyle     =   0  'None
          Height          =   1890
          Left            =   30
-         Picture         =   "frmMain.frx":DAF4F
+         Picture         =   "frmMain.frx":DAE37
          ScaleHeight     =   126
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   176
-         TabIndex        =   239
+         TabIndex        =   232
          Top             =   435
          Visible         =   0   'False
          Width           =   2640
@@ -676,7 +710,7 @@ Begin VB.Form frmMain
             ForeColor       =   &H00FFFFFF&
             Height          =   495
             Left            =   120
-            TabIndex        =   240
+            TabIndex        =   233
             Top             =   405
             Width           =   2415
          End
@@ -684,7 +718,7 @@ Begin VB.Form frmMain
             Height          =   345
             Index           =   23
             Left            =   450
-            Picture         =   "frmMain.frx":EB373
+            Picture         =   "frmMain.frx":EB25B
             Top             =   1200
             Width           =   1695
          End
@@ -694,10 +728,10 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   135
-         Picture         =   "frmMain.frx":ED243
+         Picture         =   "frmMain.frx":ED12B
          ScaleHeight     =   225
          ScaleWidth      =   240
-         TabIndex        =   238
+         TabIndex        =   231
          Top             =   1200
          Width           =   240
       End
@@ -706,10 +740,10 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   135
-         Picture         =   "frmMain.frx":EF12B
+         Picture         =   "frmMain.frx":EF013
          ScaleHeight     =   225
          ScaleWidth      =   240
-         TabIndex        =   123
+         TabIndex        =   116
          Top             =   870
          Width           =   240
       End
@@ -718,10 +752,10 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   135
-         Picture         =   "frmMain.frx":F1013
+         Picture         =   "frmMain.frx":F0EFB
          ScaleHeight     =   225
          ScaleWidth      =   240
-         TabIndex        =   122
+         TabIndex        =   115
          Top             =   540
          Width           =   240
       End
@@ -729,11 +763,11 @@ Begin VB.Form frmMain
          BackColor       =   &H00000000&
          BorderStyle     =   0  'None
          Height          =   615
-         Left            =   480
+         Left            =   360
          ScaleHeight     =   615
          ScaleWidth      =   735
          TabIndex        =   24
-         Top             =   2520
+         Top             =   2400
          Width           =   735
          Begin VB.OptionButton optSOn 
             Appearance      =   0  'Flat
@@ -831,7 +865,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   22
          Left            =   480
-         Picture         =   "frmMain.frx":F2EFB
+         Picture         =   "frmMain.frx":F2DE3
          Top             =   1800
          Width           =   1695
       End
@@ -839,7 +873,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   13
          Left            =   2355
-         Picture         =   "frmMain.frx":F4DCB
+         Picture         =   "frmMain.frx":F4CB3
          Top             =   15
          Width           =   330
       End
@@ -852,11 +886,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   3735
       Left            =   33360
-      Picture         =   "frmMain.frx":F54F7
+      Picture         =   "frmMain.frx":F53DF
       ScaleHeight     =   249
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   161
-      TabIndex        =   74
+      TabIndex        =   67
       Top             =   120
       Visible         =   0   'False
       Width           =   2415
@@ -864,7 +898,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   4
          Left            =   2070
-         Picture         =   "frmMain.frx":112BFF
+         Picture         =   "frmMain.frx":112AE7
          Top             =   15
          Width           =   330
       End
@@ -872,7 +906,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   11
          Left            =   360
-         Picture         =   "frmMain.frx":11332B
+         Picture         =   "frmMain.frx":113213
          Top             =   3105
          Width           =   1695
       End
@@ -906,7 +940,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   4
          Left            =   750
-         TabIndex        =   81
+         TabIndex        =   74
          Top             =   2475
          Width           =   2505
       End
@@ -926,7 +960,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   750
-         TabIndex        =   80
+         TabIndex        =   73
          Top             =   1875
          Width           =   2505
       End
@@ -946,7 +980,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   2
          Left            =   750
-         TabIndex        =   79
+         TabIndex        =   72
          Top             =   1275
          Width           =   2505
       End
@@ -966,7 +1000,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   1
          Left            =   750
-         TabIndex        =   78
+         TabIndex        =   71
          Top             =   675
          Width           =   3105
       End
@@ -1010,11 +1044,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H00000000&
       Height          =   4215
       Left            =   30840
-      Picture         =   "frmMain.frx":1151FB
+      Picture         =   "frmMain.frx":1150E3
       ScaleHeight     =   281
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   594
-      TabIndex        =   177
+      TabIndex        =   170
       Top             =   3960
       Visible         =   0   'False
       Width           =   8910
@@ -1034,7 +1068,7 @@ Begin VB.Form frmMain
          Height          =   3435
          IntegralHeight  =   0   'False
          Left            =   165
-         TabIndex        =   178
+         TabIndex        =   171
          Top             =   570
          Width           =   2355
       End
@@ -1042,7 +1076,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   7
          Left            =   8565
-         Picture         =   "frmMain.frx":18F877
+         Picture         =   "frmMain.frx":18F75F
          Top             =   15
          Width           =   330
       End
@@ -1068,7 +1102,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   7
          Left            =   2760
-         TabIndex        =   186
+         TabIndex        =   179
          Top             =   3795
          Width           =   2655
       End
@@ -1080,7 +1114,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   6
          Left            =   2760
-         TabIndex        =   185
+         TabIndex        =   178
          Top             =   3585
          Width           =   2415
       End
@@ -1092,7 +1126,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   5
          Left            =   2760
-         TabIndex        =   184
+         TabIndex        =   177
          Top             =   3375
          Width           =   2415
       End
@@ -1104,7 +1138,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   5760
-         TabIndex        =   183
+         TabIndex        =   176
          Top             =   2760
          Width           =   3015
       End
@@ -1116,31 +1150,31 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   4
          Left            =   5760
-         TabIndex        =   182
+         TabIndex        =   175
          Top             =   3000
          Width           =   3015
       End
       Begin VB.Label lblQuestInfo 
          BackColor       =   &H00FFFFFF&
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":18FFA3
+         Caption         =   $"frmMain.frx":18FE8B
          ForeColor       =   &H00FFFFFF&
          Height          =   1575
          Index           =   2
          Left            =   5760
-         TabIndex        =   181
+         TabIndex        =   174
          Top             =   1080
          Width           =   2835
       End
       Begin VB.Label lblQuestInfo 
          BackColor       =   &H00FFFFFF&
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":190036
+         Caption         =   $"frmMain.frx":18FF1E
          ForeColor       =   &H00FFFFFF&
          Height          =   2055
          Index           =   1
          Left            =   2880
-         TabIndex        =   180
+         TabIndex        =   173
          Top             =   1080
          Width           =   2505
       End
@@ -1153,7 +1187,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   0
          Left            =   2760
-         TabIndex        =   179
+         TabIndex        =   172
          Top             =   615
          Width           =   5895
       End
@@ -1166,11 +1200,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2280
       Left            =   30840
-      Picture         =   "frmMain.frx":19011E
+      Picture         =   "frmMain.frx":190006
       ScaleHeight     =   152
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   258
-      TabIndex        =   105
+      TabIndex        =   98
       Top             =   14640
       Visible         =   0   'False
       Width           =   3870
@@ -1183,7 +1217,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   102
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   102
-         TabIndex        =   203
+         TabIndex        =   196
          Top             =   555
          Width           =   1530
       End
@@ -1196,10 +1230,10 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   8
          Left            =   3135
-         Picture         =   "frmMain.frx":1ACE22
+         Picture         =   "frmMain.frx":1ACD0A
          ScaleHeight     =   270
          ScaleWidth      =   270
-         TabIndex        =   113
+         TabIndex        =   106
          Top             =   1770
          Visible         =   0   'False
          Width           =   270
@@ -1213,10 +1247,10 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   7
          Left            =   2805
-         Picture         =   "frmMain.frx":1AD254
+         Picture         =   "frmMain.frx":1AD13C
          ScaleHeight     =   270
          ScaleWidth      =   270
-         TabIndex        =   112
+         TabIndex        =   105
          Top             =   1755
          Visible         =   0   'False
          Width           =   270
@@ -1230,10 +1264,10 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   6
          Left            =   2475
-         Picture         =   "frmMain.frx":1AD686
+         Picture         =   "frmMain.frx":1AD56E
          ScaleHeight     =   270
          ScaleWidth      =   270
-         TabIndex        =   111
+         TabIndex        =   104
          Top             =   1770
          Visible         =   0   'False
          Width           =   270
@@ -1247,10 +1281,10 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   5
          Left            =   2145
-         Picture         =   "frmMain.frx":1ADAB8
+         Picture         =   "frmMain.frx":1AD9A0
          ScaleHeight     =   270
          ScaleWidth      =   270
-         TabIndex        =   110
+         TabIndex        =   103
          Top             =   1770
          Visible         =   0   'False
          Width           =   270
@@ -1263,11 +1297,11 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   4
          Left            =   3135
-         Picture         =   "frmMain.frx":1ADEEA
+         Picture         =   "frmMain.frx":1ADDD2
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
-         TabIndex        =   109
+         TabIndex        =   102
          Top             =   1470
          Visible         =   0   'False
          Width           =   240
@@ -1281,11 +1315,11 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   3
          Left            =   2805
-         Picture         =   "frmMain.frx":1AE31C
+         Picture         =   "frmMain.frx":1AE204
          ScaleHeight     =   18
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   18
-         TabIndex        =   108
+         TabIndex        =   101
          Top             =   1470
          Visible         =   0   'False
          Width           =   270
@@ -1299,11 +1333,11 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   2
          Left            =   2475
-         Picture         =   "frmMain.frx":1AE74E
+         Picture         =   "frmMain.frx":1AE636
          ScaleHeight     =   18
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   18
-         TabIndex        =   107
+         TabIndex        =   100
          Top             =   1470
          Visible         =   0   'False
          Width           =   270
@@ -1317,11 +1351,11 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   1
          Left            =   2145
-         Picture         =   "frmMain.frx":1AEB80
+         Picture         =   "frmMain.frx":1AEA68
          ScaleHeight     =   18
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   18
-         TabIndex        =   106
+         TabIndex        =   99
          Top             =   1470
          Visible         =   0   'False
          Width           =   270
@@ -1330,7 +1364,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   3
          Left            =   3525
-         Picture         =   "frmMain.frx":1AEFB2
+         Picture         =   "frmMain.frx":1AEE9A
          Top             =   15
          Width           =   330
       End
@@ -1352,7 +1386,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   1
          Left            =   1800
-         TabIndex        =   115
+         TabIndex        =   108
          Top             =   960
          Width           =   1965
       End
@@ -1374,7 +1408,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   0
          Left            =   1740
-         TabIndex        =   114
+         TabIndex        =   107
          Top             =   660
          Width           =   1995
       End
@@ -1389,11 +1423,11 @@ Begin VB.Form frmMain
       Height          =   4470
       Index           =   1
       Left            =   20640
-      Picture         =   "frmMain.frx":1AF6DE
+      Picture         =   "frmMain.frx":1AF5C6
       ScaleHeight     =   298
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   225
-      TabIndex        =   167
+      TabIndex        =   160
       Top             =   2400
       Visible         =   0   'False
       Width           =   3375
@@ -1407,11 +1441,11 @@ Begin VB.Form frmMain
          Height          =   750
          Index           =   2
          Left            =   150
-         Picture         =   "frmMain.frx":1E0A0A
+         Picture         =   "frmMain.frx":1E08F2
          ScaleHeight     =   50
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   205
-         TabIndex        =   172
+         TabIndex        =   165
          Top             =   2865
          Width           =   3075
       End
@@ -1421,11 +1455,11 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   2
          Left            =   3000
-         Picture         =   "frmMain.frx":1E829C
+         Picture         =   "frmMain.frx":1E8184
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
-         TabIndex        =   171
+         TabIndex        =   164
          Top             =   2445
          Width           =   225
       End
@@ -1435,11 +1469,11 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   1
          Left            =   3000
-         Picture         =   "frmMain.frx":1E85DE
+         Picture         =   "frmMain.frx":1E84C6
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
-         TabIndex        =   170
+         TabIndex        =   163
          Top             =   315
          Width           =   225
       End
@@ -1453,11 +1487,11 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   0
          Left            =   3030
-         Picture         =   "frmMain.frx":1E8920
+         Picture         =   "frmMain.frx":1E8808
          ScaleHeight     =   26
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   11
-         TabIndex        =   169
+         TabIndex        =   162
          Top             =   555
          Width           =   165
       End
@@ -1465,7 +1499,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   26
          Left            =   840
-         Picture         =   "frmMain.frx":1E8D0A
+         Picture         =   "frmMain.frx":1E8BF2
          Top             =   3840
          Width           =   1695
       End
@@ -1476,7 +1510,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   3360
-         TabIndex        =   168
+         TabIndex        =   161
          Top             =   3840
          Visible         =   0   'False
          Width           =   2055
@@ -1491,11 +1525,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   5445
       Left            =   16920
-      Picture         =   "frmMain.frx":1EABDA
+      Picture         =   "frmMain.frx":1EAAC2
       ScaleHeight     =   363
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   245
-      TabIndex        =   166
+      TabIndex        =   159
       Top             =   2400
       Visible         =   0   'False
       Width           =   3675
@@ -1510,7 +1544,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   32
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   32
-         TabIndex        =   245
+         TabIndex        =   238
          Top             =   615
          Width           =   480
       End
@@ -1524,11 +1558,11 @@ Begin VB.Form frmMain
          Height          =   1890
          Index           =   5
          Left            =   3285
-         Picture         =   "frmMain.frx":22BFBE
+         Picture         =   "frmMain.frx":22BEA6
          ScaleHeight     =   126
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   11
-         TabIndex        =   176
+         TabIndex        =   169
          Top             =   1860
          Visible         =   0   'False
          Width           =   165
@@ -1539,11 +1573,11 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   4
          Left            =   3255
-         Picture         =   "frmMain.frx":22D1B8
+         Picture         =   "frmMain.frx":22D0A0
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
-         TabIndex        =   175
+         TabIndex        =   168
          Top             =   1590
          Width           =   225
       End
@@ -1553,11 +1587,11 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   3
          Left            =   3255
-         Picture         =   "frmMain.frx":22D4FA
+         Picture         =   "frmMain.frx":22D3E2
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
-         TabIndex        =   174
+         TabIndex        =   167
          Top             =   4200
          Width           =   225
       End
@@ -1567,7 +1601,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   1590
          Left            =   3840
-         TabIndex        =   173
+         TabIndex        =   166
          Top             =   3240
          Width           =   2775
       End
@@ -1575,7 +1609,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   15
          Left            =   3330
-         Picture         =   "frmMain.frx":22D83C
+         Picture         =   "frmMain.frx":22D724
          Top             =   15
          Width           =   330
       End
@@ -1583,7 +1617,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   25
          Left            =   990
-         Picture         =   "frmMain.frx":22DF68
+         Picture         =   "frmMain.frx":22DE50
          Top             =   4875
          Width           =   1695
       End
@@ -1603,7 +1637,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   2
          Left            =   960
-         TabIndex        =   247
+         TabIndex        =   240
          Top             =   840
          Width           =   2385
       End
@@ -1623,14 +1657,14 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   1
          Left            =   960
-         TabIndex        =   246
+         TabIndex        =   239
          Top             =   600
          Width           =   2385
       End
       Begin VB.Image PicExp 
          Height          =   150
          Left            =   180
-         Picture         =   "frmMain.frx":22FE38
+         Picture         =   "frmMain.frx":22FD20
          Top             =   1275
          Width           =   3315
       End
@@ -1642,23 +1676,23 @@ Begin VB.Form frmMain
       Height          =   1395
       Index           =   2
       Left            =   34800
-      Picture         =   "frmMain.frx":23186A
+      Picture         =   "frmMain.frx":231752
       ScaleHeight     =   93
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   313
-      TabIndex        =   194
+      TabIndex        =   187
       Top             =   14640
       Visible         =   0   'False
       Width           =   4695
       Begin VB.Label lblVip 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":246E2A
+         Caption         =   $"frmMain.frx":246D12
          ForeColor       =   &H00FFFFFF&
          Height          =   975
          Index           =   0
          Left            =   120
-         TabIndex        =   195
+         TabIndex        =   188
          Top             =   270
          Width           =   4455
       End
@@ -1668,11 +1702,11 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   3945
       Left            =   30840
-      Picture         =   "frmMain.frx":246EED
+      Picture         =   "frmMain.frx":246DD5
       ScaleHeight     =   263
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   488
-      TabIndex        =   57
+      TabIndex        =   54
       Top             =   8280
       Visible         =   0   'False
       Width           =   7320
@@ -1682,11 +1716,11 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   105
-         Picture         =   "frmMain.frx":2A4F39
+         Picture         =   "frmMain.frx":2A4E21
          ScaleHeight     =   15
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
-         TabIndex        =   193
+         TabIndex        =   186
          Top             =   2040
          Width           =   240
       End
@@ -1697,11 +1731,11 @@ Begin VB.Form frmMain
          Height          =   1605
          Index           =   1
          Left            =   360
-         Picture         =   "frmMain.frx":2A524B
+         Picture         =   "frmMain.frx":2A5133
          ScaleHeight     =   107
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   440
-         TabIndex        =   190
+         TabIndex        =   183
          Top             =   1020
          Visible         =   0   'False
          Width           =   6600
@@ -1736,7 +1770,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   12
             Left            =   120
-            TabIndex        =   192
+            TabIndex        =   185
             Top             =   360
             Width           =   1215
          End
@@ -1757,7 +1791,7 @@ Begin VB.Form frmMain
             Height          =   975
             Index           =   11
             Left            =   1440
-            TabIndex        =   191
+            TabIndex        =   184
             Top             =   360
             Width           =   4935
          End
@@ -1768,10 +1802,10 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   150
          Left            =   825
-         Picture         =   "frmMain.frx":2C7A47
+         Picture         =   "frmMain.frx":2C792F
          ScaleHeight     =   150
          ScaleWidth      =   5670
-         TabIndex        =   188
+         TabIndex        =   181
          Top             =   1020
          Width           =   5670
       End
@@ -1779,7 +1813,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   11
          Left            =   6975
-         Picture         =   "frmMain.frx":2CA6EB
+         Picture         =   "frmMain.frx":2CA5D3
          Top             =   15
          Width           =   330
       End
@@ -1787,7 +1821,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   21
          Left            =   6165
-         Picture         =   "frmMain.frx":2CAE17
+         Picture         =   "frmMain.frx":2CACFF
          Top             =   3420
          Width           =   990
       End
@@ -1795,7 +1829,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   20
          Left            =   4965
-         Picture         =   "frmMain.frx":2CBEC3
+         Picture         =   "frmMain.frx":2CBDAB
          Top             =   3420
          Width           =   990
       End
@@ -1803,7 +1837,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   19
          Left            =   3765
-         Picture         =   "frmMain.frx":2CCF6F
+         Picture         =   "frmMain.frx":2CCE57
          Top             =   3420
          Width           =   990
       End
@@ -1811,7 +1845,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   18
          Left            =   2565
-         Picture         =   "frmMain.frx":2CE01B
+         Picture         =   "frmMain.frx":2CDF03
          Top             =   3420
          Width           =   990
       End
@@ -1819,7 +1853,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   17
          Left            =   1365
-         Picture         =   "frmMain.frx":2CF0C7
+         Picture         =   "frmMain.frx":2CEFAF
          Top             =   3420
          Width           =   990
       End
@@ -1827,7 +1861,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   16
          Left            =   165
-         Picture         =   "frmMain.frx":2D0173
+         Picture         =   "frmMain.frx":2D005B
          Top             =   3420
          Width           =   990
       End
@@ -1835,7 +1869,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   15
          Left            =   5475
-         Picture         =   "frmMain.frx":2D121F
+         Picture         =   "frmMain.frx":2D1107
          Top             =   1725
          Width           =   1695
       End
@@ -1888,7 +1922,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   7
          Left            =   240
-         TabIndex        =   189
+         TabIndex        =   182
          Top             =   1800
          Width           =   975
       End
@@ -1898,11 +1932,11 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   480
       Left            =   0
-      Picture         =   "frmMain.frx":2D30EF
+      Picture         =   "frmMain.frx":2D2FD7
       ScaleHeight     =   32
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
-      TabIndex        =   187
+      TabIndex        =   180
       Top             =   0
       Width           =   480
    End
@@ -1935,7 +1969,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   3060
       Left            =   24240
-      Picture         =   "frmMain.frx":424931
+      Picture         =   "frmMain.frx":424819
       ScaleHeight     =   204
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   214
@@ -1947,7 +1981,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   5
          Left            =   2865
-         Picture         =   "frmMain.frx":444AA5
+         Picture         =   "frmMain.frx":44498D
          Top             =   15
          Width           =   330
       End
@@ -1958,11 +1992,11 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   1245
       Left            =   3120
-      Picture         =   "frmMain.frx":4451D1
+      Picture         =   "frmMain.frx":4450B9
       ScaleHeight     =   83
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
-      TabIndex        =   196
+      TabIndex        =   189
       Top             =   180
       Width           =   2670
       Begin VB.PictureBox ImgHpTarget 
@@ -1973,10 +2007,10 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   195
          Left            =   735
-         Picture         =   "frmMain.frx":44FFDD
+         Picture         =   "frmMain.frx":44FEC5
          ScaleHeight     =   195
          ScaleWidth      =   1830
-         TabIndex        =   213
+         TabIndex        =   206
          Top             =   585
          Width           =   1830
          Begin VB.Label lblTargetInfo 
@@ -1988,7 +2022,7 @@ Begin VB.Form frmMain
             Height          =   195
             Index           =   0
             Left            =   540
-            TabIndex        =   214
+            TabIndex        =   207
             Top             =   0
             Visible         =   0   'False
             Width           =   735
@@ -2026,7 +2060,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   1
          Left            =   705
-         TabIndex        =   197
+         TabIndex        =   190
          Top             =   285
          Width           =   1890
       End
@@ -2048,7 +2082,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2460
       Left            =   27600
-      Picture         =   "frmMain.frx":4512D1
+      Picture         =   "frmMain.frx":4511B9
       ScaleHeight     =   164
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
@@ -2094,7 +2128,6 @@ Begin VB.Form frmMain
       Begin VB.Label lblItemDesc 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   """This is an example of an item's description. It  can be quite big, so we have to keep it at a decent size."""
          BeginProperty Font 
             Name            =   "Georgia"
             Size            =   9.75
@@ -2121,11 +2154,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   5430
       Left            =   25200
-      Picture         =   "frmMain.frx":46A7F5
+      Picture         =   "frmMain.frx":46A6DD
       ScaleHeight     =   362
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   370
-      TabIndex        =   84
+      TabIndex        =   77
       Top             =   12720
       Visible         =   0   'False
       Width           =   5550
@@ -2138,10 +2171,10 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   1
          Left            =   2760
-         Picture         =   "frmMain.frx":4CCCA9
+         Picture         =   "frmMain.frx":4CCB91
          ScaleHeight     =   180
          ScaleWidth      =   480
-         TabIndex        =   235
+         TabIndex        =   228
          Top             =   1875
          Visible         =   0   'False
          Width           =   480
@@ -2155,10 +2188,10 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   0
          Left            =   3285
-         Picture         =   "frmMain.frx":4CD16B
+         Picture         =   "frmMain.frx":4CD053
          ScaleHeight     =   180
          ScaleWidth      =   480
-         TabIndex        =   234
+         TabIndex        =   227
          Top             =   1875
          Visible         =   0   'False
          Width           =   480
@@ -2170,7 +2203,7 @@ Begin VB.Form frmMain
          Height          =   4650
          IntegralHeight  =   0   'False
          Left            =   165
-         TabIndex        =   86
+         TabIndex        =   79
          Top             =   570
          Width           =   2355
       End
@@ -2185,7 +2218,7 @@ Begin VB.Form frmMain
          Left            =   3345
          ScaleHeight     =   1380
          ScaleWidth      =   1410
-         TabIndex        =   85
+         TabIndex        =   78
          Top             =   675
          Width           =   1410
       End
@@ -2193,7 +2226,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   12
          Left            =   5205
-         Picture         =   "frmMain.frx":4CD62D
+         Picture         =   "frmMain.frx":4CD515
          Top             =   15
          Width           =   330
       End
@@ -2205,19 +2238,19 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   0
          Left            =   3750
-         TabIndex        =   96
+         TabIndex        =   89
          Top             =   2325
          Width           =   1680
       End
       Begin VB.Label lblPI 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":4CDD59
+         Caption         =   $"frmMain.frx":4CDC41
          ForeColor       =   &H00E0E0E0&
          Height          =   975
          Index           =   1
          Left            =   5760
-         TabIndex        =   95
+         TabIndex        =   88
          Top             =   240
          Width           =   4215
       End
@@ -2228,7 +2261,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00E0E0E0&
          Height          =   195
          Left            =   6600
-         TabIndex        =   94
+         TabIndex        =   87
          Top             =   3360
          Width           =   2715
       End
@@ -2240,7 +2273,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   2
          Left            =   3750
-         TabIndex        =   93
+         TabIndex        =   86
          Top             =   3465
          Width           =   1680
       End
@@ -2252,7 +2285,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   3750
-         TabIndex        =   92
+         TabIndex        =   85
          Top             =   3840
          Width           =   1680
       End
@@ -2264,7 +2297,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   4
          Left            =   3750
-         TabIndex        =   91
+         TabIndex        =   84
          Top             =   4200
          Width           =   1680
       End
@@ -2276,7 +2309,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   5
          Left            =   3720
-         TabIndex        =   90
+         TabIndex        =   83
          Top             =   4560
          Width           =   1695
       End
@@ -2288,7 +2321,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   6
          Left            =   3720
-         TabIndex        =   89
+         TabIndex        =   82
          Top             =   4935
          Width           =   1695
       End
@@ -2300,7 +2333,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   7
          Left            =   3750
-         TabIndex        =   88
+         TabIndex        =   81
          Top             =   2715
          Width           =   1680
       End
@@ -2312,7 +2345,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   8
          Left            =   3750
-         TabIndex        =   87
+         TabIndex        =   80
          Top             =   3090
          Width           =   1680
       End
@@ -2326,7 +2359,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   6705
       Left            =   9000
-      Picture         =   "frmMain.frx":4CDE10
+      Picture         =   "frmMain.frx":4CDCF8
       ScaleHeight     =   447
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   540
@@ -2353,11 +2386,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   3795
       Left            =   35880
-      Picture         =   "frmMain.frx":57EB00
+      Picture         =   "frmMain.frx":57E9E8
       ScaleHeight     =   253
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   258
-      TabIndex        =   61
+      TabIndex        =   58
       Top             =   120
       Visible         =   0   'False
       Width           =   3870
@@ -2368,7 +2401,7 @@ Begin VB.Form frmMain
          Height          =   1980
          IntegralHeight  =   0   'False
          Left            =   225
-         TabIndex        =   62
+         TabIndex        =   59
          Top             =   855
          Width           =   3420
       End
@@ -2376,7 +2409,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   13
          Left            =   1080
-         Picture         =   "frmMain.frx":5AEA2C
+         Picture         =   "frmMain.frx":5AE914
          Top             =   3120
          Width           =   1695
       End
@@ -2384,7 +2417,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   1
          Left            =   3525
-         Picture         =   "frmMain.frx":5B08FC
+         Picture         =   "frmMain.frx":5B07E4
          Top             =   15
          Width           =   330
       End
@@ -2403,18 +2436,18 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   5790
       Left            =   -7680
-      Picture         =   "frmMain.frx":5B1028
+      Picture         =   "frmMain.frx":5B0F10
       ScaleHeight     =   384
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   608
-      TabIndex        =   134
+      TabIndex        =   127
       Top             =   14640
       Visible         =   0   'False
       Width           =   9150
       Begin VB.ListBox lstRank 
          Height          =   645
          Left            =   8280
-         TabIndex        =   135
+         TabIndex        =   128
          Top             =   120
          Visible         =   0   'False
          Width           =   735
@@ -2435,7 +2468,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   10
          Left            =   6240
-         TabIndex        =   165
+         TabIndex        =   158
          Top             =   4440
          Width           =   3195
       End
@@ -2454,148 +2487,148 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   375
          Index           =   1
-         Left            =   6240
-         TabIndex        =   164
-         Top             =   1200
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   2
-         Left            =   6240
-         TabIndex        =   163
-         Top             =   1560
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   3
-         Left            =   6240
-         TabIndex        =   162
-         Top             =   1920
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   4
-         Left            =   6240
-         TabIndex        =   161
-         Top             =   2280
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   5
-         Left            =   6240
-         TabIndex        =   160
-         Top             =   2640
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   6
-         Left            =   6240
-         TabIndex        =   159
-         Top             =   3000
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   7
-         Left            =   6240
-         TabIndex        =   158
-         Top             =   3360
-         Width           =   3195
-      End
-      Begin VB.Label lblL 
-         BackStyle       =   0  'Transparent
-         Caption         =   "none"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   375
-         Index           =   8
          Left            =   6240
          TabIndex        =   157
+         Top             =   1200
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   2
+         Left            =   6240
+         TabIndex        =   156
+         Top             =   1560
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   3
+         Left            =   6240
+         TabIndex        =   155
+         Top             =   1920
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   4
+         Left            =   6240
+         TabIndex        =   154
+         Top             =   2280
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   5
+         Left            =   6240
+         TabIndex        =   153
+         Top             =   2640
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   6
+         Left            =   6240
+         TabIndex        =   152
+         Top             =   3000
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   7
+         Left            =   6240
+         TabIndex        =   151
+         Top             =   3360
+         Width           =   3195
+      End
+      Begin VB.Label lblL 
+         BackStyle       =   0  'Transparent
+         Caption         =   "none"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Index           =   8
+         Left            =   6240
+         TabIndex        =   150
          Top             =   3720
          Width           =   3195
       End
@@ -2615,7 +2648,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   9
          Left            =   6240
-         TabIndex        =   156
+         TabIndex        =   149
          Top             =   4080
          Width           =   3195
       End
@@ -2635,7 +2668,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   2
          Left            =   240
-         TabIndex        =   155
+         TabIndex        =   148
          Top             =   1560
          Width           =   2355
       End
@@ -2655,7 +2688,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   1
          Left            =   3240
-         TabIndex        =   154
+         TabIndex        =   147
          Top             =   1200
          Width           =   3195
       End
@@ -2675,7 +2708,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   2
          Left            =   3240
-         TabIndex        =   153
+         TabIndex        =   146
          Top             =   1560
          Width           =   3195
       End
@@ -2695,7 +2728,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   3
          Left            =   3240
-         TabIndex        =   152
+         TabIndex        =   145
          Top             =   1920
          Width           =   3195
       End
@@ -2715,7 +2748,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   4
          Left            =   3240
-         TabIndex        =   151
+         TabIndex        =   144
          Top             =   2280
          Width           =   3195
       End
@@ -2735,7 +2768,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   5
          Left            =   3240
-         TabIndex        =   150
+         TabIndex        =   143
          Top             =   2640
          Width           =   3195
       End
@@ -2755,7 +2788,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   6
          Left            =   3240
-         TabIndex        =   149
+         TabIndex        =   142
          Top             =   3000
          Width           =   3195
       End
@@ -2775,7 +2808,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   7
          Left            =   3240
-         TabIndex        =   148
+         TabIndex        =   141
          Top             =   3360
          Width           =   3195
       End
@@ -2795,7 +2828,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   8
          Left            =   3240
-         TabIndex        =   147
+         TabIndex        =   140
          Top             =   3720
          Width           =   3195
       End
@@ -2815,7 +2848,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   9
          Left            =   3240
-         TabIndex        =   146
+         TabIndex        =   139
          Top             =   4080
          Width           =   3195
       End
@@ -2835,7 +2868,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   10
          Left            =   3240
-         TabIndex        =   145
+         TabIndex        =   138
          Top             =   4440
          Width           =   3195
       End
@@ -2855,7 +2888,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   10
          Left            =   240
-         TabIndex        =   144
+         TabIndex        =   137
          Top             =   4440
          Width           =   2355
       End
@@ -2875,7 +2908,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   9
          Left            =   240
-         TabIndex        =   143
+         TabIndex        =   136
          Top             =   4080
          Width           =   2355
       End
@@ -2895,7 +2928,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   8
          Left            =   240
-         TabIndex        =   142
+         TabIndex        =   135
          Top             =   3720
          Width           =   2355
       End
@@ -2915,7 +2948,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   7
          Left            =   240
-         TabIndex        =   141
+         TabIndex        =   134
          Top             =   3360
          Width           =   2355
       End
@@ -2935,7 +2968,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   6
          Left            =   240
-         TabIndex        =   140
+         TabIndex        =   133
          Top             =   3000
          Width           =   2235
       End
@@ -2955,7 +2988,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   5
          Left            =   240
-         TabIndex        =   139
+         TabIndex        =   132
          Top             =   2640
          Width           =   2355
       End
@@ -2975,7 +3008,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   4
          Left            =   240
-         TabIndex        =   138
+         TabIndex        =   131
          Top             =   2280
          Width           =   2355
       End
@@ -2995,7 +3028,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   3
          Left            =   240
-         TabIndex        =   137
+         TabIndex        =   130
          Top             =   1920
          Width           =   2355
       End
@@ -3015,7 +3048,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   1
          Left            =   240
-         TabIndex        =   136
+         TabIndex        =   129
          Top             =   1200
          Width           =   2355
       End
@@ -3027,30 +3060,30 @@ Begin VB.Form frmMain
       CausesValidation=   0   'False
       Height          =   5670
       Left            =   18960
-      Picture         =   "frmMain.frx":5CCFBB
+      Picture         =   "frmMain.frx":5CCEA3
       ScaleHeight     =   378
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   412
-      TabIndex        =   116
+      TabIndex        =   109
       Top             =   12720
       Visible         =   0   'False
       Width           =   6180
       Begin VB.ComboBox cmbTipo 
          Height          =   315
-         ItemData        =   "frmMain.frx":63F107
+         ItemData        =   "frmMain.frx":63EFEF
          Left            =   2760
-         List            =   "frmMain.frx":63F111
-         TabIndex        =   249
+         List            =   "frmMain.frx":63EFF9
+         TabIndex        =   242
          Text            =   "Combo2"
          Top             =   6240
          Width           =   1095
       End
       Begin VB.ComboBox Combo1 
          Height          =   315
-         ItemData        =   "frmMain.frx":63F11F
+         ItemData        =   "frmMain.frx":63F007
          Left            =   840
-         List            =   "frmMain.frx":63F126
-         TabIndex        =   248
+         List            =   "frmMain.frx":63F00E
+         TabIndex        =   241
          Text            =   "Combo2"
          Top             =   6360
          Width           =   1215
@@ -3061,10 +3094,10 @@ Begin VB.Form frmMain
          Height          =   225
          Index           =   3
          Left            =   3240
-         Picture         =   "frmMain.frx":63F13C
+         Picture         =   "frmMain.frx":63F024
          ScaleHeight     =   225
          ScaleWidth      =   240
-         TabIndex        =   243
+         TabIndex        =   236
          Top             =   4395
          Width           =   240
       End
@@ -3074,10 +3107,10 @@ Begin VB.Form frmMain
          Height          =   225
          Index           =   2
          Left            =   3240
-         Picture         =   "frmMain.frx":641024
+         Picture         =   "frmMain.frx":640F0C
          ScaleHeight     =   225
          ScaleWidth      =   240
-         TabIndex        =   242
+         TabIndex        =   235
          Top             =   4095
          Width           =   240
       End
@@ -3087,10 +3120,10 @@ Begin VB.Form frmMain
          Height          =   225
          Index           =   1
          Left            =   3240
-         Picture         =   "frmMain.frx":642F0C
+         Picture         =   "frmMain.frx":642DF4
          ScaleHeight     =   225
          ScaleWidth      =   240
-         TabIndex        =   241
+         TabIndex        =   234
          Top             =   3795
          Width           =   240
       End
@@ -3100,7 +3133,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   2
          Left            =   3720
-         TabIndex        =   133
+         TabIndex        =   126
          Top             =   5880
          Visible         =   0   'False
          Width           =   1455
@@ -3111,7 +3144,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   1
          Left            =   2160
-         TabIndex        =   132
+         TabIndex        =   125
          Top             =   5880
          Visible         =   0   'False
          Width           =   1455
@@ -3122,7 +3155,7 @@ Begin VB.Form frmMain
          Height          =   195
          Index           =   0
          Left            =   720
-         TabIndex        =   131
+         TabIndex        =   124
          Top             =   5880
          Value           =   -1  'True
          Visible         =   0   'False
@@ -3139,7 +3172,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   168
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   380
-         TabIndex        =   119
+         TabIndex        =   112
          Top             =   645
          Width           =   5700
       End
@@ -3151,7 +3184,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   0
          Left            =   225
-         TabIndex        =   244
+         TabIndex        =   237
          Top             =   3750
          Width           =   2925
       End
@@ -3159,7 +3192,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   24
          Left            =   2160
-         Picture         =   "frmMain.frx":644DF4
+         Picture         =   "frmMain.frx":644CDC
          Top             =   4920
          Width           =   1695
       End
@@ -3167,7 +3200,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   14
          Left            =   5835
-         Picture         =   "frmMain.frx":646CC4
+         Picture         =   "frmMain.frx":646BAC
          Top             =   15
          Width           =   330
       End
@@ -3179,7 +3212,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   6
          Left            =   225
-         TabIndex        =   130
+         TabIndex        =   123
          Top             =   4080
          Width           =   2925
       End
@@ -3191,7 +3224,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   7
          Left            =   225
-         TabIndex        =   121
+         TabIndex        =   114
          Top             =   4410
          Width           =   2925
       End
@@ -3203,7 +3236,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   360
-         TabIndex        =   120
+         TabIndex        =   113
          Top             =   3315
          Width           =   5535
       End
@@ -3213,7 +3246,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   4
          Left            =   5640
-         TabIndex        =   118
+         TabIndex        =   111
          Top             =   3240
          Width           =   495
       End
@@ -3223,7 +3256,7 @@ Begin VB.Form frmMain
          Height          =   375
          Index           =   5
          Left            =   120
-         TabIndex        =   117
+         TabIndex        =   110
          Top             =   3240
          Width           =   495
       End
@@ -3234,18 +3267,20 @@ Begin VB.Form frmMain
       BackColor       =   &H00E0E0E0&
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
-      Height          =   5115
-      Left            =   12000
-      ScaleHeight     =   341
+      Height          =   2460
+      Left            =   9000
+      Picture         =   "frmMain.frx":6472D8
+      ScaleHeight     =   164
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   275
+      ScaleWidth      =   340
       TabIndex        =   17
-      Top             =   -2880
+      Top             =   840
       Visible         =   0   'False
-      Width           =   4125
+      Width           =   5100
       Begin VB.PictureBox picShopItems 
          Appearance      =   0  'Flat
          AutoRedraw      =   -1  'True
+         AutoSize        =   -1  'True
          BackColor       =   &H00000000&
          BorderStyle     =   0  'None
          BeginProperty Font 
@@ -3258,32 +3293,64 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H80000008&
-         Height          =   3165
-         Left            =   615
-         ScaleHeight     =   211
+         Height          =   1950
+         Left            =   30
+         Picture         =   "frmMain.frx":67008C
+         ScaleHeight     =   130
          ScaleMode       =   3  'Pixel
-         ScaleWidth      =   193
+         ScaleWidth      =   210
          TabIndex        =   18
-         Top             =   630
-         Width           =   2895
+         Top             =   435
+         Width           =   3150
       End
-      Begin VB.Image imgLeaveShop 
-         Height          =   435
-         Left            =   2715
-         Top             =   4350
-         Width           =   1035
+      Begin VB.Image imgClose 
+         Height          =   390
+         Index           =   18
+         Left            =   4755
+         Picture         =   "frmMain.frx":6841BE
+         Top             =   15
+         Width           =   330
       End
-      Begin VB.Image imgShopSell 
-         Height          =   435
-         Left            =   1545
-         Top             =   4350
-         Width           =   1035
+      Begin VB.Image imgButton 
+         Height          =   345
+         Index           =   30
+         Left            =   3240
+         Picture         =   "frmMain.frx":6848EA
+         Top             =   1560
+         Width           =   1695
       End
-      Begin VB.Image imgShopBuy 
-         Height          =   435
-         Left            =   375
-         Top             =   4350
-         Width           =   1035
+      Begin VB.Image imgButton 
+         Height          =   345
+         Index           =   29
+         Left            =   3240
+         Picture         =   "frmMain.frx":6867BA
+         Top             =   1920
+         Width           =   1695
+      End
+      Begin VB.Label lblValor 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Left            =   3240
+         TabIndex        =   254
+         Top             =   960
+         Width           =   1695
+      End
+      Begin VB.Label lblDesc 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         Caption         =   "Selecione o item no estoque!"
+         ForeColor       =   &H00FFFFFF&
+         Height          =   375
+         Left            =   3240
+         TabIndex        =   253
+         Top             =   525
+         Width           =   1695
       End
    End
    Begin VB.PictureBox picchat 
@@ -3294,10 +3361,10 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   1605
       Left            =   25440
-      Picture         =   "frmMain.frx":6473F0
+      Picture         =   "frmMain.frx":68868A
       ScaleHeight     =   1605
       ScaleWidth      =   5310
-      TabIndex        =   82
+      TabIndex        =   75
       Top             =   8760
       Visible         =   0   'False
       Width           =   5310
@@ -3317,7 +3384,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   975
          Left            =   120
-         TabIndex        =   83
+         TabIndex        =   76
          Top             =   360
          Width           =   5055
       End
@@ -3339,10 +3406,9 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   790032
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ScrollBars      =   2
       Appearance      =   0
-      TextRTF         =   $"frmMain.frx":6630EC
+      TextRTF         =   $"frmMain.frx":6A4386
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Georgia"
          Size            =   8.25
@@ -3361,11 +3427,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2220
       Left            =   25200
-      Picture         =   "frmMain.frx":663168
+      Picture         =   "frmMain.frx":6A4402
       ScaleHeight     =   148
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   370
-      TabIndex        =   124
+      TabIndex        =   117
       Top             =   10440
       Visible         =   0   'False
       Width           =   5550
@@ -3373,7 +3439,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   10
          Left            =   5205
-         Picture         =   "frmMain.frx":68B48C
+         Picture         =   "frmMain.frx":6CC726
          Top             =   15
          Width           =   330
       End
@@ -3385,7 +3451,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   4
          Left            =   2760
-         TabIndex        =   129
+         TabIndex        =   122
          Top             =   1770
          Width           =   2715
       End
@@ -3397,7 +3463,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   3
          Left            =   180
-         TabIndex        =   128
+         TabIndex        =   121
          Top             =   1770
          Width           =   2475
       End
@@ -3409,7 +3475,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   2
          Left            =   2835
-         TabIndex        =   127
+         TabIndex        =   120
          Top             =   1335
          Width           =   2580
       End
@@ -3421,7 +3487,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   1
          Left            =   180
-         TabIndex        =   126
+         TabIndex        =   119
          Top             =   1335
          Width           =   2475
       End
@@ -3433,7 +3499,7 @@ Begin VB.Form frmMain
          Height          =   510
          Index           =   0
          Left            =   270
-         TabIndex        =   125
+         TabIndex        =   118
          Top             =   600
          Width           =   5025
       End
@@ -3467,13 +3533,13 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   2610
-      Left            =   10680
-      Picture         =   "frmMain.frx":68BBB8
+      Left            =   1560
+      Picture         =   "frmMain.frx":6CCE52
       ScaleHeight     =   174
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
-      TabIndex        =   99
-      Top             =   5400
+      TabIndex        =   92
+      Top             =   14640
       Visible         =   0   'False
       Width           =   3150
       Begin VB.PictureBox PicTradeOn 
@@ -3484,10 +3550,10 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   0
          Left            =   150
-         Picture         =   "frmMain.frx":696C37
+         Picture         =   "frmMain.frx":6D7ED1
          ScaleHeight     =   180
          ScaleWidth      =   180
-         TabIndex        =   102
+         TabIndex        =   95
          Top             =   2310
          Visible         =   0   'False
          Width           =   180
@@ -3509,7 +3575,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   0
          Left            =   480
-         TabIndex        =   101
+         TabIndex        =   94
          Top             =   2280
          Width           =   2415
       End
@@ -3528,7 +3594,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   255
          Left            =   960
-         TabIndex        =   100
+         TabIndex        =   93
          Top             =   0
          Visible         =   0   'False
          Width           =   1815
@@ -3551,13 +3617,13 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   2610
-      Left            =   7440
-      Picture         =   "frmMain.frx":698DC8
+      Left            =   4800
+      Picture         =   "frmMain.frx":6DA062
       ScaleHeight     =   174
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
-      TabIndex        =   97
-      Top             =   5400
+      TabIndex        =   90
+      Top             =   14640
       Visible         =   0   'False
       Width           =   3150
       Begin VB.PictureBox PicTradeOn 
@@ -3568,11 +3634,11 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   1
          Left            =   150
-         Picture         =   "frmMain.frx":6A3E47
+         Picture         =   "frmMain.frx":6E50E1
          ScaleHeight     =   12
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   12
-         TabIndex        =   103
+         TabIndex        =   96
          Top             =   2310
          Visible         =   0   'False
          Width           =   180
@@ -3594,7 +3660,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   1
          Left            =   480
-         TabIndex        =   104
+         TabIndex        =   97
          Top             =   2280
          Width           =   2415
       End
@@ -3613,7 +3679,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   255
          Left            =   1800
-         TabIndex        =   98
+         TabIndex        =   91
          Top             =   0
          Visible         =   0   'False
          Width           =   1815
@@ -3627,13 +3693,13 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   420
-      Left            =   7440
-      Picture         =   "frmMain.frx":6A5FD8
+      Left            =   1560
+      Picture         =   "frmMain.frx":6E7272
       ScaleHeight     =   28
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   139
       TabIndex        =   29
-      Top             =   8040
+      Top             =   17280
       Visible         =   0   'False
       Width           =   2085
       Begin VB.Image imgDeclineTrade 
@@ -3683,11 +3749,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   570
       Left            =   120
-      Picture         =   "frmMain.frx":6AA3C2
+      Picture         =   "frmMain.frx":6EB65C
       ScaleHeight     =   38
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   360
-      TabIndex        =   75
+      TabIndex        =   68
       Top             =   8880
       Width           =   5400
       Begin VB.TextBox txtMyChat 
@@ -3707,7 +3773,7 @@ Begin VB.Form frmMain
          Height          =   225
          Left            =   240
          MaxLength       =   80
-         TabIndex        =   76
+         TabIndex        =   69
          Top             =   180
          Width           =   4920
       End
@@ -3730,11 +3796,11 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   765
       Left            =   13365
-      Picture         =   "frmMain.frx":6B4456
+      Picture         =   "frmMain.frx":6F56F0
       ScaleHeight     =   51
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   248
-      TabIndex        =   52
+      TabIndex        =   49
       Top             =   8670
       Width           =   3720
    End
@@ -3753,119 +3819,33 @@ Begin VB.Form frmMain
       Height          =   270
       Index           =   0
       Left            =   5250
-      Picture         =   "frmMain.frx":6BD8D2
+      Picture         =   "frmMain.frx":6FEB6C
       ScaleHeight     =   18
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   18
-      TabIndex        =   77
+      TabIndex        =   70
       Top             =   8520
       Width           =   270
    End
-   Begin VB.PictureBox picLeilao 
-      Appearance      =   0  'Flat
-      AutoRedraw      =   -1  'True
-      AutoSize        =   -1  'True
-      BackColor       =   &H80000005&
-      BorderStyle     =   0  'None
-      ForeColor       =   &H80000008&
-      Height          =   255
-      Index           =   1
-      Left            =   9960
-      Picture         =   "frmMain.frx":6BDD04
-      ScaleHeight     =   17
-      ScaleMode       =   3  'Pixel
-      ScaleWidth      =   59
-      TabIndex        =   64
-      Top             =   5160
-      Visible         =   0   'False
-      Width           =   885
-      Begin VB.Label lblLeilaoInfo 
-         Alignment       =   2  'Center
-         Appearance      =   0  'Flat
-         BackColor       =   &H80000005&
-         BackStyle       =   0  'Transparent
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   210
-         Index           =   6
-         Left            =   690
-         TabIndex        =   73
-         Top             =   15
-         Width           =   180
-      End
-      Begin VB.Label lblLeilaoInfo 
-         Alignment       =   2  'Center
-         Appearance      =   0  'Flat
-         BackColor       =   &H80000005&
-         BackStyle       =   0  'Transparent
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   210
-         Index           =   5
-         Left            =   45
-         TabIndex        =   72
-         Top             =   15
-         Width           =   180
-      End
-      Begin VB.Label lblLeilaoInfo 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "#/#"
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   210
-         Index           =   0
-         Left            =   285
-         TabIndex        =   67
-         Top             =   0
-         Width           =   345
-      End
-   End
-   Begin VB.PictureBox picLeilao 
+   Begin VB.PictureBox picLeilaoPainel 
       Appearance      =   0  'Flat
       AutoSize        =   -1  'True
       BackColor       =   &H80000005&
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
-      Height          =   2805
-      Index           =   0
-      Left            =   9960
-      Picture         =   "frmMain.frx":6BE93A
-      ScaleHeight     =   187
+      Height          =   3645
+      Left            =   18720
+      Picture         =   "frmMain.frx":6FEF9E
+      ScaleHeight     =   243
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   419
-      TabIndex        =   63
-      Top             =   2400
+      ScaleWidth      =   425
+      TabIndex        =   60
+      Top             =   8880
       Visible         =   0   'False
-      Width           =   6285
+      Width           =   6375
       Begin VB.Timer LeilaoTempo 
          Interval        =   1000
-         Left            =   5880
+         Left            =   3360
          Top             =   0
       End
       Begin VB.PictureBox picLeilao 
@@ -3877,13 +3857,13 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   480
          Index           =   3
-         Left            =   3345
-         Picture         =   "frmMain.frx":6F81E0
+         Left            =   3450
+         Picture         =   "frmMain.frx":74AB16
          ScaleHeight     =   32
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   32
-         TabIndex        =   66
-         Top             =   315
+         TabIndex        =   62
+         Top             =   585
          Width           =   480
       End
       Begin VB.PictureBox picLeilao 
@@ -3895,26 +3875,39 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   2625
          Index           =   2
-         Left            =   15
-         Picture         =   "frmMain.frx":6F8E22
+         Left            =   90
+         Picture         =   "frmMain.frx":74B758
          ScaleHeight     =   175
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   208
-         TabIndex        =   65
-         Top             =   165
+         TabIndex        =   61
+         Top             =   435
          Width           =   3120
       End
-      Begin VB.Image cmdBuyLei 
-         Height          =   270
-         Left            =   5205
-         Top             =   2445
-         Width           =   930
+      Begin VB.Image imgButton 
+         Height          =   345
+         Index           =   28
+         Left            =   3960
+         Picture         =   "frmMain.frx":76622A
+         Top             =   3090
+         Width           =   1695
+      End
+      Begin VB.Image imgClose 
+         Height          =   390
+         Index           =   17
+         Left            =   6030
+         Picture         =   "frmMain.frx":7680FA
+         Top             =   15
+         Width           =   330
       End
       Begin VB.Label lblLeilaoInfo 
+         Alignment       =   2  'Center
+         AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
+         Caption         =   "#/#"
          BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   6.75
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3923,11 +3916,65 @@ Begin VB.Form frmMain
          EndProperty
          ForeColor       =   &H00FFFFFF&
          Height          =   210
+         Index           =   0
+         Left            =   1470
+         TabIndex        =   247
+         Top             =   3150
+         Width           =   405
+      End
+      Begin VB.Label lblLeilaoInfo 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         BeginProperty Font 
+            Name            =   "Georgia"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   330
+         Index           =   5
+         Left            =   120
+         TabIndex        =   246
+         Top             =   3120
+         Width           =   300
+      End
+      Begin VB.Label lblLeilaoInfo 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         BeginProperty Font 
+            Name            =   "Georgia"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   330
+         Index           =   6
+         Left            =   2880
+         TabIndex        =   245
+         Top             =   3120
+         Width           =   300
+      End
+      Begin VB.Label lblLeilaoInfo 
+         BackStyle       =   0  'Transparent
+         ForeColor       =   &H00FFFFFF&
+         Height          =   210
          Index           =   4
-         Left            =   3360
-         TabIndex        =   71
-         Top             =   2160
-         Width           =   2715
+         Left            =   3525
+         TabIndex        =   66
+         Top             =   2715
+         Width           =   2595
       End
       Begin VB.Label lblLeilaoInfo 
          BackStyle       =   0  'Transparent
@@ -3943,50 +3990,32 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   210
          Index           =   3
-         Left            =   3360
-         TabIndex        =   70
-         Top             =   2460
+         Left            =   3480
+         TabIndex        =   65
+         Top             =   3060
          Width           =   1755
       End
       Begin VB.Label lblLeilaoInfo 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          ForeColor       =   &H00FFFFFF&
          Height          =   1170
          Index           =   2
-         Left            =   3360
-         TabIndex        =   69
-         Top             =   960
+         Left            =   3480
+         TabIndex        =   64
+         Top             =   1320
          Width           =   2715
       End
       Begin VB.Label lblLeilaoInfo 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          ForeColor       =   &H00FFFFFF&
          Height          =   255
          Index           =   1
-         Left            =   3840
-         TabIndex        =   68
-         Top             =   450
-         Width           =   2265
+         Left            =   4200
+         TabIndex        =   63
+         Top             =   720
+         Width           =   2025
       End
    End
    Begin VB.PictureBox PicPokeSpell 
@@ -3999,11 +4028,11 @@ Begin VB.Form frmMain
       Height          =   450
       Index           =   1
       Left            =   180
-      Picture         =   "frmMain.frx":7138F4
+      Picture         =   "frmMain.frx":768826
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
-      TabIndex        =   59
+      TabIndex        =   56
       Top             =   1500
       Width           =   2670
       Begin VB.Label lblPokeSpell 
@@ -4024,7 +4053,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   1
          Left            =   105
-         TabIndex        =   60
+         TabIndex        =   57
          Top             =   60
          Width           =   2445
       End
@@ -4047,7 +4076,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   1245
       Left            =   180
-      Picture         =   "frmMain.frx":717808
+      Picture         =   "frmMain.frx":76C73A
       ScaleHeight     =   83
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -4062,10 +4091,10 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   195
          Left            =   735
-         Picture         =   "frmMain.frx":722614
+         Picture         =   "frmMain.frx":777546
          ScaleHeight     =   195
          ScaleWidth      =   1830
-         TabIndex        =   251
+         TabIndex        =   244
          Top             =   645
          Width           =   1830
       End
@@ -4077,10 +4106,10 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   105
          Left            =   735
-         Picture         =   "frmMain.frx":723908
+         Picture         =   "frmMain.frx":77883A
          ScaleHeight     =   105
          ScaleWidth      =   1830
-         TabIndex        =   205
+         TabIndex        =   198
          Top             =   885
          Width           =   1830
       End
@@ -4095,7 +4124,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   32
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   32
-         TabIndex        =   58
+         TabIndex        =   55
          Top             =   270
          Width           =   480
       End
@@ -4107,7 +4136,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   195
          Left            =   120
-         TabIndex        =   250
+         TabIndex        =   243
          Top             =   480
          Visible         =   0   'False
          Width           =   1815
@@ -4129,14 +4158,14 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   150
          Left            =   3600
-         TabIndex        =   206
+         TabIndex        =   199
          Top             =   960
          Width           =   525
       End
       Begin VB.Image imgEXPBar 
          Height          =   60
          Left            =   735
-         Picture         =   "frmMain.frx":72435C
+         Picture         =   "frmMain.frx":77928E
          Top             =   1035
          Width           =   1830
       End
@@ -4293,11 +4322,11 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   2160
       Left            =   34560
-      Picture         =   "frmMain.frx":724960
+      Picture         =   "frmMain.frx":779892
       ScaleHeight     =   144
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   354
-      TabIndex        =   54
+      TabIndex        =   51
       Top             =   12360
       Visible         =   0   'False
       Width           =   5310
@@ -4313,7 +4342,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   96.043
          ScaleMode       =   0  'User
          ScaleWidth      =   94
-         TabIndex        =   237
+         TabIndex        =   230
          Top             =   555
          Width           =   1410
       End
@@ -4321,7 +4350,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   14
          Left            =   3480
-         Picture         =   "frmMain.frx":74A024
+         Picture         =   "frmMain.frx":79EF56
          Top             =   1650
          Width           =   1695
       End
@@ -4329,7 +4358,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   9
          Left            =   4965
-         Picture         =   "frmMain.frx":74BEF4
+         Picture         =   "frmMain.frx":7A0E26
          Top             =   15
          Width           =   330
       End
@@ -4350,7 +4379,7 @@ Begin VB.Form frmMain
          Height          =   735
          Index           =   0
          Left            =   1800
-         TabIndex        =   55
+         TabIndex        =   52
          Top             =   660
          Width           =   3315
       End
@@ -4364,11 +4393,11 @@ Begin VB.Form frmMain
       Height          =   270
       Index           =   1
       Left            =   5250
-      Picture         =   "frmMain.frx":74C620
+      Picture         =   "frmMain.frx":7A1552
       ScaleHeight     =   18
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   18
-      TabIndex        =   56
+      TabIndex        =   53
       Top             =   6825
       Width           =   270
    End
@@ -4412,7 +4441,7 @@ Begin VB.Form frmMain
          Caption         =   "Elemento:"
          Height          =   255
          Left            =   240
-         TabIndex        =   53
+         TabIndex        =   50
          Top             =   3240
          Visible         =   0   'False
          Width           =   2655
@@ -4459,47 +4488,86 @@ Begin VB.Form frmMain
    End
    Begin VB.PictureBox picDialogue 
       Appearance      =   0  'Flat
+      AutoSize        =   -1  'True
       BackColor       =   &H000C0E10&
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
-      Height          =   2085
-      Left            =   120
-      ScaleHeight     =   2085
-      ScaleWidth      =   7140
+      Height          =   2235
+      Left            =   30840
+      Picture         =   "frmMain.frx":7A1984
+      ScaleHeight     =   149
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   354
       TabIndex        =   39
-      Top             =   3600
+      Top             =   17040
       Visible         =   0   'False
-      Width           =   7140
-      Begin VB.Label lblDialogue_Button 
-         Alignment       =   2  'Center
+      Width           =   5310
+      Begin VB.PictureBox lblDialogueBtn 
+         Appearance      =   0  'Flat
          AutoSize        =   -1  'True
-         BackColor       =   &H00000000&
-         BackStyle       =   0  'Transparent
-         Caption         =   "Okay"
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   210
+         BackColor       =   &H80000005&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H80000008&
+         Height          =   345
          Index           =   1
-         Left            =   3285
-         TabIndex        =   44
-         Top             =   1440
-         Width           =   525
+         Left            =   1800
+         Picture         =   "frmMain.frx":7C8510
+         ScaleHeight     =   345
+         ScaleWidth      =   1695
+         TabIndex        =   252
+         Top             =   1680
+         Width           =   1695
+      End
+      Begin VB.PictureBox lblDialogueBtn 
+         Appearance      =   0  'Flat
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H80000008&
+         Height          =   345
+         Index           =   3
+         Left            =   840
+         Picture         =   "frmMain.frx":7CA3E0
+         ScaleHeight     =   345
+         ScaleWidth      =   1695
+         TabIndex        =   251
+         Top             =   1680
+         Width           =   1695
+      End
+      Begin VB.PictureBox lblDialogueBtn 
+         Appearance      =   0  'Flat
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H80000008&
+         Height          =   345
+         Index           =   2
+         Left            =   2650
+         Picture         =   "frmMain.frx":7CC2B0
+         ScaleHeight     =   345
+         ScaleWidth      =   1695
+         TabIndex        =   250
+         Top             =   1680
+         Width           =   1695
       End
       Begin VB.Label lblDialogue_Text 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
          Caption         =   "Robin has requested a trade. Would you like to accept?"
+         ForeColor       =   &H00FFFFFF&
+         Height          =   615
+         Left            =   120
+         TabIndex        =   41
+         Top             =   840
+         Width           =   5055
+      End
+      Begin VB.Label lblDialogue_Title 
+         Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
+         Caption         =   "Trade Request"
          BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4507,77 +4575,11 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00FFFFFF&
-         Height          =   495
-         Left            =   240
-         TabIndex        =   43
-         Top             =   720
-         Width           =   6615
-      End
-      Begin VB.Label lblDialogue_Title 
-         Alignment       =   2  'Center
-         BackStyle       =   0  'Transparent
-         Caption         =   "Trade Request"
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
          Height          =   255
-         Left            =   120
-         TabIndex        =   42
-         Top             =   480
-         Width           =   6855
-      End
-      Begin VB.Label lblDialogue_Button 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         BackColor       =   &H00000000&
-         BackStyle       =   0  'Transparent
-         Caption         =   "Yes"
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   210
-         Index           =   2
-         Left            =   3375
-         TabIndex        =   41
-         Top             =   1320
-         Width           =   345
-      End
-      Begin VB.Label lblDialogue_Button 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         BackColor       =   &H00000000&
-         BackStyle       =   0  'Transparent
-         Caption         =   "No"
-         BeginProperty Font 
-            Name            =   "Georgia"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   210
-         Index           =   3
-         Left            =   3405
+         Left            =   240
          TabIndex        =   40
-         Top             =   1560
-         Width           =   285
+         Top             =   440
+         Width           =   4815
       End
    End
    Begin VB.PictureBox picCurrency 
@@ -4588,7 +4590,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2220
       Left            =   19920
-      Picture         =   "frmMain.frx":74CA52
+      Picture         =   "frmMain.frx":7CE180
       ScaleHeight     =   148
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   275
@@ -4610,7 +4612,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   27
          Left            =   1200
-         Picture         =   "frmMain.frx":76A946
+         Picture         =   "frmMain.frx":7EC074
          Top             =   1680
          Width           =   1695
       End
@@ -4618,7 +4620,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   16
          Left            =   3780
-         Picture         =   "frmMain.frx":76C816
+         Picture         =   "frmMain.frx":7EDF44
          Top             =   15
          Width           =   330
       End
@@ -4758,7 +4760,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   270
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   194
-      TabIndex        =   45
+      TabIndex        =   42
       Top             =   9600
       Visible         =   0   'False
       Width           =   2910
@@ -4841,7 +4843,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   375
          Left            =   1560
-         TabIndex        =   51
+         TabIndex        =   48
          Top             =   3480
          Width           =   1095
       End
@@ -4860,7 +4862,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   375
          Left            =   240
-         TabIndex        =   50
+         TabIndex        =   47
          Top             =   3480
          Width           =   1095
       End
@@ -4880,7 +4882,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   4
          Left            =   240
-         TabIndex        =   49
+         TabIndex        =   46
          Top             =   2670
          Width           =   2415
       End
@@ -4900,7 +4902,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   48
+         TabIndex        =   45
          Top             =   1935
          Width           =   2415
       End
@@ -4920,7 +4922,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   47
+         TabIndex        =   44
          Top             =   1200
          Width           =   2415
       End
@@ -4940,7 +4942,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   46
+         TabIndex        =   43
          Top             =   465
          Width           =   2415
       End
@@ -4998,25 +5000,6 @@ Private Declare Function ShellExecute Lib "shell32.dll" _
                                       Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, _
                                                              ByVal lpFile As String, ByVal lpParameters As String, _
                                                              ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
-
-Private Sub cmdBuyLei_Click()
-
-    If LeilaoItemSelect = 0 Then Exit Sub
-
-    If Leilao(LeilaoItemSelect).Vendedor <> vbNullString Then
-        If Leilao(LeilaoItemSelect).ItemNum > 0 Then
-            SendComprar LeilaoItemSelect
-        End If
-    End If
-
-    LeilaoItemSelect = 0
-    lblLeilaoInfo(1).Caption = vbNullString
-    lblLeilaoInfo(2).Caption = vbNullString
-    lblLeilaoInfo(3).Caption = vbNullString
-    lblLeilaoInfo(4).Caption = vbNullString
-    BltPokeLeilaoSelect
-
-End Sub
 
 Private Sub cmdVip_Click(Index As Integer)
 
@@ -5133,6 +5116,25 @@ Private Sub imgSelectPoke_MouseMove(Index As Integer, Button As Integer, Shift A
     End Select
 
     picItemDesc.Visible = False
+    Exit Sub
+End Sub
+
+
+Private Sub lblDialogueBtn_Click(Index As Integer)
+' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    ' call the handler
+    dialogueHandler Index
+
+    picDialogue.Visible = False
+    dialogueIndex = 0
+
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "lblDialogueBtn_Click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
     Exit Sub
 End Sub
 
@@ -5387,16 +5389,15 @@ Private Sub imgButton_Click(Index As Integer)
         BltInventory
         PlaySound Sound_ButtonClick, -1, -1
     Case 2
-        If picLeilao(0).Visible = False Then
-            picLeilao(0).ZOrder 0
-            picLeilao(1).ZOrder 0
-            picLeilao(0).Visible = True
-            picLeilao(1).Visible = True
+        If picLeilaoPainel.Visible = False Then
+            picLeilaoPainel.ZOrder 0
+            picLeilaoPainel.Visible = True
+            frmMain.picLeilaoPainel.top = (frmMain.ScaleHeight / 2) - (frmMain.picLeilaoPainel.Height / 2)
+            frmMain.picLeilaoPainel.Left = (frmMain.ScaleWidth / 2) - (frmMain.picLeilaoPainel.Width / 2)
             SendALeilao
             BltLeilao
         Else
-            picLeilao(0).Visible = False
-            picLeilao(1).Visible = False
+            picLeilaoPainel.Visible = False
             SendALeilao
             BltLeilao
         End If
@@ -5661,6 +5662,33 @@ Private Sub imgButton_Click(Index As Integer)
         tmpCurrencyItem = 0
         txtCurrency.text = vbNullString
         CurrencyMenu = 0    ' clear
+
+    Case 28
+        If LeilaoItemSelect = 0 Then Exit Sub
+
+        If Leilao(LeilaoItemSelect).Vendedor <> vbNullString Then
+            If Leilao(LeilaoItemSelect).ItemNum > 0 Then
+                SendComprar LeilaoItemSelect
+            End If
+        End If
+
+        LeilaoItemSelect = 0
+        lblLeilaoInfo(1).Caption = vbNullString
+        lblLeilaoInfo(2).Caption = vbNullString
+        lblLeilaoInfo(3).Caption = vbNullString
+        lblLeilaoInfo(4).Caption = vbNullString
+        BltPokeLeilaoSelect
+
+    Case 29
+        If ShopAction = 1 Then Exit Sub
+        ShopAction = 1    ' buying an item
+        AddText "Agora clique no item para comprar.", White
+
+    Case 30
+        If ShopAction = 2 Then Exit Sub
+        ShopAction = 2    ' selling an item
+        AddText "Clique duas vezes no item para vender.", White
+
     End Select
 
     ' Error handler
@@ -5835,105 +5863,12 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgLeaveShop_Click()
-    Dim Buffer As clsBuffer
-
-    ' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    Set Buffer = New clsBuffer
-
-    Buffer.WriteLong CCloseShop
-
-    SendData Buffer.ToArray()
-
-    Set Buffer = Nothing
-
-    picCover.Visible = False
-    picShop.Visible = False
-    InShop = 0
-    ShopAction = 0
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "imgLeaveShop_Click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
-
-Private Sub lblCurrencyOk_Click()
-    Dim OrgPrice As Long
-
-    ' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "lblCurrencyOk_Click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
-
-Private Sub imgShopBuy_Click()
-' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    If ShopAction = 1 Then Exit Sub
-    ShopAction = 1    ' buying an item
-    AddText "Click on the item in the shop you wish to buy.", White
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "imgShopBuy_Click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
-
-Private Sub imgShopSell_Click()
-' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    If ShopAction = 2 Then Exit Sub
-    ShopAction = 2    ' selling an item
-    AddText "Double-click on the item in your inventory you wish to sell.", White
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "imgShopSell_Click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
-
 Private Sub lblDescHab_Click(Index As Integer)
     Select Case Index
     Case 1 To 4
         SendAprenderHab Index
         frmMain.PicHabilidade.Visible = False
     End Select
-End Sub
-
-Private Sub lblDialogue_Button_Click(Index As Integer)
-' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    ' call the handler
-    dialogueHandler Index
-
-    picDialogue.Visible = False
-    dialogueIndex = 0
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "lblDialogue_Button_Click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
 End Sub
 
 Private Sub lblLeilaoInfo_Click(Index As Integer)
@@ -6038,14 +5973,6 @@ Private Sub LeilaoTempo_Timer()
             Leilao(i).Tempo = Leilao(i).Tempo - 1
         End If
     Next
-
-    If LeilaoItemSelect > 0 Then
-        If Leilao(LeilaoItemSelect).ItemNum = 0 Then
-            frmMain.lblLeilaoInfo(4).Caption = vbNullString
-        Else
-            frmMain.lblLeilaoInfo(4).Caption = "V: " & Trim$(Leilao(LeilaoItemSelect).Vendedor) & " Tempo: " & Leilao(LeilaoItemSelect).Tempo
-        End If
-    End If
 
 End Sub
 
@@ -6179,6 +6106,35 @@ errorhandler:
     Exit Sub
 End Sub
 
+Private Sub optWOff_click()
+
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    Options.wasd = 0
+    SaveOptions
+
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "optWOff_click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+Private Sub optWOn_click()
+
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    Options.wasd = 1
+    SaveOptions
+
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "optWOn_click", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
 Private Sub picCover_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -6288,24 +6244,22 @@ Private Sub picLeilao_MouseDown(Index As Integer, Button As Integer, Shift As In
             End If
 
             If Leilao(LeilaoSlot).Poke.Pokemon > 0 Then
-                lblLeilaoInfo(1).Caption = Trim$(Pokemon(Leilao(LeilaoSlot).Poke.Pokemon).Name) & " - Level:" & Leilao(LeilaoSlot).Poke.Level
+                lblLeilaoInfo(1).Caption = Trim$(Leilao(LeilaoSlot).Vendedor) & " - " & Trim$(Pokemon(Leilao(LeilaoSlot).Poke.Pokemon).Name)
                 lblLeilaoInfo(2).Caption = Trim$(Pokemon(Leilao(LeilaoSlot).Poke.Pokemon).Desc)
                 If Leilao(LeilaoSlot).Tipo = 1 Then
-                    lblLeilaoInfo(3).Caption = Leilao(LeilaoSlot).Price & " Zeny(s)"
+                    lblLeilaoInfo(4).Caption = "Valor: " & Leilao(LeilaoSlot).Price & " Zeny(s)"
                 Else
-                    lblLeilaoInfo(3).Caption = Leilao(LeilaoSlot).Price & " P.C"
+                    lblLeilaoInfo(4).Caption = "Valor: " & Leilao(LeilaoSlot).Price & " P.C"
                 End If
-                lblLeilaoInfo(4).Caption = "V: " & Trim$(Leilao(LeilaoSlot).Vendedor) & " Tempo: " & Leilao(LeilaoSlot).Tempo
             Else
 
                 lblLeilaoInfo(1).Caption = Trim$(Item(Leilao(LeilaoSlot).ItemNum).Name)
                 lblLeilaoInfo(2).Caption = Trim$(Item(Leilao(LeilaoSlot).ItemNum).Desc)
                 If Leilao(LeilaoSlot).Tipo = 1 Then
-                    lblLeilaoInfo(3).Caption = Leilao(LeilaoSlot).Price & " Zeny(s)"
+                    lblLeilaoInfo(4).Caption = "Valor: " & Leilao(LeilaoSlot).Price & " Zeny(s)"
                 Else
-                    lblLeilaoInfo(3).Caption = Leilao(LeilaoSlot).Price & " P.C"
+                    lblLeilaoInfo(4).Caption = "Valor: " & Leilao(LeilaoSlot).Price & " P.C"
                 End If
-                lblLeilaoInfo(4).Caption = "V: " & Trim$(Leilao(LeilaoSlot).Vendedor) & " Tempo: " & Leilao(LeilaoSlot).Tempo
             End If
 
         End If
@@ -6328,14 +6282,14 @@ Private Sub picLeilao_MouseMove(Index As Integer, Button As Integer, Shift As In
         If Index = 2 Then
             If Leilao(LeilaoSlot).ItemNum > 0 Then
                 If Leilao(LeilaoSlot).Poke.Pokemon > 0 Then
-                    X = X + picLeilao(0).Left + picLeilao(2).Left - picPokeDesc.Width
-                    Y = Y + picLeilao(0).top + picLeilao(2).top - picPokeDesc.Height
+                    X = X + picLeilaoPainel.Left + picLeilao(2).Left - picPokeDesc.Width
+                    Y = Y + picLeilaoPainel.top + picLeilao(2).top - picPokeDesc.Height
                     UpdatePokeWindow LeilaoSlot, X, Y, 2    'Inventario
                     LastItemDesc = 0
                     picItemDesc.Visible = False
                 Else
-                    X = X + picLeilao(0).Left + picLeilao(2).Left - picItemDesc.Width
-                    Y = Y + picLeilao(0).top + picLeilao(2).top - picItemDesc.Height
+                    X = X + picLeilaoPainel.Left + picLeilao(2).Left - picItemDesc.Width
+                    Y = Y + picLeilaoPainel.top + picLeilao(2).top - picItemDesc.Height
                     UpdateDescWindow Leilao(LeilaoSlot).ItemNum, X, Y
                     LastItemPoke = 0
                     picPokeDesc.Visible = False
@@ -6355,14 +6309,14 @@ Private Sub picLeilao_MouseMove(Index As Integer, Button As Integer, Shift As In
             If LeilaoItemSelect > 0 Then
                 If Leilao(LeilaoItemSelect).ItemNum > 0 Then
                     If Leilao(LeilaoItemSelect).Poke.Pokemon > 0 Then
-                        X = X + picLeilao(0).Left + picLeilao(3).Left - picPokeDesc.Width
-                        Y = Y + picLeilao(0).top + picLeilao(3).top - picPokeDesc.Height
+                        X = X + picLeilaoPainel.Left + picLeilao(3).Left - picPokeDesc.Width
+                        Y = Y + picLeilaoPainel.top + picLeilao(3).top - picPokeDesc.Height
                         UpdatePokeWindow LeilaoItemSelect, X, Y, 2    'Inventario
                         LastItemDesc = 0
                         picItemDesc.Visible = False
                     Else
-                        X = X + picLeilao(0).Left + picLeilao(3).Left - picItemDesc.Width
-                        Y = Y + picLeilao(0).top + picLeilao(3).top - picItemDesc.Height
+                        X = X + picLeilaoPainel.Left + picLeilao(3).Left - picItemDesc.Width
+                        Y = Y + picLeilaoPainel.top + picLeilao(3).top - picItemDesc.Height
                         UpdateDescWindow Leilao(LeilaoItemSelect).ItemNum, X, Y
                         LastItemPoke = 0
                         picPokeDesc.Visible = False
@@ -6547,18 +6501,6 @@ errorhandler:
     Exit Function
 End Function
 
-
-
-Private Sub picShop_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-' hide the descriptions
-    picItemDesc.Visible = False
-    picSpellDesc.Visible = False
-
-    ' reset all buttons
-    resetButtons_Main
-    resetButtons_Close
-End Sub
-
 Private Sub picShopItems_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Dim shopItem As Long
 
@@ -6571,7 +6513,8 @@ Private Sub picShopItems_MouseDown(Button As Integer, Shift As Integer, X As Sin
         Select Case ShopAction
         Case 0    ' no action, give cost
             With Shop(InShop).TradeItem(shopItem)
-                AddText "You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", White
+                frmMain.lblDesc.Caption = "Você pode comprar esse item por:"
+                frmMain.lblValor.Caption = .CostValue & " " & Trim$(Item(.CostItem).Name)
             End With
         Case 1    ' buy item
             ' buy item code
@@ -6613,6 +6556,24 @@ errorhandler:
     HandleError "picShopItems_MouseMove", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
+End Sub
+
+
+Private Sub picWasd_Click()
+
+' Se tiver marcado vai andar com wasd
+    If optWOn.value = True Then
+        optWOff.value = True
+        Options.wasd = 0
+        SaveOptions
+        picWasd.Picture = LoadPicture(App.Path & "\data files\graphics\gui\main\buttons\off.jpg")
+    Else
+        optWOn.value = True
+        Options.wasd = 1
+        SaveOptions
+        picWasd.Picture = LoadPicture(App.Path & "\data files\graphics\gui\main\buttons\on.jpg")
+    End If
+
 End Sub
 
 Private Sub PicSound_Click()
@@ -6815,6 +6776,7 @@ Private Sub picUpDown_Click(Index As Integer)
     End Select
 
 End Sub
+
 
 Private Sub picYourTrade_DblClick()
     Dim TradeNum As Long
@@ -7082,35 +7044,35 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
             Exit Sub
         End Select
     End If
-    
+
     If txtMyChat.Visible = False Then
-    
-    Select Case KeyCode
-    Case vbKeyT
-        If txtMyChat.Visible = False Then
-            If myTargetType = TARGET_TYPE_PLAYER And myTarget <> MyIndex Then
-                SendTradeRequest
-                ' play sound
-                PlaySound Sound_ButtonClick, -1, -1
-            Else
-                AddText "Invalid trade target.", BrightRed
+
+        Select Case KeyCode
+        Case vbKeyT
+            If txtMyChat.Visible = False Then
+                If myTargetType = TARGET_TYPE_PLAYER And myTarget <> MyIndex Then
+                    SendTradeRequest
+                    ' play sound
+                    PlaySound Sound_ButtonClick, -1, -1
+                Else
+                    AddText "Invalid trade target.", BrightRed
+                End If
             End If
-        End If
 
-    Case vbKeyInsert
-        If Player(MyIndex).Access > 0 Then
-            frmPanel.Visible = Not frmPanel.Visible
-        End If
+        Case vbKeyInsert
+            If Player(MyIndex).Access > 0 Then
+                frmPanel.Visible = Not frmPanel.Visible
+            End If
 
-    Case vbKeyE
-        frmMain.picAtalho.Visible = Not frmMain.picAtalho.Visible
-        frmMain.picAtalho.top = (frmMain.ScaleHeight / 2) - (frmMain.picAtalho.Height / 2)
-        frmMain.picAtalho.Left = (frmMain.ScaleWidth / 2) - (frmMain.picAtalho.Width / 2)
+        Case vbKeyE
+            frmMain.picAtalho.Visible = Not frmMain.picAtalho.Visible
+            frmMain.picAtalho.top = (frmMain.ScaleHeight / 2) - (frmMain.picAtalho.Height / 2)
+            frmMain.picAtalho.Left = (frmMain.ScaleWidth / 2) - (frmMain.picAtalho.Width / 2)
 
-    End Select
-    
+        End Select
+
     End If
-    
+
     ' hotbar
     If txtMyChat.Visible = False Then
 
@@ -7999,31 +7961,62 @@ Private Sub imgClose_Click(Index As Integer)
     Case 10
         SendAprenderHab Index
         frmMain.PicHabilidade.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
 
         ' Premium
     Case 11
         frmMain.PicVipPanel.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
 
         ' Pokedex
     Case 12
         frmMain.picPokedex.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
 
         ' Opções
     Case 13
         frmMain.picOptions.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
 
+        ' Batalha
     Case 14
         frmMain.PicBatalha.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
 
+        ' Organização
     Case 15
         frmMain.PicOrgs.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
 
+        ' Quantidade
     Case 16
         picCurrency.Visible = False
         txtCurrency.text = vbNullString
         tmpCurrencyItem = 0
         CurrencyMenu = 0    ' clear
+        PlaySound Sound_ButtonClick, -1, -1
 
+        ' Leilão
+    Case 17
+        picLeilaoPainel.Visible = False
+        PlaySound Sound_ButtonClick, -1, -1
+
+        ' Loja
+    Case 18
+        Dim Buffer As clsBuffer
+        Set Buffer = New clsBuffer
+
+        Buffer.WriteLong CCloseShop
+
+        SendData Buffer.ToArray()
+
+        Set Buffer = Nothing
+
+        picCover.Visible = False
+        picShop.Visible = False
+        InShop = 0
+        ShopAction = 0
+        
     End Select
 
     ' Error handler
@@ -8137,6 +8130,59 @@ Private Sub PicOrgs_MouseMove(Button As Integer, Shift As Integer, X As Single, 
     Exit Sub
 errorhandler:
     HandleError "PicOrg_MouseMove", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+'''''''''''''''
+' CÓDIGO LOJA '
+'''''''''''''''
+
+Private Sub picShop_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
+    SOffsetX = X
+    SOffsetY = Y
+End Sub
+
+Private Sub picShop_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    Call MovePicture(frmMain.picShop, Button, Shift, X, Y)
+    
+    picItemDesc.Visible = False
+    picSpellDesc.Visible = False
+
+    ' reset all buttons
+    resetButtons_Main
+    resetButtons_Close
+    
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "picLeilaoPainel_MouseMove", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+'''''''''''''''''
+' CÓDIGO LEILÃO '
+'''''''''''''''''
+
+Private Sub picLeilaoPainel_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
+    SOffsetX = X
+    SOffsetY = Y
+End Sub
+
+Private Sub picLeilaoPainel_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    Call MovePicture(frmMain.picLeilaoPainel, Button, Shift, X, Y)
+
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "picLeilaoPainel_MouseMove", "frmMain", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
 End Sub

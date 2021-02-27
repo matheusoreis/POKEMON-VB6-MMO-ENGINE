@@ -812,7 +812,22 @@ Public Sub cacheButtons()
         .filename = "confirmar"
         .state = 0    ' normal
     End With
-
+    
+    With MainButton(28)
+        .filename = "comprar"
+        .state = 0    ' normal
+    End With
+    
+    With MainButton(29)
+        .filename = "comprar"
+        .state = 0    ' normal
+    End With
+    
+    With MainButton(30)
+        .filename = "vender"
+        .state = 0    ' normal
+    End With
+    
     '###########Quest Buttons##############
     ' quest - informations
     With QuestButton(1)
@@ -914,7 +929,17 @@ Public Sub cacheButtons()
         .filename = "fechar"
         .state = 0
     End With
-
+    
+    With CloseButton(17)
+        .filename = "fechar"
+        .state = 0
+    End With
+    
+    With CloseButton(18)
+        .filename = "fechar"
+        .state = 0
+    End With
+    
     ' Error handler
     Exit Sub
 errorhandler:

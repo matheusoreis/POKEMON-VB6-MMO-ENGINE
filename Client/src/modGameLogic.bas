@@ -1794,17 +1794,19 @@ Public Sub Dialogue(ByVal diTitle As String, ByVal diText As String, ByVal diInd
 
     ' show/hide buttons
     If Not isYesNo Then
-        frmMain.lblDialogue_Button(1).Visible = True    ' Okay button
-        frmMain.lblDialogue_Button(2).Visible = False    ' Yes button
-        frmMain.lblDialogue_Button(3).Visible = False    ' No button
+        frmMain.lblDialogueBtn(1).Visible = True    ' Okay button
+        frmMain.lblDialogueBtn(2).Visible = False    ' Yes button
+        frmMain.lblDialogueBtn(3).Visible = False    ' No button
     Else
-        frmMain.lblDialogue_Button(1).Visible = False    ' Okay button
-        frmMain.lblDialogue_Button(2).Visible = True    ' Yes button
-        frmMain.lblDialogue_Button(3).Visible = True    ' No button
+        frmMain.lblDialogueBtn(1).Visible = False    ' Okay button
+        frmMain.lblDialogueBtn(2).Visible = True    ' Yes button
+        frmMain.lblDialogueBtn(3).Visible = True    ' No button
     End If
 
     ' show the dialogue box
     frmMain.picDialogue.Visible = True
+    frmMain.picDialogue.top = (frmMain.ScaleHeight / 2) - (frmMain.picDialogue.Height / 2)
+    frmMain.picDialogue.Left = (frmMain.ScaleWidth / 2) - (frmMain.picDialogue.Width / 2)
 
     ' Error handler
     Exit Sub

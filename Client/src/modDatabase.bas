@@ -116,6 +116,7 @@ Public Sub SaveOptions()
     Call PutVar(filename, "Options", "MenuMusic", Trim$(Options.MenuMusic))
     Call PutVar(filename, "Options", "Music", str(Options.Music))
     Call PutVar(filename, "Options", "Sound", str(Options.sound))
+    Call PutVar(filename, "Options", "Wasd", str(Options.wasd))
     Call PutVar(filename, "Options", "Debug", str(Options.Debug))
     Call PutVar(filename, "Options", "MiniMap", str(Options.MiniMap))
     Call PutVar(filename, "Options", "Quest", str(Options.Quest))
@@ -146,6 +147,7 @@ Public Sub LoadOptions()
         Options.MenuMusic = vbNullString
         Options.Music = 1
         Options.sound = 1
+        Options.wasd = 0
         Options.Debug = 0
         Options.MiniMap = 1
         Options.Quest = 1
@@ -160,6 +162,7 @@ Public Sub LoadOptions()
         Options.MenuMusic = GetVar(filename, "Options", "MenuMusic")
         Options.Music = GetVar(filename, "Options", "Music")
         Options.sound = GetVar(filename, "Options", "Sound")
+        Options.wasd = GetVar(filename, "Options", "Wasd")
         Options.Debug = GetVar(filename, "Options", "Debug")
         Options.MiniMap = GetVar(filename, "Options", "MiniMap")
         Options.Quest = GetVar(filename, "Options", "Quest")
@@ -176,6 +179,12 @@ Public Sub LoadOptions()
         frmMain.optSOff.value = True
     Else
         frmMain.optSOn.value = True
+    End If
+    
+    If Options.wasd = 0 Then
+        frmMain.optWOff.value = True
+    Else
+        frmMain.optWOn.Visible = True
     End If
 
     ' Error handler

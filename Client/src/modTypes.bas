@@ -63,6 +63,7 @@ Private Type OptionsRec
     MenuMusic As String
     Music As Byte
     sound As Byte
+    wasd As Byte
     Debug As Byte
     MiniMap As Byte
     Quest As Byte
