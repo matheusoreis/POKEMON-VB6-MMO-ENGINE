@@ -1583,6 +1583,8 @@ Public Sub OpenShop(ByVal shopnum As Long)
     ShopAction = 0
     'frmMain.picCover.Visible = True
     frmMain.picShop.Visible = True
+    frmMain.picShop.top = (frmMain.ScaleHeight / 2) - (frmMain.picShop.Height / 2)
+    frmMain.picShop.Left = (frmMain.ScaleWidth / 2) - (frmMain.picShop.Width / 2)
     BltShop
 
     ' Error handler
