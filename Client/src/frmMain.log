@@ -1,0 +1,10 @@
+Line 2438: Class RichTextLib.RichTextBox of control txtChat was not a loaded control class.
+Line 3760: Class MSWinsockLib.Winsock of control Socket was not a loaded control class.
+Line 2445: The property name _ExtentX in txtChat is invalid.
+Line 2446: The property name _ExtentY in txtChat is invalid.
+Line 2447: The property name _Version in txtChat is invalid.
+Line 2451: The property name ScrollBars in txtChat is invalid.
+Line 2453: The property name TextRTF in txtChat is invalid.
+Line 3763: The property name _ExtentX in Socket is invalid.
+Line 3764: The property name _ExtentY in Socket is invalid.
+Line 3765: The property name _Version in Socket is invalid.
