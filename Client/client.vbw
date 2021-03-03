@@ -1,4 +1,4 @@
-modText = 50, 50, 1086, 697, Z
+modText = 50, 50, 1086, 697, 
 modTypes = 75, 75, 1111, 722, 
 frmMenu = 0, 0, 599, 456, , 175, 175, 1211, 822, C
 modGameLogic = 125, 125, 1161, 772, 
@@ -9,7 +9,7 @@ frmEditor_Item = 100, 100, 904, 523, C, 250, 250, 1286, 897, C
 modDatabase = 107, -22, 1143, 625, 
 frmEditor_NPC = 0, 0, 1036, 647, , 300, 300, 1336, 947, C
 frmEditor_Shop = 125, 125, 1161, 772, C, 100, 100, 1136, 747, C
-modConstants = 100, 100, 1136, 747, 
+modConstants = 100, 100, 1136, 747, Z
 modGlobals = 125, 125, 1161, 772, 
 modGeneral = 75, 75, 1111, 722, 
 modGameEditors = 71, 9, 1107, 656, 
