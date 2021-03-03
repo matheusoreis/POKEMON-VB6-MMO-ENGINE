@@ -38,7 +38,7 @@ Function GetPlayerMaxVital(ByVal Index As Long, ByVal Vital As Vitals) As Long
 End Function
 
 Function GetPlayerVitalRegen(ByVal Index As Long, ByVal Vital As Vitals) As Long
-    Dim I As Long
+    Dim i As Long
 
     ' Prevent subscript out of range
     If IsPlaying(Index) = False Or Index <= 0 Or Index > MAX_PLAYERS Then
@@ -48,16 +48,16 @@ Function GetPlayerVitalRegen(ByVal Index As Long, ByVal Vital As Vitals) As Long
 
     Select Case Vital
         Case HP
-            I = (GetPlayerStat(Index, Stats.Willpower) * 0.8) + 6
+            i = (GetPlayerStat(Index, Stats.Willpower) * 0.8) + 6
             If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
-                I = (GetPlayerEquipmentPokeInfoStat(Index, weapon, 5) * 0.5) + (Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Vital(1) * 25 / 100)
+                i = (GetPlayerEquipmentPokeInfoStat(Index, weapon, 5) * 0.5) + (Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Vital(1) * 25 / 100)
             End If
         Case MP
-            I = (GetPlayerStat(Index, Stats.Willpower) / 4) + 12.5
+            i = (GetPlayerStat(Index, Stats.Willpower) / 4) + 12.5
     End Select
 
-    If I < 2 Then I = 2
-    GetPlayerVitalRegen = I
+    If i < 2 Then i = 2
+    GetPlayerVitalRegen = i
 End Function
 
 Function GetPlayerDamage(ByVal Index As Long) As Long
@@ -131,7 +131,7 @@ Function GetPokemonMaxVital(ByVal NpcNum As Long, ByVal Vital As Vitals, ByVal L
 End Function
 
 Function GetNpcVitalRegen(ByVal NpcNum As Long, ByVal Vital As Vitals) As Long
-    Dim I As Long
+    Dim i As Long
 
     'Prevent subscript out of range
     If NpcNum <= 0 Or NpcNum > MAX_NPCS Then
@@ -141,17 +141,17 @@ Function GetNpcVitalRegen(ByVal NpcNum As Long, ByVal Vital As Vitals) As Long
 
     Select Case Vital
         Case HP
-            I = (Npc(NpcNum).Stat(Stats.Willpower) * 0.8) + 6
+            i = (Npc(NpcNum).Stat(Stats.Willpower) * 0.8) + 6
         Case MP
-            I = (Npc(NpcNum).Stat(Stats.Willpower) / 4) + 12.5
+            i = (Npc(NpcNum).Stat(Stats.Willpower) / 4) + 12.5
     End Select
     
-    GetNpcVitalRegen = I
+    GetNpcVitalRegen = i
 
 End Function
 
 Function GetPokemonVitalRegen(ByVal NpcNum As Long, ByVal Vital As Vitals) As Long
-    Dim I As Long
+    Dim i As Long
 
     'Prevent subscript out of range
     If NpcNum <= 0 Or NpcNum > MAX_NPCS Then
@@ -161,12 +161,12 @@ Function GetPokemonVitalRegen(ByVal NpcNum As Long, ByVal Vital As Vitals) As Lo
 
     Select Case Vital
         Case HP
-            I = (Pokemon(Npc(NpcNum).Pokemon).Vital(1) * 10 / 100) + (Pokemon(Npc(NpcNum).Pokemon).Add_Stat(3) * 0.5)
+            i = (Pokemon(Npc(NpcNum).Pokemon).Vital(1) * 10 / 100) + (Pokemon(Npc(NpcNum).Pokemon).Add_Stat(3) * 0.5)
         Case MP
-            I = (Npc(NpcNum).Stat(Stats.Willpower) / 4) + 12.5
+            i = (Npc(NpcNum).Stat(Stats.Willpower) / 4) + 12.5
     End Select
     
-    GetPokemonVitalRegen = I
+    GetPokemonVitalRegen = i
 
 End Function
 
@@ -480,7 +480,7 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
     Dim Name As String
     Dim EXP As Long
     Dim n As Long
-    Dim I As Long
+    Dim i As Long
     Dim STR As Long
     Dim DEF As Long
     Dim MapNum As Long
@@ -539,11 +539,11 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
             ' pass through party sharing function
             Party_ShareExp TempPlayer(attacker).inParty, EXP, attacker
         Else
-            For I = 1 To Player_HighIndex
-                If IsPlaying(I) = True Then
-                    If Player(I).ORG > 0 Then
-                        If GetPlayerMap(I) = GetPlayerMap(attacker) Then
-                            GivePlayerEXP I, (EXP * 5) / 100
+            For i = 1 To Player_HighIndex
+                If IsPlaying(i) = True Then
+                    If Player(i).ORG > 0 Then
+                        If GetPlayerMap(i) = GetPlayerMap(attacker) Then
+                            GivePlayerEXP i, (EXP * 5) / 100
                         End If
                     End If
                 End If
@@ -560,9 +560,9 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
                 Call CheckAORGlevelUP(Player(attacker).ORG)
                 Call SaveOrgExp(Player(attacker).ORG)
                         
-                For I = 1 To Player_HighIndex
-                    If Player(I).ORG = Player(attacker).ORG Then
-                        Call SendOrganização(I)
+                For i = 1 To Player_HighIndex
+                    If Player(i).ORG = Player(attacker).ORG Then
+                        Call SendOrganização(i)
                     End If
                 Next
             Else
@@ -595,8 +595,8 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
         ChecarTarefasAtuais attacker, 1, MapNpc(MapNum).Npc(MapNpcNum).Num
         
         ' clear DoTs and HoTs
-        For I = 1 To MAX_DOTS
-            With MapNpc(MapNum).Npc(MapNpcNum).DoT(I)
+        For i = 1 To MAX_DOTS
+            With MapNpc(MapNum).Npc(MapNpcNum).DoT(i)
                 .Spell = 0
                 .Timer = 0
                 .Caster = 0
@@ -604,7 +604,7 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
                 .Used = False
             End With
             
-            With MapNpc(MapNum).Npc(MapNpcNum).HoT(I)
+            With MapNpc(MapNum).Npc(MapNpcNum).HoT(i)
                 .Spell = 0
                 .Timer = 0
                 .Caster = 0
@@ -618,14 +618,14 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
         Call SendMapNpcVitals(MapNum, MapNpcNum)
         
         'Loop through entire map and purge NPC from targets
-        For I = 1 To Player_HighIndex
-            If IsPlaying(I) And IsConnected(I) Then
-                If Player(I).Map = MapNum Then
-                    If TempPlayer(I).targetType = TARGET_TYPE_NPC Then
-                        If TempPlayer(I).target = MapNpcNum Then
-                            TempPlayer(I).target = 0
-                            TempPlayer(I).targetType = TARGET_TYPE_NONE
-                            SendTarget I
+        For i = 1 To Player_HighIndex
+            If IsPlaying(i) And IsConnected(i) Then
+                If Player(i).Map = MapNum Then
+                    If TempPlayer(i).targetType = TARGET_TYPE_NPC Then
+                        If TempPlayer(i).target = MapNpcNum Then
+                            TempPlayer(i).target = 0
+                            TempPlayer(i).targetType = TARGET_TYPE_NONE
+                            SendTarget i
                         End If
                     End If
                 End If
@@ -685,10 +685,10 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
 
         ' Now check for guard ai and if so have all onmap guards come after'm
         If Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Behaviour = NPC_BEHAVIOUR_GUARD Then
-            For I = 1 To MAX_MAP_NPCS
-                If MapNpc(MapNum).Npc(I).Num = MapNpc(MapNum).Npc(MapNpcNum).Num Then
-                    MapNpc(MapNum).Npc(I).target = attacker
-                    MapNpc(MapNum).Npc(I).targetType = 1 ' player
+            For i = 1 To MAX_MAP_NPCS
+                If MapNpc(MapNum).Npc(i).Num = MapNpc(MapNum).Npc(MapNpcNum).Num Then
+                    MapNpc(MapNum).Npc(i).target = attacker
+                    MapNpc(MapNum).Npc(i).targetType = 1 ' player
                 End If
             Next
         End If
@@ -844,7 +844,7 @@ Sub NpcAttackPlayer(ByVal MapNpcNum As Long, ByVal victim As Long, ByVal Damage 
     Dim Name As String
     Dim EXP As Long
     Dim MapNum As Long
-    Dim I As Long
+    Dim i As Long
     Dim Buffer As clsBuffer
 
     ' Check for subscript out of range
@@ -1060,7 +1060,7 @@ End Function
 Sub PlayerAttackPlayer(ByVal attacker As Long, ByVal victim As Long, ByVal Damage As Long, Optional ByVal SpellNum As Long = 0)
     Dim EXP As Long
     Dim n As Long
-    Dim I As Long
+    Dim i As Long
     Dim Buffer As clsBuffer
 
     ' Check for subscript out of range
@@ -1086,14 +1086,14 @@ Sub PlayerAttackPlayer(ByVal attacker As Long, ByVal victim As Long, ByVal Damag
         If SpellNum > 0 Then SendMapSound victim, GetPlayerX(victim), GetPlayerY(victim), SoundEntity.seSpell, SpellNum
         
         ' purge target info of anyone who targetted dead guy
-        For I = 1 To Player_HighIndex
-            If IsPlaying(I) And IsConnected(I) Then
-                If Player(I).Map = GetPlayerMap(attacker) Then
-                    If TempPlayer(I).target = TARGET_TYPE_PLAYER Then
-                        If TempPlayer(I).target = victim Then
-                            TempPlayer(I).target = 0
-                            TempPlayer(I).targetType = TARGET_TYPE_NONE
-                            SendTarget I
+        For i = 1 To Player_HighIndex
+            If IsPlaying(i) And IsConnected(i) Then
+                If Player(i).Map = GetPlayerMap(attacker) Then
+                    If TempPlayer(i).target = TARGET_TYPE_PLAYER Then
+                        If TempPlayer(i).target = victim Then
+                            TempPlayer(i).target = 0
+                            TempPlayer(i).targetType = TARGET_TYPE_NONE
+                            SendTarget i
                         End If
                     End If
                 End If
@@ -1109,15 +1109,15 @@ Sub PlayerAttackPlayer(ByVal attacker As Long, ByVal victim As Long, ByVal Damag
          If TempPlayer(victim).LutQntPoke = 0 Then
             SendArenaStatus TempPlayer(victim).LutandoA, 0
             
-            If GetPlayerIP(victim) = GetPlayerIP(attacker) Then
-                PlayerMsg attacker, "Você venceu a batalha mas não ganhou Vitórias por ter o mesmo IP do Jogador: " & Trim$(GetPlayerName(victim)), BrightRed
-                PlayerMsg victim, "Você perdeu a Batalha mas não ganhou Derrotas por ter o mesmo IP do jogador: " & Trim$(GetPlayerName(attacker)), BrightRed
-            Else
+          '  If GetPlayerIP(victim) = GetPlayerIP(attacker) Then
+            '    PlayerMsg attacker, "Você venceu a batalha mas não ganhou Vitórias por ter o mesmo IP do Jogador: " & Trim$(GetPlayerName(victim)), BrightRed
+             '   PlayerMsg victim, "Você perdeu a Batalha mas não ganhou Derrotas por ter o mesmo IP do jogador: " & Trim$(GetPlayerName(attacker)), BrightRed
+           ' Else
                 Player(victim).Derrotas = Player(victim).Derrotas + 1
                 Player(attacker).Vitorias = Player(attacker).Vitorias + 1
                 SetPlayerEquipmentFelicidade attacker, weapon, GetPlayerEquipmentFelicidade(attacker, weapon) + 2
                 SetPlayerEquipmentFelicidade victim, weapon, GetPlayerEquipmentFelicidade(victim, weapon) - 2
-            End If
+            'End If
             
             TempPlayer(victim).Lutando = 0
             TempPlayer(victim).LutandoA = 0
@@ -1166,18 +1166,18 @@ Sub PlayerAttackPlayer(ByVal attacker As Long, ByVal victim As Long, ByVal Damag
             End If
             
             If Party(TempPlayer(victim).inParty).PT = 0 Then
-            For I = 1 To Player_HighIndex
-                If IsPlaying(I) = True Then
-                    If TempPlayer(I).inParty = TempPlayer(victim).inParty Then
-                        Player(I).Derrotas = Player(I).Derrotas + 1
+            For i = 1 To Player_HighIndex
+                If IsPlaying(i) = True Then
+                    If TempPlayer(i).inParty = TempPlayer(victim).inParty Then
+                        Player(i).Derrotas = Player(i).Derrotas + 1
                     End If
                 End If
             Next
             
-            For I = 1 To Player_HighIndex
-                If IsPlaying(I) = True Then
-                    If TempPlayer(I).inParty = TempPlayer(attacker).inParty Then
-                        Player(I).Vitorias = Player(I).Vitorias + 1
+            For i = 1 To Player_HighIndex
+                If IsPlaying(i) = True Then
+                    If TempPlayer(i).inParty = TempPlayer(attacker).inParty Then
+                        Player(i).Vitorias = Player(i).Vitorias + 1
                         PlayerWarp attacker, 350, 11, 8
                         Party(TempPlayer(attacker).inParty).PT = 0
                     End If
@@ -1378,7 +1378,7 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
     Dim DidCast As Boolean
     Dim ClassReq As Long
     Dim AccessReq As Long
-    Dim I As Long
+    Dim i As Long
     Dim AoE As Long
     Dim Range As Long
     Dim VitalType As Byte
@@ -1511,16 +1511,16 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
             Select Case Spell(SpellNum).Type
                 Case SPELL_TYPE_DAMAGEHP
                     DidCast = True
-                    For I = 1 To Player_HighIndex
-                        If IsPlaying(I) Then
-                            If I <> Index Then
-                                If GetPlayerMap(I) = GetPlayerMap(Index) Then
-                                    If isInRange(AoE, X, Y, GetPlayerX(I), GetPlayerY(I)) Then
-                                        If CanPlayerAttackPlayer(Index, I, True) Then
-                                            SendAnimation MapNum, Spell(SpellNum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, I
+                    For i = 1 To Player_HighIndex
+                        If IsPlaying(i) Then
+                            If i <> Index Then
+                                If GetPlayerMap(i) = GetPlayerMap(Index) Then
+                                    If isInRange(AoE, X, Y, GetPlayerX(i), GetPlayerY(i)) Then
+                                        If CanPlayerAttackPlayer(Index, i, True) Then
+                                            SendAnimation MapNum, Spell(SpellNum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, i
                                             
-                                            If GetPlayerEquipmentPokeInfoPokemon(I, weapon) > 0 Then
-                                            Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(GetPlayerEquipmentPokeInfoPokemon(I, weapon)).Tipo(1))
+                                            If GetPlayerEquipmentPokeInfoPokemon(i, weapon) > 0 Then
+                                            Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(GetPlayerEquipmentPokeInfoPokemon(i, weapon)).Tipo(1))
                                             Case 0 'Normal
                                             Vital = Vital 'Dano Normal
                                             Case 1
@@ -1532,22 +1532,22 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
                                             End Select
                                             End If
                                             
-                                            PlayerAttackPlayer Index, I, Vital, SpellNum
+                                            PlayerAttackPlayer Index, i, Vital, SpellNum
                                         End If
                                     End If
                                 End If
                             End If
                         End If
                     Next
-                    For I = 1 To MAX_MAP_NPCS
-                        If MapNpc(MapNum).Npc(I).Num > 0 Then
-                            If MapNpc(MapNum).Npc(I).Vital(HP) > 0 Then
-                                If isInRange(AoE, X, Y, MapNpc(MapNum).Npc(I).X, MapNpc(MapNum).Npc(I).Y) Then
-                                    If CanPlayerAttackNpc(Index, I, True) Then
-                                        SendAnimation MapNum, Spell(SpellNum).SpellAnim, 0, 0, TARGET_TYPE_NPC, I
+                    For i = 1 To MAX_MAP_NPCS
+                        If MapNpc(MapNum).Npc(i).Num > 0 Then
+                            If MapNpc(MapNum).Npc(i).Vital(HP) > 0 Then
+                                If isInRange(AoE, X, Y, MapNpc(MapNum).Npc(i).X, MapNpc(MapNum).Npc(i).Y) Then
+                                    If CanPlayerAttackNpc(Index, i, True) Then
+                                        SendAnimation MapNum, Spell(SpellNum).SpellAnim, 0, 0, TARGET_TYPE_NPC, i
                                         
-                                        If Npc(MapNpc(MapNum).Npc(I).Num).Pokemon > 0 Then
-                                        Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(Npc(MapNpc(MapNum).Npc(I).Num).Pokemon).Tipo(1))
+                                        If Npc(MapNpc(MapNum).Npc(i).Num).Pokemon > 0 Then
+                                        Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(Npc(MapNpc(MapNum).Npc(i).Num).Pokemon).Tipo(1))
                                         Case 0 'Normal
                                         Vital = Vital 'Dano Normal
                                         Case 1
@@ -1561,7 +1561,7 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
                                             Vital = Vital
                                         End If
                                         
-                                        PlayerAttackNpc Index, I, Vital, SpellNum
+                                        PlayerAttackNpc Index, i, Vital, SpellNum
                                     End If
                                 End If
                             End If
@@ -1580,12 +1580,12 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
                     End If
                     
                     DidCast = True
-                     For I = 1 To Player_HighIndex
-                        If IsPlaying(I) Then
-                            If I <> Index Then
-                                If GetPlayerMap(I) = GetPlayerMap(Index) Then
-                                    If isInRange(AoE, X, Y, GetPlayerX(I), GetPlayerY(I)) Then
-                                        SpellPlayer_Effect VitalType, increment, I, Vital, SpellNum
+                     For i = 1 To Player_HighIndex
+                        If IsPlaying(i) Then
+                            If i <> Index Then
+                                If GetPlayerMap(i) = GetPlayerMap(Index) Then
+                                    If isInRange(AoE, X, Y, GetPlayerX(i), GetPlayerY(i)) Then
+                                        SpellPlayer_Effect VitalType, increment, i, Vital, SpellNum
                                         DidCast = True
                                     End If
                                 End If
@@ -1593,11 +1593,11 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
                         End If
                     Next
                     
-                    For I = 1 To MAX_MAP_NPCS
-                        If MapNpc(MapNum).Npc(I).Num > 0 Then
-                            If MapNpc(MapNum).Npc(I).Vital(HP) > 0 Then
-                                If isInRange(AoE, X, Y, MapNpc(MapNum).Npc(I).X, MapNpc(MapNum).Npc(I).Y) Then
-                                    SpellNpc_Effect VitalType, increment, I, Vital, SpellNum, MapNum
+                    For i = 1 To MAX_MAP_NPCS
+                        If MapNpc(MapNum).Npc(i).Num > 0 Then
+                            If MapNpc(MapNum).Npc(i).Vital(HP) > 0 Then
+                                If isInRange(AoE, X, Y, MapNpc(MapNum).Npc(i).X, MapNpc(MapNum).Npc(i).Y) Then
+                                    SpellNpc_Effect VitalType, increment, i, Vital, SpellNum, MapNum
                                 End If
                             End If
                         End If
@@ -1723,7 +1723,7 @@ Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal target 
                             If Vital > 0 Then
                                 SendAnimation MapNum, Spell(SpellNum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, target
                                 
-                                If GetPlayerEquipmentPokeInfoPokemon(I, weapon) > 0 Then
+                                If GetPlayerEquipmentPokeInfoPokemon(i, weapon) > 0 Then
                                 Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(GetPlayerEquipmentPokeInfoPokemon(target, weapon)).Tipo(1))
                                 Case 0 'Normal
                                 Vital = Vital 'Dano Normal
@@ -1885,10 +1885,10 @@ Dim Colour As Long
 End Sub
 
 Public Sub AddDoT_Player(ByVal Index As Long, ByVal SpellNum As Long, ByVal Caster As Long)
-Dim I As Long
+Dim i As Long
 
-    For I = 1 To MAX_DOTS
-        With TempPlayer(Index).DoT(I)
+    For i = 1 To MAX_DOTS
+        With TempPlayer(Index).DoT(i)
             If .Spell = SpellNum Then
                 .Timer = GetTickCount
                 .Caster = Caster
@@ -1909,10 +1909,10 @@ Dim I As Long
 End Sub
 
 Public Sub AddHoT_Player(ByVal Index As Long, ByVal SpellNum As Long)
-Dim I As Long
+Dim i As Long
 
-    For I = 1 To MAX_DOTS
-        With TempPlayer(Index).HoT(I)
+    For i = 1 To MAX_DOTS
+        With TempPlayer(Index).HoT(i)
             If .Spell = SpellNum Then
                 .Timer = GetTickCount
                 .StartTime = GetTickCount
@@ -1931,10 +1931,10 @@ Dim I As Long
 End Sub
 
 Public Sub AddDoT_Npc(ByVal MapNum As Long, ByVal Index As Long, ByVal SpellNum As Long, ByVal Caster As Long)
-Dim I As Long
+Dim i As Long
 
-    For I = 1 To MAX_DOTS
-        With MapNpc(MapNum).Npc(Index).DoT(I)
+    For i = 1 To MAX_DOTS
+        With MapNpc(MapNum).Npc(Index).DoT(i)
             If .Spell = SpellNum Then
                 .Timer = GetTickCount
                 .Caster = Caster
@@ -1955,10 +1955,10 @@ Dim I As Long
 End Sub
 
 Public Sub AddHoT_Npc(ByVal MapNum As Long, ByVal Index As Long, ByVal SpellNum As Long)
-Dim I As Long
+Dim i As Long
 
-    For I = 1 To MAX_DOTS
-        With MapNpc(MapNum).Npc(Index).HoT(I)
+    For i = 1 To MAX_DOTS
+        With MapNpc(MapNum).Npc(Index).HoT(i)
             If .Spell = SpellNum Then
                 .Timer = GetTickCount
                 .StartTime = GetTickCount
@@ -2112,17 +2112,17 @@ Public Sub StunNPC(ByVal Index As Long, ByVal MapNum As Long, ByVal SpellNum As 
 End Sub
 
 Function UsarMagiaLinear(ByVal Index As Integer, ByVal SpellNum As Integer, ByVal Vital As Long, ByVal Mapa As Long, ByVal X As Byte, ByVal Y As Byte)
-Dim I As Long
+Dim i As Long
 
     'Loop Global Npc
-    For I = 1 To MAX_MAP_NPCS
-      If MapNpc(Mapa).Npc(I).Num > 0 And MapNpc(Mapa).Npc(I).X = X And MapNpc(Mapa).Npc(I).Y = Y And MapNpc(Mapa).Npc(I).Vital(HP) > 0 Then
-        If CanPlayerAttackNpc(Index, I, True) Then
+    For i = 1 To MAX_MAP_NPCS
+      If MapNpc(Mapa).Npc(i).Num > 0 And MapNpc(Mapa).Npc(i).X = X And MapNpc(Mapa).Npc(i).Y = Y And MapNpc(Mapa).Npc(i).Vital(HP) > 0 Then
+        If CanPlayerAttackNpc(Index, i, True) Then
         
         'Evitar OverFlow
-        If Npc(MapNpc(Mapa).Npc(I).Num).Pokemon = 0 Then Exit Function
+        If Npc(MapNpc(Mapa).Npc(i).Num).Pokemon = 0 Then Exit Function
         
-            Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(Npc(MapNpc(Mapa).Npc(I).Num).Pokemon).Tipo(1))
+            Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(Npc(MapNpc(Mapa).Npc(i).Num).Pokemon).Tipo(1))
             Case 0 'Normal
             Vital = Vital 'Dano Normal
             Case 1
@@ -2133,16 +2133,16 @@ Dim I As Long
             Vital = 0 'Dano 0
             End Select
         
-          PlayerAttackNpc Index, I, Vital, SpellNum
+          PlayerAttackNpc Index, i, Vital, SpellNum
         End If
       End If
     Next
     
     'Loop Global Player
-    For I = 1 To Player_HighIndex
-      If IsPlaying(I) Then
-        If GetPlayerMap(I) = Mapa And GetPlayerX(I) = X And GetPlayerY(I) = Y Then
-          If CanPlayerAttackPlayer(Index, I, True) Then
+    For i = 1 To Player_HighIndex
+      If IsPlaying(i) Then
+        If GetPlayerMap(i) = Mapa And GetPlayerX(i) = X And GetPlayerY(i) = Y Then
+          If CanPlayerAttackPlayer(Index, i, True) Then
           
             If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
             Select Case DanoElemental(Spell(SpellNum).Element, Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Tipo(1))
@@ -2157,7 +2157,7 @@ Dim I As Long
             End Select
             End If
           
-            PlayerAttackPlayer Index, I, Vital, SpellNum
+            PlayerAttackPlayer Index, i, Vital, SpellNum
           End If
         End If
       End If
@@ -2503,12 +2503,12 @@ End Function
 ' /////////////////////
 
 Public Sub ChecarTarefasAtuais(ByVal Index As Long, ByVal TaskType As Long, ByVal TargetIndex As Long)
-    Dim I As Long
+    Dim i As Long
     
-    For I = 1 To MAX_QUESTS
-        If Player(Index).Quests(I).Status > 0 And Player(Index).Quests(I).Status < 3 Then
-            If Quest(I).Task(Player(Index).Quests(I).Part).Type = TaskType Then
-                ChecarQuest Index, I, TaskType, TargetIndex
+    For i = 1 To MAX_QUESTS
+        If Player(Index).Quests(i).Status > 0 And Player(Index).Quests(i).Status < 3 Then
+            If Quest(i).Task(Player(Index).Quests(i).Part).Type = TaskType Then
+                ChecarQuest Index, i, TaskType, TargetIndex
             End If
         End If
     Next

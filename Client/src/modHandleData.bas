@@ -2543,6 +2543,7 @@ Private Sub HandleTrade(ByVal Index As Long, ByRef data() As Byte, ByVal StartAd
     Buffer.WriteBytes data()
 
     InTrade = Buffer.ReadLong
+    frmMain.picDialogue.Visible = False
     frmMain.picTrade.Visible = True
     frmMain.picYourTrade.Visible = True
     frmMain.picTheirTrade.Visible = True
@@ -2570,6 +2571,7 @@ Private Sub HandleCloseTrade(ByVal Index As Long, ByRef data() As Byte, ByVal St
 
     InTrade = 0
     frmMain.picTrade.Visible = False
+    frmMain.picCurrency.Visible = False
     frmMain.lblTradeStatus(0).Caption = "Esperando Confirmação"
     frmMain.lblTradeStatus(1).Caption = "Esperando Confirmação"
     frmMain.lblTradeStatus(0).ForeColor = &HE0E0E0
@@ -3382,6 +3384,10 @@ Private Sub HandleArenas(ByVal Index As Long, ByRef data() As Byte, ByVal StartA
     If Arena = 0 Then Exit Sub
 
     Player(Index).Arena(Arena) = status
+    
+    'If Player(Index).Arena(Arena) = 1 Then
+    '    frmMain.lblArena(3).Caption = "teste"
+   ' End If
 
 End Sub
 

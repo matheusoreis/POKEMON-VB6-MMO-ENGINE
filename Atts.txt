@@ -1,0 +1,29 @@
+Bug Pesca Arrumado:
+
+Pescava e o poke não vinha(Arrumado)
+Animação não aparecia(Arrumado)
+
+Bug Trade:
+
+Alguns bugs arrumados(Arrumado)
+
+Bug Arena:
+
+Podia entrar na arena ja tendo player batalhando(Arrumado)
+Arena não aparecia ocupado na label(Arrumado)
+se alguem saisse do jogo na arena não era teleportado neen contado vit/der(Arrumado)
+
+Pokedex:
+
+desc do poke ao passar mouse em cima(Adicionado)
+
+Leilão:
+
+Bug q dupava item no leilão ao reinicar servidor ou fechar e abrir(Arrumado)
+Bug em que apenas o pokemon ia para o banco(Arrumado)
+Adicionado Novamente VENDEDOR E TEMPO( NÃO RETIRAR )
+Lista de Seleção de tempo do item no leilão 1 a 12(Adicionado)
+
+Screen:
+
+Adicionado novamente LABELHP/MP( NÃO RETIRAR )

@@ -1533,7 +1533,7 @@ Public Sub BltPlayer(ByVal Index As Long)
     End If
 
     ' Configuração Ler Coluna 1 ou 2
-    If Player(Index).InSurf Or Player(Index).InFishing Then Coluna = 1
+    If Player(Index).InSurf = 1 Or Player(Index).InFishing Then Coluna = 1
     If GetPlayerEquipment(Index, weapon) Then
         If Item(GetPlayerEquipment(Index, weapon)).vel > 0 Then Coluna = 1
     End If
@@ -2884,7 +2884,7 @@ Sub BltTrade()
 
                     Engine_BltToDC DDS_Item(itempic), rec, rec_pos, frmMain.picTheirTrade, False
                 End If
-
+                'editar aqui amanhã
                 'Set Y,X
                 Y = rec_pos.top + 22
                 X = rec_pos.Left - 4

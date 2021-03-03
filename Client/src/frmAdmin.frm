@@ -640,6 +640,7 @@ Begin VB.Form frmPanel
       Begin VB.HScrollBar scrlAItem 
          Height          =   375
          Left            =   240
+         Max             =   255
          Min             =   1
          TabIndex        =   23
          Top             =   7080
@@ -1340,7 +1341,7 @@ Private Sub scrlAItem_Change()
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    lblAItem.Caption = "Item: " & Trim$(Item(scrlAItem.value).Name)
+    lblAItem.Caption = "Item: " & scrlAItem.value & " " & Trim$(Item(scrlAItem.value).Name)
     If Item(scrlAItem.value).Type = ITEM_TYPE_CURRENCY Then
         scrlAAmount.Enabled = True
         Exit Sub

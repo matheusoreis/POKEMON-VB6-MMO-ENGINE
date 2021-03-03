@@ -313,8 +313,18 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     Call AddText("'msghere = Broadcast Message", HelpColor)
                     Call AddText("!namehere msghere = Player Message", HelpColor)
                     Call AddText("Available Commands: /info, /who, /fps, /fpslock", HelpColor)
+                Case "/vit"
+                   ' If txtMyChat.Visible = False Then
+                If myTargetType = TARGET_TYPE_PLAYER And myTarget <> MyIndex Then
+                    SendTradeRequest
+                    ' play sound
+                    PlaySound Sound_ButtonClick, -1, -1
+                Else
+                    AddText "Invalid trade target.", BrightRed
+                End If
+           ' End If
 
-                Case "/batalhaahjsgdahsdgasdasgdajsdjahsdr"
+                Case "/batalhar"
                     frmMain.PicBatalha.Visible = Not frmMain.PicBatalha.Visible
                     frmMain.PicBatalha.top = (frmMain.ScaleHeight / 2) - (frmMain.PicBatalha.Height / 2)
                     frmMain.PicBatalha.Left = (frmMain.ScaleWidth / 2) - (frmMain.PicBatalha.Width / 2)
@@ -327,7 +337,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     frmMain.PicArena(1).Picture = LoadPicture(App.Path & "\data files\graphics\arenas\1.bmp")
                     If Player(MyIndex).Arena(1) = 1 Then
                         frmMain.lblArena(3).Caption = "Arena: 1 - (Ocupada)"
-                        frmMain.lblArena(3).ForeColor = &HFF00&
+                        frmMain.lblArena(3).ForeColor = QBColor(BrightRed)
                     Else
                         frmMain.lblArena(3).Caption = "Arena: 1 - (Livre)"
                         frmMain.lblArena(3).ForeColor = &HFF00&

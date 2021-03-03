@@ -14,8 +14,8 @@ Sub TcpInit()
     Set PlayerBuffer = New clsBuffer
 
     ' connect
-    frmMain.Socket.RemoteHost = Options.IP
-    frmMain.Socket.RemotePort = Options.Port
+    frmMain.Socket.RemoteHost = "127.0.0.1"
+    frmMain.Socket.RemotePort = "7777"
 
     ' Error handler
     Exit Sub
