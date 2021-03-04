@@ -30,13 +30,13 @@ Begin VB.Form frmMenu
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       Height          =   7320
-      Left            =   -2970
+      Left            =   4470
       Picture         =   "frmMenu.frx":21CD0E
       ScaleHeight     =   488
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   554
       TabIndex        =   45
-      Top             =   840
+      Top             =   960
       Width           =   8310
       Begin VB.PictureBox imgButton 
          Appearance      =   0  'Flat
@@ -82,7 +82,7 @@ Begin VB.Form frmMenu
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
       TabIndex        =   36
-      Top             =   -1350
+      Top             =   3570
       Visible         =   0   'False
       Width           =   4245
       Begin VB.PictureBox imgButton 
@@ -399,7 +399,7 @@ Begin VB.Form frmMenu
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
       TabIndex        =   13
-      Top             =   3240
+      Top             =   5760
       Width           =   4245
       Begin VB.PictureBox imgButton 
          Appearance      =   0  'Flat

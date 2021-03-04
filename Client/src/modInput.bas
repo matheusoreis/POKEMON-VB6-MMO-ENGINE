@@ -216,7 +216,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
     Dim i As Long
     Dim n As Long
     Dim Command() As String
-    Dim Buffer As clsBuffer
+    Dim buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -349,7 +349,10 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                         SendALeilao
                         frmLeilao.Visible = True
                     End If
-
+                
+                Case "/top"
+                    frmDailyLogin.Visible = True
+                    
                 Case "/info"
                     ' Checks to make sure we have more than one string in the array
 
@@ -358,11 +361,11 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                         GoTo Continue
                     End If
 
-                    Set Buffer = New clsBuffer
-                    Buffer.WriteLong CPlayerInfoRequest
-                    Buffer.WriteString Command(1)
-                    SendData Buffer.ToArray()
-                    Set Buffer = Nothing
+                    Set buffer = New clsBuffer
+                    buffer.WriteLong CPlayerInfoRequest
+                    buffer.WriteString Command(1)
+                    SendData buffer.ToArray()
+                    Set buffer = Nothing
                     ' Whos Online
                 Case "/who"
                     SendWhosOnline
@@ -374,10 +377,10 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     FPS_Lock = Not FPS_Lock
                     ' Request stats
                 Case "/stats"
-                    Set Buffer = New clsBuffer
-                    Buffer.WriteLong CGetStats
-                    SendData Buffer.ToArray()
-                    Set Buffer = Nothing
+                    Set buffer = New clsBuffer
+                    buffer.WriteLong CGetStats
+                    SendData buffer.ToArray()
+                    Set buffer = Nothing
                 Case "/kick"
                     If GetPlayerAccess(MyIndex) < ADMIN_MONITOR Then GoTo Continue
 

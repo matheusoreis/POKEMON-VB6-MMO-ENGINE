@@ -849,7 +849,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub BltItem(ByVal ItemNum As Long)
+Public Sub BltItem(ByVal itemNum As Long)
     Dim PicNum As Long
     Dim rec As DxVBLib.RECT
     Dim MaxFrames As Byte
@@ -858,10 +858,10 @@ Public Sub BltItem(ByVal ItemNum As Long)
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     ' get the picture
-    PicNum = Item(MapItem(ItemNum).num).Pic
+    PicNum = Item(MapItem(itemNum).num).Pic
 
-    If MapItem(ItemNum).num = 3 Then
-        Select Case MapItem(ItemNum).PokeInfo.Pokeball
+    If MapItem(itemNum).num = 3 Then
+        Select Case MapItem(itemNum).PokeInfo.Pokeball
         Case 1
             PicNum = 2
         Case 2
@@ -888,7 +888,7 @@ Public Sub BltItem(ByVal ItemNum As Long)
         With rec
             .top = 0
             .Bottom = 32
-            .Left = (MapItem(ItemNum).Frame * 32)
+            .Left = (MapItem(itemNum).Frame * 32)
             .Right = .Left + 32
         End With
     Else
@@ -900,7 +900,7 @@ Public Sub BltItem(ByVal ItemNum As Long)
         End With
     End If
 
-    Call Engine_BltFast(ConvertMapX(MapItem(ItemNum).X * PIC_X), ConvertMapY(MapItem(ItemNum).Y * PIC_Y), DDS_Item(PicNum), rec, DDBLTFAST_WAIT Or DDBLTFAST_SRCCOLORKEY)
+    Call Engine_BltFast(ConvertMapX(MapItem(itemNum).X * PIC_X), ConvertMapY(MapItem(itemNum).Y * PIC_Y), DDS_Item(PicNum), rec, DDBLTFAST_WAIT Or DDBLTFAST_SRCCOLORKEY)
 
     ' Error handler
     Exit Sub
@@ -2183,7 +2183,7 @@ End Sub
 
 Sub BltAnimatedInvItems()
     Dim i As Long
-    Dim ItemNum As Long, itempic As Long
+    Dim itemNum As Long, itempic As Long
     Dim X As Long, Y As Long
     Dim MaxFrames As Byte
     Dim Amount As Long
@@ -2213,10 +2213,10 @@ Sub BltAnimatedInvItems()
     Next
 
     For i = 1 To MAX_INV
-        ItemNum = GetPlayerInvItemNum(MyIndex, i)
+        itemNum = GetPlayerInvItemNum(MyIndex, i)
 
-        If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-            itempic = Item(ItemNum).Pic
+        If itemNum > 0 And itemNum <= MAX_ITEMS Then
+            itempic = Item(itemNum).Pic
 
             If itempic > 0 And itempic <= numitems Then
                 If DDSD_Item(itempic).lWidth > 64 Then
@@ -2371,7 +2371,7 @@ errorhandler:
 End Sub
 
 Sub BltEquipment()
-    Dim i As Long, ItemNum As Long, itempic As Long
+    Dim i As Long, itemNum As Long, itempic As Long
     Dim rec As RECT, rec_pos As RECT
 
     ' If debug mode, handle error then exit out
@@ -2382,12 +2382,12 @@ Sub BltEquipment()
     frmMain.picCharacter.Cls
 
     For i = 1 To Equipment.Equipment_Count - 1
-        ItemNum = GetPlayerEquipment(MyIndex, i)
+        itemNum = GetPlayerEquipment(MyIndex, i)
 
-        If ItemNum > 0 Then
-            itempic = Item(ItemNum).Pic
+        If itemNum > 0 Then
+            itempic = Item(itemNum).Pic
 
-            If ItemNum = 3 Then
+            If itemNum = 3 Then
                 Select Case GetPlayerEquipmentPokeInfoPokeball(MyIndex, i)
                 Case 1
                     itempic = 2    'Pokeball
@@ -2438,7 +2438,7 @@ errorhandler:
 End Sub
 
 Sub BltInventory()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long, itempic As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long, itempic As Long
     Dim Amount As Long
     Dim rec As RECT, rec_pos As RECT
     Dim colour As Long
@@ -2452,10 +2452,10 @@ Sub BltInventory()
     frmMain.picInventory.Cls
 
     For i = 1 To MAX_INV
-        ItemNum = GetPlayerInvItemNum(MyIndex, i)
+        itemNum = GetPlayerInvItemNum(MyIndex, i)
 
-        If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-            itempic = Item(ItemNum).Pic
+        If itemNum > 0 And itemNum <= MAX_ITEMS Then
+            itempic = Item(itemNum).Pic
 
             If GetPlayerInvItemPokeInfoPokemon(MyIndex, i) > 0 Then
                 itempic = GetPlayerInvItemPokeInfoPokemon(MyIndex, i)
@@ -2602,7 +2602,7 @@ errorhandler:
 End Sub
 
 Sub BltInventoryPokemon()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long, itempic As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long, itempic As Long
     Dim Amount As Long
     Dim rec As RECT, rec_pos As RECT
     Dim colour As Long
@@ -2617,9 +2617,9 @@ Sub BltInventoryPokemon()
 
     For i = 1 To MAX_INV
 
-        ItemNum = GetPlayerInvItemPokeInfoPokemon(MyIndex, i)
+        itemNum = GetPlayerInvItemPokeInfoPokemon(MyIndex, i)
 
-        If ItemNum > 0 And ItemNum <= MAX_POKEMONS Then
+        If itemNum > 0 And itemNum <= MAX_POKEMONS Then
             itempic = GetPlayerInvItemPokeInfoPokemon(MyIndex, i)
 
             amountModifier = 0
@@ -2699,7 +2699,7 @@ errorhandler:
 End Sub
 
 Sub BltTrade()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long, itempic As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long, itempic As Long
     Dim Amount As Long
     Dim rec As RECT, rec_pos As RECT
     Dim colour As Long
@@ -2713,10 +2713,10 @@ Sub BltTrade()
 
     For i = 1 To MAX_INV
         ' blt your own offer
-        ItemNum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).num)
+        itemNum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).num)
 
-        If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-            itempic = Item(ItemNum).Pic
+        If itemNum > 0 And itemNum <= MAX_ITEMS Then
+            itempic = Item(itemNum).Pic
 
             If GetPlayerInvItemPokeInfoPokemon(MyIndex, TradeYourOffer(i).num) > 0 Then
                 itempic = GetPlayerInvItemPokeInfoPokemon(MyIndex, TradeYourOffer(i).num)
@@ -2818,10 +2818,10 @@ Sub BltTrade()
         End If
 
         ' blt their offer
-        ItemNum = TradeTheirOffer(i).num
+        itemNum = TradeTheirOffer(i).num
 
-        If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-            itempic = Item(ItemNum).Pic
+        If itemNum > 0 And itemNum <= MAX_ITEMS Then
+            itempic = Item(itemNum).Pic
 
             If TradeTheirOffer(i).PokeInfo.Pokemon > 0 Then
                 itempic = TradeTheirOffer(i).PokeInfo.Pokemon
@@ -2993,7 +2993,7 @@ errorhandler:
 End Sub
 
 Sub BltShop()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long, itempic As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long, itempic As Long
     Dim Amount As String
     Dim rec As RECT, rec_pos As RECT
     Dim colour As Long
@@ -3006,9 +3006,9 @@ Sub BltShop()
     frmMain.picShopItems.Cls
 
     For i = 1 To MAX_TRADES
-        ItemNum = Shop(InShop).TradeItem(i).Item    'GetPlayerInvItemNum(MyIndex, i)
-        If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-            itempic = Item(ItemNum).Pic
+        itemNum = Shop(InShop).TradeItem(i).Item    'GetPlayerInvItemNum(MyIndex, i)
+        If itemNum > 0 And itemNum <= MAX_ITEMS Then
+            itempic = Item(itemNum).Pic
             If itempic > 0 And itempic <= numitems Then
 
                 With rec
@@ -3065,17 +3065,17 @@ End Sub
 
 Public Sub BltInventoryItem(ByVal X As Long, ByVal Y As Long)
     Dim rec As RECT, rec_pos As RECT
-    Dim ItemNum As Long, itempic As Long
+    Dim itemNum As Long, itempic As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ItemNum = GetPlayerInvItemNum(MyIndex, DragInvSlotNum)
+    itemNum = GetPlayerInvItemNum(MyIndex, DragInvSlotNum)
 
-    If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-        itempic = Item(ItemNum).Pic
+    If itemNum > 0 And itemNum <= MAX_ITEMS Then
+        itempic = Item(itemNum).Pic
 
-        If ItemNum = 3 Then
+        If itemNum = 3 Then
             Select Case GetPlayerInvItemPokeInfoPokeball(MyIndex, DragInvSlotNum)
             Case 1
                 itempic = 2
@@ -3186,7 +3186,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub BltItemDesc(ByVal ItemNum As Long)
+Public Sub BltItemDesc(ByVal itemNum As Long)
     Dim rec As RECT, rec_pos As RECT
     Dim itempic As Long
 
@@ -3195,8 +3195,8 @@ Public Sub BltItemDesc(ByVal ItemNum As Long)
 
     frmMain.picItemDescPic.Cls
 
-    If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
-        itempic = Item(ItemNum).Pic
+    If itemNum > 0 And itemNum <= MAX_ITEMS Then
+        itempic = Item(itemNum).Pic
 
         If itempic = 0 Then Exit Sub
 
@@ -3401,24 +3401,24 @@ errorhandler:
 End Sub
 
 Public Sub EditorMap_BltMapItem()
-    Dim ItemNum As Long
+    Dim itemNum As Long
     Dim sRECT As DxVBLib.RECT
     Dim dRECT As DxVBLib.RECT
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ItemNum = Item(frmEditor_Map.scrlMapItem.value).Pic
+    itemNum = Item(frmEditor_Map.scrlMapItem.value).Pic
 
-    If ItemNum < 1 Or ItemNum > numitems Then
+    If itemNum < 1 Or itemNum > numitems Then
         frmEditor_Map.picMapItem.Cls
         Exit Sub
     End If
 
-    ItemTimer(ItemNum) = GetTickCount + SurfaceTimerMax
+    ItemTimer(itemNum) = GetTickCount + SurfaceTimerMax
 
-    If DDS_Item(ItemNum) Is Nothing Then
-        Call InitDDSurf("Items\" & ItemNum, DDSD_Item(ItemNum), DDS_Item(ItemNum))
+    If DDS_Item(itemNum) Is Nothing Then
+        Call InitDDSurf("Items\" & itemNum, DDSD_Item(itemNum), DDS_Item(itemNum))
     End If
 
     sRECT.top = 0
@@ -3429,7 +3429,7 @@ Public Sub EditorMap_BltMapItem()
     dRECT.Bottom = PIC_Y
     dRECT.Left = 0
     dRECT.Right = PIC_X
-    Call Engine_BltToDC(DDS_Item(ItemNum), sRECT, dRECT, frmEditor_Map.picMapItem)
+    Call Engine_BltToDC(DDS_Item(itemNum), sRECT, dRECT, frmEditor_Map.picMapItem)
 
     ' Error handler
     Exit Sub
@@ -3440,24 +3440,24 @@ errorhandler:
 End Sub
 
 Public Sub EditorMap_BltKey()
-    Dim ItemNum As Long
+    Dim itemNum As Long
     Dim sRECT As DxVBLib.RECT
     Dim dRECT As DxVBLib.RECT
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ItemNum = Item(frmEditor_Map.scrlMapKey.value).Pic
+    itemNum = Item(frmEditor_Map.scrlMapKey.value).Pic
 
-    If ItemNum < 1 Or ItemNum > numitems Then
+    If itemNum < 1 Or itemNum > numitems Then
         frmEditor_Map.picMapKey.Cls
         Exit Sub
     End If
 
-    ItemTimer(ItemNum) = GetTickCount + SurfaceTimerMax
+    ItemTimer(itemNum) = GetTickCount + SurfaceTimerMax
 
-    If DDS_Item(ItemNum) Is Nothing Then
-        Call InitDDSurf("Items\" & ItemNum, DDSD_Item(ItemNum), DDS_Item(ItemNum))
+    If DDS_Item(itemNum) Is Nothing Then
+        Call InitDDSurf("Items\" & itemNum, DDSD_Item(itemNum), DDS_Item(itemNum))
     End If
 
     sRECT.top = 0
@@ -3468,7 +3468,7 @@ Public Sub EditorMap_BltKey()
     dRECT.Bottom = PIC_Y
     dRECT.Left = 0
     dRECT.Right = PIC_X
-    Call Engine_BltToDC(DDS_Item(ItemNum), sRECT, dRECT, frmEditor_Map.picMapKey)
+    Call Engine_BltToDC(DDS_Item(itemNum), sRECT, dRECT, frmEditor_Map.picMapKey)
 
     ' Error handler
     Exit Sub
@@ -3479,24 +3479,24 @@ errorhandler:
 End Sub
 
 Public Sub EditorItem_BltItem()
-    Dim ItemNum As Long
+    Dim itemNum As Long
     Dim sRECT As DxVBLib.RECT
     Dim dRECT As DxVBLib.RECT
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ItemNum = frmEditor_Item.scrlPic.value
+    itemNum = frmEditor_Item.scrlPic.value
 
-    If ItemNum < 1 Or ItemNum > numitems Then
+    If itemNum < 1 Or itemNum > numitems Then
         frmEditor_Item.picItem.Cls
         Exit Sub
     End If
 
-    ItemTimer(ItemNum) = GetTickCount + SurfaceTimerMax
+    ItemTimer(itemNum) = GetTickCount + SurfaceTimerMax
 
-    If DDS_Item(ItemNum) Is Nothing Then
-        Call InitDDSurf("Items\" & ItemNum, DDSD_Item(ItemNum), DDS_Item(ItemNum))
+    If DDS_Item(itemNum) Is Nothing Then
+        Call InitDDSurf("Items\" & itemNum, DDSD_Item(itemNum), DDS_Item(itemNum))
     End If
 
     ' rect for source
@@ -3507,7 +3507,7 @@ Public Sub EditorItem_BltItem()
 
     ' same for destination as source
     dRECT = sRECT
-    Call Engine_BltToDC(DDS_Item(ItemNum), sRECT, dRECT, frmEditor_Item.picItem)
+    Call Engine_BltToDC(DDS_Item(itemNum), sRECT, dRECT, frmEditor_Item.picItem)
 
     ' Error handler
     Exit Sub
@@ -4346,7 +4346,7 @@ errorhandler:
 End Sub
 
 Sub BltBank()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long
     Dim Amount As String
     Dim sRECT As RECT, dRECT As RECT
     Dim Sprite As Long, colour As Long
@@ -4358,10 +4358,10 @@ Sub BltBank()
         frmMain.picBank.Cls
 
         For i = 1 To MAX_BANK
-            ItemNum = GetBankItemNum(i)
-            If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
+            itemNum = GetBankItemNum(i)
+            If itemNum > 0 And itemNum <= MAX_ITEMS Then
 
-                Sprite = Item(ItemNum).Pic
+                Sprite = Item(itemNum).Pic
 
                 'Icone Pokemon
                 If GetPlayerBankItemPokemon(i) > 0 Then
@@ -4479,16 +4479,16 @@ End Sub
 
 Public Sub BltBankItem(ByVal X As Long, ByVal Y As Long)
     Dim sRECT As RECT, dRECT As RECT
-    Dim ItemNum As Long
+    Dim itemNum As Long
     Dim Sprite As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ItemNum = GetBankItemNum(DragBankSlotNum)
+    itemNum = GetBankItemNum(DragBankSlotNum)
     Sprite = Item(GetBankItemNum(DragBankSlotNum)).Pic
 
-    If ItemNum = 3 Then
+    If itemNum = 3 Then
         Select Case GetPlayerBankItemPokeball(DragBankSlotNum)
         Case 1
             Sprite = 2
@@ -4509,8 +4509,8 @@ Public Sub BltBankItem(ByVal X As Long, ByVal Y As Long)
         Call InitDDSurf("Items\" & Sprite, DDSD_Item(Sprite), DDS_Item(Sprite))
     End If
 
-    If ItemNum > 0 Then
-        If ItemNum <= MAX_ITEMS Then
+    If itemNum > 0 Then
+        If itemNum <= MAX_ITEMS Then
             With sRECT
                 .top = 0
                 .Bottom = .top + PIC_Y
@@ -4878,7 +4878,7 @@ errorhandler:
 End Sub
 
 Sub BltLeilao()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long
     Dim Amount As String
     Dim sRECT As RECT, dRECT As RECT
     Dim Sprite As Long, colour As Long
@@ -4909,10 +4909,10 @@ Sub BltLeilao()
         frmMain.picLeilao(2).Cls
 
         For i = AB To BA
-            ItemNum = Leilao(i).ItemNum
-            If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
+            itemNum = Leilao(i).itemNum
+            If itemNum > 0 And itemNum <= MAX_ITEMS Then
 
-                Sprite = Item(ItemNum).Pic
+                Sprite = Item(itemNum).Pic
 
                 'Icone Pokemon
                 If Leilao(i).Poke.Pokemon > 0 Then
@@ -4972,14 +4972,14 @@ Sub BltLeilao()
                 Y = dRECT.top + 22
                 X = dRECT.Left - 4
 
-                If Item(Leilao(i).ItemNum).Type = ITEM_TYPE_ROD Then
+                If Item(Leilao(i).itemNum).Type = ITEM_TYPE_ROD Then
                     DrawText frmMain.picLeilao(2).hDC, X + 4, Y - 2, Leilao(i).Poke.Level, QBColor(BrightGreen)
                 End If
 
                 If Leilao(i).Poke.Pokemon > 0 Then
                     DrawText frmMain.picLeilao(2).hDC, X + 4, Y - 2, Leilao(i).Poke.Level, QBColor(BrightGreen)
 
-                    If Not Item(Leilao(i).ItemNum).Type = ITEM_TYPE_ROD Then
+                    If Not Item(Leilao(i).itemNum).Type = ITEM_TYPE_ROD Then
                         If Leilao(i).Poke.Sexo = 0 Then
                             DrawText frmMain.picLeilao(2).hDC, X + 24, Y - 22, "M", QBColor(BrightCyan)
                         Else
@@ -5019,7 +5019,7 @@ Sub BltPokeLeilaoSelect()
     End If
 
     'Leilao item = 0 sair
-    If Leilao(LeilaoItemSelect).ItemNum = 0 Then
+    If Leilao(LeilaoItemSelect).itemNum = 0 Then
         frmMain.picLeilao(3).Visible = False
         Exit Sub
     Else
@@ -5028,7 +5028,7 @@ Sub BltPokeLeilaoSelect()
 
     frmMain.picLeilao(3).Cls
 
-    faceNum = Item(Leilao(LeilaoItemSelect).ItemNum).Pic
+    faceNum = Item(Leilao(LeilaoItemSelect).itemNum).Pic
 
     If Leilao(LeilaoItemSelect).Poke.Pokemon > 0 Then
         faceNum = Leilao(LeilaoItemSelect).Poke.Pokemon
@@ -6197,7 +6197,7 @@ Atualizar:
 End Sub
 
 Public Sub BltQuestRewards()
-    Dim i As Long, X As Long, Y As Long, ItemNum As Long, itempic As Long, QuestNum As Long
+    Dim i As Long, X As Long, Y As Long, itemNum As Long, itempic As Long, QuestNum As Long
     Dim Amount As String
     Dim rec As RECT, rec_pos As RECT
     Dim colour As Long
@@ -6222,13 +6222,13 @@ Public Sub BltQuestRewards()
     End Select
 
     For i = a To B
-        If QuestNum > 0 Then ItemNum = Quest(QuestNum).ItemRew(i)
+        If QuestNum > 0 Then itemNum = Quest(QuestNum).ItemRew(i)
 
-        If ItemNum > 0 And ItemNum <= MAX_ITEMS Then
+        If itemNum > 0 And itemNum <= MAX_ITEMS Then
 
             'Numero do Icone
             If Quest(QuestNum).PokeRew(i) = 0 Then
-                itempic = Item(ItemNum).Pic
+                itempic = Item(itemNum).Pic
             Else
                 itempic = Quest(QuestNum).PokeRew(i)
             End If

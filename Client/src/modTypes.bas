@@ -87,7 +87,7 @@ End Type
 
 Private Type LeilaoRec
     Vendedor As String
-    ItemNum As Long
+    itemNum As Long
     Poke As PokeRec
     Price As Long
     Tempo As Long
@@ -444,7 +444,7 @@ Private Type ResourceRec
 End Type
 
 Private Type ActionMsgRec
-    message As String
+    Message As String
     Created As Long
 Type As Long
     color As Long
