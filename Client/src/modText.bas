@@ -25,7 +25,7 @@ errorhandler:
 End Sub
 
 ' GDI text drawing onto buffer
-Public Sub DrawText(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, Color As Long)
+Public Sub DrawText(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, color As Long)
 ' If debug mode, handle error then exit out
     Dim OldFont As Long    ' HFONT
 
@@ -39,7 +39,7 @@ Public Sub DrawText(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, C
     Call TextOut(hDC, X + 0, Y + 1, text, Len(text))
     Call TextOut(hDC, X - 1, Y - 0, text, Len(text))
     Call TextOut(hDC, X - 0, Y - 1, text, Len(text))
-    Call SetTextColor(hDC, Color)
+    Call SetTextColor(hDC, color)
     Call TextOut(hDC, X, Y, text, Len(text))
     Call SelectObject(hDC, OldFont)
     Call DeleteObject(GameFont)
@@ -52,7 +52,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub DrawTextVisitor(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, Color As Long)
+Public Sub DrawTextVisitor(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, color As Long)
 ' If debug mode, handle error then exit out
     Dim OldFont As Long    ' HFONT
 
@@ -66,7 +66,7 @@ Public Sub DrawTextVisitor(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As St
     Call TextOut(hDC, X + 0, Y + 1, text, Len(text))
     Call TextOut(hDC, X - 1, Y - 0, text, Len(text))
     Call TextOut(hDC, X - 0, Y - 1, text, Len(text))
-    Call SetTextColor(hDC, Color)
+    Call SetTextColor(hDC, color)
     Call TextOut(hDC, X, Y, text, Len(text))
     Call SelectObject(hDC, OldFont)
     Call DeleteObject(GameFont)
@@ -79,7 +79,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub DrawTextDamage(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, Color As Long)
+Public Sub DrawTextDamage(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, color As Long)
 ' If debug mode, handle error then exit out
     Dim OldFont As Long    ' HFONT
 
@@ -93,7 +93,7 @@ Public Sub DrawTextDamage(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As Str
     Call TextOut(hDC, X + 0, Y + 1, text, Len(text))
     Call TextOut(hDC, X - 1, Y - 0, text, Len(text))
     Call TextOut(hDC, X - 0, Y - 1, text, Len(text))
-    Call SetTextColor(hDC, Color)
+    Call SetTextColor(hDC, color)
     Call TextOut(hDC, X, Y, text, Len(text))
     Call SelectObject(hDC, OldFont)
     Call DeleteObject(GameFont)
@@ -107,7 +107,7 @@ errorhandler:
 End Sub
 
 ' GDI text drawing onto buffer
-Public Sub DrawTextOrgShop(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, Color As Long)
+Public Sub DrawTextOrgShop(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, color As Long)
 ' If debug mode, handle error then exit out
     Dim OldFont As Long    ' HFONT
 
@@ -121,7 +121,7 @@ Public Sub DrawTextOrgShop(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As St
     Call TextOut(hDC, X + 0, Y + 1, text, Len(text))
     Call TextOut(hDC, X - 1, Y - 0, text, Len(text))
     Call TextOut(hDC, X - 0, Y - 1, text, Len(text))
-    Call SetTextColor(hDC, Color)
+    Call SetTextColor(hDC, color)
     Call TextOut(hDC, X, Y, text, Len(text))
     Call SelectObject(hDC, OldFont)
     Call DeleteObject(GameFont)
@@ -139,7 +139,7 @@ Public Sub DrawPlayerOrg(ByVal Index As Long)
 
     Dim TextX As Long
     Dim TextY As Long
-    Dim Color As Long
+    Dim color As Long
     Dim Name As String
 
     Select Case Player(Index).ORG
@@ -147,13 +147,13 @@ Public Sub DrawPlayerOrg(ByVal Index As Long)
         Name = vbNullString
     Case 1
         Name = "Equipe Rocket"
-        Color = QBColor(BrightRed)
+        color = QBColor(BrightRed)
     Case 2
         Name = "Team Magma"
-        Color = QBColor(BrightRed)
+        color = QBColor(BrightRed)
     Case 3
         Name = "Team Aqua"
-        Color = QBColor(BrightRed)
+        color = QBColor(BrightRed)
     Case Else
         Exit Sub
     End Select
@@ -169,14 +169,14 @@ Public Sub DrawPlayerOrg(ByVal Index As Long)
     End If
 
     ' Draw name
-    Call DrawText(TexthDC, TextX, TextY, Name, Color)
+    Call DrawText(TexthDC, TextX, TextY, Name, color)
 End Sub
 
 
 Public Sub DrawPlayerName(ByVal Index As Long)
     Dim TextX As Long, TextX2 As Long, TextXPoke As Long
     Dim TextY As Long, TextY2 As Long, TextYPoke As Long
-    Dim Color As Long, PokeName As String
+    Dim color As Long, PokeName As String
     Dim Name As String, Name2 As String
 
     ' If debug mode, handle error then exit out
@@ -187,19 +187,19 @@ Public Sub DrawPlayerName(ByVal Index As Long)
 
         Select Case GetPlayerAccess(Index)
         Case 0
-            Color = RGB(255, 96, 0)
+            color = RGB(255, 96, 0)
         Case 1
-            Color = QBColor(DarkGrey)
+            color = QBColor(DarkGrey)
         Case 2
-            Color = QBColor(Cyan)
+            color = QBColor(Cyan)
         Case 3
-            Color = QBColor(BrightGreen)
+            color = QBColor(BrightGreen)
         Case 4
-            Color = QBColor(Yellow)
+            color = QBColor(Yellow)
         End Select
 
     Else
-        Color = QBColor(BrightRed)
+        color = QBColor(BrightRed)
     End If
 
     Name = Trim$(Player(Index).Name)
@@ -262,12 +262,12 @@ Public Sub DrawPlayerName(ByVal Index As Long)
             TextYPoke = TextYPoke + 47 - Player(Index).PuloSlide
         End Select
 
-        Call DrawText(TexthDC, TextX2, TextY2, Name, Color)
-        Call DrawText(TexthDC, TextXPoke, TextYPoke, PokeName, Color)
-        Call DrawText(TexthDC, TextX, TextYPoke - 16, Name, Color)
+        Call DrawText(TexthDC, TextX2, TextY2, Name, color)
+        Call DrawText(TexthDC, TextXPoke, TextYPoke, PokeName, color)
+        Call DrawText(TexthDC, TextX, TextYPoke - 16, Name, color)
 
     Else
-        Call DrawText(TexthDC, TextX, TextY, Name, Color)
+        Call DrawText(TexthDC, TextX, TextY, Name, color)
     End If
 
     ' Error handler
@@ -281,7 +281,7 @@ End Sub
 Public Sub DrawNpcName(ByVal Index As Long)
     Dim TextX As Long
     Dim TextY As Long
-    Dim Color As Long
+    Dim color As Long
     Dim Name As String
     Dim NpcNum As Long
 
@@ -292,18 +292,18 @@ Public Sub DrawNpcName(ByVal Index As Long)
 
     Select Case Npc(NpcNum).Behaviour
     Case NPC_BEHAVIOUR_ATTACKONSIGHT
-        Color = QBColor(BrightRed)
+        color = QBColor(BrightRed)
     Case NPC_BEHAVIOUR_ATTACKWHENATTACKED
-        Color = QBColor(Yellow)
+        color = QBColor(Yellow)
     Case NPC_BEHAVIOUR_GUARD
-        Color = QBColor(Grey)
+        color = QBColor(Grey)
     Case Else
-        Color = QBColor(BrightGreen)
+        color = QBColor(BrightGreen)
     End Select
 
     If MapNpc(Index).Desmaiado = False Then
         If MapNpc(Index).Shiny = True Then
-            Color = QBColor(BrightCyan)
+            color = QBColor(BrightCyan)
             Name = "S." & Trim$(Npc(NpcNum).Name) & " [" & MapNpc(Index).Level & "]"
         Else
             If Npc(MapNpc(Index).num).Behaviour = 1 Or Npc(MapNpc(Index).num).Behaviour = 0 Then
@@ -338,7 +338,7 @@ Public Sub DrawNpcName(ByVal Index As Long)
     End Select
 
     ' Draw name
-    Call DrawText(TexthDC, TextX, TextY, Trim$(Name), Color)
+    Call DrawText(TexthDC, TextX, TextY, Trim$(Name), color)
 
     ' Error handler
     Exit Sub
@@ -435,10 +435,10 @@ Sub BltActionMsg(ByVal Index As Long)
         Time = 1500
 
         If ActionMsg(Index).Y > 0 Then
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) - 2
         Else
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18
         End If
 
@@ -446,11 +446,11 @@ Sub BltActionMsg(ByVal Index As Long)
         Time = 1500
 
         If ActionMsg(Index).Y > 0 Then
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) - 2 - (ActionMsg(Index).Scroll * 0.6)
             ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
         Else
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18 + (ActionMsg(Index).Scroll * 0.6)
             ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
         End If
@@ -467,17 +467,17 @@ Sub BltActionMsg(ByVal Index As Long)
                 End If
             End If
         Next
-        X = (frmMain.picScreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+        X = (frmMain.picScreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
         Y = 425
 
     Case ACTIONMSG_STATICLOCKED
         Time = 1500
 
         If ActionMsg(Index).Y > 0 Then
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) - 2
         Else
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18
         End If
 
@@ -487,10 +487,10 @@ Sub BltActionMsg(ByVal Index As Long)
     Y = ConvertMapY(Y)
 
     If GetTickCount < ActionMsg(Index).Created + Time Then
-        If IsNumeric(ActionMsg(Index).Message) = True Then
-            Call DrawTextDamage(TexthDC, X, Y, ActionMsg(Index).Message, QBColor(ActionMsg(Index).Color))
+        If IsNumeric(ActionMsg(Index).message) = True Then
+            Call DrawTextDamage(TexthDC, X, Y, ActionMsg(Index).message, QBColor(ActionMsg(Index).color))
         Else
-            Call DrawText(TexthDC, X, Y, ActionMsg(Index).Message, QBColor(ActionMsg(Index).Color))
+            Call DrawText(TexthDC, X, Y, ActionMsg(Index).message, QBColor(ActionMsg(Index).color))
         End If
     Else
         ClearActionMsg Index
@@ -518,50 +518,18 @@ errorhandler:
     Exit Function
 End Function
 
-Public Sub AddText(ByVal Msg As String, ByVal Color As Integer)
-    Dim S As String
-    Dim ConvMsg() As String
-    Dim lines As Long
-    Dim i As Long
+Public Sub AddText(ByVal Msg As String, ByVal color As Integer)
+Dim S As String
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
-    ReDim ConvMsg(1 To 20)
-    ConvMsg(1) = Msg
-    lines = 1
-    TextStart = 1
-
+    
     S = vbNewLine & Msg
-
-    If Len(Msg) > 50 And Len(Msg) <= 100 Then
-        ConvMsg = SplitString(Msg, 50)
-        lines = 2
-    End If
-
-    If Len(Msg) > 100 And Len(Msg) <= 150 Then
-        ConvMsg = SplitString(Msg, 50)
-        lines = 3
-    End If
-
-    If Len(Msg) > 150 And Len(Msg) <= 200 Then
-        ConvMsg = SplitString(Msg, 50)
-        lines = 4
-    End If
-
-    If Len(Msg) > 200 And Len(Msg) <= 250 Then
-        ConvMsg = SplitString(Msg, 50)
-        lines = 5
-    End If
-
-    If Len(Msg) > 250 And Len(Msg) <= 300 Then
-        ConvMsg = SplitString(Msg, 50)
-        lines = 6
-    End If
-
-    For i = 1 To lines
-        ReOrderChat ConvMsg(i), QBColor(Color)
-    Next
-
+    frmMain.txtChat.SelStart = Len(frmMain.txtChat.text)
+    frmMain.txtChat.SelColor = QBColor(color)
+    frmMain.txtChat.SelText = S
+    frmMain.txtChat.SelStart = Len(frmMain.txtChat.text) - 1
+    
     ' Error handler
     Exit Sub
 errorhandler:
@@ -587,26 +555,6 @@ Public Function SplitString(ByVal str As String, ByVal numOfChar As Long) As Str
     SplitString = sArr
 
 End Function
-
-Public Sub DrawChat()
-    Dim i As Integer
-    For i = TextStart To TextStart + 5
-        Call DrawTextVisitor(TexthDC, Camera.Left + 10, (Camera.Bottom - 80) - ((i - TextStart) * 20), Chat(i).text, Chat(i).colour)
-    Next
-End Sub
-
-'Evilbunnie's DrawChat system
-Public Sub ReOrderChat(ByVal nText As String, nColour As Long)
-    Dim i As Integer
-
-    For i = 19 To 1 Step -1
-        Chat(i + 1).text = Chat(i).text
-        Chat(i + 1).colour = Chat(i).colour
-    Next
-
-    Chat(1).text = nText
-    Chat(1).colour = nColour
-End Sub
 
 Public Sub DrawPingText()
     Dim PingToDraw As String
@@ -678,7 +626,7 @@ Public Sub DrawQuestsInWindow()
         Case 2    'Ganhar De Jogadores
             ObjetivoString = "Ganhar de Jogadores " & "[" & Player(MyIndex).Quests(QuestNum).KillPlayers & "/" & Quest(QuestNum).Task(Task).value & "]"
         Case 3    'Ir Até Mapa
-            ObjetivoString = "Vá até o mapa " & Quest(QuestNum).Task(Task).Message(2)
+            ObjetivoString = "Vá até o mapa " & Quest(QuestNum).Task(Task).message(2)
         Case 4    'Falar Com Npc
             ObjetivoString = "Fale com " & Trim$(Npc(Quest(QuestNum).Task(Task).num).Name) & "."
         Case 5    'Coletar Itens
@@ -837,7 +785,7 @@ End Function
 ' PLEASE NOTE THIS WILL FAIL MISERABLY IF YOU DIDN'T APPLY THE FONT MEMORY LEAK FIX FIRST
 ' Chat Bubble Mondo
 ' I ONLY DID THIS COZ THE CHATBUBBLE TEXT LOOKS BETTER WITHOUT SHADOW OVER WHITE BUBBLES!
-Public Sub DrawTextNoShadow(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, Color As Long)
+Public Sub DrawTextNoShadow(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, color As Long)
 ' If debug mode, handle error then exit out
     Dim OldFont As Long    ' HFONT
 
@@ -846,7 +794,7 @@ Public Sub DrawTextNoShadow(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As S
     Call SetFont(FONT_NAME, FONT_SIZE)
     OldFont = SelectObject(hDC, GameFont)
     Call SetBkMode(hDC, vbTransparent)
-    Call SetTextColor(hDC, Color)
+    Call SetTextColor(hDC, color)
     Call TextOut(hDC, X, Y, text, Len(text))
     Call SelectObject(hDC, OldFont)
     Call DeleteObject(GameFont)
@@ -862,7 +810,7 @@ End Sub
 Public Sub DrawMapaItem(ByVal ItemNum As Long)
     Dim TextX As Long
     Dim TextY As Long
-    Dim Color As Long
+    Dim color As Long
     Dim Nome As String, PokeballName As String
 
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -872,17 +820,17 @@ Public Sub DrawMapaItem(ByVal ItemNum As Long)
 
         Select Case Item(MapItem(ItemNum).num).Rarity
         Case 0    'Sem raridade
-            Color = QBColor(White)
+            color = QBColor(White)
         Case 1
-            Color = RGB(117, 198, 92)
+            color = RGB(117, 198, 92)
         Case 2
-            Color = RGB(103, 140, 224)
+            color = RGB(103, 140, 224)
         Case 3
-            Color = RGB(205, 34, 0)
+            color = RGB(205, 34, 0)
         Case 4
-            Color = RGB(193, 104, 204)
+            color = RGB(193, 104, 204)
         Case 5
-            Color = RGB(217, 150, 64)
+            color = RGB(217, 150, 64)
         End Select
 
     Else
@@ -900,19 +848,19 @@ Public Sub DrawMapaItem(ByVal ItemNum As Long)
                 PokeballName = "Pokéball"
             Case 2
                 PokeballName = "GreatBall"
-                Color = RGB(103, 140, 224)
+                color = RGB(103, 140, 224)
             Case 3
                 PokeballName = "UltraBall"
-                Color = QBColor(DarkGrey)
+                color = QBColor(DarkGrey)
             Case 4
                 PokeballName = "MasterBall"
-                Color = RGB(193, 104, 204)
+                color = RGB(193, 104, 204)
             Case 5
                 PokeballName = "RapidBall"
-                Color = QBColor(Grey)
+                color = QBColor(Grey)
             Case 6
                 PokeballName = "SafariBall"
-                Color = RGB(117, 198, 92)
+                color = RGB(117, 198, 92)
             End Select
 
             Nome = PokeballName & " " & Trim$(Pokemon(MapItem(ItemNum).PokeInfo.Pokemon).Name) & " [" & MapItem(ItemNum).PokeInfo.Level & "]"
@@ -929,7 +877,7 @@ Public Sub DrawMapaItem(ByVal ItemNum As Long)
     End If
 
     ' Execução dos textos
-    Call DrawText(TexthDC, TextX, TextY, Nome, Color)
+    Call DrawText(TexthDC, TextX, TextY, Nome, color)
 
     ' Error handlerr
     Exit Sub

@@ -30,7 +30,7 @@ Begin VB.Form frmMenu
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       Height          =   7320
-      Left            =   4470
+      Left            =   -2970
       Picture         =   "frmMenu.frx":21CD0E
       ScaleHeight     =   488
       ScaleMode       =   3  'Pixel
@@ -82,7 +82,7 @@ Begin VB.Form frmMenu
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
       TabIndex        =   36
-      Top             =   3570
+      Top             =   -1350
       Visible         =   0   'False
       Width           =   4245
       Begin VB.PictureBox imgButton 
@@ -399,7 +399,7 @@ Begin VB.Form frmMenu
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
       TabIndex        =   13
-      Top             =   5760
+      Top             =   3240
       Width           =   4245
       Begin VB.PictureBox imgButton 
          Appearance      =   0  'Flat
@@ -1617,4 +1617,51 @@ Private Sub txtCName_KeyPress(KeyAscii As Integer)
         KeyAscii = 0
     End If
 
+End Sub
+
+Private Sub txtRecovery_KeyPress(KeyAscii As Integer)
+
+    Dim Name As String
+    Dim Password As String
+    Dim PasswordAgain As String
+    Dim RecoveryKey As String
+    Dim Email As String
+    
+        Name = Trim$(txtRUser.text)
+        Password = Trim$(txtRPass.text)
+        PasswordAgain = Trim$(txtRPass2.text)
+        RecoveryKey = Trim$(txtRecovery.text)
+        Email = Trim$(txtEmail.text)
+        
+        If KeyAscii = vbKeyReturn Then
+        If isLoginLegal(Name, Password) Then
+            If Password <> PasswordAgain Then
+                Call MsgBox("Passwords don't match.")
+                Exit Sub
+            End If
+
+            If Not isStringLegal(Name) Then
+                Exit Sub
+            End If
+
+            'RecoveryKey
+            If LenB(RecoveryKey) <= 5 Then
+                Call MsgBox("Recovery Key curta demais.")
+                Exit Sub
+            End If
+
+            'Email Válidos
+            If Email = vbNullString Then
+                Call MsgBox("Insira um Email Válido! A Recuperação de informações será a partir dele!")
+                Exit Sub
+            Else
+                If IsValidEmail(Email) = False Then
+                    Call MsgBox("Insira um Email Válido! A Recuperação de informações será a partir dele!")
+                    Exit Sub
+                End If
+            End If
+
+            Call MenuState(MENU_STATE_NEWACCOUNT)
+        End If
+End If
 End Sub

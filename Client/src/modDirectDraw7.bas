@@ -4031,9 +4031,6 @@ Public Sub Render_Graphics()
     ' Lock the backbuffer so we can draw text and names
     TexthDC = DDS_BackBuffer.GetDC
 
-    'Evilbunnie's DrawnChat System
-    DrawChat
-
     'Ping - Ativar Depois
     'DrawPingText
 
@@ -4117,9 +4114,6 @@ Public Sub Render_Graphics()
 
         ' Draw map name
         Call DrawText(TexthDC, DrawMapNameX, DrawMapNameY, DrawMapName, DrawMapNameColor)
-
-        'Evilbunnie's DrawnChat System
-        DrawChat
 
         ' draw FPS
         If BFPS Then

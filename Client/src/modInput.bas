@@ -227,8 +227,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
         If KeyAscii = vbKeyReturn Then
             chaton = Not chaton
             SetFocusOnGame
-            frmMain.picUpDown(0).Visible = True
-            frmMain.picUpDown(1).Visible = True
+            frmMain.PicChat.Visible = True
         End If
         Exit Sub
     End If

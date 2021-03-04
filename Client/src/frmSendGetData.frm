@@ -67,7 +67,7 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
         Call DestroyTCP
         frmLoad.Hide
         frmMenu.Show
-        frmMenu.picMain.Visible = True
+        frmMenu.picLogin.Visible = True
     End If
 
     ' Error handler
@@ -89,7 +89,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
         Call DestroyTCP
         frmLoad.Hide
         frmMenu.Show
-        frmMenu.picMain.Visible = True
+        frmMenu.picLogin.Visible = True
     End If
 
     ' Error handler

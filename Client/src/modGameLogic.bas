@@ -989,16 +989,16 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     End If
 
     'Check PicChat Tirar quando tiver visivel e sair da Tile ...
-    If frmMain.picchat.Visible = True Then frmMain.picchat.Visible = False
+    If frmMain.picPlaca.Visible = True Then frmMain.picPlaca.Visible = False
 
     'Check Sign Tile
     If Map.Tile(X, Y).Type = TILE_TYPE_SIGN Then
         If GetPlayerEquipment(MyIndex, weapon) = 0 Then
             Number = Map.Tile(X, Y).Data1
             frmMain.lblChat.Caption = GetVar(App.Path & "\Data Files\chat.ini", "CHAT", Val(Number))
-            frmMain.picchat.Visible = True
-            frmMain.picchat.top = (frmMain.ScaleHeight / 2) - (frmMain.picchat.Height / 2)
-            frmMain.picchat.Left = (frmMain.ScaleWidth / 2) - (frmMain.picchat.Width / 2)
+            frmMain.picPlaca.Visible = True
+            frmMain.picPlaca.top = (frmMain.ScaleHeight / 2) - (frmMain.picPlaca.Height / 2)
+            frmMain.picPlaca.Left = (frmMain.ScaleWidth / 2) - (frmMain.picPlaca.Width / 2)
         End If
     End If
 
@@ -1257,13 +1257,13 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub DevMsg(ByVal text As String, ByVal Color As Byte)
+Public Sub DevMsg(ByVal text As String, ByVal color As Byte)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If InGame Then
         If GetPlayerAccess(MyIndex) > ADMIN_DEVELOPER Then
-            Call AddText(text, Color)
+            Call AddText(text, color)
         End If
     End If
 
@@ -1450,7 +1450,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub CreateActionMsg(ByVal Message As String, ByVal Color As Integer, ByVal MsgType As Byte, ByVal X As Long, ByVal Y As Long)
+Public Sub CreateActionMsg(ByVal message As String, ByVal color As Integer, ByVal MsgType As Byte, ByVal X As Long, ByVal Y As Long)
     Dim i As Long
 
     ' If debug mode, handle error then exit out
@@ -1460,8 +1460,8 @@ Public Sub CreateActionMsg(ByVal Message As String, ByVal Color As Integer, ByVa
     If ActionMsgIndex >= MAX_BYTE Then ActionMsgIndex = 1
 
     With ActionMsg(ActionMsgIndex)
-        .Message = Message
-        .Color = Color
+        .message = message
+        .color = color
         .Type = MsgType
         .Created = GetTickCount
         .Scroll = 1
@@ -1498,10 +1498,10 @@ Public Sub ClearActionMsg(ByVal Index As Byte)
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ActionMsg(Index).Message = vbNullString
+    ActionMsg(Index).message = vbNullString
     ActionMsg(Index).Created = 0
     ActionMsg(Index).Type = 0
-    ActionMsg(Index).Color = 0
+    ActionMsg(Index).color = 0
     ActionMsg(Index).Scroll = 0
     ActionMsg(Index).X = 0
     ActionMsg(Index).Y = 0

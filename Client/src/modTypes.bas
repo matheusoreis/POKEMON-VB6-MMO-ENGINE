@@ -69,15 +69,6 @@ Private Type OptionsRec
     Quest As Byte
 End Type
 
-'Evilbunnie's DrawnChat system
-Public Chat(1 To 20) As ChatRec
-
-'Evilbunnie's DrawnChat system
-Private Type ChatRec
-    text As String
-    colour As Long
-End Type
-
 Private Type PokeRec
     Pokemon As Integer
     Pokeball As Byte
@@ -453,10 +444,10 @@ Private Type ResourceRec
 End Type
 
 Private Type ActionMsgRec
-    Message As String
+    message As String
     Created As Long
 Type As Long
-    Color As Long
+    color As Long
     Scroll As Long
     X As Long
     Y As Long

@@ -347,10 +347,6 @@ Public Sub logoutGame()
     frmMain.imgButton(14).Visible = True
     frmMain.PicPokeInicial.Visible = False
     frmMain.picRank.Visible = False
-
-    For i = 1 To 20
-        Chat(i).text = vbNullString
-    Next
 End Sub
 
 Sub GameInit()
@@ -496,8 +492,7 @@ Public Sub SetFocusOnChat()
 
     On Error Resume Next    'prevent RTE5, no way to handle error
     frmMain.txtMyChat.Visible = True
-    frmMain.picUpDown(0).Visible = True
-    frmMain.picUpDown(1).Visible = True
+    frmMain.PicChat.Visible = True
 
     frmMain.txtMyChat.SetFocus
 End Sub
@@ -511,8 +506,7 @@ Public Sub SetFocusOnGame()
 
     On Error Resume Next    'prevent RTE5, no way to handle error
     frmMain.txtMyChat.Visible = False
-    frmMain.picUpDown(0).Visible = False
-    frmMain.picUpDown(1).Visible = False
+    frmMain.PicChat.Visible = False
     frmMain.picScreen.SetFocus
 End Sub
 
@@ -825,6 +819,42 @@ Public Sub cacheButtons()
     
     With MainButton(30)
         .filename = "vender"
+        .state = 0    ' normal
+    End With
+        
+        ' Chat enviar
+    With MainButton(31)
+        .filename = "enviar"
+        .state = 0    ' normal
+    End With
+    
+        ' Chat Sistem
+    With MainButton(32)
+        .filename = "sistema"
+        .state = 0    ' normal
+    End With
+    
+        ' Chat Mapa
+    With MainButton(33)
+        .filename = "mapa"
+        .state = 0    ' normal
+    End With
+    
+        ' Chat Todos
+    With MainButton(34)
+        .filename = "todos"
+        .state = 0    ' normal
+    End With
+    
+        ' Chat Grupo
+    With MainButton(35)
+        .filename = "grupo"
+        .state = 0    ' normal
+    End With
+    
+        ' Chat Org
+    With MainButton(36)
+        .filename = "corg"
         .state = 0    ' normal
     End With
     

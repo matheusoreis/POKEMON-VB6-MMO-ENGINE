@@ -16,7 +16,7 @@ Public Declare Function GetForegroundWindow Lib "user32" () As Long
 
 ' animated buttons
 Public Const MAX_MENUBUTTONS As Long = 30
-Public Const MAX_MAINBUTTONS As Long = 30
+Public Const MAX_MAINBUTTONS As Long = 50
 Public Const MAX_QUESTBUTTONS As Long = 3
 Public Const MAX_CLOSEBUTTONS As Long = 30
 
