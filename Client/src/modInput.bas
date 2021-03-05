@@ -351,7 +351,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     End If
                 
                 Case "/top"
-                    frmDailyLogin.Visible = True
+                   ' frmDailyLogin.Visible = True
                     
                 Case "/info"
                     ' Checks to make sure we have more than one string in the array

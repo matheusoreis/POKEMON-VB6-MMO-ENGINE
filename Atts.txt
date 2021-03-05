@@ -27,3 +27,7 @@ Lista de Seleção de tempo do item no leilão 1 a 12(Adicionado)
 Screen:
 
 Adicionado novamente LABELHP/MP( NÃO RETIRAR )
+
+Menu:
+
+Game Offline nao abria janela, e ai tinha q fechar e abrir o cliente novamente(Arrumado)

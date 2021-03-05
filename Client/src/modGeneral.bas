@@ -257,7 +257,7 @@ Public Sub MenuState(ByVal state As Long)
     If frmLoad.Visible Then
         If Not IsConnected Then
             frmMenu.Visible = True
-            frmMenu.picLogin.Visible = False
+            frmMenu.picLogin.Visible = True
             frmMenu.picCharacter.Visible = False
             frmMenu.picRegister.Visible = False
             frmLoad.Visible = False
@@ -274,14 +274,14 @@ errorhandler:
 End Sub
 
 Public Sub logoutGame()
-    Dim Buffer As clsBuffer, i As Long
+    Dim buffer As clsBuffer, i As Long
 
     isLogging = True
     InGame = False
-    Set Buffer = New clsBuffer
-    Buffer.WriteLong CQuit
-    SendData Buffer.ToArray()
-    Set Buffer = Nothing
+    Set buffer = New clsBuffer
+    buffer.WriteLong CQuit
+    SendData buffer.ToArray()
+    Set buffer = Nothing
     Call DestroyTCP
 
     ' destroy the animations loaded
