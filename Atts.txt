@@ -35,3 +35,10 @@ Game Offline nao abria janela, e ai tinha q fechar e abrir o cliente novamente(A
 Main:
 
 Face Shiny não aparecia(Adicionado)
+
+Chat:
+
+Mensagem de grupo(Adicionado)
+Botões setando canal de cnv Global/Map/Grupo(adicionado) F. Org
+Código do Botão Enviar mensagem(Adicionado)
+Ao apertar enter apos enviar msg fechar o chat(Retirado) só fecha caso a msg esteja vazia

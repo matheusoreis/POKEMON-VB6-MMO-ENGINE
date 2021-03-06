@@ -1,6 +1,6 @@
-modText = 50, 50, 1086, 697, Z
+modText = 50, 50, 1086, 697, 
 modTypes = 75, 75, 1111, 722, 
-frmMenu = 0, 0, 599, 456, C, 175, 175, 1211, 822, C
+frmMenu = 0, 0, 599, 456, , 175, 175, 1211, 822, C
 modGameLogic = 125, 125, 1161, 772, 
 modClientTCP = 25, 25, 1061, 672, 
 frmLoad = 25, 25, 896, 448, , 200, 200, 1236, 847, C
@@ -16,7 +16,7 @@ modGameEditors = 71, 9, 1107, 656,
 modDirectDraw7 = 25, 25, 837, 637, 
 modEnumerations = 275, 275, 1311, 922, 
 modHandleData = 250, 250, 1286, 897, 
-modInput = 0, 0, 1036, 647, C
+modInput = 0, 0, 1036, 647, Z
 clsBuffer = 132, 174, 761, 537, 
 frmEditor_Map = 125, 125, 929, 548, , 275, 275, 1311, 922, C
 frmEditor_Resource = 150, 150, 954, 573, C, 300, 300, 1336, 947, C

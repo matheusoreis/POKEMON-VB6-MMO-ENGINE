@@ -694,7 +694,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub SendSaveItem(ByVal ItemNum As Long)
+Public Sub SendSaveItem(ByVal itemNum As Long)
     Dim Buffer As clsBuffer
     Dim ItemSize As Long
     Dim ItemData() As Byte
@@ -703,11 +703,11 @@ Public Sub SendSaveItem(ByVal ItemNum As Long)
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     Set Buffer = New clsBuffer
-    ItemSize = LenB(Item(ItemNum))
+    ItemSize = LenB(Item(itemNum))
     ReDim ItemData(ItemSize - 1)
-    CopyMemory ItemData(0), ByVal VarPtr(Item(ItemNum)), ItemSize
+    CopyMemory ItemData(0), ByVal VarPtr(Item(itemNum)), ItemSize
     Buffer.WriteLong CSaveItem
-    Buffer.WriteLong ItemNum
+    Buffer.WriteLong itemNum
     Buffer.WriteBytes ItemData
     SendData Buffer.ToArray()
     Set Buffer = Nothing
@@ -2197,4 +2197,24 @@ Sub SendComandoGym(ByVal Comando As Byte)
     Buffer.WriteByte Comando
     SendData Buffer.ToArray()
     Set Buffer = Nothing
+End Sub
+
+Public Sub GrupoMsg(ByVal text As String)
+Dim Buffer As clsBuffer
+
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+    
+    Set Buffer = New clsBuffer
+    Buffer.WriteLong CGrupoMsg
+    Buffer.WriteString text
+    SendData Buffer.ToArray()
+    Set Buffer = Nothing
+    
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "VilaMsg", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
 End Sub

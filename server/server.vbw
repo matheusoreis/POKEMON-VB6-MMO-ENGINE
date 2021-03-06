@@ -1,14 +1,14 @@
 clsBuffer = 0, 0, 0, 0, C
 frmServer = 0, 0, 0, 0, C, 26, 26, 913, 478, C
 modCombat = 0, 0, 0, 0, C
-modConstants = 52, 52, 883, 504, Z
+modConstants = 52, 52, 883, 504, 
 modPokemonServer = 0, 0, 0, 0, C
 modDatabase = 130, 130, 961, 582, 
 modEnumerations = 78, 78, 909, 530, 
 modGameLogic = 182, 182, 1146, 547, 
 modGeneral = 0, 0, 0, 0, C
 modGlobals = 0, 0, 0, 0, C
-modHandleData = 156, 156, 987, 608, 
+modHandleData = 156, 156, 987, 608, Z
 modPlayer = 78, 78, 1002, 469, 
 ModQuest = 52, 52, 1032, 433, 
 modScriptedSpell = 0, 0, 0, 0, C

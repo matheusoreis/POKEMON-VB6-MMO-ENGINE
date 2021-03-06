@@ -216,7 +216,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
     Dim i As Long
     Dim n As Long
     Dim Command() As String
-    Dim buffer As clsBuffer
+    Dim Buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -229,27 +229,37 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
             SetFocusOnGame
             frmMain.PicChat.Visible = True
         End If
-        Exit Sub
+        Exit Sub '123114
     End If
     If chaton = False Then Exit Sub
     MyText = LCase$(ChatText)
 
     ' Handle when the player presses the return key
     If KeyAscii = vbKeyReturn Then
-        chaton = False
+        chaton = True
         SetFocusOnGame
 
         ' Handle when the player presses the return key
         If KeyAscii = vbKeyReturn Then
+        
+        ' Grupo message
+        If frmMain.cmbEscolha.ListIndex = 4 Then
 
-            ' Broadcast message
-            If Left$(ChatText, 1) = "'" Then
-                ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)
+            If Len(ChatText) > 0 Then
+                Call GrupoMsg(ChatText)
+            End If
 
-                If Len(ChatText) > 0 Then
+            MyText = vbNullString
+            frmMain.txtMyChat.text = vbNullString
+            Exit Sub
+        End If
+        
+        'msg global
+        If frmMain.cmbEscolha.ListIndex = 3 Then
+            If Len(ChatText) > 0 Then
                     Call BroadcastMsg(ChatText)
                 End If
-
+        
                 MyText = vbNullString
                 frmMain.txtMyChat.text = vbNullString
                 Exit Sub
@@ -361,11 +371,11 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                         GoTo Continue
                     End If
 
-                    Set buffer = New clsBuffer
-                    buffer.WriteLong CPlayerInfoRequest
-                    buffer.WriteString Command(1)
-                    SendData buffer.ToArray()
-                    Set buffer = Nothing
+                    Set Buffer = New clsBuffer
+                    Buffer.WriteLong CPlayerInfoRequest
+                    Buffer.WriteString Command(1)
+                    SendData Buffer.ToArray()
+                    Set Buffer = Nothing
                     ' Whos Online
                 Case "/who"
                     SendWhosOnline
@@ -377,10 +387,10 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     FPS_Lock = Not FPS_Lock
                     ' Request stats
                 Case "/stats"
-                    Set buffer = New clsBuffer
-                    buffer.WriteLong CGetStats
-                    SendData buffer.ToArray()
-                    Set buffer = Nothing
+                    Set Buffer = New clsBuffer
+                    Buffer.WriteLong CGetStats
+                    SendData Buffer.ToArray()
+                    Set Buffer = Nothing
                 Case "/kick"
                     If GetPlayerAccess(MyIndex) < ADMIN_MONITOR Then GoTo Continue
 

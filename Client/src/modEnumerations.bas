@@ -225,6 +225,7 @@ Public Enum ClientPackets
     CSetVisual
     CPlayerRun
     CComandGym
+    CGrupoMsg
     ' Make sure CMSG_COUNT is below everything else
     CMSG_COUNT
 End Enum

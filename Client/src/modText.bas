@@ -41,7 +41,7 @@ Public Sub DrawText(ByVal hDC As Long, ByVal X, ByVal Y, ByVal text As String, c
     Call TextOut(hDC, X - 0, Y - 1, text, Len(text))
     Call SetTextColor(hDC, color)
     Call TextOut(hDC, X, Y, text, Len(text))
-    Call SelectObject(hDC, OldFont)
+    Call SelectObject(hDC, OldFont) '123
     Call DeleteObject(GameFont)
 
     ' Error handler
@@ -435,10 +435,10 @@ Sub BltActionMsg(ByVal Index As Long)
         Time = 1500
 
         If ActionMsg(Index).Y > 0 Then
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) - 2
         Else
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18
         End If
 
@@ -446,11 +446,11 @@ Sub BltActionMsg(ByVal Index As Long)
         Time = 1500
 
         If ActionMsg(Index).Y > 0 Then
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) - 2 - (ActionMsg(Index).Scroll * 0.6)
             ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
         Else
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18 + (ActionMsg(Index).Scroll * 0.6)
             ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
         End If
@@ -467,17 +467,17 @@ Sub BltActionMsg(ByVal Index As Long)
                 End If
             End If
         Next
-        X = (frmMain.picScreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+        X = (frmMain.picScreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
         Y = 425
 
     Case ACTIONMSG_STATICLOCKED
         Time = 1500
 
         If ActionMsg(Index).Y > 0 Then
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) - 2
         Else
-            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+            X = ActionMsg(Index).X + Int(PIC_X \ 2) - ((Len(Trim$(ActionMsg(Index).Message)) \ 2) * 8)
             Y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18
         End If
 
@@ -487,10 +487,10 @@ Sub BltActionMsg(ByVal Index As Long)
     Y = ConvertMapY(Y)
 
     If GetTickCount < ActionMsg(Index).Created + Time Then
-        If IsNumeric(ActionMsg(Index).message) = True Then
-            Call DrawTextDamage(TexthDC, X, Y, ActionMsg(Index).message, QBColor(ActionMsg(Index).color))
+        If IsNumeric(ActionMsg(Index).Message) = True Then
+            Call DrawTextDamage(TexthDC, X, Y, ActionMsg(Index).Message, QBColor(ActionMsg(Index).color))
         Else
-            Call DrawText(TexthDC, X, Y, ActionMsg(Index).message, QBColor(ActionMsg(Index).color))
+            Call DrawText(TexthDC, X, Y, ActionMsg(Index).Message, QBColor(ActionMsg(Index).color))
         End If
     Else
         ClearActionMsg Index
@@ -525,6 +525,7 @@ Dim S As String
     If Options.Debug = 1 Then On Error GoTo errorhandler
     
     S = vbNewLine & Msg
+    
     frmMain.txtChat.SelStart = Len(frmMain.txtChat.text)
     frmMain.txtChat.SelColor = QBColor(color)
     frmMain.txtChat.SelText = S
@@ -626,7 +627,7 @@ Public Sub DrawQuestsInWindow()
         Case 2    'Ganhar De Jogadores
             ObjetivoString = "Ganhar de Jogadores " & "[" & Player(MyIndex).Quests(QuestNum).KillPlayers & "/" & Quest(QuestNum).Task(Task).value & "]"
         Case 3    'Ir Até Mapa
-            ObjetivoString = "Vá até o mapa " & Quest(QuestNum).Task(Task).message(2)
+            ObjetivoString = "Vá até o mapa " & Quest(QuestNum).Task(Task).Message(2)
         Case 4    'Falar Com Npc
             ObjetivoString = "Fale com " & Trim$(Npc(Quest(QuestNum).Task(Task).num).Name) & "."
         Case 5    'Coletar Itens
@@ -807,7 +808,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub DrawMapaItem(ByVal ItemNum As Long)
+Public Sub DrawMapaItem(ByVal itemNum As Long)
     Dim TextX As Long
     Dim TextY As Long
     Dim color As Long
@@ -816,9 +817,9 @@ Public Sub DrawMapaItem(ByVal ItemNum As Long)
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     ' Verificando se existem itens no mapa !!
-    If ItemNum > 0 Then
+    If itemNum > 0 Then
 
-        Select Case Item(MapItem(ItemNum).num).Rarity
+        Select Case Item(MapItem(itemNum).num).Rarity
         Case 0    'Sem raridade
             color = QBColor(White)
         Case 1
@@ -837,13 +838,13 @@ Public Sub DrawMapaItem(ByVal ItemNum As Long)
         Exit Sub    ' Verificação sem sucesso!!
     End If
 
-    If MapItem(ItemNum).value > 0 Then
-        Nome = MapItem(ItemNum).value & " " & Trim$(Item(MapItem(ItemNum).num).Name)
+    If MapItem(itemNum).value > 0 Then
+        Nome = MapItem(itemNum).value & " " & Trim$(Item(MapItem(itemNum).num).Name)
     Else
-        If MapItem(ItemNum).PokeInfo.Pokemon = 0 Then
-            Nome = Trim$(Item(MapItem(ItemNum).num).Name)
+        If MapItem(itemNum).PokeInfo.Pokemon = 0 Then
+            Nome = Trim$(Item(MapItem(itemNum).num).Name)
         Else
-            Select Case MapItem(ItemNum).PokeInfo.Pokeball
+            Select Case MapItem(itemNum).PokeInfo.Pokeball
             Case 1
                 PokeballName = "Pokéball"
             Case 2
@@ -863,17 +864,17 @@ Public Sub DrawMapaItem(ByVal ItemNum As Long)
                 color = RGB(117, 198, 92)
             End Select
 
-            Nome = PokeballName & " " & Trim$(Pokemon(MapItem(ItemNum).PokeInfo.Pokemon).Name) & " [" & MapItem(ItemNum).PokeInfo.Level & "]"
+            Nome = PokeballName & " " & Trim$(Pokemon(MapItem(itemNum).PokeInfo.Pokemon).Name) & " [" & MapItem(itemNum).PokeInfo.Level & "]"
         End If
     End If
 
     ' Calcular coordenadas
-    TextX = ConvertMapX(MapItem(ItemNum).X * PIC_X) + (PIC_X \ 2) - getWidth(TexthDC, (Trim$(Nome)))
-    If MapItem(ItemNum).num < 1 Or MapItem(ItemNum).num > numitems Then
-        TextY = ConvertMapY(MapItem(ItemNum).Y * PIC_Y)
+    TextX = ConvertMapX(MapItem(itemNum).X * PIC_X) + (PIC_X \ 2) - getWidth(TexthDC, (Trim$(Nome)))
+    If MapItem(itemNum).num < 1 Or MapItem(itemNum).num > numitems Then
+        TextY = ConvertMapY(MapItem(itemNum).Y * PIC_Y)
     Else
         ' Determinação do texto
-        TextY = ConvertMapY(MapItem(ItemNum).Y * PIC_Y) - (DDSD_Item(MapItem(ItemNum).num).lHeight / 4) + 16
+        TextY = ConvertMapY(MapItem(itemNum).Y * PIC_Y) - (DDSD_Item(MapItem(itemNum).num).lHeight / 4) + 16
     End If
 
     ' Execução dos textos
