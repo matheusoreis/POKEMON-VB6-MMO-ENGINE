@@ -23,6 +23,14 @@ Begin VB.Form frmEditor_Spell
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   836
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkTeste 
+      Caption         =   "Check1"
+      Height          =   255
+      Left            =   10440
+      TabIndex        =   71
+      Top             =   5160
+      Width           =   495
+   End
    Begin VB.Frame fraScript 
       Caption         =   "Script"
       Height          =   975
@@ -623,6 +631,14 @@ errorhandler:
     Exit Sub
 End Sub
 
+Private Sub chkTeste_Click()
+ If chkTeste.value = 0 Then
+        Spell(EditorIndex).Teste = False
+    Else
+        Spell(EditorIndex).Teste = True
+    End If
+End Sub
+
 Private Sub cmbClass_Click()
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -1158,7 +1174,7 @@ Private Sub scrlX_Change()
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     lblX.Caption = "X: " & scrlX.value
-    Spell(EditorIndex).X = scrlX.value
+    Spell(EditorIndex).x = scrlX.value
 
     ' Error handler
     Exit Sub

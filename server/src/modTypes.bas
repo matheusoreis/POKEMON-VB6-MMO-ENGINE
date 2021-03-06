@@ -221,6 +221,7 @@ Private Type PlayerRec
     PokeLight As Boolean
     MyMap(1 To 3) As Long
     NgtDamage(1 To MAX_NEGATIVES) As Long
+    Teleport As Boolean
 End Type
 
 Public Type SpellBufferRec
@@ -504,6 +505,7 @@ Private Type SpellRec
     Script As Long
     Voar1 As Long
     Voar2 As Long
+    Teste As Boolean
 End Type
 
 Private Type TempTileRec

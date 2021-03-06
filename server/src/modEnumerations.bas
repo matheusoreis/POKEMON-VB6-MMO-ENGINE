@@ -107,6 +107,7 @@ Public Enum ServerPackets
     SRunning
     SComandGym
     SContagem
+    STeleport
     ' Make sure SMSG_COUNT is below everything else
     SMSG_COUNT
 End Enum

@@ -53,7 +53,7 @@ errorhandler:
 End Sub
 
 Public Sub MapEditorProperties()
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
     Dim i As Long
 
@@ -97,17 +97,17 @@ Public Sub MapEditorProperties()
         .CmbWeather.ListIndex = CStr(Map.Weather)
         .scrlWeatherIntensity.value = CStr(Map.Intensity)
 
-        For X = 1 To 2
-            .scrlLevel(X - 1).value = CStr(Map.LevelPoke(X))
+        For x = 1 To 2
+            .scrlLevel(x - 1).value = CStr(Map.LevelPoke(x))
         Next
 
         ' show the map npcs
         .lstNpcs.Clear
-        For X = 1 To MAX_MAP_NPCS
-            If Map.Npc(X) > 0 Then
-                .lstNpcs.AddItem X & ": " & Trim$(Npc(Map.Npc(X)).Name)
+        For x = 1 To MAX_MAP_NPCS
+            If Map.Npc(x) > 0 Then
+                .lstNpcs.AddItem x & ": " & Trim$(Npc(Map.Npc(x)).Name)
             Else
-                .lstNpcs.AddItem X & ": No NPC"
+                .lstNpcs.AddItem x & ": No NPC"
             End If
         Next
         .lstNpcs.ListIndex = 0
@@ -115,8 +115,8 @@ Public Sub MapEditorProperties()
         ' show the npc selection combo
         .cmbNpc.Clear
         .cmbNpc.AddItem "No NPC"
-        For X = 1 To MAX_NPCS
-            .cmbNpc.AddItem X & ": " & Trim$(Npc(X).Name)
+        For x = 1 To MAX_NPCS
+            .cmbNpc.AddItem x & ": " & Trim$(Npc(x).Name)
         Next
 
         ' set the combo box properly
@@ -140,16 +140,16 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub MapEditorSetTile(ByVal X As Long, ByVal Y As Long, ByVal CurLayer As Long, Optional ByVal multitile As Boolean = False)
+Public Sub MapEditorSetTile(ByVal x As Long, ByVal Y As Long, ByVal CurLayer As Long, Optional ByVal multitile As Boolean = False)
     Dim X2 As Long, Y2 As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Not multitile Then    ' single
-        With Map.Tile(X, Y)
+        With Map.Tile(x, Y)
             ' set layer
-            .Layer(CurLayer).X = EditorTileX
+            .Layer(CurLayer).x = EditorTileX
             .Layer(CurLayer).Y = EditorTileY
             .Layer(CurLayer).Tileset = frmEditor_Map.scrlTileSet.value
         End With
@@ -157,11 +157,11 @@ Public Sub MapEditorSetTile(ByVal X As Long, ByVal Y As Long, ByVal CurLayer As 
         Y2 = 0    ' starting tile for y axis
         For Y = CurY To CurY + EditorTileHeight - 1
             X2 = 0    ' re-set x count every y loop
-            For X = CurX To CurX + EditorTileWidth - 1
-                If X >= 0 And X <= Map.MaxX Then
+            For x = CurX To CurX + EditorTileWidth - 1
+                If x >= 0 And x <= Map.MaxX Then
                     If Y >= 0 And Y <= Map.MaxY Then
-                        With Map.Tile(X, Y)
-                            .Layer(CurLayer).X = EditorTileX + X2
+                        With Map.Tile(x, Y)
+                            .Layer(CurLayer).x = EditorTileX + X2
                             .Layer(CurLayer).Y = EditorTileY + Y2
                             .Layer(CurLayer).Tileset = frmEditor_Map.scrlTileSet.value
                         End With
@@ -181,7 +181,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub MapEditorMouseDown(ByVal Button As Integer, ByVal X As Long, ByVal Y As Long, Optional ByVal movedMouse As Boolean = True)
+Public Sub MapEditorMouseDown(ByVal Button As Integer, ByVal x As Long, ByVal Y As Long, Optional ByVal movedMouse As Boolean = True)
     Dim i As Long
     Dim CurLayer As Long
     Dim tmpDir As Byte
@@ -346,11 +346,11 @@ Public Sub MapEditorMouseDown(ByVal Button As Integer, ByVal X As Long, ByVal Y 
         ElseIf frmEditor_Map.optBlock.value Then
             If movedMouse Then Exit Sub
             ' find what tile it is
-            X = X - ((X \ 32) * 32)
+            x = x - ((x \ 32) * 32)
             Y = Y - ((Y \ 32) * 32)
             ' see if it hits an arrow
             For i = 1 To 4
-                If X >= DirArrowX(i) And X <= DirArrowX(i) + 8 Then
+                If x >= DirArrowX(i) And x <= DirArrowX(i) + 8 Then
                     If Y >= DirArrowY(i) And Y <= DirArrowY(i) + 8 Then
                         ' flip the value.
                         setDirBlock Map.Tile(CurX, CurY).DirBlock, CByte(i), Not isDirBlocked(Map.Tile(CurX, CurY).DirBlock, CByte(i))
@@ -365,7 +365,7 @@ Public Sub MapEditorMouseDown(ByVal Button As Integer, ByVal X As Long, ByVal Y 
         If frmEditor_Map.optLayers.value Then
             With Map.Tile(CurX, CurY)
                 ' clear layer
-                .Layer(CurLayer).X = 0
+                .Layer(CurLayer).x = 0
                 .Layer(CurLayer).Y = 0
                 .Layer(CurLayer).Tileset = 0
             End With
@@ -391,7 +391,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub MapEditorChooseTile(Button As Integer, X As Single, Y As Single)
+Public Sub MapEditorChooseTile(Button As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -399,7 +399,7 @@ Public Sub MapEditorChooseTile(Button As Integer, X As Single, Y As Single)
         EditorTileWidth = 1
         EditorTileHeight = 1
 
-        EditorTileX = X \ PIC_X
+        EditorTileX = x \ PIC_X
         EditorTileY = Y \ PIC_Y
 
         frmEditor_Map.shpSelected.top = EditorTileY * PIC_Y
@@ -417,22 +417,22 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub MapEditorDrag(Button As Integer, X As Single, Y As Single)
+Public Sub MapEditorDrag(Button As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Button = vbLeftButton Then
         ' convert the pixel number to tile number
-        X = (X \ PIC_X) + 1
+        x = (x \ PIC_X) + 1
         Y = (Y \ PIC_Y) + 1
         ' check it's not out of bounds
-        If X < 0 Then X = 0
-        If X > frmEditor_Map.picBackSelect.Width / PIC_X Then X = frmEditor_Map.picBackSelect.Width / PIC_X
+        If x < 0 Then x = 0
+        If x > frmEditor_Map.picBackSelect.Width / PIC_X Then x = frmEditor_Map.picBackSelect.Width / PIC_X
         If Y < 0 Then Y = 0
         If Y > frmEditor_Map.picBackSelect.Height / PIC_Y Then Y = frmEditor_Map.picBackSelect.Height / PIC_Y
         ' find out what to set the width + height of map editor to
-        If X > EditorTileX Then    ' drag right
-            EditorTileWidth = X - EditorTileX
+        If x > EditorTileX Then    ' drag right
+            EditorTileWidth = x - EditorTileX
         Else    ' drag left
             ' TO DO
         End If
@@ -520,7 +520,7 @@ End Sub
 
 Public Sub MapEditorClearLayer()
     Dim i As Long
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
     Dim CurLayer As Long
 
@@ -539,11 +539,11 @@ Public Sub MapEditorClearLayer()
 
     ' ask to clear layer
     If MsgBox("Are you sure you wish to clear this layer?", vbYesNo, Options.Game_Name) = vbYes Then
-        For X = 0 To Map.MaxX
+        For x = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
-                Map.Tile(X, Y).Layer(CurLayer).X = 0
-                Map.Tile(X, Y).Layer(CurLayer).Y = 0
-                Map.Tile(X, Y).Layer(CurLayer).Tileset = 0
+                Map.Tile(x, Y).Layer(CurLayer).x = 0
+                Map.Tile(x, Y).Layer(CurLayer).Y = 0
+                Map.Tile(x, Y).Layer(CurLayer).Tileset = 0
             Next
         Next
     End If
@@ -558,7 +558,7 @@ End Sub
 
 Public Sub MapEditorFillLayer()
     Dim i As Long
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
     Dim CurLayer As Long
 
@@ -575,11 +575,11 @@ Public Sub MapEditorFillLayer()
 
     ' Ground layer
     If MsgBox("Are you sure you wish to fill this layer?", vbYesNo, Options.Game_Name) = vbYes Then
-        For X = 0 To Map.MaxX
+        For x = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
-                Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
-                Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                Map.Tile(X, Y).Layer(CurLayer).Tileset = frmEditor_Map.scrlTileSet.value
+                Map.Tile(x, Y).Layer(CurLayer).x = EditorTileX
+                Map.Tile(x, Y).Layer(CurLayer).Y = EditorTileY
+                Map.Tile(x, Y).Layer(CurLayer).Tileset = frmEditor_Map.scrlTileSet.value
             Next
         Next
     End If
@@ -593,7 +593,7 @@ errorhandler:
 End Sub
 
 Public Sub MapEditorClearAttribs()
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
 
     ' If debug mode, handle error then exit out
@@ -601,9 +601,9 @@ Public Sub MapEditorClearAttribs()
 
     If MsgBox("Are you sure you wish to clear the attributes on this map?", vbYesNo, Options.Game_Name) = vbYes Then
 
-        For X = 0 To Map.MaxX
+        For x = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
-                Map.Tile(X, Y).Type = 0
+                Map.Tile(x, Y).Type = 0
             Next
         Next
 
@@ -1424,9 +1424,9 @@ Public Sub SpellEditorInit()
         .cmbClass.ListIndex = Spell(EditorIndex).ClassReq
         .scrlCast.value = Spell(EditorIndex).CastTime
         .scrlCool.value = Spell(EditorIndex).CDTime
-        .scrlIcon.value = Spell(EditorIndex).Icon
+'        .scrlIcon.value = Spell(EditorIndex).Icon
         .scrlMap.value = Spell(EditorIndex).Map
-        .scrlX.value = Spell(EditorIndex).X
+        .scrlX.value = Spell(EditorIndex).x
         .scrlY.value = Spell(EditorIndex).Y
         .scrlDir.value = Spell(EditorIndex).Dir
         .scrlVital.value = Spell(EditorIndex).Vital
@@ -1437,6 +1437,12 @@ Public Sub SpellEditorInit()
             .chkAOE.value = 1
         Else
             .chkAOE.value = 0
+        End If
+        
+        If Spell(EditorIndex).Teste Then
+            .chkTeste.value = 1
+        Else
+            .chkTeste.value = 0
         End If
         .scrlAOE.value = Spell(EditorIndex).AoE
         .scrlAnimCast.value = Spell(EditorIndex).CastAnim

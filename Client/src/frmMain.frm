@@ -27,6 +27,35 @@ Begin VB.Form frmMain
    ScaleWidth      =   2661
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.PictureBox picTele 
+      BorderStyle     =   0  'None
+      Height          =   480
+      Left            =   1680
+      Picture         =   "frmMain.frx":0CCA
+      ScaleHeight     =   480
+      ScaleWidth      =   480
+      TabIndex        =   259
+      Top             =   4320
+      Visible         =   0   'False
+      Width           =   480
+   End
+   Begin VB.PictureBox picTeleport 
+      Height          =   3615
+      Left            =   7200
+      ScaleHeight     =   3555
+      ScaleWidth      =   2715
+      TabIndex        =   256
+      Top             =   1680
+      Visible         =   0   'False
+      Width           =   2775
+      Begin VB.ListBox lstTeleport 
+         Height          =   3375
+         Left            =   120
+         TabIndex        =   258
+         Top             =   120
+         Width           =   2535
+      End
+   End
    Begin VB.PictureBox PicChat 
       Appearance      =   0  'Flat
       AutoSize        =   -1  'True
@@ -35,7 +64,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2535
       Left            =   120
-      Picture         =   "frmMain.frx":0CCA
+      Picture         =   "frmMain.frx":190C
       ScaleHeight     =   169
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   406
@@ -44,9 +73,9 @@ Begin VB.Form frmMain
       Width           =   6090
       Begin VB.ComboBox cmbEscolha 
          Height          =   315
-         ItemData        =   "frmMain.frx":33272
+         ItemData        =   "frmMain.frx":33EB4
          Left            =   1800
-         List            =   "frmMain.frx":33285
+         List            =   "frmMain.frx":33EC7
          TabIndex        =   255
          Text            =   "Combo2"
          Top             =   720
@@ -64,9 +93,10 @@ Begin VB.Form frmMain
          _Version        =   393217
          BackColor       =   1907997
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ScrollBars      =   2
          Appearance      =   0
-         TextRTF         =   $"frmMain.frx":332AA
+         TextRTF         =   $"frmMain.frx":33EEC
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
             Size            =   8.25
@@ -93,7 +123,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   31
          Left            =   4575
-         Picture         =   "frmMain.frx":33326
+         Picture         =   "frmMain.frx":33F68
          Top             =   2085
          Width           =   1455
       End
@@ -101,7 +131,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   32
          Left            =   2460
-         Picture         =   "frmMain.frx":34DA6
+         Picture         =   "frmMain.frx":359E8
          Top             =   60
          Width           =   1170
       End
@@ -109,7 +139,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   33
          Left            =   1260
-         Picture         =   "frmMain.frx":3631E
+         Picture         =   "frmMain.frx":36F60
          Top             =   60
          Width           =   1170
       End
@@ -117,7 +147,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   34
          Left            =   60
-         Picture         =   "frmMain.frx":37896
+         Picture         =   "frmMain.frx":384D8
          Top             =   60
          Width           =   1170
       End
@@ -125,7 +155,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   35
          Left            =   3660
-         Picture         =   "frmMain.frx":38E0E
+         Picture         =   "frmMain.frx":39A50
          Top             =   60
          Width           =   1170
       End
@@ -133,7 +163,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   36
          Left            =   4860
-         Picture         =   "frmMain.frx":3A386
+         Picture         =   "frmMain.frx":3AFC8
          Top             =   60
          Width           =   1170
       End
@@ -146,7 +176,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H00FFFFFF&
       Height          =   2790
       Left            =   6000
-      Picture         =   "frmMain.frx":3B8FE
+      Picture         =   "frmMain.frx":3C540
       ScaleHeight     =   186
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
@@ -157,7 +187,7 @@ Begin VB.Form frmMain
       Begin VB.Label lblPI 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":58472
+         Caption         =   $"frmMain.frx":590B4
          ForeColor       =   &H00FFFFFF&
          Height          =   2295
          Index           =   1
@@ -185,7 +215,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2610
       Left            =   3840
-      Picture         =   "frmMain.frx":58529
+      Picture         =   "frmMain.frx":5916B
       ScaleHeight     =   174
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
@@ -201,7 +231,7 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   0
          Left            =   150
-         Picture         =   "frmMain.frx":635A8
+         Picture         =   "frmMain.frx":641EA
          ScaleHeight     =   180
          ScaleWidth      =   180
          TabIndex        =   244
@@ -269,7 +299,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2610
       Left            =   7320
-      Picture         =   "frmMain.frx":65739
+      Picture         =   "frmMain.frx":6637B
       ScaleHeight     =   174
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
@@ -285,7 +315,7 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   1
          Left            =   150
-         Picture         =   "frmMain.frx":707B8
+         Picture         =   "frmMain.frx":713FA
          ScaleHeight     =   12
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   12
@@ -345,7 +375,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   420
       Left            =   5880
-      Picture         =   "frmMain.frx":72949
+      Picture         =   "frmMain.frx":7358B
       ScaleHeight     =   28
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   139
@@ -371,7 +401,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   9600
       Left            =   -17160
-      Picture         =   "frmMain.frx":76D33
+      Picture         =   "frmMain.frx":77975
       ScaleHeight     =   640
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   1152
@@ -397,7 +427,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   1635
       Left            =   30960
-      Picture         =   "frmMain.frx":292D75
+      Picture         =   "frmMain.frx":2939B7
       ScaleHeight     =   109
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   214
@@ -409,7 +439,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   12
          Left            =   750
-         Picture         =   "frmMain.frx":2A3FED
+         Picture         =   "frmMain.frx":2A4C2F
          Top             =   990
          Width           =   1695
       End
@@ -417,7 +447,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   8
          Left            =   2865
-         Picture         =   "frmMain.frx":2A5EBD
+         Picture         =   "frmMain.frx":2A6AFF
          Top             =   15
          Width           =   330
       End
@@ -428,7 +458,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   3030
       Left            =   26880
-      Picture         =   "frmMain.frx":2A65E9
+      Picture         =   "frmMain.frx":2A722B
       ScaleHeight     =   202
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   257
@@ -656,7 +686,7 @@ Begin VB.Form frmMain
       Height          =   450
       Index           =   4
       Left            =   180
-      Picture         =   "frmMain.frx":2CC755
+      Picture         =   "frmMain.frx":2CD397
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -696,7 +726,7 @@ Begin VB.Form frmMain
       Height          =   450
       Index           =   3
       Left            =   180
-      Picture         =   "frmMain.frx":2D0669
+      Picture         =   "frmMain.frx":2D12AB
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -736,7 +766,7 @@ Begin VB.Form frmMain
       Height          =   450
       Index           =   2
       Left            =   180
-      Picture         =   "frmMain.frx":2D457D
+      Picture         =   "frmMain.frx":2D51BF
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -774,7 +804,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   4995
       Left            =   22440
-      Picture         =   "frmMain.frx":2D8491
+      Picture         =   "frmMain.frx":2D90D3
       ScaleHeight     =   333
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   160
@@ -786,7 +816,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   2
          Left            =   2055
-         Picture         =   "frmMain.frx":2FF535
+         Picture         =   "frmMain.frx":300177
          Top             =   15
          Width           =   330
       End
@@ -794,7 +824,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   4
          Left            =   60
-         Picture         =   "frmMain.frx":2FFC61
+         Picture         =   "frmMain.frx":3008A3
          Top             =   4410
          Width           =   2280
       End
@@ -803,7 +833,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   2
          Left            =   60
-         Picture         =   "frmMain.frx":3033DD
+         Picture         =   "frmMain.frx":30401F
          Top             =   3930
          Width           =   2280
       End
@@ -811,7 +841,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   9
          Left            =   60
-         Picture         =   "frmMain.frx":306B59
+         Picture         =   "frmMain.frx":30779B
          Top             =   3435
          Width           =   2280
       End
@@ -819,7 +849,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   8
          Left            =   60
-         Picture         =   "frmMain.frx":30A2D5
+         Picture         =   "frmMain.frx":30AF17
          Top             =   2940
          Width           =   2280
       End
@@ -827,7 +857,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   7
          Left            =   60
-         Picture         =   "frmMain.frx":30DA51
+         Picture         =   "frmMain.frx":30E693
          Top             =   2445
          Width           =   2280
       End
@@ -835,7 +865,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   3
          Left            =   60
-         Picture         =   "frmMain.frx":3111CD
+         Picture         =   "frmMain.frx":311E0F
          Top             =   1950
          Width           =   2280
       End
@@ -843,7 +873,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   10
          Left            =   60
-         Picture         =   "frmMain.frx":314949
+         Picture         =   "frmMain.frx":31558B
          Top             =   1455
          Width           =   2280
       End
@@ -851,7 +881,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   6
          Left            =   60
-         Picture         =   "frmMain.frx":3180C5
+         Picture         =   "frmMain.frx":318D07
          Top             =   960
          Width           =   2280
       End
@@ -859,7 +889,7 @@ Begin VB.Form frmMain
          Height          =   465
          Index           =   1
          Left            =   60
-         Picture         =   "frmMain.frx":31B841
+         Picture         =   "frmMain.frx":31C483
          Top             =   465
          Width           =   2280
       End
@@ -870,7 +900,7 @@ Begin VB.Form frmMain
       Height          =   2790
       Index           =   0
       Left            =   27600
-      Picture         =   "frmMain.frx":31EFBD
+      Picture         =   "frmMain.frx":31FBFF
       ScaleHeight     =   186
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   376
@@ -884,7 +914,7 @@ Begin VB.Form frmMain
          Height          =   960
          Index           =   1
          Left            =   210
-         Picture         =   "frmMain.frx":352391
+         Picture         =   "frmMain.frx":352FD3
          ScaleHeight     =   64
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   64
@@ -908,7 +938,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   6
          Left            =   5295
-         Picture         =   "frmMain.frx":3575F2
+         Picture         =   "frmMain.frx":358234
          Top             =   15
          Width           =   330
       End
@@ -993,7 +1023,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2400
       Left            =   36240
-      Picture         =   "frmMain.frx":357D1E
+      Picture         =   "frmMain.frx":358960
       ScaleHeight     =   160
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   180
@@ -1046,7 +1076,7 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   1890
          Left            =   30
-         Picture         =   "frmMain.frx":36CEE2
+         Picture         =   "frmMain.frx":36DB24
          ScaleHeight     =   126
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   176
@@ -1070,7 +1100,7 @@ Begin VB.Form frmMain
             Height          =   345
             Index           =   23
             Left            =   450
-            Picture         =   "frmMain.frx":37D306
+            Picture         =   "frmMain.frx":37DF48
             Top             =   1200
             Width           =   1695
          End
@@ -1080,7 +1110,7 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   135
-         Picture         =   "frmMain.frx":37F1D6
+         Picture         =   "frmMain.frx":37FE18
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   214
@@ -1092,7 +1122,7 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   135
-         Picture         =   "frmMain.frx":3810BE
+         Picture         =   "frmMain.frx":381D00
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   101
@@ -1104,7 +1134,7 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   135
-         Picture         =   "frmMain.frx":382FA6
+         Picture         =   "frmMain.frx":383BE8
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   100
@@ -1217,7 +1247,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   22
          Left            =   480
-         Picture         =   "frmMain.frx":384E8E
+         Picture         =   "frmMain.frx":385AD0
          Top             =   1800
          Width           =   1695
       End
@@ -1225,7 +1255,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   13
          Left            =   2355
-         Picture         =   "frmMain.frx":386D5E
+         Picture         =   "frmMain.frx":3879A0
          Top             =   15
          Width           =   330
       End
@@ -1238,7 +1268,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   3735
       Left            =   33360
-      Picture         =   "frmMain.frx":38748A
+      Picture         =   "frmMain.frx":3880CC
       ScaleHeight     =   249
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   161
@@ -1250,7 +1280,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   4
          Left            =   2070
-         Picture         =   "frmMain.frx":3A4B92
+         Picture         =   "frmMain.frx":3A57D4
          Top             =   15
          Width           =   330
       End
@@ -1258,7 +1288,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   11
          Left            =   360
-         Picture         =   "frmMain.frx":3A52BE
+         Picture         =   "frmMain.frx":3A5F00
          Top             =   3105
          Width           =   1695
       End
@@ -1396,7 +1426,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H00000000&
       Height          =   4215
       Left            =   30840
-      Picture         =   "frmMain.frx":3A718E
+      Picture         =   "frmMain.frx":3A7DD0
       ScaleHeight     =   281
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   594
@@ -1428,7 +1458,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   7
          Left            =   8565
-         Picture         =   "frmMain.frx":42180A
+         Picture         =   "frmMain.frx":42244C
          Top             =   15
          Width           =   330
       End
@@ -1509,7 +1539,7 @@ Begin VB.Form frmMain
       Begin VB.Label lblQuestInfo 
          BackColor       =   &H00FFFFFF&
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":421F36
+         Caption         =   $"frmMain.frx":422B78
          ForeColor       =   &H00FFFFFF&
          Height          =   1575
          Index           =   2
@@ -1521,7 +1551,7 @@ Begin VB.Form frmMain
       Begin VB.Label lblQuestInfo 
          BackColor       =   &H00FFFFFF&
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":421FC9
+         Caption         =   $"frmMain.frx":422C0B
          ForeColor       =   &H00FFFFFF&
          Height          =   2055
          Index           =   1
@@ -1552,7 +1582,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2280
       Left            =   30840
-      Picture         =   "frmMain.frx":4220B1
+      Picture         =   "frmMain.frx":422CF3
       ScaleHeight     =   152
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   258
@@ -1582,7 +1612,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   8
          Left            =   3135
-         Picture         =   "frmMain.frx":43EDB5
+         Picture         =   "frmMain.frx":43F9F7
          ScaleHeight     =   270
          ScaleWidth      =   270
          TabIndex        =   91
@@ -1599,7 +1629,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   7
          Left            =   2805
-         Picture         =   "frmMain.frx":43F1E7
+         Picture         =   "frmMain.frx":43FE29
          ScaleHeight     =   270
          ScaleWidth      =   270
          TabIndex        =   90
@@ -1616,7 +1646,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   6
          Left            =   2475
-         Picture         =   "frmMain.frx":43F619
+         Picture         =   "frmMain.frx":44025B
          ScaleHeight     =   270
          ScaleWidth      =   270
          TabIndex        =   89
@@ -1633,7 +1663,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   5
          Left            =   2145
-         Picture         =   "frmMain.frx":43FA4B
+         Picture         =   "frmMain.frx":44068D
          ScaleHeight     =   270
          ScaleWidth      =   270
          TabIndex        =   88
@@ -1649,7 +1679,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   4
          Left            =   3135
-         Picture         =   "frmMain.frx":43FE7D
+         Picture         =   "frmMain.frx":440ABF
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
@@ -1667,7 +1697,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   3
          Left            =   2805
-         Picture         =   "frmMain.frx":4402AF
+         Picture         =   "frmMain.frx":440EF1
          ScaleHeight     =   18
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   18
@@ -1685,7 +1715,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   2
          Left            =   2475
-         Picture         =   "frmMain.frx":4406E1
+         Picture         =   "frmMain.frx":441323
          ScaleHeight     =   18
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   18
@@ -1703,7 +1733,7 @@ Begin VB.Form frmMain
          Height          =   270
          Index           =   1
          Left            =   2145
-         Picture         =   "frmMain.frx":440B13
+         Picture         =   "frmMain.frx":441755
          ScaleHeight     =   18
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   18
@@ -1716,7 +1746,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   3
          Left            =   3525
-         Picture         =   "frmMain.frx":440F45
+         Picture         =   "frmMain.frx":441B87
          Top             =   15
          Width           =   330
       End
@@ -1775,7 +1805,7 @@ Begin VB.Form frmMain
       Height          =   4470
       Index           =   1
       Left            =   20640
-      Picture         =   "frmMain.frx":441671
+      Picture         =   "frmMain.frx":4422B3
       ScaleHeight     =   298
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   225
@@ -1793,7 +1823,7 @@ Begin VB.Form frmMain
          Height          =   750
          Index           =   2
          Left            =   150
-         Picture         =   "frmMain.frx":47299D
+         Picture         =   "frmMain.frx":4735DF
          ScaleHeight     =   50
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   205
@@ -1807,7 +1837,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   2
          Left            =   3000
-         Picture         =   "frmMain.frx":47A22F
+         Picture         =   "frmMain.frx":47AE71
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
@@ -1821,7 +1851,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   1
          Left            =   3000
-         Picture         =   "frmMain.frx":47A571
+         Picture         =   "frmMain.frx":47B1B3
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
@@ -1839,7 +1869,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   0
          Left            =   3030
-         Picture         =   "frmMain.frx":47A8B3
+         Picture         =   "frmMain.frx":47B4F5
          ScaleHeight     =   26
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   11
@@ -1851,7 +1881,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   26
          Left            =   840
-         Picture         =   "frmMain.frx":47AC9D
+         Picture         =   "frmMain.frx":47B8DF
          Top             =   3840
          Width           =   1695
       End
@@ -1877,7 +1907,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   5445
       Left            =   16920
-      Picture         =   "frmMain.frx":47CB6D
+      Picture         =   "frmMain.frx":47D7AF
       ScaleHeight     =   363
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   245
@@ -1910,7 +1940,7 @@ Begin VB.Form frmMain
          Height          =   1890
          Index           =   5
          Left            =   3285
-         Picture         =   "frmMain.frx":4BDF51
+         Picture         =   "frmMain.frx":4BEB93
          ScaleHeight     =   126
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   11
@@ -1925,7 +1955,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   4
          Left            =   3255
-         Picture         =   "frmMain.frx":4BF14B
+         Picture         =   "frmMain.frx":4BFD8D
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
@@ -1939,7 +1969,7 @@ Begin VB.Form frmMain
          Height          =   240
          Index           =   3
          Left            =   3255
-         Picture         =   "frmMain.frx":4BF48D
+         Picture         =   "frmMain.frx":4C00CF
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   15
@@ -1961,7 +1991,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   15
          Left            =   3330
-         Picture         =   "frmMain.frx":4BF7CF
+         Picture         =   "frmMain.frx":4C0411
          Top             =   15
          Width           =   330
       End
@@ -1969,7 +1999,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   25
          Left            =   990
-         Picture         =   "frmMain.frx":4BFEFB
+         Picture         =   "frmMain.frx":4C0B3D
          Top             =   4875
          Width           =   1695
       End
@@ -2016,7 +2046,7 @@ Begin VB.Form frmMain
       Begin VB.Image PicExp 
          Height          =   150
          Left            =   180
-         Picture         =   "frmMain.frx":4C1DCB
+         Picture         =   "frmMain.frx":4C2A0D
          Top             =   1275
          Width           =   3315
       End
@@ -2028,7 +2058,7 @@ Begin VB.Form frmMain
       Height          =   1395
       Index           =   2
       Left            =   34800
-      Picture         =   "frmMain.frx":4C37FD
+      Picture         =   "frmMain.frx":4C443F
       ScaleHeight     =   93
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   313
@@ -2039,7 +2069,7 @@ Begin VB.Form frmMain
       Begin VB.Label lblVip 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   $"frmMain.frx":4D8DBD
+         Caption         =   $"frmMain.frx":4D99FF
          ForeColor       =   &H00FFFFFF&
          Height          =   975
          Index           =   0
@@ -2054,7 +2084,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   3945
       Left            =   30840
-      Picture         =   "frmMain.frx":4D8E80
+      Picture         =   "frmMain.frx":4D9AC2
       ScaleHeight     =   263
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   488
@@ -2068,7 +2098,7 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   105
-         Picture         =   "frmMain.frx":536ECC
+         Picture         =   "frmMain.frx":537B0E
          ScaleHeight     =   15
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
@@ -2083,7 +2113,7 @@ Begin VB.Form frmMain
          Height          =   1605
          Index           =   1
          Left            =   360
-         Picture         =   "frmMain.frx":5371DE
+         Picture         =   "frmMain.frx":537E20
          ScaleHeight     =   107
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   440
@@ -2154,7 +2184,7 @@ Begin VB.Form frmMain
          BorderStyle     =   0  'None
          Height          =   150
          Left            =   825
-         Picture         =   "frmMain.frx":5599DA
+         Picture         =   "frmMain.frx":55A61C
          ScaleHeight     =   150
          ScaleWidth      =   5670
          TabIndex        =   165
@@ -2165,7 +2195,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   11
          Left            =   6975
-         Picture         =   "frmMain.frx":55C67E
+         Picture         =   "frmMain.frx":55D2C0
          Top             =   15
          Width           =   330
       End
@@ -2173,7 +2203,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   21
          Left            =   6165
-         Picture         =   "frmMain.frx":55CDAA
+         Picture         =   "frmMain.frx":55D9EC
          Top             =   3420
          Width           =   990
       End
@@ -2181,7 +2211,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   20
          Left            =   4965
-         Picture         =   "frmMain.frx":55DE56
+         Picture         =   "frmMain.frx":55EA98
          Top             =   3420
          Width           =   990
       End
@@ -2189,7 +2219,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   19
          Left            =   3765
-         Picture         =   "frmMain.frx":55EF02
+         Picture         =   "frmMain.frx":55FB44
          Top             =   3420
          Width           =   990
       End
@@ -2197,7 +2227,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   18
          Left            =   2565
-         Picture         =   "frmMain.frx":55FFAE
+         Picture         =   "frmMain.frx":560BF0
          Top             =   3420
          Width           =   990
       End
@@ -2205,7 +2235,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   17
          Left            =   1365
-         Picture         =   "frmMain.frx":56105A
+         Picture         =   "frmMain.frx":561C9C
          Top             =   3420
          Width           =   990
       End
@@ -2213,7 +2243,7 @@ Begin VB.Form frmMain
          Height          =   315
          Index           =   16
          Left            =   165
-         Picture         =   "frmMain.frx":562106
+         Picture         =   "frmMain.frx":562D48
          Top             =   3420
          Width           =   990
       End
@@ -2221,7 +2251,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   15
          Left            =   5475
-         Picture         =   "frmMain.frx":5631B2
+         Picture         =   "frmMain.frx":563DF4
          Top             =   1725
          Width           =   1695
       End
@@ -2308,7 +2338,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   4260
       Left            =   24240
-      Picture         =   "frmMain.frx":565082
+      Picture         =   "frmMain.frx":565CC4
       ScaleHeight     =   284
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   214
@@ -2320,7 +2350,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   5
          Left            =   2865
-         Picture         =   "frmMain.frx":591B36
+         Picture         =   "frmMain.frx":592778
          Top             =   15
          Width           =   330
       End
@@ -2331,7 +2361,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   1245
       Left            =   3120
-      Picture         =   "frmMain.frx":592262
+      Picture         =   "frmMain.frx":592EA4
       ScaleHeight     =   83
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -2346,7 +2376,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   195
          Left            =   735
-         Picture         =   "frmMain.frx":59D06E
+         Picture         =   "frmMain.frx":59DCB0
          ScaleHeight     =   195
          ScaleWidth      =   1830
          TabIndex        =   189
@@ -2421,7 +2451,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2460
       Left            =   27600
-      Picture         =   "frmMain.frx":59E362
+      Picture         =   "frmMain.frx":59EFA4
       ScaleHeight     =   164
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   210
@@ -2493,7 +2523,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   5430
       Left            =   14040
-      Picture         =   "frmMain.frx":5B7886
+      Picture         =   "frmMain.frx":5B84C8
       ScaleHeight     =   362
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   370
@@ -2510,7 +2540,7 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   1
          Left            =   2760
-         Picture         =   "frmMain.frx":619D3A
+         Picture         =   "frmMain.frx":61A97C
          ScaleHeight     =   180
          ScaleWidth      =   480
          TabIndex        =   211
@@ -2527,7 +2557,7 @@ Begin VB.Form frmMain
          Height          =   180
          Index           =   0
          Left            =   3285
-         Picture         =   "frmMain.frx":61A1FC
+         Picture         =   "frmMain.frx":61AE3E
          ScaleHeight     =   180
          ScaleWidth      =   480
          TabIndex        =   210
@@ -2565,7 +2595,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   12
          Left            =   5205
-         Picture         =   "frmMain.frx":61A6BE
+         Picture         =   "frmMain.frx":61B300
          Top             =   15
          Width           =   330
       End
@@ -2686,7 +2716,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   6705
       Left            =   6840
-      Picture         =   "frmMain.frx":61ADEA
+      Picture         =   "frmMain.frx":61BA2C
       ScaleHeight     =   447
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   540
@@ -2713,7 +2743,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   3795
       Left            =   35880
-      Picture         =   "frmMain.frx":6CBADA
+      Picture         =   "frmMain.frx":6CC71C
       ScaleHeight     =   253
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   258
@@ -2736,7 +2766,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   13
          Left            =   1080
-         Picture         =   "frmMain.frx":6FBA06
+         Picture         =   "frmMain.frx":6FC648
          Top             =   3120
          Width           =   1695
       End
@@ -2744,7 +2774,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   1
          Left            =   3525
-         Picture         =   "frmMain.frx":6FD8D6
+         Picture         =   "frmMain.frx":6FE518
          Top             =   15
          Width           =   330
       End
@@ -2763,7 +2793,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   5790
       Left            =   -6120
-      Picture         =   "frmMain.frx":6FE002
+      Picture         =   "frmMain.frx":6FEC44
       ScaleHeight     =   384
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   608
@@ -3387,7 +3417,7 @@ Begin VB.Form frmMain
       CausesValidation=   0   'False
       Height          =   5670
       Left            =   18960
-      Picture         =   "frmMain.frx":719F95
+      Picture         =   "frmMain.frx":71ABD7
       ScaleHeight     =   378
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   412
@@ -3397,9 +3427,9 @@ Begin VB.Form frmMain
       Width           =   6180
       Begin VB.ComboBox cmbTipo 
          Height          =   315
-         ItemData        =   "frmMain.frx":78C0E1
+         ItemData        =   "frmMain.frx":78CD23
          Left            =   2760
-         List            =   "frmMain.frx":78C0EB
+         List            =   "frmMain.frx":78CD2D
          TabIndex        =   225
          Text            =   "Combo2"
          Top             =   6240
@@ -3407,9 +3437,9 @@ Begin VB.Form frmMain
       End
       Begin VB.ComboBox Combo1 
          Height          =   315
-         ItemData        =   "frmMain.frx":78C0F9
+         ItemData        =   "frmMain.frx":78CD3B
          Left            =   840
-         List            =   "frmMain.frx":78C100
+         List            =   "frmMain.frx":78CD42
          TabIndex        =   224
          Text            =   "Combo2"
          Top             =   6360
@@ -3421,7 +3451,7 @@ Begin VB.Form frmMain
          Height          =   225
          Index           =   3
          Left            =   3240
-         Picture         =   "frmMain.frx":78C116
+         Picture         =   "frmMain.frx":78CD58
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   219
@@ -3434,7 +3464,7 @@ Begin VB.Form frmMain
          Height          =   225
          Index           =   2
          Left            =   3240
-         Picture         =   "frmMain.frx":78DFFE
+         Picture         =   "frmMain.frx":78EC40
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   218
@@ -3447,7 +3477,7 @@ Begin VB.Form frmMain
          Height          =   225
          Index           =   1
          Left            =   3240
-         Picture         =   "frmMain.frx":78FEE6
+         Picture         =   "frmMain.frx":790B28
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   217
@@ -3519,7 +3549,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   24
          Left            =   2160
-         Picture         =   "frmMain.frx":791DCE
+         Picture         =   "frmMain.frx":792A10
          Top             =   4920
          Width           =   1695
       End
@@ -3527,7 +3557,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   14
          Left            =   5835
-         Picture         =   "frmMain.frx":793C9E
+         Picture         =   "frmMain.frx":7948E0
          Top             =   15
          Width           =   330
       End
@@ -3596,7 +3626,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2460
       Left            =   13800
-      Picture         =   "frmMain.frx":7943CA
+      Picture         =   "frmMain.frx":79500C
       ScaleHeight     =   164
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   340
@@ -3622,7 +3652,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   1950
          Left            =   30
-         Picture         =   "frmMain.frx":7BD17E
+         Picture         =   "frmMain.frx":7BDDC0
          ScaleHeight     =   130
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   210
@@ -3634,7 +3664,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   18
          Left            =   4755
-         Picture         =   "frmMain.frx":7D12B0
+         Picture         =   "frmMain.frx":7D1EF2
          Top             =   15
          Width           =   330
       End
@@ -3642,7 +3672,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   30
          Left            =   3240
-         Picture         =   "frmMain.frx":7D19DC
+         Picture         =   "frmMain.frx":7D261E
          Top             =   1560
          Width           =   1695
       End
@@ -3650,7 +3680,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   29
          Left            =   3240
-         Picture         =   "frmMain.frx":7D38AC
+         Picture         =   "frmMain.frx":7D44EE
          Top             =   1920
          Width           =   1695
       End
@@ -3688,7 +3718,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   1605
       Left            =   25440
-      Picture         =   "frmMain.frx":7D577C
+      Picture         =   "frmMain.frx":7D63BE
       ScaleHeight     =   1605
       ScaleWidth      =   5310
       TabIndex        =   69
@@ -3729,7 +3759,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2220
       Left            =   25200
-      Picture         =   "frmMain.frx":7F1478
+      Picture         =   "frmMain.frx":7F20BA
       ScaleHeight     =   148
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   370
@@ -3741,7 +3771,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   10
          Left            =   5205
-         Picture         =   "frmMain.frx":81979C
+         Picture         =   "frmMain.frx":81A3DE
          Top             =   15
          Width           =   330
       End
@@ -3862,13 +3892,21 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   765
       Left            =   13365
-      Picture         =   "frmMain.frx":819EC8
+      Picture         =   "frmMain.frx":81AB0A
       ScaleHeight     =   51
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   248
       TabIndex        =   47
       Top             =   8670
       Width           =   3720
+      Begin VB.CommandButton Command1 
+         Caption         =   "Command1"
+         Height          =   375
+         Left            =   240
+         TabIndex        =   257
+         Top             =   120
+         Width           =   735
+      End
    End
    Begin VB.Timer TmrHotbar 
       Enabled         =   0   'False
@@ -3884,7 +3922,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   3645
       Left            =   5160
-      Picture         =   "frmMain.frx":823344
+      Picture         =   "frmMain.frx":823F86
       ScaleHeight     =   243
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   425
@@ -3907,7 +3945,7 @@ Begin VB.Form frmMain
          Height          =   480
          Index           =   3
          Left            =   3450
-         Picture         =   "frmMain.frx":86EEBC
+         Picture         =   "frmMain.frx":86FAFE
          ScaleHeight     =   32
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   32
@@ -3925,7 +3963,7 @@ Begin VB.Form frmMain
          Height          =   2625
          Index           =   2
          Left            =   90
-         Picture         =   "frmMain.frx":86FAFE
+         Picture         =   "frmMain.frx":870740
          ScaleHeight     =   175
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   208
@@ -3946,7 +3984,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   28
          Left            =   3960
-         Picture         =   "frmMain.frx":88A5D0
+         Picture         =   "frmMain.frx":88B212
          Top             =   3090
          Width           =   1695
       End
@@ -3954,7 +3992,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   17
          Left            =   6030
-         Picture         =   "frmMain.frx":88C4A0
+         Picture         =   "frmMain.frx":88D0E2
          Top             =   15
          Width           =   330
       End
@@ -4086,7 +4124,7 @@ Begin VB.Form frmMain
       Height          =   450
       Index           =   1
       Left            =   180
-      Picture         =   "frmMain.frx":88CBCC
+      Picture         =   "frmMain.frx":88D80E
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -4134,7 +4172,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   1245
       Left            =   180
-      Picture         =   "frmMain.frx":890AE0
+      Picture         =   "frmMain.frx":891722
       ScaleHeight     =   83
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   178
@@ -4149,7 +4187,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   195
          Left            =   735
-         Picture         =   "frmMain.frx":89B8EC
+         Picture         =   "frmMain.frx":89C52E
          ScaleHeight     =   195
          ScaleWidth      =   1830
          TabIndex        =   226
@@ -4176,7 +4214,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000008&
          Height          =   105
          Left            =   735
-         Picture         =   "frmMain.frx":89CBE0
+         Picture         =   "frmMain.frx":89D822
          ScaleHeight     =   105
          ScaleWidth      =   1830
          TabIndex        =   182
@@ -4222,7 +4260,7 @@ Begin VB.Form frmMain
       Begin VB.Image imgEXPBar 
          Height          =   60
          Left            =   735
-         Picture         =   "frmMain.frx":89D634
+         Picture         =   "frmMain.frx":89E276
          Top             =   1035
          Width           =   1830
       End
@@ -4379,7 +4417,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   2160
       Left            =   34560
-      Picture         =   "frmMain.frx":89DC38
+      Picture         =   "frmMain.frx":89E87A
       ScaleHeight     =   144
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   354
@@ -4407,7 +4445,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   14
          Left            =   3480
-         Picture         =   "frmMain.frx":8C32FC
+         Picture         =   "frmMain.frx":8C3F3E
          Top             =   1650
          Width           =   1695
       End
@@ -4415,7 +4453,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   9
          Left            =   4965
-         Picture         =   "frmMain.frx":8C51CC
+         Picture         =   "frmMain.frx":8C5E0E
          Top             =   15
          Width           =   330
       End
@@ -4534,7 +4572,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2235
       Left            =   30840
-      Picture         =   "frmMain.frx":8C58F8
+      Picture         =   "frmMain.frx":8C653A
       ScaleHeight     =   149
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   354
@@ -4551,7 +4589,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   1
          Left            =   1800
-         Picture         =   "frmMain.frx":8EC484
+         Picture         =   "frmMain.frx":8ED0C6
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   234
@@ -4567,7 +4605,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   3
          Left            =   840
-         Picture         =   "frmMain.frx":8EE354
+         Picture         =   "frmMain.frx":8EEF96
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   233
@@ -4583,7 +4621,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   2
          Left            =   2650
-         Picture         =   "frmMain.frx":8F0224
+         Picture         =   "frmMain.frx":8F0E66
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   232
@@ -4630,7 +4668,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   2220
       Left            =   19920
-      Picture         =   "frmMain.frx":8F20F4
+      Picture         =   "frmMain.frx":8F2D36
       ScaleHeight     =   148
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   275
@@ -4652,7 +4690,7 @@ Begin VB.Form frmMain
          Height          =   345
          Index           =   27
          Left            =   1200
-         Picture         =   "frmMain.frx":90FFE8
+         Picture         =   "frmMain.frx":910C2A
          Top             =   1680
          Width           =   1695
       End
@@ -4660,7 +4698,7 @@ Begin VB.Form frmMain
          Height          =   390
          Index           =   16
          Left            =   3780
-         Picture         =   "frmMain.frx":911EB8
+         Picture         =   "frmMain.frx":912AFA
          Top             =   15
          Width           =   330
       End
@@ -5074,14 +5112,14 @@ Private Sub cmdVip_Click(Index As Integer)
 
 End Sub
 
-Private Sub cmdVip_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdVip_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     If Index > 0 And Index < 7 Then
 
-        X = TwipsToPixels(X, 0)
+        x = TwipsToPixels(x, 0)
         Y = TwipsToPixels(Y, 1)
         PicVip(2).ZOrder 0
         PicVip(2).Visible = True
-        PicVip(2).Left = X + PicVipPanel.Left + cmdVip(Index).Left - (PicVip(2).Width / 2)
+        PicVip(2).Left = x + PicVipPanel.Left + cmdVip(Index).Left - (PicVip(2).Width / 2)
         PicVip(2).top = Y + PicVipPanel.top + cmdVip(Index).top - PicVip(2).Height - 2
 
         Select Case Index
@@ -5101,6 +5139,12 @@ Private Sub cmdVip_MouseMove(Index As Integer, Button As Integer, Shift As Integ
     Else
         PicVip(2).Visible = False
     End If
+End Sub
+
+Private Sub Command1_Click()
+If Player(MyIndex).Teleport = True Then
+    picTeleport.Visible = Not picTeleport.Visible
+End If
 End Sub
 
 Private Sub imgQuestC_Click(Index As Integer)
@@ -5124,17 +5168,17 @@ Private Sub imgQuestC_Click(Index As Integer)
     BltQuestRewards
 End Sub
 
-Private Sub imgQuestC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgQuestC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     frmMain.picItemDesc.Visible = False
     picPokeDesc.Visible = False
     LastBankDesc = 0
     LastItemPoke = 0
 End Sub
 
-Private Sub imgSelectPoke_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgSelectPoke_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim X2 As Long, Y2 As Long
 
-    X2 = TwipsToPixels(X, 0) + PicPokeInicial.Left + imgSelectPoke(Index).Left - picPokeDesc.Width - 25
+    X2 = TwipsToPixels(x, 0) + PicPokeInicial.Left + imgSelectPoke(Index).Left - picPokeDesc.Width - 25
     Y2 = TwipsToPixels(Y, 1) + PicPokeInicial.top + imgSelectPoke(Index).top - picPokeDesc.Height / 2
     Select Case Index
     Case 1
@@ -5217,13 +5261,13 @@ Private Sub lblOrgInfo_Click(Index As Integer)
     End If
 End Sub
 
-Private Sub lblPokeInicial_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblPokeInicial_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     picPokeDesc.Visible = False
     LastItemDesc = 0
     LastItemPoke = 0
 End Sub
 
-Private Sub lblVip_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblVip_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     If PicVip(2).Visible = True Then PicVip(2).Visible = False
 End Sub
 
@@ -5276,7 +5320,7 @@ Private Sub PicChkVipName_Click()
     End If
 End Sub
 
-Private Sub PicMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMenu_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     If PicVip(2).Visible = True Then PicVip(2).Visible = False
 End Sub
 
@@ -5381,7 +5425,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -5421,7 +5465,7 @@ Private Sub imgButton_Click(Index As Integer)
     Dim ChatText As String
     ChatText = Trim$(MyText)
     MyText = LCase$(ChatText)
-    chaton = True
+    'chaton = True '123
     SetFocusOnGame
 
     ' If debug mode, handle error then exit out
@@ -5742,6 +5786,14 @@ Private Sub imgButton_Click(Index As Integer)
     If LenB(ChatText) = 0 Then Exit Sub
     
         Select Case cmbEscolha.ListIndex
+            Case 0
+                If Len(ChatText) > 0 Then
+                        Call SayMsg(ChatText)
+                    End If
+                
+                    MyText = vbNullString
+                    frmMain.txtMyChat.text = vbNullString
+                    Exit Sub
             Case 1
                     If Len(ChatText) > 0 Then
                         Call SayMsg(ChatText)
@@ -5806,7 +5858,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -5832,7 +5884,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -5847,7 +5899,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6250,7 +6302,7 @@ errorhandler:
     Err.Clear
     Exit Sub
 End Sub
-Private Sub picCover_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picCover_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6270,13 +6322,13 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picHotbar_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picHotbar_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim SlotNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    SlotNum = IsHotbarSlot(X, Y)
+    SlotNum = IsHotbarSlot(x, Y)
 
     If Button = 1 Then
         If SlotNum <> 0 Then
@@ -6296,29 +6348,29 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picHotbar_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picHotbar_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim SlotNum As Long, InvNum As Long, QuestNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    SlotNum = IsHotbarSlot(X, Y)
+    SlotNum = IsHotbarSlot(x, Y)
 
     If SlotNum <> 0 Then
         If Hotbar(SlotNum).sType = 1 Then    ' item
 
             If Hotbar(SlotNum).Pokemon = 0 Then
-                X = X + picHotbar.Left + 1
+                x = x + picHotbar.Left + 1
                 Y = Y + picHotbar.top - picItemDesc.Height - 1
-                UpdateDescWindow Hotbar(SlotNum).Slot, X, Y
+                UpdateDescWindow Hotbar(SlotNum).Slot, x, Y
                 LastItemDesc = Hotbar(SlotNum).Slot    ' set it so you don't re-set values
             End If
 
             Exit Sub
         ElseIf Hotbar(SlotNum).sType = 2 Then    ' spell
-            X = X + picHotbar.Left + 1
+            x = x + picHotbar.Left + 1
             Y = Y + picHotbar.top - picSpellDesc.Height - 1
-            UpdateSpellWindow Hotbar(SlotNum).Slot, X, Y
+            UpdateSpellWindow Hotbar(SlotNum).Slot, x, Y
             LastSpellDesc = Hotbar(SlotNum).Slot  ' set it so you don't re-set values
             Exit Sub
         End If
@@ -6338,9 +6390,9 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picLeilao_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picLeilao_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim LeilaoSlot As Long
-    LeilaoSlot = IsLeilaoItem(X, Y)
+    LeilaoSlot = IsLeilaoItem(x, Y)
 
     If Index = 2 Then
         If LeilaoSlot > 0 Then
@@ -6383,9 +6435,9 @@ Private Sub picLeilao_MouseDown(Index As Integer, Button As Integer, Shift As In
 
 End Sub
 
-Private Sub picLeilao_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picLeilao_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim LeilaoSlot As Long
-    LeilaoSlot = IsLeilaoItem(X, Y)
+    LeilaoSlot = IsLeilaoItem(x, Y)
 
     If Index = 0 Then
         picPokeDesc.Visible = False
@@ -6398,15 +6450,15 @@ Private Sub picLeilao_MouseMove(Index As Integer, Button As Integer, Shift As In
         If Index = 2 Then
             If Leilao(LeilaoSlot).itemNum > 0 Then
                 If Leilao(LeilaoSlot).Poke.Pokemon > 0 Then
-                    X = X + picLeilaoPainel.Left + picLeilao(2).Left - picPokeDesc.Width
+                    x = x + picLeilaoPainel.Left + picLeilao(2).Left - picPokeDesc.Width
                     Y = Y + picLeilaoPainel.top + picLeilao(2).top - picPokeDesc.Height
-                    UpdatePokeWindow LeilaoSlot, X, Y, 2    'Inventario
+                    UpdatePokeWindow LeilaoSlot, x, Y, 2    'Inventario
                     LastItemDesc = 0
                     picItemDesc.Visible = False
                 Else
-                    X = X + picLeilaoPainel.Left + picLeilao(2).Left - picItemDesc.Width
+                    x = x + picLeilaoPainel.Left + picLeilao(2).Left - picItemDesc.Width
                     Y = Y + picLeilaoPainel.top + picLeilao(2).top - picItemDesc.Height
-                    UpdateDescWindow Leilao(LeilaoSlot).itemNum, X, Y
+                    UpdateDescWindow Leilao(LeilaoSlot).itemNum, x, Y
                     LastItemPoke = 0
                     picPokeDesc.Visible = False
                 End If
@@ -6425,15 +6477,15 @@ Private Sub picLeilao_MouseMove(Index As Integer, Button As Integer, Shift As In
             If LeilaoItemSelect > 0 Then
                 If Leilao(LeilaoItemSelect).itemNum > 0 Then
                     If Leilao(LeilaoItemSelect).Poke.Pokemon > 0 Then
-                        X = X + picLeilaoPainel.Left + picLeilao(3).Left - picPokeDesc.Width
+                        x = x + picLeilaoPainel.Left + picLeilao(3).Left - picPokeDesc.Width
                         Y = Y + picLeilaoPainel.top + picLeilao(3).top - picPokeDesc.Height
-                        UpdatePokeWindow LeilaoItemSelect, X, Y, 2    'Inventario
+                        UpdatePokeWindow LeilaoItemSelect, x, Y, 2    'Inventario
                         LastItemDesc = 0
                         picItemDesc.Visible = False
                     Else
-                        X = X + picLeilaoPainel.Left + picLeilao(3).Left - picItemDesc.Width
+                        x = x + picLeilaoPainel.Left + picLeilao(3).Left - picItemDesc.Width
                         Y = Y + picLeilaoPainel.top + picLeilao(3).top - picItemDesc.Height
-                        UpdateDescWindow Leilao(LeilaoItemSelect).itemNum, X, Y
+                        UpdateDescWindow Leilao(LeilaoItemSelect).itemNum, x, Y
                         LastItemPoke = 0
                         picPokeDesc.Visible = False
                     End If
@@ -6480,7 +6532,7 @@ Private Sub PicMusic_Click()
     End If
 End Sub
 
-Private Sub picPokeDesc_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picPokeDesc_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6494,7 +6546,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picScreen_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picScreen_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6507,7 +6559,7 @@ Private Sub picScreen_MouseDown(Button As Integer, Shift As Integer, X As Single
     End If
 
     If InMapEditor Then
-        Call MapEditorMouseDown(Button, X, Y, False)
+        Call MapEditorMouseDown(Button, x, Y, False)
     Else
         ' left click
         If Button = vbLeftButton Then
@@ -6529,7 +6581,7 @@ Private Sub picScreen_MouseDown(Button As Integer, Shift As Integer, X As Single
     ' Atalhos '
     If Button = vbKeyMButton Then
         picAtalho.top = Y
-        picAtalho.Left = X
+        picAtalho.Left = x
         frmMain.picAtalho.Visible = Not frmMain.picAtalho.Visible
 
 
@@ -6543,7 +6595,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picScreen_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picScreen_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6553,16 +6605,16 @@ Private Sub picScreen_MouseMove(Button As Integer, Shift As Integer, X As Single
     If picTemdexDesc.Visible = True Then picTemdexDesc.Visible = False
 
 
-    CurX = TileView.Left + ((X + Camera.Left) \ PIC_X)
+    CurX = TileView.Left + ((x + Camera.Left) \ PIC_X)
     CurY = TileView.top + ((Y + Camera.top) \ PIC_Y)
-    MouseX = X
+    MouseX = x
     MouseY = Y
 
     If InMapEditor Then
         frmEditor_Map.shpLoc.Visible = False
 
         If Button = vbLeftButton Or Button = vbRightButton Then
-            Call MapEditorMouseDown(Button, X, Y)
+            Call MapEditorMouseDown(Button, x, Y)
         End If
     End If
 
@@ -6582,7 +6634,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Function IsShopItem(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsShopItem(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long
 
@@ -6601,7 +6653,7 @@ Private Function IsShopItem(ByVal X As Single, ByVal Y As Single) As Long
                 .Right = .Left + PIC_X
             End With
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
                     IsShopItem = i
                     Exit Function
@@ -6618,13 +6670,13 @@ errorhandler:
     Exit Function
 End Function
 
-Private Sub picShopItems_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picShopItems_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim shopItem As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    shopItem = IsShopItem(X, Y)
+    shopItem = IsShopItem(x, Y)
 
     If shopItem > 0 Then
         Select Case ShopAction
@@ -6647,17 +6699,17 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picShopItems_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picShopItems_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim shopslot As Long
     Dim X2 As Long, Y2 As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    shopslot = IsShopItem(X, Y)
+    shopslot = IsShopItem(x, Y)
 
     If shopslot <> 0 Then
-        X2 = X + picShop.Left + picShopItems.Left + 1
+        X2 = x + picShop.Left + picShopItems.Left + 1
         Y2 = Y + picShop.top + picShopItems.top + 1
         UpdateDescWindow Shop(InShop).TradeItem(shopslot).Item, X2, Y2
         LastItemDesc = Shop(InShop).TradeItem(shopslot).Item
@@ -6709,7 +6761,7 @@ Private Sub PicSound_Click()
     End If
 End Sub
 
-Private Sub picSpellDesc_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSpellDesc_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6744,7 +6796,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picSpells_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSpells_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim SpellNum As Long
 
     ' If debug mode, handle error then exit out
@@ -6771,23 +6823,23 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picSpells_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSpells_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim spellslot As Long
     Dim X2 As Long, Y2 As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    SpellX = X
+    SpellX = x
     SpellY = Y
 
-    spellslot = IsPlayerSpell(X, Y)
+    spellslot = IsPlayerSpell(x, Y)
 
     If DragSpell > 0 Then
-        Call BltDraggedSpell(X + picSpells.Left, Y + picSpells.top)
+        Call BltDraggedSpell(x + picSpells.Left, Y + picSpells.top)
     Else
         If spellslot <> 0 Then
-            X2 = X + picSpells.Left - picSpellDesc.Width - 1
+            X2 = x + picSpells.Left - picSpellDesc.Width - 1
             Y2 = Y + picSpells.top - picSpellDesc.Height - 1
             UpdateSpellWindow PlayerSpells(spellslot), X2, Y2
             LastSpellDesc = PlayerSpells(spellslot)
@@ -6806,7 +6858,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picSpells_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSpells_MouseUp(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim i As Long
     Dim rec_pos As RECT
 
@@ -6823,7 +6875,7 @@ Private Sub picSpells_MouseUp(Button As Integer, Shift As Integer, X As Single, 
                 .Right = .Left + PIC_X
             End With
 
-            If X >= rec_pos.Left And X <= rec_pos.Right Then
+            If x >= rec_pos.Left And x <= rec_pos.Right Then
                 If Y >= rec_pos.top And Y <= rec_pos.Bottom Then
                     If DragSpell <> i Then
                         SendChangeSpellSlots DragSpell, i
@@ -6841,7 +6893,7 @@ Private Sub picSpells_MouseUp(Button As Integer, Shift As Integer, X As Single, 
                 .Bottom = picHotbar.top - picSpells.top + 32
             End With
 
-            If X >= rec_pos.Left And X <= rec_pos.Right Then
+            If x >= rec_pos.Left And x <= rec_pos.Right Then
                 If Y >= rec_pos.top And Y <= rec_pos.Bottom Then
                     SendHotbarChange 2, DragSpell, i
                     DragSpell = 0
@@ -6863,7 +6915,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picTrade_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picTrade_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -6899,34 +6951,34 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picYourTrade_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picYourTrade_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim TradeNum As Long
     Dim InvNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    TradeX = X
+    TradeX = x
     TradeY = Y
 
-    TradeNum = IsTradeItem(X, Y, True)
+    TradeNum = IsTradeItem(x, Y, True)
 
     If TradeNum <> 0 Then
 
         InvNum = TradeYourOffer(TradeNum).num
 
         If GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum) > 0 Then
-            X = X + picYourTrade.Left + 4    '- picPokeDesc.width - 1
+            x = x + picYourTrade.Left + 4    '- picPokeDesc.width - 1
             Y = Y + picYourTrade.top + 4    '- picPokeDesc.height - 1
-            UpdatePokeWindow InvNum, X, Y, 0    'Inventario
+            UpdatePokeWindow InvNum, x, Y, 0    'Inventario
             LastItemPoke = GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum)
             LastItemDesc = 0
             picItemDesc.Visible = False
             Exit Sub
         Else
-            X = X + picYourTrade.Left + 4
+            x = x + picYourTrade.Left + 4
             Y = Y + picYourTrade.top + 4
-            UpdateDescWindow GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).num), X, Y
+            UpdateDescWindow GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).num), x, Y
             LastItemDesc = GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).num)    ' set it so you don't re-set values
             picPokeDesc.Visible = False
             LastItemPoke = 0
@@ -6948,31 +7000,31 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picTheirTrade_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picTheirTrade_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim TradeNum As Long, InvNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    TradeNum = IsTradeItem(X, Y, False)
+    TradeNum = IsTradeItem(x, Y, False)
 
     If TradeNum <> 0 Then
 
         InvNum = TradeNum
 
         If TradeTheirOffer(TradeNum).PokeInfo.Pokemon > 0 Then
-            X = X + picTheirTrade.Left + 4    '- picPokeDesc.width - 1
+            x = x + picTheirTrade.Left + 4    '- picPokeDesc.width - 1
             Y = Y + picTheirTrade.top + 4    '- picPokeDesc.height - 1
-            UpdatePokeWindow TradeNum, X, Y, 3    'Inventario
+            UpdatePokeWindow TradeNum, x, Y, 3    'Inventario
             LastItemPoke = TradeTheirOffer(InvNum).PokeInfo.Pokemon
             LastItemDesc = 0
             picItemDesc.Visible = False
             Exit Sub
         Else
 
-            X = X + picTheirTrade.Left + 4
+            x = x + picTheirTrade.Left + 4
             Y = Y + picTheirTrade.top + 4
-            UpdateDescWindow TradeTheirOffer(TradeNum).num, X, Y
+            UpdateDescWindow TradeTheirOffer(TradeNum).num, x, Y
             LastItemDesc = TradeTheirOffer(TradeNum).num    ' set it so you don't re-set values
             Exit Sub
         End If
@@ -7040,12 +7092,12 @@ Private Sub ScrollBarFake_Click(Index As Integer)
 
 End Sub
 
-Private Sub ScrollBarFake_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub ScrollBarFake_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub ScrollBarFake_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ScrollBarFake_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     If Index = 0 Then
 
         If frmMain.ScrollBarFake(0).top + Y - SOffsetY <= 36 Then GoTo Continue:
@@ -7126,9 +7178,9 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picFD_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picFD_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 '
-        X = TwipsToPixels(X, 0)
+        x = TwipsToPixels(x, 0)
         Y = TwipsToPixels(Y, 1)
         picTemdexDesc.ZOrder 0
         picTemdexDesc.Visible = True
@@ -7322,7 +7374,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsEqItem(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long
 
@@ -7342,7 +7394,7 @@ Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
                 .Right = .Left + PIC_X
             End With
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
                     IsEqItem = i
                     Exit Function
@@ -7360,7 +7412,7 @@ errorhandler:
     Exit Function
 End Function
 
-Private Function IsInvItem(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsInvItem(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long
 
@@ -7380,7 +7432,7 @@ Private Function IsInvItem(ByVal X As Single, ByVal Y As Single) As Long
                 .Right = .Left + PIC_X
             End With
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
                     IsInvItem = i
                     Exit Function
@@ -7398,7 +7450,7 @@ errorhandler:
     Exit Function
 End Function
 
-Private Function IsPlayerSpell(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsPlayerSpell(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long
 
@@ -7418,7 +7470,7 @@ Private Function IsPlayerSpell(ByVal X As Single, ByVal Y As Single) As Long
                 .Right = .Left + PIC_X
             End With
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
                     IsPlayerSpell = i
                     Exit Function
@@ -7436,7 +7488,7 @@ errorhandler:
     Exit Function
 End Function
 
-Private Function IsTradeItem(ByVal X As Single, ByVal Y As Single, ByVal Yours As Boolean) As Long
+Private Function IsTradeItem(ByVal x As Single, ByVal Y As Single, ByVal Yours As Boolean) As Long
     Dim tempRec As RECT
     Dim i As Long
     Dim itemNum As Long
@@ -7463,7 +7515,7 @@ Private Function IsTradeItem(ByVal X As Single, ByVal Y As Single, ByVal Yours A
                 .Right = .Left + PIC_X
             End With
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
                     IsTradeItem = i
                     Exit Function
@@ -7482,7 +7534,7 @@ errorhandler:
 End Function
 
 
-Private Sub picItemDesc_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picItemDesc_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -7520,20 +7572,20 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picCharacter_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picCharacter_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim EqNum As Long
     Dim X2 As Long, Y2 As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    EqX = X
+    EqX = x
     EqY = Y
-    EqNum = IsEqItem(X, Y)
+    EqNum = IsEqItem(x, Y)
 
     If EqNum <> 0 Then
         Y2 = Y + picCharacter.top - frmMain.picItemDesc.Height - 1
-        X2 = X + picCharacter.Left - frmMain.picItemDesc.Width - 1
+        X2 = x + picCharacter.Left - frmMain.picItemDesc.Width - 1
         UpdateDescWindow GetPlayerEquipment(MyIndex, EqNum), X2, Y2
         LastItemDesc = GetPlayerEquipment(MyIndex, EqNum)    ' set it so you don't re-set values
         LastItemPoke = GetPlayerEquipmentPokeInfoPokemon(MyIndex, EqNum)
@@ -7590,13 +7642,13 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picBank_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picBank_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim bankNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    bankNum = IsBankItem(X, Y)
+    bankNum = IsBankItem(x, Y)
 
     If bankNum <> 0 Then
 
@@ -7613,7 +7665,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picBank_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picBank_MouseUp(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim i As Long
     Dim rec_pos As RECT
 
@@ -7630,7 +7682,7 @@ Private Sub picBank_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
                 .Right = .Left + PIC_X
             End With
 
-            If X >= rec_pos.Left And X <= rec_pos.Right Then
+            If x >= rec_pos.Left And x <= rec_pos.Right Then
                 If Y >= rec_pos.top And Y <= rec_pos.Bottom Then
                     If DragBankSlotNum <> i Then
                         ChangeBankSlots DragBankSlotNum, i
@@ -7652,34 +7704,34 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picBank_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picBank_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim bankNum As Long, itemNum As Long, ItemType As Long
     Dim X2 As Long, Y2 As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    BankX = X
+    BankX = x
     BankY = Y
 
     If DragBankSlotNum > 0 Then
-        Call BltBankItem(X + picBank.Left, Y + picBank.top)
+        Call BltBankItem(x + picBank.Left, Y + picBank.top)
     Else
-        bankNum = IsBankItem(X, Y)
+        bankNum = IsBankItem(x, Y)
 
         If bankNum <> 0 Then
 
             If Bank.Item(bankNum).PokeInfo.Pokeball > 0 Then
-                X = X + picBank.Left + 1
+                x = x + picBank.Left + 1
                 Y = Y + picBank.top + 1
-                UpdatePokeWindow bankNum, X, Y, 1    'Inventario
+                UpdatePokeWindow bankNum, x, Y, 1    'Inventario
                 LastItemPoke = GetPlayerBankItemPokemon(bankNum)
                 LastItemDesc = 0
                 picItemDesc.Visible = False
             End If
 
             If Bank.Item(bankNum).PokeInfo.Pokeball = 0 Then
-                X2 = X + picBank.Left + 1
+                X2 = x + picBank.Left + 1
                 Y2 = Y + picBank.top + 1
                 UpdateDescWindow Bank.Item(bankNum).num, X2, Y2
                 LastItemDesc = Bank.Item(bankNum).num
@@ -7704,7 +7756,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Function IsBankItem(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsBankItem(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long
 
@@ -7723,7 +7775,7 @@ Private Function IsBankItem(ByVal X As Single, ByVal Y As Single) As Long
                 .Right = .Left + PIC_X
             End With
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
 
                     IsBankItem = i
@@ -7741,7 +7793,7 @@ errorhandler:
     Exit Function
 End Function
 
-Private Sub imgQuest_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgQuest_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -7759,7 +7811,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgQuest_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgQuest_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -7785,7 +7837,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgQuest_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgQuest_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -7800,7 +7852,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Function IsLeilaoItem(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsLeilaoItem(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long
     Dim AB As Long, BA As Long
@@ -7846,7 +7898,7 @@ Private Function IsLeilaoItem(ByVal X As Single, ByVal Y As Single) As Long
             End With
         End If
 
-        If X >= tempRec.Left And X <= tempRec.Right Then
+        If x >= tempRec.Left And x <= tempRec.Right Then
             If Y >= tempRec.top And Y <= tempRec.Bottom Then
                 IsLeilaoItem = i
                 Exit Function
@@ -7879,7 +7931,7 @@ Public Sub CarregarTrainerCard()
     lblTrainerCard(1).Caption = "Pokédex:" & QntiaPokeDex
 End Sub
 
-Private Function IsOrgShopItem(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsOrgShopItem(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long, a As Byte, B As Byte
     ' If debug mode, handle error then exit out
@@ -7924,7 +7976,7 @@ Private Function IsOrgShopItem(ByVal X As Single, ByVal Y As Single) As Long
                 End With
             End If
 
-            If X >= tempRec.Left And X <= tempRec.Right Then
+            If x >= tempRec.Left And x <= tempRec.Right Then
                 If Y >= tempRec.top And Y <= tempRec.Bottom Then
 
                     IsOrgShopItem = i
@@ -7942,7 +7994,7 @@ errorhandler:
     Exit Function
 End Function
 
-Private Function IsQuestItemSlot(ByVal X As Single, ByVal Y As Single) As Long
+Private Function IsQuestItemSlot(ByVal x As Single, ByVal Y As Single) As Long
     Dim tempRec As RECT
     Dim i As Long, a As Long, B As Long
 
@@ -7978,7 +8030,7 @@ Private Function IsQuestItemSlot(ByVal X As Single, ByVal Y As Single) As Long
             End With
         End If
 
-        If X >= tempRec.Left And X <= tempRec.Right Then
+        If x >= tempRec.Left And x <= tempRec.Right Then
             If Y >= tempRec.top And Y <= tempRec.Bottom Then
                 IsQuestItemSlot = i
                 Exit Function
@@ -8140,7 +8192,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgClose_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgClose_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -8159,7 +8211,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgClose_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgClose_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -8186,7 +8238,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgClose_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgClose_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -8205,13 +8257,13 @@ End Sub
 '''''''''''''''
 ' CÓDIGO ORGS '
 '''''''''''''''
-Private Sub PicOrg_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicOrg_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim OrgShopNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    OrgShopNum = IsOrgShopItem(X, Y)
+    OrgShopNum = IsOrgShopItem(x, Y)
 
     If OrgShopNum <> 0 Then
         DragOrgShopNum = OrgShopNum
@@ -8227,17 +8279,17 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub PicOrgs_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicOrgs_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicOrgs_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicOrgs_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.PicOrgs, Button, Shift, X, Y)
-    Call MovePicture(frmMain.PicOrg(1), Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicOrgs, Button, Shift, x, Y)
+    Call MovePicture(frmMain.PicOrg(1), Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8251,16 +8303,16 @@ End Sub
 ' CÓDIGO LOJA '
 '''''''''''''''
 
-Private Sub picShop_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picShop_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picShop_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picShop_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picShop, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picShop, Button, Shift, x, Y)
     
     picItemDesc.Visible = False
     picSpellDesc.Visible = False
@@ -8281,16 +8333,16 @@ End Sub
 ' CÓDIGO LEILÃO '
 '''''''''''''''''
 
-Private Sub picLeilaoPainel_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picLeilaoPainel_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picLeilaoPainel_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picLeilaoPainel_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picLeilaoPainel, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picLeilaoPainel, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8304,16 +8356,16 @@ End Sub
 ' CÓDIGO BATALHA '
 '''''''''''''''' '
 
-Private Sub PicBatalha_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicBatalha_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicBatalha_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicBatalha_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.PicBatalha, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicBatalha, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8327,16 +8379,16 @@ End Sub
 ' CÓDIGO OPÇÕES '
 '''''''''''''''''
 
-Private Sub picOptions_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picOptions_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picOptions_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picOptions_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picOptions, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picOptions, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8350,17 +8402,17 @@ End Sub
 ' CÓDIGO POKEDEX '
 ''''''''''''''''''
 
-Private Sub picPokedex_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picPokedex_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
     
 End Sub
 
-Private Sub picPokedex_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picPokedex_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picPokedex, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picPokedex, Button, Shift, x, Y)
 
     If PicVip(2).Visible = True Then PicVip(2).Visible = False
     If picTemdexDesc.Visible = True Then picTemdexDesc.Visible = False
@@ -8379,16 +8431,16 @@ End Sub
 ' CÓDIGO CURRENCY '
 '''''''''''''''''''
 
-Private Sub picCurrency_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picCurrency_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picCurrency_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picCurrency_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picCurrency, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picCurrency, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8402,16 +8454,16 @@ End Sub
 ' CÓDIGO VIP '
 ''''''''''''''
 
-Private Sub PicVipPanel_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicVipPanel_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicVipPanel_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicVipPanel_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.PicVipPanel, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicVipPanel, Button, Shift, x, Y)
 
     If PicVip(2).Visible = True Then PicVip(2).Visible = False
 
@@ -8427,16 +8479,16 @@ End Sub
 ' CÓDIGO SELECIONAR QUEST'
 ''''''''''''''''''''''''''
 
-Private Sub picSelectQuest_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picSelectQuest_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picSelectQuest_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSelectQuest_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picSelectQuest, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picSelectQuest, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8450,16 +8502,16 @@ End Sub
 ' CÓDIGO SURF '
 '''''''''''''''
 
-Private Sub PicSurf_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicSurf_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicSurf_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicSurf_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.PicSurf, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicSurf, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8473,16 +8525,16 @@ End Sub
 ' CÓDIGO EVOLUCÃO '
 '''''''''''''''''''
 
-Private Sub PicEvolution_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicEvolution_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicEvolution_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicEvolution_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.PicEvolution, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicEvolution, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8496,16 +8548,16 @@ End Sub
 ' CÓDIGO PERSONAGEM '
 '''''''''''''''''''''
 
-Private Sub PicTreinador_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicTreinador_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicTreinador_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicTreinador_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.PicTreinador, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicTreinador, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8519,16 +8571,16 @@ End Sub
 ' CÓDIGO ATALHOS '
 ''''''''''''''''''
 
-Private Sub picAtalho_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picAtalho_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picAtalho_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picAtalho_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMain.picAtalho, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picAtalho, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8542,12 +8594,12 @@ End Sub
 ' ESCOLHA POKEMON '
 '''''''''''''''''''
 
-Private Sub PicPokeInicial_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicPokeInicial_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicPokeInicial_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicPokeInicial_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -8555,7 +8607,7 @@ Private Sub PicPokeInicial_MouseMove(Button As Integer, Shift As Integer, X As S
     LastItemDesc = 0
     LastItemPoke = 0
 
-    Call MovePicture(frmMain.PicPokeInicial, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicPokeInicial, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8569,12 +8621,12 @@ End Sub
 ' ESCOLHA HABILIDADE '
 ''''''''''''''''''''''
 
-Private Sub PicHabilidade_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub PicHabilidade_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub PicHabilidade_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicHabilidade_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -8582,7 +8634,7 @@ Private Sub PicHabilidade_MouseMove(Button As Integer, Shift As Integer, X As Si
     LastItemDesc = 0
     LastItemPoke = 0
 
-    Call MovePicture(frmMain.PicHabilidade, Button, Shift, X, Y)
+    Call MovePicture(frmMain.PicHabilidade, Button, Shift, x, Y)
 
     ' Error handler
     Exit Sub
@@ -8596,25 +8648,25 @@ End Sub
 ' ** Inventory **
 ' ***************
 
-Private Sub picInventory_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picInventory_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim InvNum As Long
     Dim i As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    InvX = X
+    InvX = x
     InvY = Y
 
     If DragInvSlotNum > 0 Then
         If InTrade > 0 Then Exit Sub
         If InBank Or InShop Then Exit Sub
-        Call BltInventoryItem(X + picInventory.Left, Y + picInventory.top)
+        Call BltInventoryItem(x + picInventory.Left, Y + picInventory.top)
     Else
 
-        Call MovePicture(frmMain.picInventory, Button, Shift, X, Y)
+        Call MovePicture(frmMain.picInventory, Button, Shift, x, Y)
 
-        InvNum = IsInvItem(X, Y)
+        InvNum = IsInvItem(x, Y)
 
         If InvNum <> 0 Then
             ' exit out if we're offering that item
@@ -8635,17 +8687,17 @@ Private Sub picInventory_MouseMove(Button As Integer, Shift As Integer, X As Sin
             End If
 
             If GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum) > 0 Then
-                X = X + picInventory.Left - picPokeDesc.Width - 1
+                x = x + picInventory.Left - picPokeDesc.Width - 1
                 Y = Y + picInventory.top - picPokeDesc.Height - 1
-                UpdatePokeWindow InvNum, X, Y, 0    'Inventario
+                UpdatePokeWindow InvNum, x, Y, 0, 0    'Inventario
                 LastItemDesc = 0
                 picItemDesc.Visible = False
             End If
 
             If GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum) = 0 Then
-                X = X + picInventory.Left - picItemDesc.Width - 1
+                x = x + picInventory.Left - picItemDesc.Width - 1
                 Y = Y + picInventory.top - picItemDesc.Height - 1
-                UpdateDescWindow GetPlayerInvItemNum(MyIndex, InvNum), X, Y
+                UpdateDescWindow GetPlayerInvItemNum(MyIndex, InvNum), x, Y
                 LastItemPoke = 0
                 picPokeDesc.Visible = False
                 If GetPlayerInvItemNum(MyIndex, InvNum) = 50 Then
@@ -8672,7 +8724,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picInventory_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picInventory_MouseUp(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim i As Long
     Dim rec_pos As RECT
 
@@ -8692,7 +8744,7 @@ Private Sub picInventory_MouseUp(Button As Integer, Shift As Integer, X As Singl
                 .Right = .Left + PIC_X
             End With
 
-            If X >= rec_pos.Left And X <= rec_pos.Right Then
+            If x >= rec_pos.Left And x <= rec_pos.Right Then
                 If Y >= rec_pos.top And Y <= rec_pos.Bottom Then    '
                     If DragInvSlotNum <> i Then
                         SendChangeInvSlots DragInvSlotNum, i
@@ -8710,7 +8762,7 @@ Private Sub picInventory_MouseUp(Button As Integer, Shift As Integer, X As Singl
                 .Bottom = picHotbar.top - picInventory.top + 32
             End With
 
-            If X >= rec_pos.Left And X <= rec_pos.Right Then
+            If x >= rec_pos.Left And x <= rec_pos.Right Then
                 If Y >= rec_pos.top And Y <= rec_pos.Bottom Then
                     SendHotbarChange 1, DragInvSlotNum, i
                     DragInvSlotNum = 0
@@ -8733,16 +8785,16 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picInventory_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picInventory_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim InvNum As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    SOffsetX = X
+    SOffsetX = x
     SOffsetY = Y
 
-    InvNum = IsInvItem(X, Y)
+    InvNum = IsInvItem(x, Y)
 
     If Button = 1 Then
         If InvNum <> 0 Then
@@ -8887,19 +8939,19 @@ End Sub
 ''''''''''''''''
 ' JANELA QUEST '
 ''''''''''''''''
-Private Sub picQuest_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
+Private Sub picQuest_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, Y As Single)
+    SOffsetX = x
     SOffsetY = Y
 End Sub
 
-Private Sub picQuest_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picQuest_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
     Dim itemNum As Long, QuestSlot As Byte, X2 As Long, Y2 As Long
     Dim QuestNum As Long
 
-    QuestSlot = IsQuestItemSlot(X, Y)
+    QuestSlot = IsQuestItemSlot(x, Y)
     QuestNum = GetQuestNum(Trim$(frmMain.lstQuests.text))
 
-    Call MovePicture(frmMain.picQuest, Button, Shift, X, Y)
+    Call MovePicture(frmMain.picQuest, Button, Shift, x, Y)
 
     If QuestNum = 0 Then GoTo Continue
     If QuestSlot = 0 Then GoTo Continue
@@ -8908,7 +8960,7 @@ Private Sub picQuest_MouseMove(Button As Integer, Shift As Integer, X As Single,
     If itemNum = 0 Then GoTo Continue
 
     If Quest(QuestNum).PokeRew(QuestSlot) = 0 Then
-        X2 = X + picQuest.Left - picItemDesc.Width - 1
+        X2 = x + picQuest.Left - picItemDesc.Width - 1
         Y2 = Y + picQuest.top - picItemDesc.Height - 1
         UpdateDescWindow itemNum, X2, Y2
         LastItemDesc = itemNum
@@ -8916,7 +8968,7 @@ Private Sub picQuest_MouseMove(Button As Integer, Shift As Integer, X As Single,
         picPokeDesc.Visible = False
         Exit Sub
     Else
-        X2 = X + picQuest.Left - picPokeDesc.Width - 1
+        X2 = x + picQuest.Left - picPokeDesc.Width - 1
         Y2 = Y + picQuest.top - picPokeDesc.Height - 1
         UpdatePokeWindow QuestSlot, X2, Y2, 4, QuestNum
         LastItemDesc = 0

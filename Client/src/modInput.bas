@@ -322,6 +322,8 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     Call AddText("'msghere = Broadcast Message", HelpColor)
                     Call AddText("!namehere msghere = Player Message", HelpColor)
                     Call AddText("Available Commands: /info, /who, /fps, /fpslock", HelpColor)
+                Case "/c"
+                AddText Player(MyIndex).Teleport, Yellow
                 Case "/vit"
                    ' If txtMyChat.Visible = False Then
                 If myTargetType = TARGET_TYPE_PLAYER And myTarget <> MyIndex Then
