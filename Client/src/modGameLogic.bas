@@ -133,6 +133,19 @@ Public Sub GameLoop()
                     End If
                 Next
             End If
+            
+             ' facesshiny
+            If NumFacesShiny > 0 Then
+                For i = 1 To NumFacesShiny    'Check to unload surfaces
+                    If FaceShinyTimer(i) > 0 Then    'Only update surfaces in use
+                        If FaceShinyTimer(i) < Tick Then   'Unload the surface
+                            Call ZeroMemory(ByVal VarPtr(DDSD_FaceShiny(i)), LenB(DDSD_FaceShiny(i)))
+                            Set DDS_FaceShiny(i) = Nothing
+                            FaceShinyTimer(i) = 0
+                        End If
+                    End If
+                Next
+            End If
 
             ' PokeIcons
             If NumPokeIcons > 0 Then
@@ -410,7 +423,7 @@ End Sub
 
 Sub ProcessMovement(ByVal Index As Long)
     Dim MovementSpeed As Long
-    Dim ItemNum As Long
+    Dim itemNum As Long
     Dim VelocidadeItem As Long
 
     ' If debug mode, handle error then exit out
@@ -539,22 +552,22 @@ errorhandler:
 End Sub
 
 Sub CheckMapGetItem()
-    Dim Buffer As New clsBuffer
+    Dim buffer As New clsBuffer
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Set Buffer = New clsBuffer
+    Set buffer = New clsBuffer
 
     If GetTickCount > Player(MyIndex).MapGetTimer + 250 Then
         If Trim$(MyText) = vbNullString Then
             Player(MyIndex).MapGetTimer = GetTickCount
-            Buffer.WriteLong CMapGetItem
-            SendData Buffer.ToArray()
+            buffer.WriteLong CMapGetItem
+            SendData buffer.ToArray()
         End If
     End If
 
-    Set Buffer = Nothing
+    Set buffer = Nothing
 
     ' Error handler
     Exit Sub
@@ -565,7 +578,7 @@ errorhandler:
 End Sub
 
 Public Sub CheckAttack()
-    Dim Buffer As clsBuffer
+    Dim buffer As clsBuffer
     Dim attackspeed As Long
 
     ' If debug mode, handle error then exit out
@@ -586,10 +599,10 @@ Public Sub CheckAttack()
         If Player(MyIndex).AttackTimer + attackspeed < GetTickCount Then
             If Player(MyIndex).Attacking = 0 Then
 
-                Set Buffer = New clsBuffer
-                Buffer.WriteLong CAttack
-                SendData Buffer.ToArray()
-                Set Buffer = Nothing
+                Set buffer = New clsBuffer
+                buffer.WriteLong CAttack
+                SendData buffer.ToArray()
+                Set buffer = Nothing
             End If
         End If
     End If
@@ -1144,7 +1157,7 @@ errorhandler:
 End Sub
 
 Public Sub ForgetSpell(ByVal spellslot As Long)
-    Dim Buffer As clsBuffer
+    Dim buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -1167,11 +1180,11 @@ Public Sub ForgetSpell(ByVal spellslot As Long)
     End If
 
     If PlayerSpells(spellslot) > 0 Then
-        Set Buffer = New clsBuffer
-        Buffer.WriteLong CForgetSpell
-        Buffer.WriteLong spellslot
-        SendData Buffer.ToArray()
-        Set Buffer = Nothing
+        Set buffer = New clsBuffer
+        buffer.WriteLong CForgetSpell
+        buffer.WriteLong spellslot
+        SendData buffer.ToArray()
+        Set buffer = Nothing
     Else
         AddText "No spell here.", BrightRed
     End If
@@ -1185,7 +1198,7 @@ errorhandler:
 End Sub
 
 Public Sub CastSpell(ByVal spellslot As Long)
-    Dim Buffer As clsBuffer
+    Dim buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -1211,11 +1224,11 @@ Public Sub CastSpell(ByVal spellslot As Long)
     If PlayerSpells(spellslot) > 0 Then
         If GetTickCount > Player(MyIndex).AttackTimer + 1000 Then
             If Player(MyIndex).Moving = 0 Then
-                Set Buffer = New clsBuffer
-                Buffer.WriteLong CCast
-                Buffer.WriteLong spellslot
-                SendData Buffer.ToArray()
-                Set Buffer = Nothing
+                Set buffer = New clsBuffer
+                buffer.WriteLong CCast
+                buffer.WriteLong spellslot
+                SendData buffer.ToArray()
+                Set buffer = Nothing
                 SpellBuffer = spellslot
                 SpellBufferTimer = GetTickCount
             Else
@@ -1358,7 +1371,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub UpdateDescWindow(ByVal ItemNum As Long, ByVal X As Long, ByVal Y As Long)
+Public Sub UpdateDescWindow(ByVal itemNum As Long, ByVal X As Long, ByVal Y As Long)
     Dim i As Long
     Dim FirstLetter As String * 1
     Dim Name As String
@@ -1366,12 +1379,12 @@ Public Sub UpdateDescWindow(ByVal ItemNum As Long, ByVal X As Long, ByVal Y As L
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    FirstLetter = LCase$(Left$(Trim$(Item(ItemNum).Name), 1))
+    FirstLetter = LCase$(Left$(Trim$(Item(itemNum).Name), 1))
 
     If FirstLetter = "$" Then
-        Name = (Mid$(Trim$(Item(ItemNum).Name), 2, Len(Trim$(Item(ItemNum).Name)) - 1))
+        Name = (Mid$(Trim$(Item(itemNum).Name), 2, Len(Trim$(Item(itemNum).Name)) - 1))
     Else
-        Name = Trim$(Item(ItemNum).Name)
+        Name = Trim$(Item(itemNum).Name)
     End If
 
     ' check for off-screen
@@ -1387,10 +1400,10 @@ Public Sub UpdateDescWindow(ByVal ItemNum As Long, ByVal X As Long, ByVal Y As L
         .picItemDesc.Left = X
         .picItemDesc.Visible = True
 
-        If LastItemDesc = ItemNum Then Exit Sub    ' exit out after setting x + y so we don't reset values
+        If LastItemDesc = itemNum Then Exit Sub    ' exit out after setting x + y so we don't reset values
 
         ' set the name
-        Select Case Item(ItemNum).Rarity
+        Select Case Item(itemNum).Rarity
         Case 0    ' white
             .lblItemName.ForeColor = RGB(255, 255, 255)
         Case 1    ' green
@@ -1407,10 +1420,10 @@ Public Sub UpdateDescWindow(ByVal ItemNum As Long, ByVal X As Long, ByVal Y As L
 
         ' set captions
         .lblItemName.Caption = Name
-        .lblItemDesc.Caption = Trim$(Item(ItemNum).Desc)
+        .lblItemDesc.Caption = Trim$(Item(itemNum).Desc)
 
         ' render the item
-        BltItemDesc ItemNum
+        BltItemDesc itemNum
     End With
 
     ' Error handler
@@ -1450,7 +1463,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub CreateActionMsg(ByVal message As String, ByVal color As Integer, ByVal MsgType As Byte, ByVal X As Long, ByVal Y As Long)
+Public Sub CreateActionMsg(ByVal Message As String, ByVal color As Integer, ByVal MsgType As Byte, ByVal X As Long, ByVal Y As Long)
     Dim i As Long
 
     ' If debug mode, handle error then exit out
@@ -1460,7 +1473,7 @@ Public Sub CreateActionMsg(ByVal message As String, ByVal color As Integer, ByVa
     If ActionMsgIndex >= MAX_BYTE Then ActionMsgIndex = 1
 
     With ActionMsg(ActionMsgIndex)
-        .message = message
+        .Message = Message
         .color = color
         .Type = MsgType
         .Created = GetTickCount
@@ -1498,7 +1511,7 @@ Public Sub ClearActionMsg(ByVal Index As Byte)
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    ActionMsg(Index).message = vbNullString
+    ActionMsg(Index).Message = vbNullString
     ActionMsg(Index).Created = 0
     ActionMsg(Index).Type = 0
     ActionMsg(Index).color = 0
@@ -1619,11 +1632,11 @@ errorhandler:
     Exit Function
 End Function
 
-Public Sub SetBankItemNum(ByVal bankslot As Long, ByVal ItemNum As Long)
+Public Sub SetBankItemNum(ByVal bankslot As Long, ByVal itemNum As Long)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Bank.Item(bankslot).num = ItemNum
+    Bank.Item(bankslot).num = itemNum
 
     ' Error handler
     Exit Sub
@@ -1915,16 +1928,21 @@ Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal X As Long, ByVal Y As Lo
         .picPokeDesc.Left = X
         .picPokeDesc.Visible = True
 
-        BltFacePokemon
+        BltFacePokemon (InvNum)
         If LastItemPoke = InvNum Then Exit Sub    ' exit out after setting x + y so we don't reset values
-
-        If Command = 0 Then    'Inventario
-            If GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum) = 0 Then Exit Sub
-            If GetPlayerInvItemShiny(MyIndex, InvNum) = 0 Then
-                .lblPokeInfoDesc(0).Caption = Trim$(Pokemon(GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum)).Name)
-            Else
-                .lblPokeInfoDesc(0).Caption = "Shiny " & Trim$(Pokemon(GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum)).Name)
-            End If
+        If Command = 0 Then    'Inventario        If GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum) = 0 Then Exit Sub
+                If GetPlayerInvItemShiny(MyIndex, InvNum) = 0 Then
+                    .lblPokeInfoDesc(0).Caption = Trim$(Pokemon(GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum)).Name)
+                Else
+                    .lblPokeInfoDesc(0).Caption = "Shiny " & Trim$(Pokemon(GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum)).Name)
+                End If
+                'If GetPlayerInvItemPokeInfoStat(MyIndex, InvNum, i) >= 50 Then
+                'If PlayerInv(InvNum).PokeInfo.Stat(1) + PlayerInv(InvNum).PokeInfo.Stat(2) + PlayerInv(InvNum).PokeInfo.Stat(3) + PlayerInv(InvNum).PokeInfo.Stat(4) + PlayerInv(InvNum).PokeInfo.Stat(5) > 50 Then
+                 '   .lblPokeInfoDesc(0).ForeColor = QBColor(Red)
+                'Else
+                  '  .lblPokeInfoDesc(0).ForeColor = QBColor(White)
+                  '  End If
+'Mecher Futuramente
 
             .lblPokeInfoDesc(3).Caption = "Exp:" & GetPlayerInvItemPokeInfoExp(MyIndex, InvNum) & "/" & GetInvPokeNextLevel(InvNum, 0)
             .lblPokeInfoDesc(4).Caption = "Hp:" & GetPlayerInvItemPokeInfoVital(MyIndex, InvNum, 1) & "/" & GetPlayerInvItemPokeInfoMaxVital(MyIndex, InvNum, 1)
@@ -2506,7 +2524,7 @@ Public Sub SendALeilao()
         .lstLeilao.Clear
 
         For i = 1 To MAX_LEILAO
-            If Leilao(i).ItemNum > 0 Then
+            If Leilao(i).itemNum > 0 Then
 
                 If Leilao(i).Poke.Pokemon > 0 Then
                     Select Case Leilao(i).Tipo
@@ -2520,9 +2538,9 @@ Public Sub SendALeilao()
                 Else
                     Select Case Leilao(i).Tipo
                     Case 1
-                        .lstLeilao.AddItem i & "°: " & Trim$(Item(Leilao(i).ItemNum).Name) & " Preço: " & Leilao(i).Price & " Zenys"
+                        .lstLeilao.AddItem i & "°: " & Trim$(Item(Leilao(i).itemNum).Name) & " Preço: " & Leilao(i).Price & " Zenys"
                     Case 2
-                        .lstLeilao.AddItem i & "°: " & Trim$(Item(Leilao(i).ItemNum).Name) & " Preço: " & Leilao(i).Price & " PokeCredits"
+                        .lstLeilao.AddItem i & "°: " & Trim$(Item(Leilao(i).itemNum).Name) & " Preço: " & Leilao(i).Price & " PokeCredits"
                     Case Else
                     End Select
 
@@ -2539,7 +2557,7 @@ Public Sub SendALeilao()
 
             If Leilao(i).Poke.Pokemon > 0 Then
 
-                If Leilao(i).ItemNum > 0 Then
+                If Leilao(i).itemNum > 0 Then
                     If Leilao(i).Vendedor = GetPlayerName(MyIndex) Then
                         Select Case Leilao(i).Tipo
                         Case 1
@@ -2553,10 +2571,10 @@ Public Sub SendALeilao()
                 End If
 
             Else
-                If Leilao(i).ItemNum > 0 Then
+                If Leilao(i).itemNum > 0 Then
                     If Leilao(i).Vendedor = GetPlayerName(MyIndex) Then
                         Player(MyIndex).MyLeiloes(.lstMyLeiloes.ListCount) = i
-                        .lstMyLeiloes.AddItem i & "°: " & Trim$(Item(Leilao(i).ItemNum).Name) & " Preço: " & Leilao(i).Price
+                        .lstMyLeiloes.AddItem i & "°: " & Trim$(Item(Leilao(i).itemNum).Name) & " Preço: " & Leilao(i).Price
                     End If
                 End If
             End If

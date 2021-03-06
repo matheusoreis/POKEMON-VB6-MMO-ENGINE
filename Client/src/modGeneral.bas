@@ -88,6 +88,7 @@ Public Sub Main()
     Call CheckResources
     Call CheckSpellIcons
     Call CheckFaces
+    Call CheckFacesShiny
     Call CheckPokeIcons
     Call CheckPokeIconShiny
     Call CheckHairNum

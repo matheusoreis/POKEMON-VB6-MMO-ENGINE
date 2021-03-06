@@ -33,6 +33,7 @@ Public DDS_Resource() As DirectDrawSurface7
 Public DDS_Animation() As DirectDrawSurface7
 Public DDS_SpellIcon() As DirectDrawSurface7
 Public DDS_Face() As DirectDrawSurface7
+Public DDS_FaceShiny() As DirectDrawSurface7
 Public DDS_Door As DirectDrawSurface7    ' singes
 Public DDS_Misc As DirectDrawSurface7
 Public DDS_Direction As DirectDrawSurface7
@@ -59,6 +60,7 @@ Public DDSD_Resource() As DDSURFACEDESC2
 Public DDSD_Animation() As DDSURFACEDESC2
 Public DDSD_SpellIcon() As DDSURFACEDESC2
 Public DDSD_Face() As DDSURFACEDESC2
+Public DDSD_FaceShiny() As DDSURFACEDESC2
 Public DDSD_Door As DDSURFACEDESC2    ' singles
 Public DDSD_Misc As DDSURFACEDESC2
 Public DDSD_Direction As DDSURFACEDESC2
@@ -84,6 +86,7 @@ Public ResourceTimer() As Long
 Public AnimationTimer() As Long
 Public SpellIconTimer() As Long
 Public FaceTimer() As Long
+Public FaceShinyTimer() As Long
 Public PokeIconTimer() As Long
 Public PokeIconShinyTimer() As Long
 Public HairTimer() As Long
@@ -97,6 +100,7 @@ Public NumResources As Long
 Public NumAnimations As Long
 Public NumSpellIcons As Long
 Public NumFaces As Long
+Public NumFacesShiny As Long
 Public NumPokeIcons As Long
 Public NumPokeIconShiny As Long
 Public HairNum As Long
@@ -357,6 +361,11 @@ Public Sub DestroyDirectDraw()
     For i = 1 To NumFaces
         Set DDS_Face(i) = Nothing
         ZeroMemory ByVal VarPtr(DDSD_Face(i)), LenB(DDSD_Face(i))
+    Next
+    
+    For i = 1 To NumFacesShiny
+        Set DDS_FaceShiny(i) = Nothing
+        ZeroMemory ByVal VarPtr(DDSD_FaceShiny(i)), LenB(DDSD_FaceShiny(i))
     Next
 
     For i = 1 To NumPokeIcons
@@ -2276,7 +2285,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Sub BltFacePokemon()
+Sub BltFacePokemon(ByVal InvNum As Long)
     Dim rec As RECT, rec_pos As RECT, faceNum As Long
 
     ' If debug mode, handle error then exit out
@@ -2304,15 +2313,26 @@ Sub BltFacePokemon()
         .Right = 94
     End With
 
-    ' Load face if not loaded, and reset timer
-    FaceTimer(faceNum) = GetTickCount + SurfaceTimerMax
-
-    If DDS_Face(faceNum) Is Nothing Then
-        Call InitDDSurf("Faces\" & faceNum, DDSD_Face(faceNum), DDS_Face(faceNum))
+    If PlayerInv(InvNum).PokeInfo.Pokemon > 0 Then
+        If PlayerInv(InvNum).PokeInfo.Shiny > 0 Then
+            FaceShinyTimer(faceNum) = GetTickCount + SurfaceTimerMax
+            
+            If DDS_FaceShiny(faceNum) Is Nothing Then
+                Call InitDDSurf("Faces\Shiny\" & faceNum, DDSD_FaceShiny(faceNum), DDS_FaceShiny(faceNum))
+            End If
+            
+            Engine_BltToDC DDS_FaceShiny(faceNum), rec, rec_pos, frmMain.PicFacePokemon, False
+        Else
+            FaceTimer(faceNum) = GetTickCount + SurfaceTimerMax
+            
+            If DDS_Face(faceNum) Is Nothing Then
+                Call InitDDSurf("Faces\" & faceNum, DDSD_Face(faceNum), DDS_Face(faceNum))
+            End If
+            
+            Engine_BltToDC DDS_Face(faceNum), rec, rec_pos, frmMain.PicFacePokemon, False
+        End If
     End If
-
-    Engine_BltToDC DDS_Face(faceNum), rec, rec_pos, frmMain.PicFacePokemon, False
-
+    
     ' Error handler
     Exit Sub
 errorhandler:

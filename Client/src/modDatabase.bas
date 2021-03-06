@@ -523,6 +523,33 @@ errorhandler:
     Exit Sub
 End Sub
 
+Public Sub CheckFacesShiny()
+    Dim i As Long
+
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    i = 1
+
+    While FileExist(GFX_PATH & "Faces\Shiny\" & i & GFX_EXT)
+        NumFacesShiny = NumFacesShiny + 1
+        i = i + 1
+    Wend
+
+    If NumFaces = 0 Then Exit Sub
+
+    ReDim DDS_FaceShiny(1 To NumFacesShiny)
+    ReDim DDSD_FaceShiny(1 To NumFacesShiny)
+    ReDim FaceShinyTimer(1 To NumFacesShiny)
+
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "CheckFacesShiny", "modDatabase", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
 Public Sub CheckPokeIcons()
     Dim i As Long
 
@@ -1416,12 +1443,12 @@ errorhandler:
     Exit Function
 End Function
 
-Sub SetPlayerInvItemNum(ByVal Index As Long, ByVal invslot As Long, ByVal ItemNum As Long)
+Sub SetPlayerInvItemNum(ByVal Index As Long, ByVal invslot As Long, ByVal itemNum As Long)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Index > MAX_PLAYERS Then Exit Sub
-    PlayerInv(invslot).num = ItemNum
+    PlayerInv(invslot).num = itemNum
 
     ' Error handler
     Exit Sub
@@ -1887,19 +1914,19 @@ errorhandler:
     Exit Function
 End Function
 
-Function HasItem(ByVal Index As Long, ByVal ItemNum As Long) As Long
+Function HasItem(ByVal Index As Long, ByVal itemNum As Long) As Long
     Dim i As Long
 
     ' Check for subscript out of range
-    If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
+    If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
         Exit Function
     End If
 
     For i = 1 To MAX_INV
 
         ' Check to see if the player has the item
-        If GetPlayerInvItemNum(Index, i) = ItemNum Then
-            If Item(ItemNum).Type = ITEM_TYPE_CURRENCY Then
+        If GetPlayerInvItemNum(Index, i) = itemNum Then
+            If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
                 HasItem = GetPlayerInvItemValue(Index, i)
             Else
                 HasItem = 1

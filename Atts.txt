@@ -31,3 +31,7 @@ Adicionado novamente LABELHP/MP( NÃO RETIRAR )
 Menu:
 
 Game Offline nao abria janela, e ai tinha q fechar e abrir o cliente novamente(Arrumado)
+
+Main:
+
+Face Shiny não aparecia(Adicionado)
