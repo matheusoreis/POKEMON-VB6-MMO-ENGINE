@@ -1926,7 +1926,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal X As Long, ByVal Y As Long, ByVal Command As Long, ByVal SpellNum As Long, Optional ByVal QuestNum As Integer)
+Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal X As Long, ByVal Y As Long, ByVal Command As Long, Optional ByVal QuestNum As Integer)
     Dim i As Long, FemQntia As Long
     Dim Name As String
     Dim Felicity As String
@@ -2029,12 +2029,6 @@ Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal X As Long, ByVal Y As Lo
                 End If
             Next
         End If
-    
-                 '   If PlayerInv(InvNum).PokeInfo.Spells(1) Or PlayerInv(InvNum).PokeInfo.Spells(2) Or PlayerInv(InvNum).PokeInfo.Spells(3) Or PlayerInv(InvNum).PokeInfo.Spells(4) = 12 Then
-                  '      frmMain.picTele.Visible = True
-                  '  Else
-                  '      frmMain.picTele.Visible = False
-                   ' End If
 
         If Command = 1 Then
             If GetPlayerBankItemPokemon(InvNum) = 0 Then Exit Sub

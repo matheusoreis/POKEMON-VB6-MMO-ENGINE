@@ -2312,9 +2312,10 @@ Sub BltFacePokemon(ByVal InvNum As Long)
         .Left = 0
         .Right = 94
     End With
-
-    If PlayerInv(InvNum).PokeInfo.Pokemon > 0 Then
-        If PlayerInv(InvNum).PokeInfo.Shiny > 0 Then
+    
+  
+    If GetPlayerInvItemPokeInfoPokemon(MyIndex, InvNum) > 0 Then
+        If GetPlayerInvItemShiny(MyIndex, InvNum) > 0 Then
             FaceShinyTimer(faceNum) = GetTickCount + SurfaceTimerMax
             
             If DDS_FaceShiny(faceNum) Is Nothing Then
