@@ -553,12 +553,6 @@ Function PlayerData(ByVal Index As Long) As Byte()
         Buffer.WriteByte 0
     End If
     
-    If Player(Index).Teleport = True Then
-        Buffer.WriteByte 1
-    Else
-        Buffer.WriteByte 0
-    End If
-    
     For i = 1 To MAX_INSIGNIAS
         Buffer.WriteLong Player(Index).Insignia(i)
     Next
@@ -566,6 +560,14 @@ Function PlayerData(ByVal Index As Long) As Byte()
     For i = 1 To MAX_QUESTS
         Buffer.WriteByte Player(Index).Quests(i).Status
         Buffer.WriteByte Player(Index).Quests(i).Part
+    Next
+    
+    For i = 1 To 50
+        Buffer.WriteLong GetPlayerVisuais(Index, i)
+    Next
+    
+    For i = 1 To 30
+        Buffer.WriteLong GetPlayerTeleport(Index, i)
     Next
     
     PlayerData = Buffer.ToArray()
@@ -2709,12 +2711,16 @@ Dim Buffer As clsBuffer
     Set Buffer = Nothing
 End Sub
 
-Sub SendTeleport(ByVal Index As Long)
-Dim Buffer As clsBuffer
-
+Public Sub SendPlayerTeleport(ByVal Index As Long)
+    Dim i As Long
+    Dim Buffer As clsBuffer
+    
     Set Buffer = New clsBuffer
     Buffer.WriteLong STeleport
-    Buffer.WriteByte Player(Index).Teleport
+    For i = 1 To 30
+        Buffer.WriteLong Player(Index).Teleport(i)
+    Next
     SendDataTo Index, Buffer.ToArray()
     Set Buffer = Nothing
+
 End Sub

@@ -16,10 +16,7 @@ Dir = GetPlayerDir(Index)
             If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then Call PlayerMsg(Index, Trim$(Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Name) & " usou a habilidade Iluminar e está tudo visivel agora.", BrightGreen)
         End If
     Case 2
-        Player(Index).Teleport = True '123
-        SendTeleport Index
-        SendPlayerData Index
-        PlayerMsg Index, "Seu tp foi para: " & Player(Index).Teleport, Yellow
+
     Case Else
         Call PlayerMsg(Index, "nada", Red)
     End Select

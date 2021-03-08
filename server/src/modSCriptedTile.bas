@@ -15,7 +15,10 @@ Select Case Script
                 SendSurfInit Index
                 BlockPlayer Index
         End If
-    
+        Case 2
+            Call SetPlayerTeleport(Index, 1, 1)
+            SendPlayerData Index
+            SendPlayerTeleport Index
 End Select
 
 End Sub

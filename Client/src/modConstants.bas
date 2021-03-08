@@ -184,6 +184,7 @@ Public Const MAX_ORG_MEMBERS As Byte = 36
 Public Const QUEST_MAX_REWARDS As Byte = 10
 Public Const UNLOCKED_POKEMONS As Integer = 252
 
+
 ' Website
 Public Const GAME_WEBSITE As String = ""
 

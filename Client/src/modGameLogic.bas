@@ -16,6 +16,7 @@ Public Sub GameLoop(ByVal InvNum As Long)
     Dim Index As Long
     Dim AnQuest As Long
     Dim Confusion120 As Long
+    Dim X As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -360,14 +361,24 @@ Public Sub GameLoop(ByVal InvNum As Long)
 
             WalkTimer = Tick + 30    ' edit this value to change WalkTimer
         End If
+                    
+        Dim visibleWarp As Boolean
+        visibleWarp = False
         
-       
-        If PlayerInv(2).PokeInfo.Spells(1) = 12 Then
-                        frmMain.picTele.Visible = True
-                    Else
-                        frmMain.picTele.Visible = False
+        For i = 1 To MAX_INV ' Ta certo isso?
+            If PlayerInv(i).PokeInfo.Pokemon > 0 Then ' isso diz se tem poke? s blz
+                For X = 1 To UBound(PlayerInv(i).PokeInfo.Spells)
+                    If PlayerInv(i).PokeInfo.Spells(X) = 12 Then
+                        visibleWarp = True
+                        Exit For
                     End If
-        
+                Next
+            End If
+            If visibleWarp Then Exit For
+        Next
+        frmMain.picTele.Visible = visibleWarp
+    
+        '123
 
         ' *********************
         ' ** Render Graphics **
@@ -828,7 +839,7 @@ errorhandler:
 End Function
 
 Function CheckDirection(ByVal Direction As Byte) As Boolean
-    Dim x As Long, Y As Long
+    Dim X As Long, Y As Long
     Dim X2 As Long, Y2 As Long
     Dim i As Long, Number As Long
     Dim AntSlide As Byte, PokemonId As String, PokeRuido As Byte
@@ -846,22 +857,22 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
 
     Select Case Direction
     Case DIR_UP
-        x = GetPlayerX(MyIndex)
+        X = GetPlayerX(MyIndex)
         Y = GetPlayerY(MyIndex) - 1
         X2 = GetPlayerX(MyIndex)
         Y2 = GetPlayerY(MyIndex)
     Case DIR_DOWN
-        x = GetPlayerX(MyIndex)
+        X = GetPlayerX(MyIndex)
         Y = GetPlayerY(MyIndex) + 1
         X2 = GetPlayerX(MyIndex)
         Y2 = GetPlayerY(MyIndex)
     Case DIR_LEFT
-        x = GetPlayerX(MyIndex) - 1
+        X = GetPlayerX(MyIndex) - 1
         Y = GetPlayerY(MyIndex)
         X2 = GetPlayerX(MyIndex)
         Y2 = GetPlayerY(MyIndex)
     Case DIR_RIGHT
-        x = GetPlayerX(MyIndex) + 1
+        X = GetPlayerX(MyIndex) + 1
         Y = GetPlayerY(MyIndex)
         X2 = GetPlayerX(MyIndex)
         Y2 = GetPlayerY(MyIndex)
@@ -870,12 +881,12 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     'Limite Pokémon Walking
     If GetPlayerEquipment(MyIndex, weapon) > 0 And GetPlayerEquipmentPokeInfoPokemon(MyIndex, weapon) > 0 Then
         If Player(MyIndex).Flying = 0 Then
-            If Not isInRange(15, x, Y, Player(MyIndex).TPX, Player(MyIndex).TPY) Then
+            If Not isInRange(15, X, Y, Player(MyIndex).TPX, Player(MyIndex).TPY) Then
                 CheckDirection = True
                 Exit Function
             End If
         Else
-            If Not isInRange(20, x, Y, Player(MyIndex).TPX, Player(MyIndex).TPY) Then
+            If Not isInRange(20, X, Y, Player(MyIndex).TPX, Player(MyIndex).TPY) Then
                 CheckDirection = True
                 Exit Function
             End If
@@ -885,21 +896,21 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     If GetPlayerFlying(MyIndex) Then Exit Function
 
     ' Check to see if the map tile is blocked or not
-    If Map.Tile(x, Y).Type = TILE_TYPE_BLOCKED Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_BLOCKED Then
         CheckDirection = True
         Exit Function
     End If
 
     ' Check to see if the map tile is water or not
     If Player(MyIndex).InSurf = 3 Or Player(MyIndex).Equipment(1) > 0 Then
-        If Map.Tile(x, Y).Type = TILE_TYPE_WATER Then
+        If Map.Tile(X, Y).Type = TILE_TYPE_WATER Then
             CheckDirection = True
             Exit Function
         End If
     End If
 
     ' Check Direction
-    If Map.Tile(x, Y).Type = TILE_TYPE_SLIDE Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_SLIDE Then
         Select Case Direction
         Case DIR_UP
             AntSlide = DIR_DOWN
@@ -911,7 +922,7 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
             AntSlide = DIR_UP
         End Select
 
-        If Map.Tile(x, Y).Data1 = AntSlide Then
+        If Map.Tile(X, Y).Data1 = AntSlide Then
             CheckDirection = True
             Exit Function
         Else
@@ -921,16 +932,16 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     End If
 
     ' Check to see if the map tile is tree or not
-    If Map.Tile(x, Y).Type = TILE_TYPE_RESOURCE And CheckResourceStatCut(MyIndex, x, Y) = False Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_RESOURCE And CheckResourceStatCut(MyIndex, X, Y) = False Then
         CheckDirection = True
         Exit Function
     End If
 
     ' Check to see if the key door is open or not
-    If Map.Tile(x, Y).Type = TILE_TYPE_KEY Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_KEY Then
 
         ' This actually checks if its open or not
-        If TempTile(x, Y).DoorOpen = NO Then
+        If TempTile(X, Y).DoorOpen = NO Then
             CheckDirection = True
             Exit Function
         End If
@@ -940,7 +951,7 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     If Map.Moral = 0 Or Map.Moral = 2 Then
         For i = 1 To Player_HighIndex
             If IsPlaying(i) And GetPlayerMap(i) = GetPlayerMap(MyIndex) Then
-                If GetPlayerX(i) = x Then
+                If GetPlayerX(i) = X Then
                     If GetPlayerY(i) = Y Then
                         If Not GetPlayerFlying(i) Then
                             CheckDirection = True
@@ -956,7 +967,7 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     For i = 1 To Npc_HighIndex
         If MapNpc(i).num > 0 Then
             If MapNpc(i).Desmaiado = False Then
-                If MapNpc(i).x = x Then
+                If MapNpc(i).X = X Then
                     If MapNpc(i).Y = Y Then
                         CheckDirection = True
                         Exit Function
@@ -969,7 +980,7 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     ' Check Point Trainer
     For i = 1 To Player_HighIndex
         If IsPlaying(i) And GetPlayerMap(i) = GetPlayerMap(MyIndex) Then
-            If Player(i).TPX = x Then
+            If Player(i).TPX = X Then
                 If Player(i).TPY = Y Then
                     CheckDirection = True
                     Exit Function
@@ -979,7 +990,7 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     Next
 
     'Check to see if the map tile is Grass or not
-    If Map.Tile(x, Y).Type = TILE_TYPE_GRASS Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_GRASS Then
         If Map.Tile(X2, Y2).Type = TILE_TYPE_GRASS Then
             MeAnimation 10, GetPlayerX(MyIndex), GetPlayerY(MyIndex)
         End If
@@ -1013,9 +1024,9 @@ Function CheckDirection(ByVal Direction As Byte) As Boolean
     If frmMain.picPlaca.Visible = True Then frmMain.picPlaca.Visible = False
 
     'Check Sign Tile
-    If Map.Tile(x, Y).Type = TILE_TYPE_SIGN Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_SIGN Then
         If GetPlayerEquipment(MyIndex, weapon) = 0 Then
-            Number = Map.Tile(x, Y).Data1
+            Number = Map.Tile(X, Y).Data1
             frmMain.lblChat.Caption = GetVar(App.Path & "\Data Files\chat.ini", "CHAT", Val(Number))
             frmMain.picPlaca.Visible = True
             frmMain.picPlaca.top = (frmMain.ScaleHeight / 2) - (frmMain.picPlaca.Height / 2)
@@ -1256,7 +1267,7 @@ errorhandler:
 End Sub
 
 Sub ClearTempTile()
-    Dim x As Long
+    Dim X As Long
     Dim Y As Long
 
     ' If debug mode, handle error then exit out
@@ -1264,9 +1275,9 @@ Sub ClearTempTile()
 
     ReDim TempTile(0 To Map.MaxX, 0 To Map.MaxY)
 
-    For x = 0 To Map.MaxX
+    For X = 0 To Map.MaxX
         For Y = 0 To Map.MaxY
-            TempTile(x, Y).DoorOpen = NO
+            TempTile(X, Y).DoorOpen = NO
         Next
     Next
 
@@ -1379,7 +1390,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub UpdateDescWindow(ByVal itemNum As Long, ByVal x As Long, ByVal Y As Long)
+Public Sub UpdateDescWindow(ByVal itemNum As Long, ByVal X As Long, ByVal Y As Long)
     Dim i As Long
     Dim FirstLetter As String * 1
     Dim Name As String
@@ -1405,7 +1416,7 @@ Public Sub UpdateDescWindow(ByVal itemNum As Long, ByVal x As Long, ByVal Y As L
 
     With frmMain
         .picItemDesc.top = Y
-        .picItemDesc.Left = x
+        .picItemDesc.Left = X
         .picItemDesc.Visible = True
 
         If LastItemDesc = itemNum Then Exit Sub    ' exit out after setting x + y so we don't reset values
@@ -1443,19 +1454,19 @@ errorhandler:
 End Sub
 
 Public Sub CacheResources()
-    Dim x As Long, Y As Long, Resource_Count As Long
+    Dim X As Long, Y As Long, Resource_Count As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     Resource_Count = 0
 
-    For x = 0 To Map.MaxX
+    For X = 0 To Map.MaxX
         For Y = 0 To Map.MaxY
-            If Map.Tile(x, Y).Type = TILE_TYPE_RESOURCE Then
+            If Map.Tile(X, Y).Type = TILE_TYPE_RESOURCE Then
                 Resource_Count = Resource_Count + 1
                 ReDim Preserve MapResource(0 To Resource_Count)
-                MapResource(Resource_Count).x = x
+                MapResource(Resource_Count).X = X
                 MapResource(Resource_Count).Y = Y
             End If
         Next
@@ -1471,7 +1482,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub CreateActionMsg(ByVal Message As String, ByVal color As Integer, ByVal MsgType As Byte, ByVal x As Long, ByVal Y As Long)
+Public Sub CreateActionMsg(ByVal Message As String, ByVal color As Integer, ByVal MsgType As Byte, ByVal X As Long, ByVal Y As Long)
     Dim i As Long
 
     ' If debug mode, handle error then exit out
@@ -1486,13 +1497,13 @@ Public Sub CreateActionMsg(ByVal Message As String, ByVal color As Integer, ByVa
         .Type = MsgType
         .Created = GetTickCount
         .Scroll = 1
-        .x = x
+        .X = X
         .Y = Y
     End With
 
     If ActionMsg(ActionMsgIndex).Type = ACTIONMSG_SCROLL Then
         ActionMsg(ActionMsgIndex).Y = ActionMsg(ActionMsgIndex).Y + Rand(-2, 6)
-        ActionMsg(ActionMsgIndex).x = ActionMsg(ActionMsgIndex).x + Rand(-8, 8)
+        ActionMsg(ActionMsgIndex).X = ActionMsg(ActionMsgIndex).X + Rand(-8, 8)
     End If
 
     ' find the new high index
@@ -1524,7 +1535,7 @@ Public Sub ClearActionMsg(ByVal Index As Byte)
     ActionMsg(Index).Type = 0
     ActionMsg(Index).color = 0
     ActionMsg(Index).Scroll = 0
-    ActionMsg(Index).x = 0
+    ActionMsg(Index).X = 0
     ActionMsg(Index).Y = 0
 
     ' find the new high index
@@ -1719,7 +1730,7 @@ errorhandler:
     Exit Function
 End Function
 
-Public Function IsHotbarSlot(ByVal x As Single, ByVal Y As Single) As Long
+Public Function IsHotbarSlot(ByVal X As Single, ByVal Y As Single) As Long
     Dim top As Long, Left As Long
     Dim i As Long
 
@@ -1731,7 +1742,7 @@ Public Function IsHotbarSlot(ByVal x As Single, ByVal Y As Single) As Long
     For i = 1 To MAX_HOTBAR
         top = HotbarTop
         Left = HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1) Mod MAX_HOTBAR)))
-        If x >= Left And x <= Left + PIC_X Then
+        If X >= Left And X <= Left + PIC_X Then
             If Y >= top And Y <= top + PIC_Y Then
                 IsHotbarSlot = i
                 Exit Function
@@ -1747,7 +1758,7 @@ errorhandler:
     Exit Function
 End Function
 
-Public Sub PlayMapSound(ByVal x As Long, ByVal Y As Long, ByVal entityType As Long, ByVal entityNum As Long)
+Public Sub PlayMapSound(ByVal X As Long, ByVal Y As Long, ByVal entityType As Long, ByVal entityNum As Long)
     Dim soundName As String
 
     ' If debug mode, handle error then exit out
@@ -1785,7 +1796,7 @@ Public Sub PlayMapSound(ByVal x As Long, ByVal Y As Long, ByVal entityType As Lo
     ' exit out if it's not set
     If Trim$(soundName) = "None." Then Exit Sub
 
-    If isInRange(5, x, Y, GetPlayerX(MyIndex), GetPlayerY(MyIndex)) Then
+    If isInRange(5, X, Y, GetPlayerX(MyIndex), GetPlayerY(MyIndex)) Then
         ' play the sound
         PlaySound soundName, -1, -1
     End If
@@ -1884,7 +1895,7 @@ Function isInRange(ByVal Range As Long, ByVal x1 As Long, ByVal y1 As Long, ByVa
     If nVal <= Range Then isInRange = True
 End Function
 
-Public Sub UpdateSpellWindow(ByVal SpellNum As Long, ByVal x As Long, ByVal Y As Long)
+Public Sub UpdateSpellWindow(ByVal SpellNum As Long, ByVal X As Long, ByVal Y As Long)
     Dim i As Long
 
     ' If debug mode, handle error then exit out
@@ -1897,7 +1908,7 @@ Public Sub UpdateSpellWindow(ByVal SpellNum As Long, ByVal x As Long, ByVal Y As
 
     With frmMain
         .picSpellDesc.top = Y
-        .picSpellDesc.Left = x
+        .picSpellDesc.Left = X
         .picSpellDesc.Visible = True
 
         If LastSpellDesc = SpellNum Then Exit Sub
@@ -1915,7 +1926,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal x As Long, ByVal Y As Long, ByVal Command As Long, ByVal SpellNum As Long, Optional ByVal QuestNum As Integer)
+Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal X As Long, ByVal Y As Long, ByVal Command As Long, ByVal SpellNum As Long, Optional ByVal QuestNum As Integer)
     Dim i As Long, FemQntia As Long
     Dim Name As String
     Dim Felicity As String
@@ -1933,7 +1944,7 @@ Public Sub UpdatePokeWindow(ByVal InvNum As Long, ByVal x As Long, ByVal Y As Lo
 
     With frmMain
         .picPokeDesc.top = Y
-        .picPokeDesc.Left = x
+        .picPokeDesc.Left = X
         .picPokeDesc.Visible = True
 
         BltFacePokemon (InvNum)
@@ -2244,7 +2255,7 @@ Function GetInvPokeNextLevel(ByVal InvNum As Long, ByVal Command As Byte, Option
 
 End Function
 
-Sub MeAnimation(ByVal Animation As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal LockType As Long, Optional ByVal lockindex As Long)
+Sub MeAnimation(ByVal Animation As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal LockType As Long, Optional ByVal lockindex As Long)
 
     AnimationIndex = AnimationIndex + 1
     If AnimationIndex >= MAX_BYTE Then AnimationIndex = 1
@@ -2252,7 +2263,7 @@ Sub MeAnimation(ByVal Animation As Long, ByVal x As Long, ByVal Y As Long, Optio
     If LockType > 0 Then
         With AnimInstance(AnimationIndex)
             .Animation = Animation
-            .x = x
+            .X = X
             .Y = Y
             .LockType = LockType
             .lockindex = lockindex
@@ -2261,14 +2272,14 @@ Sub MeAnimation(ByVal Animation As Long, ByVal x As Long, ByVal Y As Long, Optio
         End With
 
         ' play the sound if we've got one
-        PlayMapSound AnimInstance(AnimationIndex).x, AnimInstance(AnimationIndex).Y, SoundEntity.seAnimation, AnimInstance(AnimationIndex).Animation
+        PlayMapSound AnimInstance(AnimationIndex).X, AnimInstance(AnimationIndex).Y, SoundEntity.seAnimation, AnimInstance(AnimationIndex).Animation
 
         Exit Sub
     End If
 
     With AnimInstance(AnimationIndex)
         .Animation = Animation
-        .x = x
+        .X = X
         .Y = Y
         .LockType = 0
         .lockindex = 0
@@ -2277,7 +2288,7 @@ Sub MeAnimation(ByVal Animation As Long, ByVal x As Long, ByVal Y As Long, Optio
     End With
 
     ' play the sound if we've got one
-    PlayMapSound AnimInstance(AnimationIndex).x, AnimInstance(AnimationIndex).Y, SoundEntity.seAnimation, AnimInstance(AnimationIndex).Animation
+    PlayMapSound AnimInstance(AnimationIndex).X, AnimInstance(AnimationIndex).Y, SoundEntity.seAnimation, AnimInstance(AnimationIndex).Animation
 
 End Sub
 
@@ -2634,19 +2645,19 @@ Public Sub UpdateRankLevel()
     Next
 End Sub
 
-Public Function CheckResourceStatCut(ByVal Index As Long, ByVal x As Long, ByVal Y As Long) As Boolean
+Public Function CheckResourceStatCut(ByVal Index As Long, ByVal X As Long, ByVal Y As Long) As Boolean
 
     Dim i As Long, Resource_num As Long
 
     CheckResourceStatCut = False
 
-    If Map.Tile(x, Y).Type = TILE_TYPE_RESOURCE Then
+    If Map.Tile(X, Y).Type = TILE_TYPE_RESOURCE Then
         Resource_num = 0
 
         ' Get the cache number
         For i = 0 To Resource_Index
 
-            If MapResource(i).x = x Then
+            If MapResource(i).X = X Then
                 If MapResource(i).Y = Y Then
                     Resource_num = i
                 End If

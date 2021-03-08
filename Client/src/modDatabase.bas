@@ -1458,6 +1458,68 @@ errorhandler:
     Exit Sub
 End Sub
 
+Function GetPlayerVisuais(ByVal Index As Long, ByVal ViSlot As Long) As Long
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    If Index > MAX_PLAYERS Then Exit Function
+    If ViSlot = 0 Then Exit Function
+    GetPlayerVisuais = Player(ViSlot).Visuais(ViSlot)
+    
+    ' Error handler
+    Exit Function
+errorhandler:
+    HandleError "GetPlayerVisuais", "modDatabase", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Function
+End Function
+
+Sub SetPlayerVisuais(ByVal Index As Long, ByVal ViSlot As Long, ByVal ViNum As Long)
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    If Index > MAX_PLAYERS Then Exit Sub
+    Player(ViSlot).Visuais(ViSlot) = ViNum
+    
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "SetPlayerVisuais", "modDatabase", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+Function GetPlayerTeleport(ByVal Index As Long, ByVal TpSlot As Long) As Long
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    If Index > MAX_PLAYERS Then Exit Function
+    If TpSlot = 0 Then Exit Function
+    GetPlayerTeleport = Player(TpSlot).Teleport(TpSlot)
+    
+    ' Error handler
+    Exit Function
+errorhandler:
+    HandleError "GetPlayerTeleport", "modDatabase", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Function
+End Function
+
+Sub SetPlayerTeleport(ByVal Index As Long, ByVal TpSlot As Long, ByVal TpNum As Long)
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    If Index > MAX_PLAYERS Then Exit Sub
+    Player(TpSlot).Teleport(TpSlot) = TpNum
+    
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "SetPlayerTeleport", "modDatabase", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
 Function GetPlayerInvItemValue(ByVal Index As Long, ByVal invslot As Long) As Long
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler

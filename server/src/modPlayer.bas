@@ -49,6 +49,7 @@ Sub JoinGame(ByVal Index As Long)
     Call SendAttLeilaoTo(Index)
     Call ChecarQntiadePokemons(Index)
     Call SendSurfInit(Index)
+    Call SendPlayerTeleport(Index)
     'Call SendAparencia(Index)
     
     ' send vitals, exp + stats
@@ -486,7 +487,6 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
     
     'Trocar Status Rock Tunel = 0
     Player(Index).PokeLight = False
-    Player(Index).Teleport = False
     
     ' Check if the player completed a quest
     ChecarTarefasAtuais Index, QUEST_TYPE_GOTOMAP, GetPlayerMap(Index)
@@ -2072,6 +2072,28 @@ End Function
 
 Sub SetPlayerInvItemNum(ByVal Index As Long, ByVal invslot As Long, ByVal ItemNum As Long)
     Player(Index).Inv(invslot).Num = ItemNum
+End Sub
+
+Function GetPlayerVisuais(ByVal Index As Long, ByVal ViSlot As Long) As Long
+    If Index > MAX_PLAYERS Then Exit Function
+    If ViSlot = 0 Then Exit Function
+    
+    GetPlayerVisuais = Player(Index).Visuais(ViSlot)
+End Function
+
+Sub SetPlayerVisuais(ByVal Index As Long, ByVal ViSlot As Long, ByVal ViNum As Long)
+    Player(Index).Visuais(ViSlot) = ViNum
+End Sub
+
+Function GetPlayerTeleport(ByVal Index As Long, ByVal TpSlot As Long) As Long
+    If Index > MAX_PLAYERS Then Exit Function
+    If TpSlot = 0 Then Exit Function
+    
+    GetPlayerTeleport = Player(Index).Teleport(TpSlot)
+End Function
+
+Sub SetPlayerTeleport(ByVal Index As Long, ByVal TpSlot As Long, ByVal TpNum As Long)
+    Player(Index).Teleport(TpSlot) = TpNum
 End Sub
 
 Function GetPlayerInvItemValue(ByVal Index As Long, ByVal invslot As Long) As Long
