@@ -275,14 +275,14 @@ errorhandler:
 End Sub
 
 Public Sub logoutGame()
-    Dim buffer As clsBuffer, i As Long
+    Dim Buffer As clsBuffer, i As Long
 
     isLogging = True
     InGame = False
-    Set buffer = New clsBuffer
-    buffer.WriteLong CQuit
-    SendData buffer.ToArray()
-    Set buffer = Nothing
+    Set Buffer = New clsBuffer
+    Buffer.WriteLong CQuit
+    SendData Buffer.ToArray()
+    Set Buffer = Nothing
     Call DestroyTCP
 
     ' destroy the animations loaded
@@ -859,6 +859,12 @@ Public Sub cacheButtons()
         .state = 0    ' normal
     End With
     
+        ' Sistema Fly
+    With MainButton(37)
+        .filename = "confirmar"
+        .state = 0    ' normal
+    End With
+    
     '###########Quest Buttons##############
     ' quest - informations
     With QuestButton(1)
@@ -967,6 +973,11 @@ Public Sub cacheButtons()
     End With
     
     With CloseButton(18)
+        .filename = "fechar"
+        .state = 0
+    End With
+    
+    With CloseButton(19)
         .filename = "fechar"
         .state = 0
     End With
