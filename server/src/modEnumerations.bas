@@ -222,7 +222,6 @@ Public Enum ClientPackets
     CRecoverPass
     CNewPass
     CGiveVip
-    CSetVisual
     CPlayerRun
     CComandGym
     CGrupoMsg

@@ -594,28 +594,6 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub SendSetVisual(ByVal Name As String, ByVal VisualNum As Byte, ByVal VisualPart As Byte)
-    Dim Buffer As clsBuffer
-
-    ' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    Set Buffer = New clsBuffer
-    Buffer.WriteLong CSetVisual
-    Buffer.WriteString Trim$(Name)
-    Buffer.WriteLong VisualNum
-    Buffer.WriteByte VisualPart
-    SendData Buffer.ToArray()
-    Set Buffer = Nothing
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "SendSetVisual", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
-
 Public Sub SendKick(ByVal Name As String)
     Dim Buffer As clsBuffer
 

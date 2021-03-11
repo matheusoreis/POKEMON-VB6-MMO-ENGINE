@@ -134,10 +134,11 @@ Sub ServerBanIndex(ByVal BanPlayerIndex As Long)
     Dim IP As String
     Dim F As Long
     Dim i As Long
-    filename = App.Path & "data\banlist.txt"
+    filename = App.Path & "\data\banlist.txt"
+
 
     ' Make sure the file exists
-    If Not FileExist("data\banlist.txt") Then
+    If Not FileExist(filename) Then
         F = FreeFile
         Open filename For Output As #F
         Close #F
