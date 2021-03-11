@@ -243,7 +243,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
         If KeyAscii = vbKeyReturn Then
         
         ' Grupo message
-        If frmMain.cmbEscolha.ListIndex = 4 Then
+        If frmMain.cmbEscolha.ListIndex = 3 Then
 
             If Len(ChatText) > 0 Then
                 Call GrupoMsg(ChatText)
@@ -255,7 +255,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
         End If
         
         'msg global
-        If frmMain.cmbEscolha.ListIndex = 3 Then
+        If frmMain.cmbEscolha.ListIndex = 2 Then
             If Len(ChatText) > 0 Then
                     Call BroadcastMsg(ChatText)
                 End If

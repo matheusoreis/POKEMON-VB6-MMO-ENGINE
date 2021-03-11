@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCN.OCX"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
 Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
 Begin VB.Form frmMain 
    BackColor       =   &H00E0E0E0&
@@ -31,13 +31,13 @@ Begin VB.Form frmMain
       AutoSize        =   -1  'True
       BorderStyle     =   0  'None
       Height          =   765
-      Left            =   12600
+      Left            =   12960
       Picture         =   "frmMain.frx":0CCA
       ScaleHeight     =   51
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   48
       TabIndex        =   258
-      Top             =   8670
+      Top             =   3960
       Visible         =   0   'False
       Width           =   720
    End
@@ -130,7 +130,6 @@ Begin VB.Form frmMain
          _Version        =   393217
          BackColor       =   1907997
          BorderStyle     =   0
-         Enabled         =   -1  'True
          ScrollBars      =   2
          Appearance      =   0
          TextRTF         =   $"frmMain.frx":6752E
@@ -5906,15 +5905,15 @@ Private Sub imgButton_Click(Index As Integer)
         End Select
 
     Case 32
-        cmbEscolha.ListIndex = 3
-    Case 33
         cmbEscolha.ListIndex = 2
-    Case 34
+    Case 33
         cmbEscolha.ListIndex = 1
+    Case 34
+        cmbEscolha.ListIndex = 0
     Case 35
-        cmbEscolha.ListIndex = 4
+        cmbEscolha.ListIndex = 3
     Case 36
-        cmbEscolha.ListIndex = 5
+        cmbEscolha.ListIndex = 4
         
         ' Sistema Fly
     Case 37
