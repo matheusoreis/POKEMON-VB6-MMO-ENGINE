@@ -44,19 +44,6 @@ Public Sub GameLoop(ByVal InvNum As Long)
                 Next
             End If
 
-            ' Cabelos
-            If HairNum > 0 Then
-                For i = 1 To HairNum   'Check to unload surfaces
-                    If HairTimer(i) > 0 Then    'Only update surfaces in use
-                        If HairTimer(i) < Tick Then   'Unload the surface
-                            Call ZeroMemory(ByVal VarPtr(DDSD_Hair(i)), LenB(DDSD_Hair(i)))
-                            Set DDS_Hair(i) = Nothing
-                            HairTimer(i) = 0
-                        End If
-                    End If
-                Next
-            End If
-
             ' Paperdolls
             If NumPaperdolls > 0 Then
                 For i = 1 To NumPaperdolls    'Check to unload surfaces
@@ -2778,18 +2765,6 @@ Public Sub ScrollBarMembers()
     frmMain.ScrollBarFake(5).Height = Height
     frmMain.ScrollBarFake(5).top = 124
     frmMain.ScrollBarFake(5).Left = 219
-End Sub
-
-Public Sub ResetCreateCharacter()
-'Contants
-    BaseDir = DIR_DOWN
-    BaseNum = 2
-    NewHairNum = 1
-    HairColor = 1
-    ClothColor = 1
-    ClothNum = 1
-    LegsNum = 1
-    LegsColor = 1
 End Sub
 
 ' Chat Bubble Mondo

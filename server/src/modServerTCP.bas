@@ -2649,33 +2649,6 @@ Sub SendVipPointsInfo(ByVal Index As Long)
     SendPlayerData Index
 End Sub
 
-Sub SendAparencia(ByVal Index As Long)
-    Dim Buffer As clsBuffer
-
-    Set Buffer = New clsBuffer
-    'Buffer.WriteLong SAparencia
-    Buffer.WriteLong Index
-    Buffer.WriteByte Player(Index).Sex
-    
-    'Modelo
-    Buffer.WriteInteger Player(Index).HairModel
-    Buffer.WriteInteger Player(Index).ClothModel
-    Buffer.WriteInteger Player(Index).LegsModel
-    
-    'Cor
-    Buffer.WriteByte Player(Index).HairColor
-    Buffer.WriteByte Player(Index).ClothColor
-    Buffer.WriteByte Player(Index).LegsColor
-    
-    'Numero
-    Buffer.WriteInteger Player(Index).HairNum
-    Buffer.WriteInteger Player(Index).ClothNum
-    Buffer.WriteInteger Player(Index).LegsNum
-    
-    SendDataToMap GetPlayerMap(Index), Buffer.ToArray()
-    Set Buffer = Nothing
-End Sub
-
 Sub SendPlayerRun(ByVal Index As Long, Optional ByVal ToTarget As Long)
 Dim Buffer As clsBuffer
 

@@ -91,7 +91,6 @@ Public Sub Main()
     Call CheckFacesShiny
     Call CheckPokeIcons
     Call CheckPokeIconShiny
-    Call CheckHairNum
 
     ' load music/sound engine
     InitFmod

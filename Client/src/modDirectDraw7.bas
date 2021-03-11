@@ -48,7 +48,6 @@ Public DDS_RockTunel As DirectDrawSurface7
 Public DDS_MiniMap As DirectDrawSurface7
 Public DDS_MapBorda As DirectDrawSurface7
 Public DDS_OrgOn As DirectDrawSurface7
-Public DDS_Hair() As DirectDrawSurface7
 
 ' descriptions
 Public DDSD_Temp As DDSURFACEDESC2    ' arrays
@@ -75,7 +74,6 @@ Public DDSD_RockTunel As DDSURFACEDESC2
 Public DDSD_MiniMap As DDSURFACEDESC2
 Public DDSD_MapBorda As DDSURFACEDESC2
 Public DDSD_OrgOn As DDSURFACEDESC2
-Public DDSD_Hair() As DDSURFACEDESC2
 
 ' timers
 Public Const SurfaceTimerMax As Long = 10000
@@ -89,7 +87,6 @@ Public FaceTimer() As Long
 Public FaceShinyTimer() As Long
 Public PokeIconTimer() As Long
 Public PokeIconShinyTimer() As Long
-Public HairTimer() As Long
 
 ' Number of graphic files
 Public NumTileSets As Long
@@ -103,7 +100,6 @@ Public NumFaces As Long
 Public NumFacesShiny As Long
 Public NumPokeIcons As Long
 Public NumPokeIconShiny As Long
-Public HairNum As Long
 
 ' ********************
 ' ** Initialization **
@@ -376,11 +372,6 @@ Public Sub DestroyDirectDraw()
     For i = 1 To NumPokeIconShiny
         Set DDS_PokeIconShiny(i) = Nothing
         ZeroMemory ByVal VarPtr(DDSD_PokeIconShiny(i)), LenB(DDSD_PokeIconShiny(i))
-    Next
-
-    For i = 1 To HairNum
-        Set DDS_Hair(i) = Nothing
-        ZeroMemory ByVal VarPtr(DDSD_Hair(i)), LenB(DDSD_Hair(i))
     Next
 
     Set DDS_Door = Nothing
@@ -1518,7 +1509,7 @@ Public Sub BltPlayer(ByVal Index As Long)
     Dim rec As DxVBLib.RECT
     Dim attackspeed As Long
     Dim X2 As Long, Y2 As Long
-    Dim Cabelo As Long, AnimStep(1 To 4) As Byte
+    Dim AnimStep(1 To 4) As Byte
     Dim Coluna As Byte
 
     ' If debug mode, handle error then exit out
@@ -1698,11 +1689,6 @@ Public Sub BltPlayer(ByVal Index As Long)
 
     ' Renderizar a Base
     Call BltSprite(Sprite, X, Y, rec)
-
-    ' Renderizar Cabelo
-    If Player(Index).HairNum > 0 Then
-        Call BltCabelo(X, Y, Player(Index).HairNum, Anim, SpriteTop)
-    End If
 
     ' check for paperdolling
     For i = 1 To UBound(PaperdollOrder)
@@ -2079,67 +2065,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub BltCabelo(ByVal X2 As Long, ByVal Y2 As Long, ByVal Cabelo As Long, ByVal Anim As Long, ByVal SpriteTop As Long)
-    Dim rec As DxVBLib.RECT
-    Dim X As Long, Y As Long
-    Dim Width As Long, Height As Long
 
-    ' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    If Cabelo < 1 Or Cabelo > HairNum Then Exit Sub
-
-    HairTimer(Cabelo) = GetTickCount + SurfaceTimerMax
-    If DDS_Hair(Cabelo) Is Nothing Then
-        Call InitDDSurf("characters\Cabelos\" & Cabelo, DDSD_Hair(Cabelo), DDS_Hair(Cabelo))
-    End If
-
-    With rec
-        .top = SpriteTop * (DDSD_Hair(Cabelo).lHeight / 8)
-        .Bottom = .top + (DDSD_Hair(Cabelo).lHeight / 8)
-        .Left = Anim * (DDSD_Hair(Cabelo).lWidth / 8)
-        .Right = .Left + (DDSD_Hair(Cabelo).lWidth / 8)
-    End With
-
-    ' clipping
-    X = ConvertMapX(X2)
-    Y = ConvertMapY(Y2)
-    Width = (rec.Right - rec.Left)
-    Height = (rec.Bottom - rec.top)
-
-    ' Clip to screen
-    If Y < 0 Then
-        With rec
-            .top = .top - Y
-        End With
-        Y = 0
-    End If
-
-    If X < 0 Then
-        With rec
-            .Left = .Left - X
-        End With
-        X = 0
-    End If
-
-    If Y + Height > DDSD_BackBuffer.lHeight Then
-        rec.Bottom = rec.Bottom - (Y + Height - DDSD_BackBuffer.lHeight)
-    End If
-
-    If X + Width > DDSD_BackBuffer.lWidth Then
-        rec.Right = rec.Right - (X + Width - DDSD_BackBuffer.lWidth)
-    End If
-
-    ' /clipping
-    Call Engine_BltFast(X, Y, DDS_Hair(Cabelo), rec, DDBLTFAST_WAIT Or DDBLTFAST_SRCCOLORKEY)
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "BltCabelo", "modDirectDraw7", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
 
 Private Sub BltSprite(ByVal Sprite As Long, ByVal X2 As Long, Y2 As Long, rec As DxVBLib.RECT)
     Dim X As Long
@@ -4655,11 +4581,6 @@ Sub BltTrainerPointMap(ByVal Index As Long)
 
     ' Renderizar Sprite do Jogador
     Call BltSprite(Sprite, X, Y, rec)
-
-    ' Renderizar o Cabelo do Jogador
-    If Player(Index).HairNum > 0 Then
-        Call BltCabelo(X, Y, Player(Index).HairNum, 2, SpriteTop)
-    End If
 
 End Sub
 

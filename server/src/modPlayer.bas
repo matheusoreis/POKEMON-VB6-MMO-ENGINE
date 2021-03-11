@@ -50,7 +50,6 @@ Sub JoinGame(ByVal Index As Long)
     Call ChecarQntiadePokemons(Index)
     Call SendSurfInit(Index)
     Call SendPlayerTeleport(Index)
-    'Call SendAparencia(Index)
     
     ' send vitals, exp + stats
     For i = 1 To Vitals.Vital_Count - 1

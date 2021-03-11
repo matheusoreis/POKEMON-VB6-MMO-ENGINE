@@ -196,17 +196,17 @@ Function PasswordOK(ByVal Name As String, ByVal Password As String) As Boolean
 
 End Function
 
-Sub AddAccount(ByVal index As Long, ByVal Name As String, ByVal Password As String, ByVal RecoveryKey As String, ByVal Email As String)
+Sub AddAccount(ByVal Index As Long, ByVal Name As String, ByVal Password As String, ByVal RecoveryKey As String, ByVal Email As String)
     Dim i As Long
     
-    ClearPlayer index
+    ClearPlayer Index
     
-    Player(index).Login = Name
-    Player(index).Password = Password
-    Player(index).SecondPass = RecoveryKey
-    Player(index).Email = Email
+    Player(Index).Login = Name
+    Player(Index).Password = Password
+    Player(Index).SecondPass = RecoveryKey
+    Player(Index).Email = Email
     
-    Call SavePlayer(index)
+    Call SavePlayer(Index)
 End Sub
 
 Sub DeleteName(ByVal Name As String)
@@ -237,64 +237,59 @@ End Sub
 ' ****************
 ' ** Characters **
 ' ****************
-Function CharExist(ByVal index As Long) As Boolean
+Function CharExist(ByVal Index As Long) As Boolean
 
-    If LenB(Trim$(Player(index).Name)) > 0 Then
+    If LenB(Trim$(Player(Index).Name)) > 0 Then
         CharExist = True
     End If
 
 End Function
 
-Sub AddChar(ByVal index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Long, ByVal Sprite As Long)
+Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Long, ByVal Sprite As Long)
     Dim F As Long
     Dim n As Long
     Dim spritecheck As Boolean
     Dim i As Long
 
-    If LenB(Trim$(Player(index).Name)) = 0 Then
+    If LenB(Trim$(Player(Index).Name)) = 0 Then
         
         spritecheck = False
         
-        Player(index).Name = Name
-        Player(index).Sex = Sex
-        Player(index).Class = ClassNum
+        Player(Index).Name = Name
+        Player(Index).Sex = Sex
+        Player(Index).Class = ClassNum
         
-        If Player(index).Sex = SEX_MALE Then
-            Player(index).Sprite = Class(ClassNum).MaleSprite(Sprite)
+        If Player(Index).Sex = SEX_MALE Then
+            Player(Index).Sprite = Class(ClassNum).MaleSprite(Sprite)
         Else
-            Player(index).Sprite = Class(ClassNum).FemaleSprite(Sprite)
+            Player(Index).Sprite = Class(ClassNum).FemaleSprite(Sprite)
         End If
 
-        Player(index).Level = 1
-        Player(index).MySprite = Player(index).Sprite
+        Player(Index).Level = 1
+        Player(Index).MySprite = Player(Index).Sprite
 
         For n = 1 To Stats.Stat_Count - 1
-            Player(index).Stat(n) = Class(ClassNum).Stat(n)
+            Player(Index).Stat(n) = Class(ClassNum).Stat(n)
         Next n
 
-        Player(index).Dir = DIR_DOWN
-        Player(index).Map = START_MAP
-        Player(index).x = START_X
-        Player(index).Y = START_Y
-        Player(index).Dir = DIR_DOWN
-        Player(index).Vital(Vitals.HP) = GetPlayerMaxVital(index, Vitals.HP)
-        Player(index).Vital(Vitals.MP) = GetPlayerMaxVital(index, Vitals.MP)
-        Player(index).TPX = 0
-        Player(index).TPY = 0
-        Player(index).TPDir = 0
-        Player(index).PokeInicial = 1
-        
-        'Temporario
-        Player(index).HairModel = 2
-        Player(index).HairColor = 7
-        Player(index).HairNum = 17 'Formula ((HairModel - 1) * 10) + HairColor
+        Player(Index).Dir = DIR_DOWN
+        Player(Index).Map = START_MAP
+        Player(Index).X = START_X
+        Player(Index).Y = START_Y
+        Player(Index).Dir = DIR_DOWN
+        Player(Index).Vital(Vitals.HP) = GetPlayerMaxVital(Index, Vitals.HP)
+        Player(Index).Vital(Vitals.MP) = GetPlayerMaxVital(Index, Vitals.MP)
+        Player(Index).TPX = 0
+        Player(Index).TPY = 0
+        Player(Index).TPDir = 0
+        Player(Index).PokeInicial = 1
         
         ' Append name to file
         F = FreeFile
         Open App.Path & "\data\accounts\charlist.txt" For Append As #F
         Print #F, Name
         Close #F
-        Call SavePlayer(index)
+        Call SavePlayer(Index)
         Exit Sub
     End If
 
@@ -337,45 +332,45 @@ Sub SaveAllPlayersOnline()
 
 End Sub
 
-Sub SavePlayer(ByVal index As Long)
+Sub SavePlayer(ByVal Index As Long)
     Dim filename As String
     Dim F As Long
 
-    filename = App.Path & "\data\accounts\" & Trim$(Player(index).Login) & ".bin"
+    filename = App.Path & "\data\accounts\" & Trim$(Player(Index).Login) & ".bin"
     
     F = FreeFile
     
     Open filename For Binary As #F
-    Put #F, , Player(index)
+    Put #F, , Player(Index)
     Close #F
 End Sub
 
-Sub LoadPlayer(ByVal index As Long, ByVal Name As String)
+Sub LoadPlayer(ByVal Index As Long, ByVal Name As String)
     Dim filename As String
     Dim F As Long
-    Call ClearPlayer(index)
+    Call ClearPlayer(Index)
     filename = App.Path & "\data\accounts\" & Trim(Name) & ".bin"
     F = FreeFile
     Open filename For Binary As #F
-    Get #F, , Player(index)
+    Get #F, , Player(Index)
     Close #F
 End Sub
 
-Sub ClearPlayer(ByVal index As Long)
+Sub ClearPlayer(ByVal Index As Long)
     Dim i As Long
     
-    Call ZeroMemory(ByVal VarPtr(TempPlayer(index)), LenB(TempPlayer(index)))
-    Set TempPlayer(index).Buffer = New clsBuffer
+    Call ZeroMemory(ByVal VarPtr(TempPlayer(Index)), LenB(TempPlayer(Index)))
+    Set TempPlayer(Index).Buffer = New clsBuffer
     
-    Call ZeroMemory(ByVal VarPtr(Player(index)), LenB(Player(index)))
-    Player(index).Login = vbNullString
-    Player(index).Password = vbNullString
-    Player(index).Name = vbNullString
-    Player(index).Class = 1
+    Call ZeroMemory(ByVal VarPtr(Player(Index)), LenB(Player(Index)))
+    Player(Index).Login = vbNullString
+    Player(Index).Password = vbNullString
+    Player(Index).Name = vbNullString
+    Player(Index).Class = 1
 
-    frmServer.lvwInfo.ListItems(index).SubItems(1) = vbNullString
-    frmServer.lvwInfo.ListItems(index).SubItems(2) = vbNullString
-    frmServer.lvwInfo.ListItems(index).SubItems(3) = vbNullString
+    frmServer.lvwInfo.ListItems(Index).SubItems(1) = vbNullString
+    frmServer.lvwInfo.ListItems(Index).SubItems(2) = vbNullString
+    frmServer.lvwInfo.ListItems(Index).SubItems(3) = vbNullString
 End Sub
 
 ' *************
@@ -403,7 +398,7 @@ Sub LoadClasses()
     Dim tmpSprite As String
     Dim tmpArray() As String
     Dim startItemCount As Long, startSpellCount As Long
-    Dim x As Long
+    Dim X As Long
 
     If CheckClasses Then
         ReDim Class(1 To Max_Classes)
@@ -456,9 +451,9 @@ Sub LoadClasses()
         ' loop for items & values
         Class(i).startItemCount = startItemCount
         If startItemCount >= 1 And startItemCount <= MAX_INV Then
-            For x = 1 To startItemCount
-                Class(i).StartItem(x) = Val(GetVar(filename, "CLASS" & i, "StartItem" & x))
-                Class(i).StartValue(x) = Val(GetVar(filename, "CLASS" & i, "StartValue" & x))
+            For X = 1 To startItemCount
+                Class(i).StartItem(X) = Val(GetVar(filename, "CLASS" & i, "StartItem" & X))
+                Class(i).StartValue(X) = Val(GetVar(filename, "CLASS" & i, "StartValue" & X))
             Next
         End If
         
@@ -469,8 +464,8 @@ Sub LoadClasses()
         ' loop for spells
         Class(i).startSpellCount = startSpellCount
         If startSpellCount >= 1 And startSpellCount <= MAX_PLAYER_SPELLS Then
-            For x = 1 To startSpellCount
-                Class(i).StartSpell(x) = Val(GetVar(filename, "CLASS" & i, "StartSpell" & x))
+            For X = 1 To startSpellCount
+                Class(i).StartSpell(X) = Val(GetVar(filename, "CLASS" & i, "StartSpell" & X))
             Next
         End If
     Next
@@ -480,7 +475,7 @@ End Sub
 Sub SaveClasses()
     Dim filename As String
     Dim i As Long
-    Dim x As Long
+    Dim X As Long
     
     filename = App.Path & "\data\classes.ini"
 
@@ -494,13 +489,13 @@ Sub SaveClasses()
         Call PutVar(filename, "CLASS" & i, "Agility", STR(Class(i).Stat(Stats.Agility)))
         Call PutVar(filename, "CLASS" & i, "Willpower", STR(Class(i).Stat(Stats.Willpower)))
         ' loop for items & values
-        For x = 1 To UBound(Class(i).StartItem)
-            Call PutVar(filename, "CLASS" & i, "StartItem" & x, STR(Class(i).StartItem(x)))
-            Call PutVar(filename, "CLASS" & i, "StartValue" & x, STR(Class(i).StartValue(x)))
+        For X = 1 To UBound(Class(i).StartItem)
+            Call PutVar(filename, "CLASS" & i, "StartItem" & X, STR(Class(i).StartItem(X)))
+            Call PutVar(filename, "CLASS" & i, "StartValue" & X, STR(Class(i).StartValue(X)))
         Next
         ' loop for spells
-        For x = 1 To UBound(Class(i).StartSpell)
-            Call PutVar(filename, "CLASS" & i, "StartSpell" & x, STR(Class(i).StartSpell(x)))
+        For X = 1 To UBound(Class(i).StartSpell)
+            Call PutVar(filename, "CLASS" & i, "StartSpell" & X, STR(Class(i).StartSpell(X)))
         Next
     Next
 
@@ -578,11 +573,11 @@ Sub CheckItems()
 
 End Sub
 
-Sub ClearItem(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Item(index)), LenB(Item(index)))
-    Item(index).Name = vbNullString
-    Item(index).Desc = vbNullString
-    Item(index).Sound = "None."
+Sub ClearItem(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Item(Index)), LenB(Item(Index)))
+    Item(Index).Name = vbNullString
+    Item(Index).Desc = vbNullString
+    Item(Index).Sound = "None."
 End Sub
 
 Sub ClearItems()
@@ -645,9 +640,9 @@ Sub CheckShops()
 
 End Sub
 
-Sub ClearShop(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Shop(index)), LenB(Shop(index)))
-    Shop(index).Name = vbNullString
+Sub ClearShop(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Shop(Index)), LenB(Shop(Index)))
+    Shop(Index).Name = vbNullString
 End Sub
 
 Sub ClearShops()
@@ -711,12 +706,12 @@ Sub CheckSpells()
 
 End Sub
 
-Sub ClearSpell(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Spell(index)), LenB(Spell(index)))
-    Spell(index).Name = vbNullString
-    Spell(index).LevelReq = 1 'Needs to be 1 for the spell editor
-    Spell(index).Desc = vbNullString
-    Spell(index).Sound = "None."
+Sub ClearSpell(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Spell(Index)), LenB(Spell(Index)))
+    Spell(Index).Name = vbNullString
+    Spell(Index).LevelReq = 1 'Needs to be 1 for the spell editor
+    Spell(Index).Desc = vbNullString
+    Spell(Index).Sound = "None."
 End Sub
 
 Sub ClearSpells()
@@ -779,11 +774,11 @@ Sub CheckNpcs()
 
 End Sub
 
-Sub ClearNpc(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Npc(index)), LenB(Npc(index)))
-    Npc(index).Name = vbNullString
-    Npc(index).AttackSay = vbNullString
-    Npc(index).Sound = "None."
+Sub ClearNpc(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Npc(Index)), LenB(Npc(Index)))
+    Npc(Index).Name = vbNullString
+    Npc(Index).AttackSay = vbNullString
+    Npc(Index).Sound = "None."
 End Sub
 
 Sub ClearNpcs()
@@ -846,12 +841,12 @@ Sub CheckResources()
 
 End Sub
 
-Sub ClearResource(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Resource(index)), LenB(Resource(index)))
-    Resource(index).Name = vbNullString
-    Resource(index).SuccessMessage = vbNullString
-    Resource(index).EmptyMessage = vbNullString
-    Resource(index).Sound = "None."
+Sub ClearResource(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Resource(Index)), LenB(Resource(Index)))
+    Resource(Index).Name = vbNullString
+    Resource(Index).SuccessMessage = vbNullString
+    Resource(Index).EmptyMessage = vbNullString
+    Resource(Index).Sound = "None."
 End Sub
 
 Sub ClearResources()
@@ -915,10 +910,10 @@ Sub CheckAnimations()
 
 End Sub
 
-Sub ClearAnimation(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Animation(index)), LenB(Animation(index)))
-    Animation(index).Name = vbNullString
-    Animation(index).Sound = "None."
+Sub ClearAnimation(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Animation(Index)), LenB(Animation(Index)))
+    Animation(Index).Name = vbNullString
+    Animation(Index).Sound = "None."
 End Sub
 
 Sub ClearAnimations()
@@ -935,7 +930,7 @@ End Sub
 Sub SaveMap(ByVal MapNum As Long)
     Dim filename As String
     Dim F As Long
-    Dim x As Long
+    Dim X As Long
     Dim Y As Long
     filename = App.Path & "\data\maps\map" & MapNum & ".dat"
     F = FreeFile
@@ -957,18 +952,18 @@ Sub SaveMap(ByVal MapNum As Long)
     Put #F, , Map(MapNum).Weather
     Put #F, , Map(MapNum).Intensity
     
-    For x = 1 To 2
-        Put #F, , Map(MapNum).LevelPoke(x)
+    For X = 1 To 2
+        Put #F, , Map(MapNum).LevelPoke(X)
     Next
     
-    For x = 0 To Map(MapNum).MaxX
+    For X = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
-            Put #F, , Map(MapNum).Tile(x, Y)
+            Put #F, , Map(MapNum).Tile(X, Y)
         Next
     Next
 
-    For x = 1 To MAX_MAP_NPCS
-        Put #F, , Map(MapNum).Npc(x)
+    For X = 1 To MAX_MAP_NPCS
+        Put #F, , Map(MapNum).Npc(X)
     Next
     Close #F
     
@@ -988,7 +983,7 @@ Sub LoadMaps()
     Dim filename As String
     Dim i As Long
     Dim F As Long
-    Dim x As Long
+    Dim X As Long
     Dim Y As Long
     Call CheckMaps
 
@@ -1012,22 +1007,22 @@ Sub LoadMaps()
         Get #F, , Map(i).Weather
         Get #F, , Map(i).Intensity
         
-        For x = 1 To 2
-            Get #F, , Map(i).LevelPoke(x)
+        For X = 1 To 2
+            Get #F, , Map(i).LevelPoke(X)
         Next
         
         ' have to set the tile()
         ReDim Map(i).Tile(0 To Map(i).MaxX, 0 To Map(i).MaxY)
 
-        For x = 0 To Map(i).MaxX
+        For X = 0 To Map(i).MaxX
             For Y = 0 To Map(i).MaxY
-                Get #F, , Map(i).Tile(x, Y)
+                Get #F, , Map(i).Tile(X, Y)
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
-            Get #F, , Map(i).Npc(x)
-            MapNpc(i).Npc(x).Num = Map(i).Npc(x)
+        For X = 1 To MAX_MAP_NPCS
+            Get #F, , Map(i).Npc(X)
+            MapNpc(i).Npc(X).Num = Map(i).Npc(X)
         Next
 
         Close #F
@@ -1051,70 +1046,70 @@ Sub CheckMaps()
 
 End Sub
 
-Sub ClearMapItem(ByVal index As Long, ByVal MapNum As Long)
+Sub ClearMapItem(ByVal Index As Long, ByVal MapNum As Long)
     Dim i As Long
     
-    Call ZeroMemory(ByVal VarPtr(MapItem(MapNum, index)), LenB(MapItem(MapNum, index)))
-    MapItem(MapNum, index).Num = 0
-    MapItem(MapNum, index).Value = 0
-    MapItem(MapNum, index).x = 0
-    MapItem(MapNum, index).Y = 0
-    MapItem(MapNum, index).canDespawn = False
-    MapItem(MapNum, index).despawnTimer = 0
-    MapItem(MapNum, index).PokeInfo.Pokemon = 0
-    MapItem(MapNum, index).PokeInfo.Pokeball = 0
-    MapItem(MapNum, index).PokeInfo.Level = 0
-    MapItem(MapNum, index).PokeInfo.EXP = 0
-    MapItem(MapNum, index).PokeInfo.Felicidade = 0
-    MapItem(MapNum, index).PokeInfo.Sexo = 0
-    MapItem(MapNum, index).PokeInfo.Shiny = 0
+    Call ZeroMemory(ByVal VarPtr(MapItem(MapNum, Index)), LenB(MapItem(MapNum, Index)))
+    MapItem(MapNum, Index).Num = 0
+    MapItem(MapNum, Index).Value = 0
+    MapItem(MapNum, Index).X = 0
+    MapItem(MapNum, Index).Y = 0
+    MapItem(MapNum, Index).canDespawn = False
+    MapItem(MapNum, Index).despawnTimer = 0
+    MapItem(MapNum, Index).PokeInfo.Pokemon = 0
+    MapItem(MapNum, Index).PokeInfo.Pokeball = 0
+    MapItem(MapNum, Index).PokeInfo.Level = 0
+    MapItem(MapNum, Index).PokeInfo.EXP = 0
+    MapItem(MapNum, Index).PokeInfo.Felicidade = 0
+    MapItem(MapNum, Index).PokeInfo.Sexo = 0
+    MapItem(MapNum, Index).PokeInfo.Shiny = 0
     
     For i = 1 To Vitals.Vital_Count - 1
-        MapItem(MapNum, index).PokeInfo.Vital(i) = 0
-        MapItem(MapNum, index).PokeInfo.MaxVital(i) = 0
+        MapItem(MapNum, Index).PokeInfo.Vital(i) = 0
+        MapItem(MapNum, Index).PokeInfo.MaxVital(i) = 0
     Next
     
     For i = 1 To Stats.Stat_Count - 1
-        MapItem(MapNum, index).PokeInfo.Stat(i) = 0
+        MapItem(MapNum, Index).PokeInfo.Stat(i) = 0
     Next
     
     For i = 1 To MAX_POKE_SPELL
-        MapItem(MapNum, index).PokeInfo.Spells(i) = 0
+        MapItem(MapNum, Index).PokeInfo.Spells(i) = 0
     Next
     
     For i = 1 To MAX_NEGATIVES
-        MapItem(MapNum, index).PokeInfo.Negatives(i) = 0
+        MapItem(MapNum, Index).PokeInfo.Negatives(i) = 0
     Next
     
     For i = 1 To MAX_BERRYS
-        MapItem(MapNum, index).PokeInfo.Berry(i) = 0
+        MapItem(MapNum, Index).PokeInfo.Berry(i) = 0
     Next
 End Sub
 
 Sub ClearMapItems()
-    Dim x As Long
+    Dim X As Long
     Dim Y As Long
 
     For Y = 1 To MAX_MAPS
-        For x = 1 To MAX_MAP_ITEMS
-            Call ClearMapItem(x, Y)
+        For X = 1 To MAX_MAP_ITEMS
+            Call ClearMapItem(X, Y)
         Next
     Next
 
 End Sub
 
-Sub ClearMapNpc(ByVal index As Long, ByVal MapNum As Long)
+Sub ClearMapNpc(ByVal Index As Long, ByVal MapNum As Long)
     ReDim MapNpc(MapNum).Npc(1 To MAX_MAP_NPCS)
-    Call ZeroMemory(ByVal VarPtr(MapNpc(MapNum).Npc(index)), LenB(MapNpc(MapNum).Npc(index)))
+    Call ZeroMemory(ByVal VarPtr(MapNpc(MapNum).Npc(Index)), LenB(MapNpc(MapNum).Npc(Index)))
 End Sub
 
 Sub ClearMapNpcs()
-    Dim x As Long
+    Dim X As Long
     Dim Y As Long
 
     For Y = 1 To MAX_MAPS
-        For x = 1 To MAX_MAP_NPCS
-            Call ClearMapNpc(x, Y)
+        For X = 1 To MAX_MAP_NPCS
+            Call ClearMapNpc(X, Y)
         Next
     Next
 
@@ -1162,40 +1157,40 @@ Function GetClassStat(ByVal ClassNum As Long, ByVal Stat As Stats) As Long
     GetClassStat = Class(ClassNum).Stat(Stat)
 End Function
 
-Sub SaveBank(ByVal index As Long)
+Sub SaveBank(ByVal Index As Long)
     Dim filename As String
     Dim F As Long
     
-    filename = App.Path & "\data\banks\" & Trim$(Player(index).Login) & ".bin"
+    filename = App.Path & "\data\banks\" & Trim$(Player(Index).Login) & ".bin"
     
     F = FreeFile
     Open filename For Binary As #F
-    Put #F, , Bank(index)
+    Put #F, , Bank(Index)
     Close #F
 End Sub
 
-Public Sub LoadBank(ByVal index As Long, ByVal Name As String)
+Public Sub LoadBank(ByVal Index As Long, ByVal Name As String)
     Dim filename As String
     Dim F As Long
 
-    Call ClearBank(index)
+    Call ClearBank(Index)
 
     filename = App.Path & "\data\banks\" & Trim$(Name) & ".bin"
     
     If Not FileExist(filename, True) Then
-        Call SaveBank(index)
+        Call SaveBank(Index)
         Exit Sub
     End If
 
     F = FreeFile
     Open filename For Binary As #F
-        Get #F, , Bank(index)
+        Get #F, , Bank(Index)
     Close #F
 
 End Sub
 
-Sub ClearBank(ByVal index As Long)
-    Call ZeroMemory(ByVal VarPtr(Bank(index)), LenB(Bank(index)))
+Sub ClearBank(ByVal Index As Long)
+    Call ZeroMemory(ByVal VarPtr(Bank(Index)), LenB(Bank(Index)))
 End Sub
 
 Sub ClearParty(ByVal partynum As Long)
@@ -1254,20 +1249,20 @@ Sub CheckQuests()
     Next
 End Sub
 
-Sub ClearQuest(ByVal index As Long)
-    Dim i As Byte, x As Byte
+Sub ClearQuest(ByVal Index As Long)
+    Dim i As Byte, X As Byte
 
-    Call ZeroMemory(ByVal VarPtr(Quest(index)), LenB(Quest(index)))
-    Quest(index).Name = ""
-    Quest(index).Description = ""
+    Call ZeroMemory(ByVal VarPtr(Quest(Index)), LenB(Quest(Index)))
+    Quest(Index).Name = ""
+    Quest(Index).Description = ""
     
     For i = 1 To MAX_QUEST_TASKS
-        For x = 1 To 3
-            Quest(index).Task(i).message(x) = ""
+        For X = 1 To 3
+            Quest(Index).Task(i).message(X) = ""
         Next
     
-        Quest(index).Task(i).Num = 1
-        Quest(index).Task(i).Value = 1
+        Quest(Index).Task(i).Num = 1
+        Quest(Index).Task(i).Value = 1
     Next
 End Sub
 
@@ -1474,7 +1469,7 @@ End Sub
 
 Sub SaveOrgExp(ByVal OrgNum As Byte)
     Dim filename As String
-    Dim i As Long, x As Long
+    Dim i As Long, X As Long
     i = OrgNum
     
     ' Declaração
@@ -1567,15 +1562,15 @@ Dim F As Long, i As Long
     
 End Sub
 
-Function GetPlayerOrg(ByVal index As Long) As Long
-    GetPlayerOrg = Player(index).ORG
+Function GetPlayerOrg(ByVal Index As Long) As Long
+    GetPlayerOrg = Player(Index).ORG
 End Function
 
-Sub SetPlayerOrg(ByVal index As Long, ByVal ORG As Long)
-    Player(index).ORG = ORG
+Sub SetPlayerOrg(ByVal Index As Long, ByVal ORG As Long)
+    Player(Index).ORG = ORG
 End Sub
 
-Public Function CheckForSwears(index As Long, Msg As String)
+Public Function CheckForSwears(Index As Long, Msg As String)
 Dim SplitStr() As String
 Dim SwearWords As String
 Dim i As Integer

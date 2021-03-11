@@ -42,3 +42,15 @@ Mensagem de grupo(Adicionado)
 Botões setando canal de cnv Global/Map/Grupo(adicionado) F. Org
 Código do Botão Enviar mensagem(Adicionado)
 Ao apertar enter apos enviar msg fechar o chat(Retirado) só fecha caso a msg esteja vazia
+
+Client:
+
+Sistema de setar visual slot / num(Adicionado)
+Sistema de Teleport(Adicionado)
+Sistema de CheckPoint(Adicionado)
+Antigo Sistema de Visual(Retirado)
+
+Bugs:
+
+No Banco não aparece shiny as faces(Falta Arrumar)
+goto continue

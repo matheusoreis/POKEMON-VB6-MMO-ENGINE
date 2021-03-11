@@ -103,7 +103,6 @@ Public Enum ServerPackets
     SOrgShop
     SChatBubble
     SVipInfo
-    'SAparencia
     SRunning
     SComandGym
     SContagem

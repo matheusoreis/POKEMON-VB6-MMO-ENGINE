@@ -175,18 +175,7 @@ Private Type PlayerRec
     TPY As Long
     TPDir As Long
     TPSprite As Long
-    
-    'Customização
-    HairModel As Integer
-    HairColor As Byte
-    HairNum As Integer
-    ClothModel As Integer
-    ClothColor As Byte
-    ClothNum As Integer
-    LegsModel As Integer
-    LegsColor As Byte
-    LegsNum As Integer
-    
+
     'Evolução
     EvolPermition As Byte
     EvolTimerStone As Long

@@ -1005,9 +1005,6 @@ Private Sub Form_Load()
         chkPass.value = Options.SavePass
     End If
 
-    NewHairNum = 1
-    HairColor = 1
-
     If chkPass.value = False Then
         PicPass.Picture = LoadPicture(App.Path & "\data files\graphics\gui\main\buttons\off.jpg")
     Else

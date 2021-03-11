@@ -604,33 +604,6 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub CheckHairNum()
-    Dim i As Long
-
-    ' If debug mode, handle error then exit out
-    If Options.Debug = 1 Then On Error GoTo errorhandler
-
-    i = 1
-
-    While FileExist(GFX_PATH & "characters\Cabelos\" & i & GFX_EXT)
-        HairNum = HairNum + 1
-        i = i + 1
-    Wend
-
-    If HairNum = 0 Then Exit Sub
-
-    ReDim DDS_Hair(1 To HairNum)
-    ReDim DDSD_Hair(1 To HairNum)
-    ReDim HairTimer(1 To HairNum)
-
-    ' Error handler
-    Exit Sub
-errorhandler:
-    HandleError "CheckHairNum", "modDatabase", Err.Number, Err.Description, Err.Source, Err.HelpContext
-    Err.Clear
-    Exit Sub
-End Sub
-
 Sub ClearPlayer(ByVal Index As Long)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
