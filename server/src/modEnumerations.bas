@@ -132,6 +132,7 @@ Public Enum ClientPackets
     CWarpToMe
     CWarpTo
     CSetSprite
+    CSetHair
     CGetStats
     CRequestNewMap
     CMapData

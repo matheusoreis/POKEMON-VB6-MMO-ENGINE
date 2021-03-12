@@ -246,7 +246,7 @@ Function CharExist(ByVal Index As Long) As Boolean
 
 End Function
 
-Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Long, ByVal Sprite As Long)
+Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Long, ByVal Sprite As Long, ByVal Cabelo As Byte)
     Dim F As Long
     Dim n As Long
     Dim spritecheck As Boolean
@@ -265,7 +265,8 @@ Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal 
         Else
             Player(Index).Sprite = Class(ClassNum).FemaleSprite(Sprite)
         End If
-
+        
+        Player(Index).Cabelo = Class(ClassNum).Cabelos(Cabelo)
         Player(Index).Level = 1
         Player(Index).MySprite = Player(Index).Sprite
 
@@ -419,6 +420,7 @@ Sub LoadClasses()
         tmpSprite = GetVar(filename, "CLASS" & i, "MaleSprite")
         ' split into an array of strings
         tmpArray() = Split(tmpSprite, ",")
+        
         ' redim the class sprite array
         ReDim Class(i).MaleSprite(0 To UBound(tmpArray))
         ' loop through converting strings to values and store in the sprite array
@@ -436,7 +438,13 @@ Sub LoadClasses()
         For n = 0 To UBound(tmpArray)
             Class(i).FemaleSprite(n) = Val(tmpArray(n))
         Next
-        
+           
+        tmpSprite = GetVar(filename, "CLASS" & i, "Cabelos")
+        tmpArray() = Split(tmpSprite, ",")
+        ReDim Class(i).Cabelos(0 To UBound(tmpArray))
+        For n = 0 To UBound(tmpArray)
+            Class(i).Cabelos(n) = Val(tmpArray(n))
+        Next
         ' continue
         Class(i).Stat(Stats.Strength) = Val(GetVar(filename, "CLASS" & i, "Strength"))
         Class(i).Stat(Stats.Endurance) = Val(GetVar(filename, "CLASS" & i, "Endurance"))

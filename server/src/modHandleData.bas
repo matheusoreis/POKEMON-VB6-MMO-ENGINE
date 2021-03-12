@@ -25,6 +25,7 @@ Public Sub InitMessages()
     HandleDataSub(CWarpToMe) = GetAddress(AddressOf HandleWarpToMe)
     HandleDataSub(CWarpTo) = GetAddress(AddressOf HandleWarpTo)
     HandleDataSub(CSetSprite) = GetAddress(AddressOf HandleSetSprite)
+    HandleDataSub(CSetHair) = GetAddress(AddressOf HandleSetHair)
     HandleDataSub(CGetStats) = GetAddress(AddressOf HandleGetStats)
     HandleDataSub(CRequestNewMap) = GetAddress(AddressOf HandleRequestNewMap)
     HandleDataSub(CMapData) = GetAddress(AddressOf HandleMapData)
@@ -370,6 +371,7 @@ Private Sub HandleAddChar(ByVal Index As Long, ByRef Data() As Byte, ByVal Start
     Dim Sex As Long
     Dim Class As Long
     Dim Sprite As Long
+    Dim Cabelo As Byte
     Dim i As Long
     Dim n As Long
 
@@ -380,6 +382,7 @@ Private Sub HandleAddChar(ByVal Index As Long, ByRef Data() As Byte, ByVal Start
         Sex = Buffer.ReadLong
         Class = Buffer.ReadLong
         Sprite = Buffer.ReadLong
+        Cabelo = Buffer.ReadByte
 
         ' Prevent hacking
         If Len(Trim$(Name)) < 3 Then
@@ -421,7 +424,7 @@ Private Sub HandleAddChar(ByVal Index As Long, ByRef Data() As Byte, ByVal Start
         End If
 
         ' Everything went ok, add the character
-        Call AddChar(Index, Name, Sex, Class, Sprite)
+        Call AddChar(Index, Name, Sex, Class, Sprite, Cabelo)
         Call AddLog("Character " & Name & " added to " & GetPlayerLogin(Index) & "'s account.", PLAYER_LOG)
         ' log them in!!
         HandleUseChar Index
@@ -4400,3 +4403,16 @@ Private Sub HandleGrupoMsg(ByVal Index As Long, ByRef Data() As Byte, ByVal Star
     Set Buffer = Nothing
 End Sub
 
+Sub HandleSetHair(ByVal Index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
+    Dim n As Long
+    Dim Buffer As clsBuffer
+    Set Buffer = New clsBuffer
+    Buffer.WriteBytes Data()
+
+    ' The sprite
+    n = Buffer.ReadLong 'CLng(Parse(1))
+    Set Buffer = Nothing
+    Call SetPlayerCabelo(Index, n)
+    Call SendPlayerData(Index)
+    Exit Sub
+End Sub

@@ -212,6 +212,7 @@ Private Type PlayerRec
     NgtDamage(1 To MAX_NEGATIVES) As Long
     Visuais(1 To 50) As Long
     Teleport(1 To 30) As Long
+    Cabelo As Byte
 End Type
 
 Public Type SpellBufferRec
@@ -339,6 +340,7 @@ Private Type ClassRec
     
     startSpellCount As Long
     StartSpell() As Long
+    Cabelos() As Long
 End Type
 
 Private Type ItemRec
@@ -382,6 +384,8 @@ Private Type ItemRec
     BauItem(1 To MAX_BAU) As Long
     BauValue(1 To MAX_BAU) As Long
     GiveAll As Boolean
+    VNum As Byte
+    VSlot As Byte
 End Type
 
 Private Type MapItemRec

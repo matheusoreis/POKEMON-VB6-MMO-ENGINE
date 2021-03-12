@@ -30,7 +30,7 @@ Begin VB.Form frmMenu
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       Height          =   7320
-      Left            =   4470
+      Left            =   0
       Picture         =   "frmMenu.frx":21CD0E
       ScaleHeight     =   488
       ScaleMode       =   3  'Pixel
@@ -1019,7 +1019,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1167,16 +1167,16 @@ End Sub
 ' CÓDIGO PERSONAGEM '
 '''''''''''''''''''''
 
-Private Sub picCharacter_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub picCharacter_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub picCharacter_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picCharacter_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.picCharacter, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.picCharacter, Button, Shift, x, y)
     resetButtons_Menu
 
     ' Error handler
@@ -1191,17 +1191,17 @@ End Sub
 ' CÓDIGO LOGIN '
 ''''''''''''''''
 
-Private Sub picLogin_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub picLogin_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub picLogin_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picLogin_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     ' Ativa o movimento da janela
-    Call MovePicture(frmMenu.picLogin, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.picLogin, Button, Shift, x, y)
 
     resetButtons_Menu
 
@@ -1213,7 +1213,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picMain_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1247,16 +1247,16 @@ End Sub
 ' CÓDIGO TROCAR SENHA '
 '''''''''''''''''''''''
 
-Private Sub PicNewPass_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub PicNewPass_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub PicNewPass_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicNewPass_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.PicNewPass, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.PicNewPass, Button, Shift, x, y)
 
     ' Error handler
     Exit Sub
@@ -1270,16 +1270,16 @@ End Sub
 ' CÓDIGO RECUPERAR SENHA '
 ''''''''''''''''''''''''''
 
-Private Sub PicRecover_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub PicRecover_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub PicRecover_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicRecover_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.PicRecover, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.PicRecover, Button, Shift, x, y)
 
     ' Error handler
     Exit Sub
@@ -1293,16 +1293,16 @@ End Sub
 ' CÓDIGO REGISTRO '
 '''''''''''''''''''
 
-Private Sub picRegister_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub picRegister_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub picRegister_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picRegister_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.picRegister, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.picRegister, Button, Shift, x, y)
 
     resetButtons_Menu
 
@@ -1514,7 +1514,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1532,7 +1532,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1558,7 +1558,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 

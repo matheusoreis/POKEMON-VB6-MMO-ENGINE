@@ -316,3 +316,7 @@ Public ChatGym As Byte
 Public ChatGymStep As Byte
 Public ContagemGym As Integer
 Public ContagemTick As Long
+
+'Hair
+Public newCharCabelo As Byte
+Public NewHairNum As Byte

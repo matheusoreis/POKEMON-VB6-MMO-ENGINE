@@ -1358,7 +1358,14 @@ End Sub
 
 ' Modificação do personagem
 Private Sub cmdSet_Click(Index As Integer)
-
+Select Case Index
+    Case 0
+        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
+        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(0).text)) Then Exit Sub
+        
+        'Modificar Sprite
+        Call SendSetSprite(Trim$(txtAName.text), CLng(Trim$(txtInfo(0).text)))
+End Select
 End Sub
 
 ' Editor de pokémon

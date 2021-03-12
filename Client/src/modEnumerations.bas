@@ -132,6 +132,7 @@ Public Enum ClientPackets
     CWarpToMe
     CWarpTo
     CSetSprite
+    CSetHair
     CGetStats
     CRequestNewMap
     CMapData
@@ -225,6 +226,7 @@ Public Enum ClientPackets
     CPlayerRun
     CComandGym
     CGrupoMsg
+    
     ' Make sure CMSG_COUNT is below everything else
     CMSG_COUNT
 End Enum

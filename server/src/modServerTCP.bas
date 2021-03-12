@@ -524,6 +524,7 @@ Function PlayerData(ByVal Index As Long) As Byte()
     Buffer.WriteLong GetPlayerLevel(Index)
     Buffer.WriteLong GetPlayerPOINTS(Index)
     Buffer.WriteLong GetPlayerSprite(Index)
+    Buffer.WriteByte GetPlayerCabelo(Index)
     Buffer.WriteLong GetPlayerMap(Index)
     Buffer.WriteLong GetPlayerX(Index)
     Buffer.WriteLong GetPlayerY(Index)
@@ -540,6 +541,7 @@ Function PlayerData(ByVal Index As Long) As Byte()
     Buffer.WriteByte Player(Index).ORG
     Buffer.WriteLong Player(Index).Honra
     Buffer.WriteByte Player(Index).MyVip
+    
     
     If Player(Index).VipInName = True Then
         Buffer.WriteByte 1
@@ -1157,6 +1159,12 @@ Sub SendClasses(ByVal Index As Long)
             Buffer.WriteLong Class(i).FemaleSprite(q)
         Next
         
+        n = UBound(Class(i).Cabelos)
+        Buffer.WriteLong n
+        For q = 0 To n
+            Buffer.WriteLong Class(i).Cabelos(q)
+        Next
+        
         For q = 1 To Stats.Stat_Count - 1
             Buffer.WriteLong Class(i).Stat(q)
         Next
@@ -1195,6 +1203,12 @@ Sub SendNewCharClasses(ByVal Index As Long)
         ' loop around sending each sprite
         For q = 0 To n
             Buffer.WriteLong Class(i).FemaleSprite(q)
+        Next
+        
+        n = UBound(Class(i).Cabelos)
+        Buffer.WriteLong n
+        For q = 0 To n
+            Buffer.WriteLong Class(i).Cabelos(q)
         Next
         
         For q = 1 To Stats.Stat_Count - 1

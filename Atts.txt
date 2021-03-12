@@ -54,3 +54,9 @@ Bugs:
 
 No Banco não aparece shiny as faces(Falta Arrumar)
 goto continue
+
+Visual:
+
+sistema de Cabelo / hair(Adicionado)
+item dar visual(Adicionado)
+Janela de visuais Usar não usar(Adicionado)

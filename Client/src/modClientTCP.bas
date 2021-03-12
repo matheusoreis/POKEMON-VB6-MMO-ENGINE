@@ -233,7 +233,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub SendAddChar(ByVal Name As String, ByVal Sex As Long, ByVal ClassNum As Long, ByVal Sprite As Long)
+Public Sub SendAddChar(ByVal Name As String, ByVal Sex As Long, ByVal ClassNum As Long, ByVal Sprite As Long, ByVal Cabelo As Byte)
     Dim Buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
@@ -245,6 +245,7 @@ Public Sub SendAddChar(ByVal Name As String, ByVal Sex As Long, ByVal ClassNum A
     Buffer.WriteLong Sex
     Buffer.WriteLong ClassNum
     Buffer.WriteLong Sprite
+    Buffer.WriteByte Cabelo
     SendData Buffer.ToArray()
     Set Buffer = Nothing
 
@@ -367,8 +368,8 @@ Public Sub SendPlayerMove()
     Buffer.WriteLong CPlayerMove
     Buffer.WriteLong GetPlayerDir(MyIndex)
     Buffer.WriteLong Player(MyIndex).Moving
-    Buffer.WriteLong Player(MyIndex).X
-    Buffer.WriteLong Player(MyIndex).Y
+    Buffer.WriteLong Player(MyIndex).x
+    Buffer.WriteLong Player(MyIndex).y
     SendData Buffer.ToArray()
     Set Buffer = Nothing
 
@@ -422,8 +423,8 @@ End Sub
 
 Public Sub SendMap()
     Dim packet As String
-    Dim X As Long
-    Dim Y As Long
+    Dim x As Long
+    Dim y As Long
     Dim i As Long
     Dim Buffer As clsBuffer
 
@@ -449,18 +450,18 @@ Public Sub SendMap()
         Buffer.WriteByte .MaxY
         Buffer.WriteLong .Weather
         Buffer.WriteLong .Intensity
-        For X = 1 To 2
-            Buffer.WriteLong .LevelPoke(X)
+        For x = 1 To 2
+            Buffer.WriteLong .LevelPoke(x)
         Next
     End With
 
-    For X = 0 To Map.MaxX
-        For Y = 0 To Map.MaxY
+    For x = 0 To Map.MaxX
+        For y = 0 To Map.MaxY
 
-            With Map.Tile(X, Y)
+            With Map.Tile(x, y)
                 For i = 1 To MapLayer.Layer_Count - 1
-                    Buffer.WriteLong .Layer(i).X
-                    Buffer.WriteLong .Layer(i).Y
+                    Buffer.WriteLong .Layer(i).x
+                    Buffer.WriteLong .Layer(i).y
                     Buffer.WriteLong .Layer(i).Tileset
                 Next
                 Buffer.WriteByte .Type
@@ -475,8 +476,8 @@ Public Sub SendMap()
 
     With Map
 
-        For X = 1 To MAX_MAP_NPCS
-            Buffer.WriteLong .Npc(X)
+        For x = 1 To MAX_MAP_NPCS
+            Buffer.WriteLong .Npc(x)
         Next
 
     End With
@@ -1501,7 +1502,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub AdminWarp(ByVal X As Long, ByVal Y As Long)
+Public Sub AdminWarp(ByVal x As Long, ByVal y As Long)
     Dim Buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
@@ -1509,8 +1510,8 @@ Public Sub AdminWarp(ByVal X As Long, ByVal Y As Long)
 
     Set Buffer = New clsBuffer
     Buffer.WriteLong CAdminWarp
-    Buffer.WriteLong X
-    Buffer.WriteLong Y
+    Buffer.WriteLong x
+    Buffer.WriteLong y
     SendData Buffer.ToArray()
     Set Buffer = Nothing
 
@@ -1626,18 +1627,18 @@ End Sub
 
 Public Sub SendHotbarUse(ByVal Slot As Long)
     Dim Buffer As clsBuffer
-    Dim X As Long
+    Dim x As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     ' check if spell
     If Hotbar(Slot).sType = 2 Then    ' spell
-        For X = 1 To MAX_PLAYER_SPELLS
+        For x = 1 To MAX_PLAYER_SPELLS
             ' is the spell matching the hotbar?
-            If PlayerSpells(X) = Hotbar(Slot).Slot Then
+            If PlayerSpells(x) = Hotbar(Slot).Slot Then
                 ' found it, cast it
-                CastSpell X
+                CastSpell x
                 Exit Sub
             End If
         Next
@@ -2193,6 +2194,26 @@ Dim Buffer As clsBuffer
     Exit Sub
 errorhandler:
     HandleError "VilaMsg", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+Public Sub SendSetHair(ByVal SpriteNum As Long)
+Dim Buffer As clsBuffer
+
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+    
+    Set Buffer = New clsBuffer
+    Buffer.WriteLong CSetHair
+    Buffer.WriteLong SpriteNum
+    SendData Buffer.ToArray()
+    Set Buffer = Nothing
+    
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "SendSetSprite", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
 End Sub
