@@ -137,7 +137,7 @@ errorhandler:
     Exit Function
 End Function
 
-Sub SendData(ByRef data() As Byte)
+Sub SendData(ByRef Data() As Byte)
     Dim Buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
@@ -146,8 +146,8 @@ Sub SendData(ByRef data() As Byte)
     If IsConnected Then
         Set Buffer = New clsBuffer
 
-        Buffer.WriteLong (UBound(data) - LBound(data)) + 1
-        Buffer.WriteBytes data()
+        Buffer.WriteLong (UBound(Data) - LBound(Data)) + 1
+        Buffer.WriteBytes Data()
         frmMain.Socket.SendData Buffer.ToArray()
     End If
 
@@ -2214,6 +2214,26 @@ Dim Buffer As clsBuffer
     Exit Sub
 errorhandler:
     HandleError "SendSetSprite", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+Public Sub SendRequestStatus()
+Dim Buffer As clsBuffer
+
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+    
+    Set Buffer = New clsBuffer
+    Buffer.WriteLong CRequestStatus
+    Buffer.WriteLong MyIndex
+    SendData Buffer.ToArray()
+    Set Buffer = Nothing
+    
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "SendRequestStatus", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
 End Sub

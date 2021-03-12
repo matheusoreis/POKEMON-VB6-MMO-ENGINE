@@ -60,3 +60,7 @@ Visual:
 sistema de Cabelo / hair(Adicionado)
 item dar visual(Adicionado)
 Janela de visuais Usar não usar(Adicionado)
+
+Menu:
+
+Server status Online/Offline(Adicionado)

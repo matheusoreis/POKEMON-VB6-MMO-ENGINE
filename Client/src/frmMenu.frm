@@ -25,6 +25,12 @@ Begin VB.Form frmMenu
    ScaleWidth      =   1152
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Timer tmrStatus 
+      Enabled         =   0   'False
+      Interval        =   5000
+      Left            =   13920
+      Top             =   7200
+   End
    Begin VB.PictureBox PicTermos 
       AutoSize        =   -1  'True
       BackColor       =   &H00FFFFFF&
@@ -318,6 +324,16 @@ Begin VB.Form frmMenu
       TabIndex        =   32
       Top             =   9195
       Width           =   17280
+      Begin VB.Label lblStatus 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Offline"
+         ForeColor       =   &H000000FF&
+         Height          =   255
+         Left            =   3480
+         TabIndex        =   48
+         Top             =   120
+         Width           =   1575
+      End
       Begin VB.Label lblExtra 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
@@ -989,6 +1005,17 @@ Private Sub cmbClass_Click()
     NewCharacterBltSprite
 End Sub
 
+Private Sub Form_Activate()
+tmrStatus.Enabled = True
+If ConnectToServer(1) Then
+SendRequestStatus
+Else
+lblStatus.Caption = "Offline"
+lblStatus.ForeColor = QBColor(BrightRed)
+
+End If
+End Sub
+
 Private Sub Form_Load()
     Dim tmpTxt As String, tmpArray() As String, i As Long
 
@@ -1571,6 +1598,15 @@ errorhandler:
     HandleError "imgButton_MouseUp", "frmMenu", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
+End Sub
+
+Private Sub tmrStatus_Timer()
+If ConnectToServer(1) Then
+SendRequestStatus
+Else
+lblStatus.Caption = "Offline"
+lblStatus.ForeColor = QBColor(BrightRed)
+End If
 End Sub
 
 ' Se pressionar enter
