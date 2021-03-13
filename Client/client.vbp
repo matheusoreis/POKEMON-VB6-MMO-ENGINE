@@ -39,6 +39,7 @@ Module=ModQuest; src\ModQuest.bas
 Module=modFMod; src\modFMod.bas
 Form=src\frmCharEditor.frm
 Form=src\frmAdmin.frm
+Object={BF38D12B-22A9-4B10-B26E-019F2B5F9C22}#1.0#0; Ani Gif.ocx
 IconForm="frmMenu"
 Startup="Sub Main"
 HelpFile=""
