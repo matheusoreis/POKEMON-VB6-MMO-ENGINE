@@ -6583,17 +6583,17 @@ End Sub
 
 Private Sub ListPokes_Click()
     Dim i As Long    '123
-
+ 
     If Player(MyIndex).Pokedex(ListPokes.ListIndex + 1) = 1 Then
         lblPI(0).Caption = Trim$(Pokemon(ListPokes.ListIndex + 1).Name)
         lblPI(1).Caption = Trim$(Pokemon(ListPokes.ListIndex + 1).Desc)
-        lblPI(2).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(1)
-        lblPI(3).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(2)
-        lblPI(4).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(3)
-        lblPI(5).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(4)
-        lblPI(6).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(5)
-        lblPI(7).Caption = Pokemon(ListPokes.ListIndex + 1).Vital(1)
-        lblPI(8).Caption = Pokemon(ListPokes.ListIndex + 1).Vital(2)
+        lblPI(2).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(1) & " Max.Atk " & Pokemon(ListPokes.ListIndex + 1).Add_Stat(1) + 297
+        lblPI(3).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(2) & " Max.Def " & Pokemon(ListPokes.ListIndex + 1).Add_Stat(3) + 297
+        lblPI(4).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(3) & " Max.EAtk " & Pokemon(ListPokes.ListIndex + 1).Add_Stat(2) + 297
+        lblPI(5).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(4) & " Max.EDef " & Pokemon(ListPokes.ListIndex + 1).Add_Stat(5) + 297
+        lblPI(6).Caption = Pokemon(ListPokes.ListIndex + 1).Add_Stat(5) & " Max.Speed " & Pokemon(ListPokes.ListIndex + 1).Add_Stat(4) + 297
+        lblPI(7).Caption = Pokemon(ListPokes.ListIndex + 1).Vital(1) & " Max.HP " & Pokemon(ListPokes.ListIndex + 1).Vital(1) + 495
+        lblPI(8).Caption = Pokemon(ListPokes.ListIndex + 1).Vital(2) & " Max.PP " & Pokemon(ListPokes.ListIndex + 1).Vital(2) + 495
 
         picFD.Visible = True
         If Pokemon(ListPokes.ListIndex + 1).Evolução(1).Pokemon > 0 Then
@@ -6605,16 +6605,31 @@ Private Sub ListPokes_Click()
         picFaces.LoadAnimatedGIF_File (App.Path & "\data files\graphics\faces\" & ListPokes.ListIndex + 1 & ".gif")
         picFaces.Visible = True
         
-        If ListPokes.ListIndex + 1 = 1 Then
-            picFaces.Left = 240
-            picFaces.top = 50
-        ElseIf ListPokes.ListIndex + 1 = 2 Then
-            picFaces.Left = 220
-            picFaces.top = 50
-        Else
-            picFaces.Left = 212
-            picFaces.top = 10
-        End If
+        Select Case ListPokes.ListIndex + 1
+            Case 1, 4
+                picFaces.Left = 245
+                picFaces.top = 65 '
+            Case 2, 5
+                picFaces.Left = 235
+                picFaces.top = 50
+            Case 3 '
+                picFaces.Left = 215
+                picFaces.top = 50
+            Case Else
+                picFaces.Left = 212
+                picFaces.top = 10
+        End Select
+        
+        'If ListPokes.ListIndex + 1 = 1 Then
+        '    picFaces.Left = 240
+        '    picFaces.top = 50
+       ' ElseIf ListPokes.ListIndex + 1 = 2 Then
+       '     picFaces.Left = 220
+       '     picFaces.top = 50
+       ' Else
+       '     picFaces.Left = 212
+       '     picFaces.top = 10
+       ' End If
        ' BltPoke
     Else
         lblPI(0).Caption = "???"
@@ -6629,6 +6644,7 @@ Private Sub ListPokes_Click()
 
         lblEv.Caption = "???"
         picFD.Visible = False
+        picFaces.Visible = False
         'BltPoke
     End If
 
