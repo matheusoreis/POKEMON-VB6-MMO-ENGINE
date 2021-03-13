@@ -302,13 +302,6 @@ Public MapName(1 To MAX_MAPS) As String
 
 'Customização do Personagem
 Public BaseDir As Byte
-Public BaseNum As Byte
-Public NewHairNum As Byte
-Public HairColor As Byte
-Public ClothNum As Byte
-Public ClothColor As Byte
-Public LegsNum As Byte
-Public LegsColor As Byte
 Public SexNewChar As Boolean    'False = Male and True = Female
 
 ' Chat Bubble Mondo
@@ -323,3 +316,7 @@ Public ChatGym As Byte
 Public ChatGymStep As Byte
 Public ContagemGym As Integer
 Public ContagemTick As Long
+
+'Hair
+Public newCharCabelo As Byte
+Public NewHairNum As Byte

@@ -25,12 +25,18 @@ Begin VB.Form frmMenu
    ScaleWidth      =   1152
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Timer tmrStatus 
+      Enabled         =   0   'False
+      Interval        =   5000
+      Left            =   13920
+      Top             =   7200
+   End
    Begin VB.PictureBox PicTermos 
       AutoSize        =   -1  'True
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       Height          =   7320
-      Left            =   4470
+      Left            =   0
       Picture         =   "frmMenu.frx":21CD0E
       ScaleHeight     =   488
       ScaleMode       =   3  'Pixel
@@ -318,6 +324,16 @@ Begin VB.Form frmMenu
       TabIndex        =   32
       Top             =   9195
       Width           =   17280
+      Begin VB.Label lblStatus 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Offline"
+         ForeColor       =   &H000000FF&
+         Height          =   255
+         Left            =   3480
+         TabIndex        =   48
+         Top             =   120
+         Width           =   1575
+      End
       Begin VB.Label lblExtra 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
@@ -989,6 +1005,17 @@ Private Sub cmbClass_Click()
     NewCharacterBltSprite
 End Sub
 
+Private Sub Form_Activate()
+tmrStatus.Enabled = True
+If ConnectToServer(1) Then
+SendRequestStatus
+Else
+lblStatus.Caption = "Offline"
+lblStatus.ForeColor = QBColor(BrightRed)
+
+End If
+End Sub
+
 Private Sub Form_Load()
     Dim tmpTxt As String, tmpArray() As String, i As Long
 
@@ -1005,9 +1032,6 @@ Private Sub Form_Load()
         chkPass.value = Options.SavePass
     End If
 
-    NewHairNum = 1
-    HairColor = 1
-
     If chkPass.value = False Then
         PicPass.Picture = LoadPicture(App.Path & "\data files\graphics\gui\main\buttons\off.jpg")
     Else
@@ -1022,7 +1046,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1170,16 +1194,16 @@ End Sub
 ' CÓDIGO PERSONAGEM '
 '''''''''''''''''''''
 
-Private Sub picCharacter_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub picCharacter_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub picCharacter_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picCharacter_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.picCharacter, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.picCharacter, Button, Shift, x, y)
     resetButtons_Menu
 
     ' Error handler
@@ -1194,17 +1218,17 @@ End Sub
 ' CÓDIGO LOGIN '
 ''''''''''''''''
 
-Private Sub picLogin_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub picLogin_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub picLogin_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picLogin_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     ' Ativa o movimento da janela
-    Call MovePicture(frmMenu.picLogin, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.picLogin, Button, Shift, x, y)
 
     resetButtons_Menu
 
@@ -1216,7 +1240,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub picMain_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1250,16 +1274,16 @@ End Sub
 ' CÓDIGO TROCAR SENHA '
 '''''''''''''''''''''''
 
-Private Sub PicNewPass_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub PicNewPass_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub PicNewPass_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicNewPass_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.PicNewPass, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.PicNewPass, Button, Shift, x, y)
 
     ' Error handler
     Exit Sub
@@ -1273,16 +1297,16 @@ End Sub
 ' CÓDIGO RECUPERAR SENHA '
 ''''''''''''''''''''''''''
 
-Private Sub PicRecover_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub PicRecover_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub PicRecover_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicRecover_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.PicRecover, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.PicRecover, Button, Shift, x, y)
 
     ' Error handler
     Exit Sub
@@ -1296,16 +1320,16 @@ End Sub
 ' CÓDIGO REGISTRO '
 '''''''''''''''''''
 
-Private Sub picRegister_MouseDown(Button As Integer, Deslocamento As Integer, X As Single, Y As Single)
-    SOffsetX = X
-    SOffsetY = Y
+Private Sub picRegister_MouseDown(Button As Integer, Deslocamento As Integer, x As Single, y As Single)
+    SOffsetX = x
+    SOffsetY = y
 End Sub
 
-Private Sub picRegister_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picRegister_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
-    Call MovePicture(frmMenu.picRegister, Button, Shift, X, Y)
+    Call MovePicture(frmMenu.picRegister, Button, Shift, x, y)
 
     resetButtons_Menu
 
@@ -1517,7 +1541,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1535,7 +1559,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1561,7 +1585,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Private Sub imgButton_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgButton_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
@@ -1574,6 +1598,15 @@ errorhandler:
     HandleError "imgButton_MouseUp", "frmMenu", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
+End Sub
+
+Private Sub tmrStatus_Timer()
+If ConnectToServer(1) Then
+SendRequestStatus
+Else
+lblStatus.Caption = "Offline"
+lblStatus.ForeColor = QBColor(BrightRed)
+End If
 End Sub
 
 ' Se pressionar enter

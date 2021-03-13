@@ -26,6 +26,48 @@ Begin VB.Form frmEditor_Item
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Frame fraVisual 
+      Caption         =   "Visual"
+      Height          =   1815
+      Left            =   12000
+      TabIndex        =   115
+      Top             =   2880
+      Visible         =   0   'False
+      Width           =   2775
+      Begin VB.HScrollBar scrlSlot 
+         Height          =   255
+         Left            =   120
+         Max             =   255
+         TabIndex        =   117
+         Top             =   1200
+         Width           =   1935
+      End
+      Begin VB.HScrollBar scrlVNum 
+         Height          =   255
+         LargeChange     =   10
+         Left            =   120
+         Max             =   255
+         TabIndex        =   116
+         Top             =   720
+         Width           =   1935
+      End
+      Begin VB.Label lblSlot 
+         Caption         =   "Value: 0"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   119
+         Top             =   960
+         Width           =   2175
+      End
+      Begin VB.Label lblVNum 
+         Caption         =   "Num: 0"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   118
+         Top             =   480
+         Width           =   2295
+      End
+   End
    Begin VB.Frame fraBau 
       Caption         =   "Báu Slot: 1"
       Height          =   2295
@@ -487,7 +529,7 @@ Begin VB.Form frmEditor_Item
          Height          =   300
          ItemData        =   "frmEditor_Item.frx":343B
          Left            =   120
-         List            =   "frmEditor_Item.frx":3469
+         List            =   "frmEditor_Item.frx":346C
          Style           =   2  'Dropdown List
          TabIndex        =   21
          Top             =   1200
@@ -937,9 +979,9 @@ Begin VB.Form frmEditor_Item
       End
       Begin VB.ComboBox cmbTool 
          Height          =   300
-         ItemData        =   "frmEditor_Item.frx":34D7
+         ItemData        =   "frmEditor_Item.frx":34E2
          Left            =   1320
-         List            =   "frmEditor_Item.frx":34E7
+         List            =   "frmEditor_Item.frx":34F2
          Style           =   2  'Dropdown List
          TabIndex        =   34
          Top             =   360
@@ -1303,6 +1345,12 @@ Private Sub cmbType_Click()
     Else
         fraBau.Visible = False
     End If
+    
+    If (cmbType.ListIndex = ITEM_TYPE_VISUAL) Then
+        fraVisual.Visible = True
+    Else
+        fraVisual.Visible = False
+    End If
 
 
 
@@ -1524,7 +1572,7 @@ errorhandler:
 End Sub
 
 Private Sub scrlPokemon_Change()
-    lblpokemon.Caption = "Pokemon: " & scrlPokemon.value
+    lblPokemon.Caption = "Pokemon: " & scrlPokemon.value
     Item(EditorIndex).Pokemon = scrlPokemon.value
     Call EditorItem_BltSprite
 End Sub
@@ -1559,6 +1607,11 @@ errorhandler:
     HandleError "scrlRarity_Change", "frmEditor_Item", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
+End Sub
+
+Private Sub scrlSlot_Change()
+lblSlot.Caption = "Slot: " & scrlSlot.value
+    Item(EditorIndex).VSlot = scrlSlot.value
 End Sub
 
 Private Sub scrlSpeed_Change()
@@ -1709,6 +1762,11 @@ Private Sub scrlVel_Change()
         lblVel.Caption = "Velocidade: " & scrlVel.value
     End If
     Item(EditorIndex).vel = scrlVel.value
+End Sub
+
+Private Sub scrlVNum_Change()
+lblVNum.Caption = "Visual: " & scrlVNum.value
+    Item(EditorIndex).VNum = scrlVNum.value
 End Sub
 
 Private Sub txtDesc_Change()

@@ -1358,55 +1358,14 @@ End Sub
 
 ' Modificação do personagem
 Private Sub cmdSet_Click(Index As Integer)
-
-    Select Case Index
+Select Case Index
     Case 0
         If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
         If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(0).text)) Then Exit Sub
-
+        
         'Modificar Sprite
         Call SendSetSprite(Trim$(txtAName.text), CLng(Trim$(txtInfo(0).text)))
-
-        If frmMain.PicTreinador.Visible = True Then
-            frmMain.PicTreinador.Visible = False
-        End If
-
-    Case 1
-        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
-        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(1).text)) Then Exit Sub
-
-        'Modificar Cabelo
-        Call SendSetVisual(Trim$(txtAName.text), CLng(Trim$(txtInfo(1).text)), 1)
-
-    Case 2
-        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
-        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(2).text)) Then Exit Sub
-
-        'Modificar Cabelo
-        Call SendSetVisual(Trim$(txtAName.text), CLng(Trim$(txtInfo(2).text)), 2)
-
-    Case 3
-        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
-        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(3).text)) Then Exit Sub
-
-        'Modificar Cabelo
-        Call SendSetVisual(Trim$(txtAName.text), CLng(Trim$(txtInfo(3).text)), 3)
-
-    Case 4
-        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
-        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(4).text)) Then Exit Sub
-
-        'Modificar Acesso
-        SendSetAccess Trim$(txtAName.text), CLng(Trim$(txtInfo(4).text))
-
-    Case 5
-        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
-        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(5).text)) Then Exit Sub
-
-        'Modificar Organização
-        Call SendSetOrganization(Trim$(txtAName.text), CLng(Trim$(txtInfo(5).text)))
-
-    End Select
+End Select
 End Sub
 
 ' Editor de pokémon

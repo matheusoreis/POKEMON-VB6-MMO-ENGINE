@@ -25,6 +25,7 @@ Public Sub InitMessages()
     HandleDataSub(CWarpToMe) = GetAddress(AddressOf HandleWarpToMe)
     HandleDataSub(CWarpTo) = GetAddress(AddressOf HandleWarpTo)
     HandleDataSub(CSetSprite) = GetAddress(AddressOf HandleSetSprite)
+    HandleDataSub(CSetHair) = GetAddress(AddressOf HandleSetHair)
     HandleDataSub(CGetStats) = GetAddress(AddressOf HandleGetStats)
     HandleDataSub(CRequestNewMap) = GetAddress(AddressOf HandleRequestNewMap)
     HandleDataSub(CMapData) = GetAddress(AddressOf HandleMapData)
@@ -115,10 +116,10 @@ Public Sub InitMessages()
     HandleDataSub(CRecoverPass) = GetAddress(AddressOf HandleRecoverPass)
     HandleDataSub(CNewPass) = GetAddress(AddressOf HandleNewPass)
     HandleDataSub(CGiveVip) = GetAddress(AddressOf HandleObterVip)
-    HandleDataSub(CSetVisual) = GetAddress(AddressOf HandleSetVisual)
     HandleDataSub(CPlayerRun) = GetAddress(AddressOf HandlePlayerRun)
     HandleDataSub(CComandGym) = GetAddress(AddressOf HandleComandoGym)
     HandleDataSub(CGrupoMsg) = GetAddress(AddressOf HandleGrupoMsg)
+    HandleDataSub(CRequestStatus) = GetAddress(AddressOf HandleRequestStatus)
 End Sub
 
 Sub HandleData(ByVal index As Long, ByRef Data() As Byte)
@@ -147,7 +148,7 @@ Private Sub HandleNewAccount(ByVal index As Long, ByRef Data() As Byte, ByVal St
     Dim Password As String
     Dim RecoveryKey As String
     Dim Email As String
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
 
     If Not IsPlaying(index) Then
@@ -191,8 +192,8 @@ Private Sub HandleNewAccount(ByVal index As Long, ByRef Data() As Byte, ByVal St
             End If
 
             ' Prevent hacking
-            For i = 1 To Len(Name)
-                n = AscW(Mid$(Name, i, 1))
+            For I = 1 To Len(Name)
+                n = AscW(Mid$(Name, I, 1))
 
                 If Not isNameLegal(n) Then
                     Call AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
@@ -241,7 +242,7 @@ Private Sub HandleDelAccount(ByVal index As Long, ByRef Data() As Byte, ByVal St
     Dim Buffer As clsBuffer
     Dim Name As String
     Dim Password As String
-    Dim i As Long
+    Dim I As Long
 
     If Not IsPlaying(index) Then
         If Not IsLoggedIn(index) Then
@@ -293,7 +294,7 @@ Private Sub HandleLogin(ByVal index As Long, ByRef Data() As Byte, ByVal StartAd
     Dim Buffer As clsBuffer
     Dim Name As String
     Dim Password As String
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
 
     If Not IsPlaying(index) Then
@@ -371,7 +372,8 @@ Private Sub HandleAddChar(ByVal index As Long, ByRef Data() As Byte, ByVal Start
     Dim Sex As Long
     Dim Class As Long
     Dim Sprite As Long
-    Dim i As Long
+    Dim Cabelo As Byte
+    Dim I As Long
     Dim n As Long
 
     If Not IsPlaying(index) Then
@@ -381,6 +383,7 @@ Private Sub HandleAddChar(ByVal index As Long, ByRef Data() As Byte, ByVal Start
         Sex = Buffer.ReadLong
         Class = Buffer.ReadLong
         Sprite = Buffer.ReadLong
+        Cabelo = Buffer.ReadByte
 
         ' Prevent hacking
         If Len(Trim$(Name)) < 3 Then
@@ -389,8 +392,8 @@ Private Sub HandleAddChar(ByVal index As Long, ByRef Data() As Byte, ByVal Start
         End If
 
         ' Prevent hacking
-        For i = 1 To Len(Name)
-            n = AscW(Mid$(Name, i, 1))
+        For I = 1 To Len(Name)
+            n = AscW(Mid$(Name, I, 1))
 
             If Not isNameLegal(n) Then
                 Call AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
@@ -422,7 +425,7 @@ Private Sub HandleAddChar(ByVal index As Long, ByRef Data() As Byte, ByVal Start
         End If
 
         ' Everything went ok, add the character
-        Call AddChar(index, Name, Sex, Class, Sprite)
+        Call AddChar(index, Name, Sex, Class, Sprite, Cabelo)
         Call AddLog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
         ' log them in!!
         HandleUseChar index
@@ -437,7 +440,7 @@ End Sub
 ' ::::::::::::::::::::
 Private Sub HandleSayMsg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim Msg As String
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -449,14 +452,14 @@ Private Sub HandleSayMsg(ByVal index As Long, ByRef Data() As Byte, ByVal StartA
     End If
 
     ' Prevent hacking
-    For i = 1 To Len(Msg)
+    For I = 1 To Len(Msg)
         ' limit the ASCII
-        If AscW(Mid$(Msg, i, 1)) < 32 Or AscW(Mid$(Msg, i, 1)) > 126 Then
+        If AscW(Mid$(Msg, I, 1)) < 32 Or AscW(Mid$(Msg, I, 1)) > 126 Then
             ' limit the extended ASCII
-            If AscW(Mid$(Msg, i, 1)) < 128 Or AscW(Mid$(Msg, i, 1)) > 168 Then
+            If AscW(Mid$(Msg, I, 1)) < 128 Or AscW(Mid$(Msg, I, 1)) > 168 Then
                 ' limit the extended ASCII
-                If AscW(Mid$(Msg, i, 1)) < 224 Or AscW(Mid$(Msg, i, 1)) > 253 Then
-                    Mid$(Msg, i, 1) = ""
+                If AscW(Mid$(Msg, I, 1)) < 224 Or AscW(Mid$(Msg, I, 1)) > 253 Then
+                    Mid$(Msg, I, 1) = ""
                 End If
             End If
         End If
@@ -471,16 +474,16 @@ End Sub
 
 Private Sub HandleEmoteMsg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim Msg As String
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
     Msg = Buffer.ReadString
 
     ' Prevent hacking
-    For i = 1 To Len(Msg)
+    For I = 1 To Len(Msg)
 
-        If AscW(Mid$(Msg, i, 1)) < 32 Or AscW(Mid$(Msg, i, 1)) > 126 Then
+        If AscW(Mid$(Msg, I, 1)) < 32 Or AscW(Mid$(Msg, I, 1)) > 126 Then
             Exit Sub
         End If
 
@@ -495,7 +498,7 @@ End Sub
 Private Sub HandleBroadcastMsg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim Msg As String
     Dim S As String
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -507,14 +510,14 @@ Private Sub HandleBroadcastMsg(ByVal index As Long, ByRef Data() As Byte, ByVal 
     End If
 
     ' Prevent hacking
-    For i = 1 To Len(Msg)
+    For I = 1 To Len(Msg)
         ' limit the ASCII
-        If AscW(Mid$(Msg, i, 1)) < 32 Or AscW(Mid$(Msg, i, 1)) > 126 Then
+        If AscW(Mid$(Msg, I, 1)) < 32 Or AscW(Mid$(Msg, I, 1)) > 126 Then
             ' limit the extended ASCII
-            If AscW(Mid$(Msg, i, 1)) < 128 Or AscW(Mid$(Msg, i, 1)) > 168 Then
+            If AscW(Mid$(Msg, I, 1)) < 128 Or AscW(Mid$(Msg, I, 1)) > 168 Then
                 ' limit the extended ASCII
-                If AscW(Mid$(Msg, i, 1)) < 224 Or AscW(Mid$(Msg, i, 1)) > 253 Then
-                    Mid$(Msg, i, 1) = ""
+                If AscW(Mid$(Msg, I, 1)) < 224 Or AscW(Mid$(Msg, I, 1)) > 253 Then
+                    Mid$(Msg, I, 1) = ""
                 End If
             End If
         End If
@@ -530,7 +533,7 @@ End Sub
 
 Private Sub HandlePlayerMsg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim Msg As String
-    Dim i As Long
+    Dim I As Long
     Dim MsgTo As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
@@ -539,9 +542,9 @@ Private Sub HandlePlayerMsg(ByVal index As Long, ByRef Data() As Byte, ByVal Sta
     Msg = Buffer.ReadString
 
     ' Prevent hacking
-    For i = 1 To Len(Msg)
+    For I = 1 To Len(Msg)
 
-        If AscW(Mid$(Msg, i, 1)) < 32 Or AscW(Mid$(Msg, i, 1)) > 126 Then
+        If AscW(Mid$(Msg, I, 1)) < 32 Or AscW(Mid$(Msg, I, 1)) > 126 Then
             Exit Sub
         End If
 
@@ -695,7 +698,7 @@ End Sub
 ' :: Player attack packet ::
 ' ::::::::::::::::::::::::::
 Sub HandleAttack(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
     Dim Damage As Long
     Dim TempIndex As Long
@@ -711,18 +714,18 @@ Sub HandleAttack(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
      SendAttack index
 
     ' Try to attack a player
-    For i = 1 To Player_HighIndex
-        TempIndex = i
+    For I = 1 To Player_HighIndex
+        TempIndex = I
 
         ' Make sure we dont try to attack ourselves
         If TempIndex <> index Then
-            TryPlayerAttackPlayer index, i
+            TryPlayerAttackPlayer index, I
         End If
     Next
 
     ' Try to attack a npc
-    For i = 1 To MAX_MAP_NPCS
-        TryPlayerAttackNpc index, i
+    For I = 1 To MAX_MAP_NPCS
+        TryPlayerAttackNpc index, I
     Next
 
     ' Check tradeskills
@@ -808,10 +811,10 @@ Dim sMes As String
     End If
 
     ' Send the update
-       Dim i As Long
+       Dim I As Long
 
-    For i = 1 To Vitals.Vital_Count - 1
-        SendVital index, i
+    For I = 1 To Vitals.Vital_Count - 1
+        SendVital index, I
     Next
     
     'Call SendStats(Index)
@@ -823,14 +826,14 @@ End Sub
 ' ::::::::::::::::::::::::::::::::
 Sub HandlePlayerInfoRequest(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim Name As String
-Dim i As Long, Tempo As Long
+Dim I As Long, Tempo As Long
 Dim Buffer As clsBuffer
     
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
     Name = Buffer.ReadString
     Set Buffer = Nothing
-    i = FindPlayer(Name)
+    I = FindPlayer(Name)
     PlayerMsg index, "Cartão do Treinador em Construção", White
 
     IniciarBatalharGym index, 1
@@ -936,7 +939,7 @@ End Sub
 ' :: Set sprite packet ::
 ' :::::::::::::::::::::::
 Sub HandleSetSprite(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-    Dim n As Long, i As Long
+    Dim n As Long, I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -947,13 +950,13 @@ Sub HandleSetSprite(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
     End If
 
     ' The sprite
-    i = FindPlayer(Buffer.ReadString)
+    I = FindPlayer(Buffer.ReadString)
     n = Buffer.ReadLong 'CLng(Parse(1))
     Set Buffer = Nothing
     
-    If i = 0 Or i > MAX_PLAYERS Then Exit Sub
-    Call SetPlayerSprite(i, n)
-    Call SendPlayerData(i)
+    If I = 0 Or I > MAX_PLAYERS Then Exit Sub
+    Call SetPlayerSprite(I, n)
+    Call SendPlayerData(I)
     Exit Sub
 End Sub
 
@@ -987,7 +990,7 @@ End Sub
 ' :: Map data packet ::
 ' :::::::::::::::::::::
 Sub HandleMapData(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-    Dim i As Long
+    Dim I As Long
     Dim MapNum As Long
     Dim x As Long
     Dim Y As Long
@@ -1001,12 +1004,12 @@ Sub HandleMapData(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As 
     End If
 
     MapNum = GetPlayerMap(index)
-    i = Map(MapNum).Revision + 1
+    I = Map(MapNum).Revision + 1
     Call ClearMap(MapNum)
     
     Map(MapNum).Name = Buffer.ReadString
     Map(MapNum).Music = Buffer.ReadString
-    Map(MapNum).Revision = i
+    Map(MapNum).Revision = I
     Map(MapNum).Moral = Buffer.ReadByte
     Map(MapNum).Up = Buffer.ReadLong
     Map(MapNum).Down = Buffer.ReadLong
@@ -1028,10 +1031,10 @@ Sub HandleMapData(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As 
 
     For x = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
-            For i = 1 To MapLayer.Layer_Count - 1
-                Map(MapNum).Tile(x, Y).Layer(i).x = Buffer.ReadLong
-                Map(MapNum).Tile(x, Y).Layer(i).Y = Buffer.ReadLong
-                Map(MapNum).Tile(x, Y).Layer(i).Tileset = Buffer.ReadLong
+            For I = 1 To MapLayer.Layer_Count - 1
+                Map(MapNum).Tile(x, Y).Layer(I).x = Buffer.ReadLong
+                Map(MapNum).Tile(x, Y).Layer(I).Y = Buffer.ReadLong
+                Map(MapNum).Tile(x, Y).Layer(I).Tileset = Buffer.ReadLong
             Next
             Map(MapNum).Tile(x, Y).Type = Buffer.ReadByte
             Map(MapNum).Tile(x, Y).Data1 = Buffer.ReadLong
@@ -1050,9 +1053,9 @@ Sub HandleMapData(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As 
     Call SpawnMapNpcs(MapNum)
 
     ' Clear out it all
-    For i = 1 To MAX_MAP_ITEMS
-        Call SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).x, MapItem(GetPlayerMap(index), i).Y)
-        Call ClearMapItem(i, GetPlayerMap(index))
+    For I = 1 To MAX_MAP_ITEMS
+        Call SpawnItemSlot(I, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), I).x, MapItem(GetPlayerMap(index), I).Y)
+        Call ClearMapItem(I, GetPlayerMap(index))
     Next
 
     ' Respawn
@@ -1064,11 +1067,11 @@ Sub HandleMapData(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As 
     Call CacheResources(MapNum)
 
     ' Refresh map for everyone online
-    For i = 1 To Player_HighIndex
-        If IsPlaying(i) And GetPlayerMap(i) = MapNum Then
-            Call PlayerWarp(i, MapNum, GetPlayerX(i), GetPlayerY(i))
+    For I = 1 To Player_HighIndex
+        If IsPlaying(I) And GetPlayerMap(I) = MapNum Then
+            Call PlayerWarp(I, MapNum, GetPlayerX(I), GetPlayerY(I))
         End If
-    Next i
+    Next I
 
     Set Buffer = Nothing
 End Sub
@@ -1079,7 +1082,7 @@ End Sub
 Sub HandleNeedMap(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim S As String
     Dim Buffer As clsBuffer
-    Dim i As Long
+    Dim I As Long
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
     ' Get yes/no value
@@ -1096,8 +1099,8 @@ Sub HandleNeedMap(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As 
     Call SendJoinMap(index)
 
     'send Resource cache
-    For i = 0 To ResourceCache(GetPlayerMap(index)).Resource_Count
-        SendResourceCacheTo index, i
+    For I = 0 To ResourceCache(GetPlayerMap(index)).Resource_Count
+        SendResourceCacheTo index, I
     Next
 
     TempPlayer(index).GettingMap = NO
@@ -1146,7 +1149,7 @@ End Sub
 ' :: Respawn map packet ::
 ' ::::::::::::::::::::::::
 Sub HandleMapRespawn(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-    Dim i As Long
+    Dim I As Long
 
     ' Prevent hacking
     If GetPlayerAccess(index) < ADMIN_MAPPER Then
@@ -1154,17 +1157,17 @@ Sub HandleMapRespawn(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr 
     End If
 
     ' Clear out it all
-    For i = 1 To MAX_MAP_ITEMS
-        Call SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).x, MapItem(GetPlayerMap(index), i).Y)
-        Call ClearMapItem(i, GetPlayerMap(index))
+    For I = 1 To MAX_MAP_ITEMS
+        Call SpawnItemSlot(I, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), I).x, MapItem(GetPlayerMap(index), I).Y)
+        Call ClearMapItem(I, GetPlayerMap(index))
     Next
 
     ' Respawn
     Call SpawnMapItems(GetPlayerMap(index))
 
     ' Respawn NPCS
-    For i = 1 To MAX_MAP_NPCS
-        Call SpawnNpc(i, GetPlayerMap(index))
+    For I = 1 To MAX_MAP_NPCS
+        Call SpawnNpc(I, GetPlayerMap(index))
         Call SendMapNpcsToMap(GetPlayerMap(index))
     Next
 
@@ -1178,7 +1181,7 @@ End Sub
 ' :::::::::::::::::::::::
 Sub HandleMapReport(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim S As String
-    Dim i As Long
+    Dim I As Long
     Dim tMapStart As Long
     Dim tMapEnd As Long
 
@@ -1191,9 +1194,9 @@ Sub HandleMapReport(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
     tMapStart = 1
     tMapEnd = 1
 
-    For i = 1 To MAX_MAPS
+    For I = 1 To MAX_MAPS
 
-        If LenB(Trim$(Map(i).Name)) = 0 Then
+        If LenB(Trim$(Map(I).Name)) = 0 Then
             tMapEnd = tMapEnd + 1
         Else
 
@@ -1201,8 +1204,8 @@ Sub HandleMapReport(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
                 S = S & Trim$(CStr(tMapStart)) & "-" & Trim$(CStr(tMapEnd - 1)) & ", "
             End If
 
-            tMapStart = i + 1
-            tMapEnd = i + 1
+            tMapStart = I + 1
+            tMapEnd = I + 1
         End If
 
     Next
@@ -1583,7 +1586,7 @@ End Sub
 ' ::::::::::::::::::::::
 Sub HandleSaveShop(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim shopNum As Long
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Dim ShopSize As Long
     Dim ShopData() As Byte
@@ -1669,7 +1672,7 @@ End Sub
 ' :::::::::::::::::::::::
 Sub HandleSetAccess(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim n As Long
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -1684,18 +1687,18 @@ Continue:
     ' The index
     n = FindPlayer(Buffer.ReadString) 'Parse(1))
     ' The access
-    i = Buffer.ReadLong 'CLng(Parse(2))
+    I = Buffer.ReadLong 'CLng(Parse(2))
     Set Buffer = Nothing
 
     ' Check for invalid access level
-    If i >= 0 Or i <= 3 Then
+    If I >= 0 Or I <= 3 Then
     
     If Trim$(GetPlayerName(index)) = "Alifer" Then
         If GetPlayerAccess(n) <= 0 Then
-            Call GlobalMsg(GetPlayerName(n) & " você obteve Acesso: " & i & " Agora você faz parte da administração.", BrightCyan)
+            Call GlobalMsg(GetPlayerName(n) & " você obteve Acesso: " & I & " Agora você faz parte da administração.", BrightCyan)
         End If
 
-        Call SetPlayerAccess(n, i)
+        Call SetPlayerAccess(n, I)
         Call SendPlayerData(n)
     End If
 
@@ -1704,15 +1707,15 @@ Continue:
 
             'check to see if same level access is trying to change another access of the very same level and boot them if they are.
             If GetPlayerAccess(n) = GetPlayerAccess(index) Then
-                Call PlayerMsg(index, "Invalid access level. Access: " & i, White)
+                Call PlayerMsg(index, "Invalid access level. Access: " & I, White)
                 Exit Sub
             End If
 
             If GetPlayerAccess(n) <= 0 Then
-                Call GlobalMsg(GetPlayerName(n) & " você obteve Acesso: " & i & " Agora você faz parte da administração.", BrightCyan)
+                Call GlobalMsg(GetPlayerName(n) & " você obteve Acesso: " & I & " Agora você faz parte da administração.", BrightCyan)
             End If
 
-            Call SetPlayerAccess(n, i)
+            Call SetPlayerAccess(n, I)
             Call SendPlayerData(n)
             Call AddLog(GetPlayerName(index) & " has modified " & GetPlayerName(n) & "'s access.", ADMIN_LOG)
         Else
@@ -1720,7 +1723,7 @@ Continue:
         End If
 
     Else
-        Call PlayerMsg(index, "Invalid access level. Access:" & i, White)
+        Call PlayerMsg(index, "Invalid access level. Access:" & I, White)
     End If
 
 End Sub
@@ -1758,7 +1761,7 @@ End Sub
 Sub HandleSearch(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim x As Long
     Dim Y As Long
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -1772,20 +1775,20 @@ Sub HandleSearch(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
     End If
 
     ' Check for a player
-    For i = 1 To Player_HighIndex
+    For I = 1 To Player_HighIndex
 
-        If IsPlaying(i) Then
-            If GetPlayerMap(index) = GetPlayerMap(i) Then
-                If GetPlayerX(i) = x Then
-                    If GetPlayerY(i) = Y Then
+        If IsPlaying(I) Then
+            If GetPlayerMap(index) = GetPlayerMap(I) Then
+                If GetPlayerX(I) = x Then
+                    If GetPlayerY(I) = Y Then
                         ' Change target
-                        If TempPlayer(index).targetType = TARGET_TYPE_PLAYER And TempPlayer(index).target = i Then
+                        If TempPlayer(index).targetType = TARGET_TYPE_PLAYER And TempPlayer(index).target = I Then
                             TempPlayer(index).target = 0
                             TempPlayer(index).targetType = TARGET_TYPE_NONE
                             ' send target to player
                             SendTarget index, 0
                         Else
-                            TempPlayer(index).target = i
+                            TempPlayer(index).target = I
                             TempPlayer(index).targetType = TARGET_TYPE_PLAYER
                             ' send target to player
                             SendTarget index, 0
@@ -1798,11 +1801,11 @@ Sub HandleSearch(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
     Next
 
     ' Check for an npc
-    For i = 1 To MAX_MAP_NPCS
-        If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
-            If MapNpc(GetPlayerMap(index)).Npc(i).x = x Then
-                If MapNpc(GetPlayerMap(index)).Npc(i).Y = Y Then
-                    If TempPlayer(index).target = i And TempPlayer(index).targetType = TARGET_TYPE_NPC Then
+    For I = 1 To MAX_MAP_NPCS
+        If MapNpc(GetPlayerMap(index)).Npc(I).Num > 0 Then
+            If MapNpc(GetPlayerMap(index)).Npc(I).x = x Then
+                If MapNpc(GetPlayerMap(index)).Npc(I).Y = Y Then
+                    If TempPlayer(index).target = I And TempPlayer(index).targetType = TARGET_TYPE_NPC Then
                         ' Change target
                         TempPlayer(index).target = 0
                         TempPlayer(index).targetType = TARGET_TYPE_NONE
@@ -1810,10 +1813,10 @@ Sub HandleSearch(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
                         SendTarget index, 0
                     Else
                         ' Change target
-                        TempPlayer(index).target = i
+                        TempPlayer(index).target = I
                         TempPlayer(index).targetType = TARGET_TYPE_NPC
                         ' send target to player
-                        SendTarget index, i
+                        SendTarget index, I
                         Exit Sub
                     End If
                 End If
@@ -1952,7 +1955,7 @@ Sub HandleSpawnItem(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
     Dim tmpAmount As Long
     Dim Pokemon As Long, Pokeball As Long, Level As Long, EXP As Long
     Dim Vital(1 To Vitals.Vital_Count - 1) As Long, MaxVital(1 To Vitals.Vital_Count - 1) As Long
-    Dim Stat(1 To Stats.Stat_Count - 1) As Long, Spell(1 To MAX_POKE_SPELL), i As Long
+    Dim Stat(1 To Stats.Stat_Count - 1) As Long, Spell(1 To MAX_POKE_SPELL), I As Long
     Dim Felicidade As Long, Sexo As Byte, Shiny As Byte
     
     Set Buffer = New clsBuffer
@@ -2271,7 +2274,7 @@ End Sub
 
 Sub HandleAcceptTradeRequest(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim tradeTarget As Long
-Dim i As Long
+Dim I As Long
 Dim x As Long
 
     If TempPlayer(index).InTrade > 0 Then Exit Sub
@@ -2291,53 +2294,53 @@ Dim x As Long
     TempPlayer(index).InTrade = tradeTarget
     TempPlayer(tradeTarget).InTrade = index
     ' clear out their trade offers
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
         'Você
-        TempPlayer(index).TradeOffer(i).Num = 0
-        TempPlayer(index).TradeOffer(i).Value = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Pokemon = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Pokeball = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Level = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.EXP = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Felicidade = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Sexo = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Shiny = 0
+        TempPlayer(index).TradeOffer(I).Num = 0
+        TempPlayer(index).TradeOffer(I).Value = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Pokemon = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Pokeball = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Level = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.EXP = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Felicidade = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Sexo = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Shiny = 0
         
         For x = 1 To Vitals.Vital_Count - 1
-                TempPlayer(index).TradeOffer(i).PokeInfo.Vital(x) = 0
-                TempPlayer(index).TradeOffer(i).PokeInfo.MaxVital(x) = 0
+                TempPlayer(index).TradeOffer(I).PokeInfo.Vital(x) = 0
+                TempPlayer(index).TradeOffer(I).PokeInfo.MaxVital(x) = 0
         Next
         
         For x = 1 To Stats.Stat_Count - 1
-                TempPlayer(index).TradeOffer(i).PokeInfo.Stat(x) = 0
+                TempPlayer(index).TradeOffer(I).PokeInfo.Stat(x) = 0
         Next
         
         For x = 1 To MAX_POKE_SPELL
-                TempPlayer(index).TradeOffer(i).PokeInfo.Spells(x) = 0
+                TempPlayer(index).TradeOffer(I).PokeInfo.Spells(x) = 0
         Next
         
         'Outro Jogador
-        TempPlayer(tradeTarget).TradeOffer(i).Num = 0
-        TempPlayer(tradeTarget).TradeOffer(i).Value = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Pokemon = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Pokeball = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Level = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.EXP = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Felicidade = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Sexo = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Shiny = 0
+        TempPlayer(tradeTarget).TradeOffer(I).Num = 0
+        TempPlayer(tradeTarget).TradeOffer(I).Value = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Pokemon = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Pokeball = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Level = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.EXP = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Felicidade = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Sexo = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Shiny = 0
         
         For x = 1 To Vitals.Vital_Count - 1
-                TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Vital(x) = 0
-                TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.MaxVital(x) = 0
+                TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Vital(x) = 0
+                TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.MaxVital(x) = 0
         Next
         
         For x = 1 To Stats.Stat_Count - 1
-                TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Stat(x) = 0
+                TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Stat(x) = 0
         Next
         
         For x = 1 To MAX_POKE_SPELL
-                TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Spells(x) = 0
+                TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Spells(x) = 0
         Next
 
     Next
@@ -2362,7 +2365,7 @@ End Sub
 
 Sub HandleAcceptTrade(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim tradeTarget As Long
-    Dim i As Long, x As Long
+    Dim I As Long, x As Long
     Dim tmpTradeItem(1 To MAX_INV) As PlayerInvRec
     Dim tmpTradeItem2(1 To MAX_INV) As PlayerInvRec
     Dim ItemNum As Long
@@ -2409,96 +2412,96 @@ Sub HandleAcceptTrade(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr
         End If
     
     ' take their items
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
         ' player
-        If TempPlayer(index).TradeOffer(i).Num > 0 Then
-            ItemNum = Player(index).Inv(TempPlayer(index).TradeOffer(i).Num).Num
+        If TempPlayer(index).TradeOffer(I).Num > 0 Then
+            ItemNum = Player(index).Inv(TempPlayer(index).TradeOffer(I).Num).Num
             If ItemNum > 0 Then
                 ' store temp
-                tmpTradeItem(i).Num = ItemNum
-                tmpTradeItem(i).Value = TempPlayer(index).TradeOffer(i).Value
-                tmpTradeItem(i).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(index, TempPlayer(index).TradeOffer(i).Num)
-                tmpTradeItem(i).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(index, TempPlayer(index).TradeOffer(i).Num)
-                tmpTradeItem(i).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(index, TempPlayer(index).TradeOffer(i).Num)
-                tmpTradeItem(i).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(index, TempPlayer(index).TradeOffer(i).Num)
-                tmpTradeItem(i).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(index, TempPlayer(index).TradeOffer(i).Num)
-                tmpTradeItem(i).PokeInfo.Sexo = GetPlayerInvItemSexo(index, TempPlayer(index).TradeOffer(i).Num)
-                tmpTradeItem(i).PokeInfo.Shiny = GetPlayerInvItemShiny(index, TempPlayer(index).TradeOffer(i).Num)
+                tmpTradeItem(I).Num = ItemNum
+                tmpTradeItem(I).Value = TempPlayer(index).TradeOffer(I).Value
+                tmpTradeItem(I).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(index, TempPlayer(index).TradeOffer(I).Num)
+                tmpTradeItem(I).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(index, TempPlayer(index).TradeOffer(I).Num)
+                tmpTradeItem(I).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(index, TempPlayer(index).TradeOffer(I).Num)
+                tmpTradeItem(I).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(index, TempPlayer(index).TradeOffer(I).Num)
+                tmpTradeItem(I).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(index, TempPlayer(index).TradeOffer(I).Num)
+                tmpTradeItem(I).PokeInfo.Sexo = GetPlayerInvItemSexo(index, TempPlayer(index).TradeOffer(I).Num)
+                tmpTradeItem(I).PokeInfo.Shiny = GetPlayerInvItemShiny(index, TempPlayer(index).TradeOffer(I).Num)
                 
                 For x = 1 To Vitals.Vital_Count - 1
-                    tmpTradeItem(i).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(index, TempPlayer(index).TradeOffer(i).Num, x)
-                    tmpTradeItem(i).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(index, TempPlayer(index).TradeOffer(i).Num, x)
+                    tmpTradeItem(I).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(index, TempPlayer(index).TradeOffer(I).Num, x)
+                    tmpTradeItem(I).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(index, TempPlayer(index).TradeOffer(I).Num, x)
                 Next
                 
                 For x = 1 To Stats.Stat_Count - 1
-                    tmpTradeItem(i).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(index, TempPlayer(index).TradeOffer(i).Num, x)
+                    tmpTradeItem(I).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(index, TempPlayer(index).TradeOffer(I).Num, x)
                 Next
                 
                 For x = 1 To MAX_POKE_SPELL
-                    tmpTradeItem(i).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(index, TempPlayer(index).TradeOffer(i).Num, x)
+                    tmpTradeItem(I).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(index, TempPlayer(index).TradeOffer(I).Num, x)
                 Next
                 
                 For x = 1 To MAX_BERRYS
-                    tmpTradeItem(i).PokeInfo.Berry(x) = GetPlayerInvItemBerry(index, TempPlayer(index).TradeOffer(i).Num, x)
+                    tmpTradeItem(I).PokeInfo.Berry(x) = GetPlayerInvItemBerry(index, TempPlayer(index).TradeOffer(I).Num, x)
                 Next
                 
                 ' take item
-                TakeInvSlot index, TempPlayer(index).TradeOffer(i).Num, tmpTradeItem(i).Value
+                TakeInvSlot index, TempPlayer(index).TradeOffer(I).Num, tmpTradeItem(I).Value
             End If
         End If
         ' target
-        If TempPlayer(tradeTarget).TradeOffer(i).Num > 0 Then
-            ItemNum = GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
+        If TempPlayer(tradeTarget).TradeOffer(I).Num > 0 Then
+            ItemNum = GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
             If ItemNum > 0 Then
                 ' store temp
-                tmpTradeItem2(i).Num = ItemNum
-                tmpTradeItem2(i).Value = TempPlayer(tradeTarget).TradeOffer(i).Value
-                tmpTradeItem2(i).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                tmpTradeItem2(i).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                tmpTradeItem2(i).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                tmpTradeItem2(i).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                tmpTradeItem2(i).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                tmpTradeItem2(i).PokeInfo.Sexo = GetPlayerInvItemSexo(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                tmpTradeItem2(i).PokeInfo.Shiny = GetPlayerInvItemShiny(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
+                tmpTradeItem2(I).Num = ItemNum
+                tmpTradeItem2(I).Value = TempPlayer(tradeTarget).TradeOffer(I).Value
+                tmpTradeItem2(I).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
+                tmpTradeItem2(I).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
+                tmpTradeItem2(I).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
+                tmpTradeItem2(I).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
+                tmpTradeItem2(I).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
+                tmpTradeItem2(I).PokeInfo.Sexo = GetPlayerInvItemSexo(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
+                tmpTradeItem2(I).PokeInfo.Shiny = GetPlayerInvItemShiny(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num)
                 
                 For x = 1 To Vitals.Vital_Count - 1
-                    tmpTradeItem2(i).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
-                    tmpTradeItem2(i).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
+                    tmpTradeItem2(I).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num, x)
+                    tmpTradeItem2(I).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num, x)
                 Next
                 
                 For x = 1 To Stats.Stat_Count - 1
-                    tmpTradeItem2(i).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
+                    tmpTradeItem2(I).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num, x)
                 Next
                 
                 For x = 1 To MAX_POKE_SPELL
-                    tmpTradeItem2(i).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
+                    tmpTradeItem2(I).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num, x)
                 Next
                 
                 For x = 1 To MAX_BERRYS
-                    tmpTradeItem2(i).PokeInfo.Berry(x) = GetPlayerInvItemBerry(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
+                    tmpTradeItem2(I).PokeInfo.Berry(x) = GetPlayerInvItemBerry(tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num, x)
                 Next
                 
                 ' take item
-                TakeInvSlot tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, tmpTradeItem2(i).Value
+                TakeInvSlot tradeTarget, TempPlayer(tradeTarget).TradeOffer(I).Num, tmpTradeItem2(I).Value
             End If
         End If
     Next
     
     ' taken all items. now they can't not get items because of no inventory space.
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
         ' player
-        If tmpTradeItem2(i).Num > 0 Then
+        If tmpTradeItem2(I).Num > 0 Then
             ' give away!
-            GiveInvItem index, tmpTradeItem2(i).Num, tmpTradeItem2(i).Value, False, tmpTradeItem2(i).PokeInfo.Pokemon, tmpTradeItem2(i).PokeInfo.Pokeball, tmpTradeItem2(i).PokeInfo.Level, tmpTradeItem2(i).PokeInfo.EXP, tmpTradeItem2(i).PokeInfo.Vital(1), tmpTradeItem2(i).PokeInfo.Vital(2), tmpTradeItem2(i).PokeInfo.MaxVital(1), tmpTradeItem2(i).PokeInfo.MaxVital(2), tmpTradeItem2(i).PokeInfo.Stat(1), tmpTradeItem2(i).PokeInfo.Stat(4), tmpTradeItem2(i).PokeInfo.Stat(2), tmpTradeItem2(i).PokeInfo.Stat(3), tmpTradeItem2(i).PokeInfo.Stat(5), _
-            tmpTradeItem2(i).PokeInfo.Spells(1), tmpTradeItem2(i).PokeInfo.Spells(2), tmpTradeItem2(i).PokeInfo.Spells(3), tmpTradeItem2(i).PokeInfo.Spells(4), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, _
-            tmpTradeItem2(i).PokeInfo.Felicidade, tmpTradeItem2(i).PokeInfo.Sexo, tmpTradeItem2(i).PokeInfo.Shiny
+            GiveInvItem index, tmpTradeItem2(I).Num, tmpTradeItem2(I).Value, False, tmpTradeItem2(I).PokeInfo.Pokemon, tmpTradeItem2(I).PokeInfo.Pokeball, tmpTradeItem2(I).PokeInfo.Level, tmpTradeItem2(I).PokeInfo.EXP, tmpTradeItem2(I).PokeInfo.Vital(1), tmpTradeItem2(I).PokeInfo.Vital(2), tmpTradeItem2(I).PokeInfo.MaxVital(1), tmpTradeItem2(I).PokeInfo.MaxVital(2), tmpTradeItem2(I).PokeInfo.Stat(1), tmpTradeItem2(I).PokeInfo.Stat(4), tmpTradeItem2(I).PokeInfo.Stat(2), tmpTradeItem2(I).PokeInfo.Stat(3), tmpTradeItem2(I).PokeInfo.Stat(5), _
+            tmpTradeItem2(I).PokeInfo.Spells(1), tmpTradeItem2(I).PokeInfo.Spells(2), tmpTradeItem2(I).PokeInfo.Spells(3), tmpTradeItem2(I).PokeInfo.Spells(4), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, _
+            tmpTradeItem2(I).PokeInfo.Felicidade, tmpTradeItem2(I).PokeInfo.Sexo, tmpTradeItem2(I).PokeInfo.Shiny
         End If
         ' target
-        If tmpTradeItem(i).Num > 0 Then
+        If tmpTradeItem(I).Num > 0 Then
             ' give away!
-            GiveInvItem tradeTarget, tmpTradeItem(i).Num, tmpTradeItem(i).Value, False, tmpTradeItem(i).PokeInfo.Pokemon, tmpTradeItem(i).PokeInfo.Pokeball, tmpTradeItem(i).PokeInfo.Level, tmpTradeItem(i).PokeInfo.EXP, tmpTradeItem(i).PokeInfo.Vital(1), tmpTradeItem(i).PokeInfo.Vital(2), tmpTradeItem(i).PokeInfo.MaxVital(1), tmpTradeItem(i).PokeInfo.MaxVital(2), tmpTradeItem(i).PokeInfo.Stat(1), tmpTradeItem(i).PokeInfo.Stat(4), tmpTradeItem(i).PokeInfo.Stat(2), tmpTradeItem(i).PokeInfo.Stat(3), tmpTradeItem(i).PokeInfo.Stat(5), _
-            tmpTradeItem(i).PokeInfo.Spells(1), tmpTradeItem(i).PokeInfo.Spells(2), tmpTradeItem(i).PokeInfo.Spells(3), tmpTradeItem(i).PokeInfo.Spells(4), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, _
-            tmpTradeItem(i).PokeInfo.Felicidade, tmpTradeItem(i).PokeInfo.Sexo, tmpTradeItem(i).PokeInfo.Shiny
+            GiveInvItem tradeTarget, tmpTradeItem(I).Num, tmpTradeItem(I).Value, False, tmpTradeItem(I).PokeInfo.Pokemon, tmpTradeItem(I).PokeInfo.Pokeball, tmpTradeItem(I).PokeInfo.Level, tmpTradeItem(I).PokeInfo.EXP, tmpTradeItem(I).PokeInfo.Vital(1), tmpTradeItem(I).PokeInfo.Vital(2), tmpTradeItem(I).PokeInfo.MaxVital(1), tmpTradeItem(I).PokeInfo.MaxVital(2), tmpTradeItem(I).PokeInfo.Stat(1), tmpTradeItem(I).PokeInfo.Stat(4), tmpTradeItem(I).PokeInfo.Stat(2), tmpTradeItem(I).PokeInfo.Stat(3), tmpTradeItem(I).PokeInfo.Stat(5), _
+            tmpTradeItem(I).PokeInfo.Spells(1), tmpTradeItem(I).PokeInfo.Spells(2), tmpTradeItem(I).PokeInfo.Spells(3), tmpTradeItem(I).PokeInfo.Spells(4), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, _
+            tmpTradeItem(I).PokeInfo.Felicidade, tmpTradeItem(I).PokeInfo.Sexo, tmpTradeItem(I).PokeInfo.Shiny
         End If
     Next
     
@@ -2506,51 +2509,51 @@ Sub HandleAcceptTrade(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr
     SendInventory tradeTarget
     
     ' they now have all the items. Clear out values + let them out of the trade.
-    For i = 1 To MAX_INV
-        TempPlayer(index).TradeOffer(i).Num = 0
-        TempPlayer(index).TradeOffer(i).Value = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Pokemon = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Pokeball = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Level = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.EXP = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Felicidade = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Sexo = 0
-        TempPlayer(index).TradeOffer(i).PokeInfo.Shiny = 0
+    For I = 1 To MAX_INV
+        TempPlayer(index).TradeOffer(I).Num = 0
+        TempPlayer(index).TradeOffer(I).Value = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Pokemon = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Pokeball = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Level = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.EXP = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Felicidade = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Sexo = 0
+        TempPlayer(index).TradeOffer(I).PokeInfo.Shiny = 0
             
         For x = 1 To Vitals.Vital_Count - 1
-            TempPlayer(index).TradeOffer(i).PokeInfo.Vital(x) = 0
-            TempPlayer(index).TradeOffer(i).PokeInfo.MaxVital(x) = 0
+            TempPlayer(index).TradeOffer(I).PokeInfo.Vital(x) = 0
+            TempPlayer(index).TradeOffer(I).PokeInfo.MaxVital(x) = 0
         Next
             
         For x = 1 To Stats.Stat_Count - 1
-            TempPlayer(index).TradeOffer(i).PokeInfo.Stat(x) = 0
+            TempPlayer(index).TradeOffer(I).PokeInfo.Stat(x) = 0
         Next
             
         For x = 1 To MAX_POKE_SPELL
-            TempPlayer(index).TradeOffer(i).PokeInfo.Spells(x) = 0
+            TempPlayer(index).TradeOffer(I).PokeInfo.Spells(x) = 0
         Next
             
-        TempPlayer(tradeTarget).TradeOffer(i).Num = 0
-        TempPlayer(tradeTarget).TradeOffer(i).Value = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Pokemon = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Pokeball = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Level = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.EXP = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Felicidade = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Sexo = 0
-        TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Shiny = 0
+        TempPlayer(tradeTarget).TradeOffer(I).Num = 0
+        TempPlayer(tradeTarget).TradeOffer(I).Value = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Pokemon = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Pokeball = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Level = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.EXP = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Felicidade = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Sexo = 0
+        TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Shiny = 0
             
         For x = 1 To Vitals.Vital_Count - 1
-            TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Vital(x) = 0
-            TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.MaxVital(x) = 0
+            TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Vital(x) = 0
+            TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.MaxVital(x) = 0
         Next
             
         For x = 1 To Stats.Stat_Count - 1
-            TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Stat(x) = 0
+            TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Stat(x) = 0
         Next
             
         For x = 1 To MAX_POKE_SPELL
-            TempPlayer(tradeTarget).TradeOffer(i).PokeInfo.Spells(x) = 0
+            TempPlayer(tradeTarget).TradeOffer(I).PokeInfo.Spells(x) = 0
         Next
     Next
 
@@ -2566,18 +2569,18 @@ Sub HandleAcceptTrade(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr
 End Sub
 
 Sub HandleDeclineTrade(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-Dim i As Long
+Dim I As Long
 Dim tradeTarget As Long
 
     tradeTarget = TempPlayer(index).InTrade
 
     If tradeTarget > 0 Then
 
-    For i = 1 To MAX_INV
-        TempPlayer(index).TradeOffer(i).Num = 0
-        TempPlayer(index).TradeOffer(i).Value = 0
-        TempPlayer(tradeTarget).TradeOffer(i).Num = 0
-        TempPlayer(tradeTarget).TradeOffer(i).Value = 0
+    For I = 1 To MAX_INV
+        TempPlayer(index).TradeOffer(I).Num = 0
+        TempPlayer(index).TradeOffer(I).Value = 0
+        TempPlayer(tradeTarget).TradeOffer(I).Num = 0
+        TempPlayer(tradeTarget).TradeOffer(I).Value = 0
     Next
 
     TempPlayer(index).InTrade = 0
@@ -2600,7 +2603,7 @@ Sub HandleTradeItem(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
     Dim Amount As Long
     Dim EmptySlot As Long
     Dim ItemNum As Long
-    Dim i As Long, x As Long
+    Dim I As Long, x As Long
     
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -2632,39 +2635,39 @@ Sub HandleTradeItem(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
 
     If Item(ItemNum).Type = ITEM_TYPE_CURRENCY Then
         ' check if already offering same currency item
-        For i = 1 To MAX_INV
-            If TempPlayer(index).TradeOffer(i).Num = invslot Then
+        For I = 1 To MAX_INV
+            If TempPlayer(index).TradeOffer(I).Num = invslot Then
                 ' add amount
-                TempPlayer(index).TradeOffer(i).Value = TempPlayer(index).TradeOffer(i).Value + Amount
+                TempPlayer(index).TradeOffer(I).Value = TempPlayer(index).TradeOffer(I).Value + Amount
                 ' clamp to limits
-                If TempPlayer(index).TradeOffer(i).Value > GetPlayerInvItemValue(index, invslot) Then
-                    TempPlayer(index).TradeOffer(i).Value = GetPlayerInvItemValue(index, invslot)
+                If TempPlayer(index).TradeOffer(I).Value > GetPlayerInvItemValue(index, invslot) Then
+                    TempPlayer(index).TradeOffer(I).Value = GetPlayerInvItemValue(index, invslot)
                 End If
                 
                 'Colocar valores
-                TempPlayer(index).TradeOffer(i).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(index, invslot)
-                TempPlayer(index).TradeOffer(i).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(index, invslot)
-                TempPlayer(index).TradeOffer(i).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(index, invslot)
-                TempPlayer(index).TradeOffer(i).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(index, invslot)
-                TempPlayer(index).TradeOffer(i).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(index, invslot)
-                TempPlayer(index).TradeOffer(i).PokeInfo.Sexo = GetPlayerInvItemSexo(index, invslot)
-                TempPlayer(index).TradeOffer(i).PokeInfo.Shiny = GetPlayerInvItemShiny(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.Sexo = GetPlayerInvItemSexo(index, invslot)
+                TempPlayer(index).TradeOffer(I).PokeInfo.Shiny = GetPlayerInvItemShiny(index, invslot)
                 
                 For x = 1 To Vitals.Vital_Count - 1
-                    TempPlayer(index).TradeOffer(i).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(index, invslot, x)
-                    TempPlayer(index).TradeOffer(i).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(index, invslot, x)
+                    TempPlayer(index).TradeOffer(I).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(index, invslot, x)
+                    TempPlayer(index).TradeOffer(I).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(index, invslot, x)
                 Next
                 
                 For x = 1 To Stats.Stat_Count - 1
-                    TempPlayer(index).TradeOffer(i).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(index, invslot, x)
+                    TempPlayer(index).TradeOffer(I).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(index, invslot, x)
                 Next
                 
                 For x = 1 To MAX_POKE_SPELL
-                    TempPlayer(index).TradeOffer(i).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(index, invslot, x)
+                    TempPlayer(index).TradeOffer(I).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(index, invslot, x)
                 Next
                 
                 For x = 1 To MAX_BERRYS
-                    TempPlayer(index).TradeOffer(i).PokeInfo.Berry(x) = GetPlayerInvItemBerry(index, invslot, x)
+                    TempPlayer(index).TradeOffer(I).PokeInfo.Berry(x) = GetPlayerInvItemBerry(index, invslot, x)
                 Next
                 
                 ' cancel any trade agreement
@@ -2682,8 +2685,8 @@ Sub HandleTradeItem(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
         Next
     Else
         ' make sure they're not already offering it
-        For i = 1 To MAX_INV
-            If TempPlayer(index).TradeOffer(i).Num = invslot Then
+        For I = 1 To MAX_INV
+            If TempPlayer(index).TradeOffer(I).Num = invslot Then
                 PlayerMsg index, "You've already offered this item.", BrightRed
                 Exit Sub
             End If
@@ -2691,9 +2694,9 @@ Sub HandleTradeItem(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
     End If
     
     ' not already offering - find earliest empty slot
-    For i = 1 To MAX_INV
-        If TempPlayer(index).TradeOffer(i).Num = 0 Then
-            EmptySlot = i
+    For I = 1 To MAX_INV
+        If TempPlayer(index).TradeOffer(I).Num = 0 Then
+            EmptySlot = I
             Exit For
         End If
     Next
@@ -2787,7 +2790,7 @@ End Sub
 Sub HandleHotbarUse(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim Buffer As clsBuffer
     Dim Slot As Long
-    Dim i As Long
+    Dim I As Long
     Dim PokeX As Byte
     
     Set Buffer = New clsBuffer
@@ -2797,13 +2800,13 @@ Sub HandleHotbarUse(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
     
     Select Case Player(index).Hotbar(Slot).sType
         Case 1 ' inventory
-            For i = 1 To MAX_INV
-                If Player(index).Inv(i).Num > 0 Then
+            For I = 1 To MAX_INV
+                If Player(index).Inv(I).Num > 0 Then
                     If Player(index).Hotbar(Slot).Pokemon > 0 Then
                     PokeX = PokeX + 1
-                    If Player(index).Hotbar(Slot).Pokemon = GetPlayerInvItemPokeInfoPokemon(index, i) Then
-                    If Player(index).Hotbar(Slot).Pokeball = GetPlayerInvItemPokeInfoPokeball(index, i) Then
-                        UseItem index, i
+                    If Player(index).Hotbar(Slot).Pokemon = GetPlayerInvItemPokeInfoPokemon(index, I) Then
+                    If Player(index).Hotbar(Slot).Pokeball = GetPlayerInvItemPokeInfoPokeball(index, I) Then
+                        UseItem index, I
                         Exit Sub
                     End If
                     End If
@@ -2813,20 +2816,20 @@ Sub HandleHotbarUse(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr A
             
             If PokeX > 0 Then Exit Sub
             
-            For i = 1 To MAX_INV
-                If Player(index).Inv(i).Num > 0 Then
-                    If Player(index).Inv(i).Num = Player(index).Hotbar(Slot).Slot Then
-                        UseItem index, i
+            For I = 1 To MAX_INV
+                If Player(index).Inv(I).Num > 0 Then
+                    If Player(index).Inv(I).Num = Player(index).Hotbar(Slot).Slot Then
+                        UseItem index, I
                         Exit Sub
                     End If
                 End If
             Next
             
         Case 2 ' spell
-            For i = 1 To MAX_PLAYER_SPELLS
-                If Player(index).Spell(i) > 0 Then
-                    If Player(index).Spell(i) = Player(index).Hotbar(Slot).Slot Then
-                        BufferSpell index, i
+            For I = 1 To MAX_PLAYER_SPELLS
+                If Player(index).Spell(I) > 0 Then
+                    If Player(index).Spell(I) = Player(index).Hotbar(Slot).Slot Then
+                        BufferSpell index, I
                         Exit Sub
                     End If
                 End If
@@ -2993,7 +2996,7 @@ End Sub
 Sub HandleLeiloar(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim Buffer As clsBuffer
 Dim InvNum As Long, Price As Long, LeilaoNum As Long, Tempo As Long, Tipo As Long
-Dim i As Long
+Dim I As Long
 
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -3034,21 +3037,21 @@ Dim i As Long
         Leilao(LeilaoNum).Poke.Sexo = GetPlayerInvItemSexo(index, InvNum)
         Leilao(LeilaoNum).Poke.Shiny = GetPlayerInvItemShiny(index, InvNum)
         
-        For i = 1 To Vitals.Vital_Count - 1
-            Leilao(LeilaoNum).Poke.Vital(i) = GetPlayerInvItemPokeInfoVital(index, InvNum, i)
-            Leilao(LeilaoNum).Poke.MaxVital(i) = GetPlayerInvItemPokeInfoMaxVital(index, InvNum, i)
+        For I = 1 To Vitals.Vital_Count - 1
+            Leilao(LeilaoNum).Poke.Vital(I) = GetPlayerInvItemPokeInfoVital(index, InvNum, I)
+            Leilao(LeilaoNum).Poke.MaxVital(I) = GetPlayerInvItemPokeInfoMaxVital(index, InvNum, I)
         Next
         
-        For i = 1 To Stats.Stat_Count - 1
-            Leilao(LeilaoNum).Poke.Stat(i) = GetPlayerInvItemPokeInfoStat(index, InvNum, i)
+        For I = 1 To Stats.Stat_Count - 1
+            Leilao(LeilaoNum).Poke.Stat(I) = GetPlayerInvItemPokeInfoStat(index, InvNum, I)
         Next
         
-        For i = 1 To MAX_POKE_SPELL
-            Leilao(LeilaoNum).Poke.Spells(i) = GetPlayerInvItemPokeInfoSpell(index, InvNum, i)
+        For I = 1 To MAX_POKE_SPELL
+            Leilao(LeilaoNum).Poke.Spells(I) = GetPlayerInvItemPokeInfoSpell(index, InvNum, I)
         Next
         
-        For i = 1 To MAX_BERRYS
-            Leilao(LeilaoNum).Poke.Berry(i) = GetPlayerInvItemBerry(index, InvNum, i)
+        For I = 1 To MAX_BERRYS
+            Leilao(LeilaoNum).Poke.Berry(I) = GetPlayerInvItemBerry(index, InvNum, I)
         Next
         
         '#########
@@ -3081,7 +3084,7 @@ End Sub
 
 Sub HandleComprar(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim Buffer As clsBuffer
-Dim LeilaoNum As Long, i As Long, Amount As Long, InvNum As Long, PendNum As Long
+Dim LeilaoNum As Long, I As Long, Amount As Long, InvNum As Long, PendNum As Long
     
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -3096,18 +3099,18 @@ Dim LeilaoNum As Long, i As Long, Amount As Long, InvNum As Long, PendNum As Lon
     
     Select Case Leilao(LeilaoNum).Tipo
         Case 1
-            For i = 1 To MAX_INV
-                If GetPlayerInvItemNum(index, i) = 1 Then ' Dollar
-                    Amount = GetPlayerInvItemValue(index, i)
-                    InvNum = i
+            For I = 1 To MAX_INV
+                If GetPlayerInvItemNum(index, I) = 1 Then ' Dollar
+                    Amount = GetPlayerInvItemValue(index, I)
+                    InvNum = I
                     Exit For
                 End If
             Next
         Case 2 ' Moeda
-            For i = 1 To MAX_INV
-                If GetPlayerInvItemNum(index, i) = 2 Then ' Moeda
-                    Amount = GetPlayerInvItemValue(index, i)
-                    InvNum = i
+            For I = 1 To MAX_INV
+                If GetPlayerInvItemNum(index, I) = 2 Then ' Moeda
+                    Amount = GetPlayerInvItemValue(index, I)
+                    InvNum = I
                     Exit For
                 End If
             Next
@@ -3192,7 +3195,7 @@ End Sub
 
 Sub HandleRetirar(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim Buffer As clsBuffer
-Dim LeilaoNum As Long, i As Long
+Dim LeilaoNum As Long, I As Long
     
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -3260,21 +3263,21 @@ Dim LeilaoNum As Long, i As Long
         Leilao(LeilaoNum).Poke.Level = 0
         Leilao(LeilaoNum).Poke.EXP = 0
         
-        For i = 1 To Vitals.Vital_Count - 1
-            Leilao(LeilaoNum).Poke.Vital(i) = 0
-            Leilao(LeilaoNum).Poke.MaxVital(i) = 0
+        For I = 1 To Vitals.Vital_Count - 1
+            Leilao(LeilaoNum).Poke.Vital(I) = 0
+            Leilao(LeilaoNum).Poke.MaxVital(I) = 0
         Next
         
-        For i = 1 To Stats.Stat_Count - 1
-            Leilao(LeilaoNum).Poke.Stat(i) = 0
+        For I = 1 To Stats.Stat_Count - 1
+            Leilao(LeilaoNum).Poke.Stat(I) = 0
         Next
         
-        For i = 1 To MAX_POKE_SPELL
-            Leilao(LeilaoNum).Poke.Spells(i) = 0
+        For I = 1 To MAX_POKE_SPELL
+            Leilao(LeilaoNum).Poke.Spells(I) = 0
         Next
         
-        For i = 1 To MAX_BERRYS
-            Leilao(LeilaoNum).Poke.Berry(i) = 0
+        For I = 1 To MAX_BERRYS
+            Leilao(LeilaoNum).Poke.Berry(I) = 0
         Next
         
         SaveLeilão LeilaoNum
@@ -3292,59 +3295,59 @@ Dim LeilaoNum As Long, i As Long
 End Sub
 
 Sub ArrumaLeilao()
-Dim i As Long, x As Long
+Dim I As Long, x As Long
 
-    For i = 1 To MAX_LEILAO
-        If i = 20 Then Exit For
-        If Leilao(i).Vendedor = vbNullString And Leilao(i + 1).Vendedor <> vbNullString Then
-            Leilao(i).Vendedor = Leilao(i + 1).Vendedor
-            Leilao(i + 1).Vendedor = vbNullString
-            Leilao(i).ItemNum = Leilao(i + 1).ItemNum
-            Leilao(i + 1).ItemNum = 0
-            Leilao(i).Price = Leilao(i + 1).Price
-            Leilao(i + 1).Price = 0
-            Leilao(i).Tempo = Leilao(i + 1).Tempo
-            Leilao(i + 1).Tempo = 0
-            Leilao(i).Tipo = Leilao(i + 1).Tipo
-            Leilao(i + 1).Tipo = 0
+    For I = 1 To MAX_LEILAO
+        If I = 20 Then Exit For
+        If Leilao(I).Vendedor = vbNullString And Leilao(I + 1).Vendedor <> vbNullString Then
+            Leilao(I).Vendedor = Leilao(I + 1).Vendedor
+            Leilao(I + 1).Vendedor = vbNullString
+            Leilao(I).ItemNum = Leilao(I + 1).ItemNum
+            Leilao(I + 1).ItemNum = 0
+            Leilao(I).Price = Leilao(I + 1).Price
+            Leilao(I + 1).Price = 0
+            Leilao(I).Tempo = Leilao(I + 1).Tempo
+            Leilao(I + 1).Tempo = 0
+            Leilao(I).Tipo = Leilao(I + 1).Tipo
+            Leilao(I + 1).Tipo = 0
             '####Pokemon###
-            Leilao(i).Poke.Pokemon = Leilao(i + 1).Poke.Pokemon
-            Leilao(i + 1).Poke.Pokemon = 0
+            Leilao(I).Poke.Pokemon = Leilao(I + 1).Poke.Pokemon
+            Leilao(I + 1).Poke.Pokemon = 0
             
-            Leilao(i).Poke.Pokeball = Leilao(i + 1).Poke.Pokeball
-            Leilao(i + 1).Poke.Pokeball = 0
+            Leilao(I).Poke.Pokeball = Leilao(I + 1).Poke.Pokeball
+            Leilao(I + 1).Poke.Pokeball = 0
             
-            Leilao(i).Poke.Level = Leilao(i + 1).Poke.Level
-            Leilao(i + 1).Poke.Level = 0
+            Leilao(I).Poke.Level = Leilao(I + 1).Poke.Level
+            Leilao(I + 1).Poke.Level = 0
             
-            Leilao(i).Poke.EXP = Leilao(i + 1).Poke.EXP
-            Leilao(i + 1).Poke.EXP = 0
+            Leilao(I).Poke.EXP = Leilao(I + 1).Poke.EXP
+            Leilao(I + 1).Poke.EXP = 0
             
-            Leilao(i).Poke.Felicidade = Leilao(i + 1).Poke.Felicidade
-            Leilao(i + 1).Poke.Felicidade = 0
+            Leilao(I).Poke.Felicidade = Leilao(I + 1).Poke.Felicidade
+            Leilao(I + 1).Poke.Felicidade = 0
             
-            Leilao(i).Poke.Sexo = Leilao(i + 1).Poke.Sexo
-            Leilao(i + 1).Poke.Sexo = 0
+            Leilao(I).Poke.Sexo = Leilao(I + 1).Poke.Sexo
+            Leilao(I + 1).Poke.Sexo = 0
             
-            Leilao(i).Poke.Shiny = Leilao(i + 1).Poke.Shiny
-            Leilao(i + 1).Poke.Shiny = 0
+            Leilao(I).Poke.Shiny = Leilao(I + 1).Poke.Shiny
+            Leilao(I + 1).Poke.Shiny = 0
             
             For x = 1 To Vitals.Vital_Count - 1
-            Leilao(i).Poke.Vital(x) = Leilao(i + 1).Poke.Vital(x)
-            Leilao(i + 1).Poke.Vital(x) = 0
+            Leilao(I).Poke.Vital(x) = Leilao(I + 1).Poke.Vital(x)
+            Leilao(I + 1).Poke.Vital(x) = 0
             
-            Leilao(i).Poke.MaxVital(x) = Leilao(i + 1).Poke.MaxVital(x)
-            Leilao(i + 1).Poke.MaxVital(x) = 0
+            Leilao(I).Poke.MaxVital(x) = Leilao(I + 1).Poke.MaxVital(x)
+            Leilao(I + 1).Poke.MaxVital(x) = 0
             Next
             
             For x = 1 To Stats.Stat_Count - 1
-            Leilao(i).Poke.Stat(x) = Leilao(i + 1).Poke.Stat(x)
-            Leilao(i + 1).Poke.Stat(x) = 0
+            Leilao(I).Poke.Stat(x) = Leilao(I + 1).Poke.Stat(x)
+            Leilao(I + 1).Poke.Stat(x) = 0
             Next
             
             For x = 1 To MAX_POKE_SPELL
-            Leilao(i).Poke.Spells(x) = Leilao(i + 1).Poke.Spells(x)
-            Leilao(i + 1).Poke.Spells(x) = 0
+            Leilao(I).Poke.Spells(x) = Leilao(I + 1).Poke.Spells(x)
+            Leilao(I + 1).Poke.Spells(x) = 0
             Next
             
         End If
@@ -3352,7 +3355,7 @@ Dim i As Long, x As Long
 End Sub
 
 Public Sub LimparLeilaoSlot(ByVal SlotNum As Long)
-Dim i As Long
+Dim I As Long
 
     Leilao(SlotNum).Vendedor = vbNullString
     Leilao(SlotNum).ItemNum = 0
@@ -3368,17 +3371,17 @@ Dim i As Long
     Leilao(SlotNum).Poke.Sexo = 0
     Leilao(SlotNum).Poke.Shiny = 0
     
-    For i = 1 To Vitals.Vital_Count - 1
-        Leilao(SlotNum).Poke.Vital(i) = 0
-        Leilao(SlotNum).Poke.MaxVital(i) = 0
+    For I = 1 To Vitals.Vital_Count - 1
+        Leilao(SlotNum).Poke.Vital(I) = 0
+        Leilao(SlotNum).Poke.MaxVital(I) = 0
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        Leilao(SlotNum).Poke.Stat(i) = 0
+    For I = 1 To Stats.Stat_Count - 1
+        Leilao(SlotNum).Poke.Stat(I) = 0
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        Leilao(SlotNum).Poke.Spells(i) = 0
+    For I = 1 To MAX_POKE_SPELL
+        Leilao(SlotNum).Poke.Spells(I) = 0
     Next
     
 End Sub
@@ -3556,14 +3559,14 @@ Dim Command As Long
 End Sub
 
 Function CanSurfPokemonInv(ByVal index As Long) As Boolean
-Dim i As Long
+Dim I As Long
 
 CanSurfPokemonInv = False
 
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
     
-        If Player(index).Inv(i).Num = 3 Then
-            If Player(index).Inv(i).PokeInfo.Pokemon > 0 Then
+        If Player(index).Inv(I).Num = 3 Then
+            If Player(index).Inv(I).PokeInfo.Pokemon > 0 Then
                 'If Pokemon(Player(Index).Inv(i).PokeInfo.Pokemon).FRS = 3 Then
                     CanSurfPokemonInv = True
                     Exit For
@@ -3576,7 +3579,7 @@ CanSurfPokemonInv = False
 End Function
 
 Sub handleLutarComando(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-Dim Buffer As clsBuffer, C, T, A, i, Pok As Long, p As String
+Dim Buffer As clsBuffer, C, T, A, I, Pok As Long, p As String
 Dim Desafiado As Long, Numero As Byte
 
 Set Buffer = New clsBuffer
@@ -3636,19 +3639,19 @@ Select Case C
         
         Select Case A
             Case 1
-                For i = 1 To Player_HighIndex
-                    If Player(i).Map = 90 Then
+                For I = 1 To Player_HighIndex
+                    If Player(I).Map = 90 Then
                         PlayerMsg index, "Arena 1 Ocupada", BrightRed
                         Exit Sub
                     End If
-                Next i
+                Next I
             Case 2
-                For i = 1 To Player_HighIndex
-                    If Player(i).Map = 3 Then
+                For I = 1 To Player_HighIndex
+                    If Player(I).Map = 3 Then
                         PlayerMsg index, "Arena 2 Ocupada", BrightRed
                         Exit Sub
                     End If
-                Next i
+                Next I
         End Select
         
         Select Case T
@@ -3768,29 +3771,29 @@ Select Case TempPlayer(index).LutandoT
 
     Case 2
         If TempPlayer(index).Lutando > 0 And TempPlayer(index).inParty > 0 Then
-            For i = 1 To Player_HighIndex
-                If IsPlaying(i) Then
-                    If TempPlayer(i).inParty = TempPlayer(index).inParty Then
+            For I = 1 To Player_HighIndex
+                If IsPlaying(I) Then
+                    If TempPlayer(I).inParty = TempPlayer(index).inParty Then
                         Party(TempPlayer(index).inParty).PT = Party(TempPlayer(index).inParty).MemberCount
                         Select Case TempPlayer(index).LutandoA
                             Case 1
-                                PlayerWarp i, 2, 5, 5
+                                PlayerWarp I, 2, 5, 5
                             Case 2
-                                PlayerWarp i, 3, 15, 15
+                                PlayerWarp I, 3, 15, 15
                         End Select
                     End If
                 End If
             Next
             
-        For i = 1 To Player_HighIndex
-            If IsPlaying(i) Then
-                If TempPlayer(i).inParty = TempPlayer(TempPlayer(index).Lutando).inParty Then
+        For I = 1 To Player_HighIndex
+            If IsPlaying(I) Then
+                If TempPlayer(I).inParty = TempPlayer(TempPlayer(index).Lutando).inParty Then
                     Party(TempPlayer(TempPlayer(index).Lutando).inParty).PT = Party(TempPlayer(TempPlayer(index).Lutando).inParty).MemberCount
                     Select Case TempPlayer(index).LutandoA
                         Case 1
-                            PlayerWarp i, 2, 5, 5
+                            PlayerWarp I, 2, 5, 5
                         Case 2
-                            PlayerWarp i, 3, 15, 15
+                            PlayerWarp I, 3, 15, 15
                     End Select
                 End If
             End If
@@ -3850,7 +3853,7 @@ End Sub
 
 Private Sub handleAprenderHab(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim Buffer As clsBuffer
-Dim Action As Byte, i As Long
+Dim Action As Byte, I As Long
 ' ???
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -3870,15 +3873,15 @@ Dim Action As Byte, i As Long
             TakeInvItem index, Player(index).LearnSpell(3), 1
         End If
         
-        For i = 1 To 3
-            Player(index).LearnSpell(i) = 0
+        For I = 1 To 3
+            Player(index).LearnSpell(I) = 0
         Next
         
-        For i = 1 To 10
-            If Player(index).LearnFila(i) > 0 Then
+        For I = 1 To 10
+            If Player(index).LearnFila(I) > 0 Then
                 Player(index).LearnSpell(1) = 1
-                Player(index).LearnSpell(2) = Player(index).LearnFila(i)
-                Player(index).LearnFila(i) = 0
+                Player(index).LearnSpell(2) = Player(index).LearnFila(I)
+                Player(index).LearnFila(I) = 0
                 SendAprenderSpell index, 0
                 Exit For
             End If
@@ -3888,15 +3891,15 @@ Dim Action As Byte, i As Long
         Call SendWornEquipment(index)
         Call SendMapEquipment(index)
     Case 5
-        For i = 1 To 3
-            Player(index).LearnSpell(i) = 0
+        For I = 1 To 3
+            Player(index).LearnSpell(I) = 0
         Next
         
-        For i = 1 To 10
-            If Player(index).LearnFila(i) > 0 Then
+        For I = 1 To 10
+            If Player(index).LearnFila(I) > 0 Then
                 Player(index).LearnSpell(1) = 1
-                Player(index).LearnSpell(2) = Player(index).LearnFila(i)
-                Player(index).LearnFila(i) = 0
+                Player(index).LearnSpell(2) = Player(index).LearnFila(I)
+                Player(index).LearnFila(I) = 0
                 SendAprenderSpell index, 0
                 Exit For
             End If
@@ -3914,7 +3917,7 @@ End Sub
 Sub HandleSetOrg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim U As String
     Dim n As Long
-    Dim i As Long
+    Dim I As Long
     Dim l As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
@@ -3928,11 +3931,11 @@ Sub HandleSetOrg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
     ' The index
     n = FindPlayer(Buffer.ReadString) 'Parse(1))
     ' The access
-    i = Buffer.ReadLong 'CLng(Parse(2))
+    I = Buffer.ReadLong 'CLng(Parse(2))
     Set Buffer = Nothing
     
     If IsPlaying(n) = False Then Exit Sub
-    Select Case i
+    Select Case I
         Case 1
             U = "Equipe 1"
         Case 2
@@ -3948,7 +3951,7 @@ Sub HandleSetOrg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
     End Select
     
     'Setar Valor 0
-    If i = 0 Then
+    If I = 0 Then
         If Player(n).ORG > 0 Then
         
             For l = 1 To MAX_ORG_MEMBERS
@@ -3977,26 +3980,26 @@ Sub HandleSetOrg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As L
     End If
     
     'Verificar Vaga e Setar numero de Membro na organização!
-    l = FindOpenOrgMemberSlot(i)
-    Select Case FindOpenOrgMemberSlot(i)
+    l = FindOpenOrgMemberSlot(I)
+    Select Case FindOpenOrgMemberSlot(I)
         Case 0
             PlayerMsg index, "Não há vagas na organização: " & U & "!", BrightRed
             PlayerMsg n, "Não há vagas na organização: " & U & "!", BrightRed
             Exit Sub
         Case 1
-            Player(n).ORG = i
-            Organization(i).Lider = Trim$(GetPlayerName(n))
-            Organization(i).OrgMember(l).Used = True
-            Organization(i).OrgMember(l).User_Login = Trim$(GetPlayerLogin(n))
-            Organization(i).OrgMember(l).User_Name = Trim$(GetPlayerName(n))
-            Organization(i).OrgMember(l).Online = True
+            Player(n).ORG = I
+            Organization(I).Lider = Trim$(GetPlayerName(n))
+            Organization(I).OrgMember(l).Used = True
+            Organization(I).OrgMember(l).User_Login = Trim$(GetPlayerLogin(n))
+            Organization(I).OrgMember(l).User_Name = Trim$(GetPlayerName(n))
+            Organization(I).OrgMember(l).Online = True
             PlayerMsg n, "Você é o lider da organização: " & U, BrightCyan
         Case Else
-            Organization(i).OrgMember(l).Used = True
-            Organization(i).OrgMember(l).User_Login = Trim$(GetPlayerLogin(n))
-            Organization(i).OrgMember(l).User_Name = Trim$(GetPlayerName(n))
-            Organization(i).OrgMember(l).Online = True
-            Player(n).ORG = i
+            Organization(I).OrgMember(l).Used = True
+            Organization(I).OrgMember(l).User_Login = Trim$(GetPlayerLogin(n))
+            Organization(I).OrgMember(l).User_Name = Trim$(GetPlayerName(n))
+            Organization(I).OrgMember(l).Online = True
+            Player(n).ORG = I
             GlobalMsg GetPlayerName(n) & " acaba de entrar para organização:  " & U & "!", BrightCyan
     End Select
     
@@ -4165,7 +4168,7 @@ Sub HandleObterVip(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As
 Dim Buffer As clsBuffer
 Dim VipNum As Byte, Pontos As Integer
 Dim VipView As Byte, BauNum As Byte
-Dim i As Long, ViewVip As Byte
+Dim I As Long, ViewVip As Byte
 
     'Receber Dados do Cliente
     Set Buffer = New clsBuffer
@@ -4255,71 +4258,13 @@ Continue:
     
     If Trim$(GetPlayerName(index)) = "Orochi" Then
         Player(index).VipPoints = 1500
-        For i = 1 To 6
-            Player(index).VipDays(i) = 0
+        For I = 1 To 6
+            Player(index).VipDays(I) = 0
         Next
         Player(index).MyVip = 0
         Player(index).VipStart = "00/00/0000"
         SendVipPointsInfo index
     End If
-End Sub
-
-' :::::::::::::::::::::::
-' :: Set Visual packet ::
-' :::::::::::::::::::::::
-Sub HandleSetVisual(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
-    Dim n As Long, i As Long, p As Byte
-    Dim NStr(1 To 2) As Integer, x As String
-    Dim Buffer As clsBuffer
-    
-    ' Prevent hacking
-    If GetPlayerAccess(index) < ADMIN_MAPPER Then
-        Exit Sub
-    End If
-    
-    Set Buffer = New clsBuffer
-    Buffer.WriteBytes Data()
-    i = FindPlayer(Buffer.ReadString)
-    n = Buffer.ReadLong
-    p = Buffer.ReadByte
-    Set Buffer = Nothing
-    
-    If i = 0 Or i > MAX_PLAYERS Then Exit Sub
-    
-    Select Case p
-    Case 1
-        Player(i).HairNum = n
-        If n > 10 Then
-            x = Mid$(Trim$(n), 1, Len(Trim$(n)) - 1)
-        Else
-            NStr(1) = 1
-            NStr(2) = n
-            GoTo Continue
-        End If
-        
-        NStr(1) = x
-        NStr(1) = (NStr(1) & 0)
-        NStr(2) = n - NStr(1)
-        
-        If NStr(2) = 0 Then
-            NStr(1) = (NStr(1) / 10)
-            NStr(2) = 10
-        Else
-            NStr(1) = (NStr(1) / 10) + 1
-        End If
-        
-Continue:
-        Player(i).HairModel = NStr(1)
-        Player(i).HairColor = NStr(2)
-        'PlayerMsg Index, "HairModel: " & NStr(1) & "/ HairColor: " & NStr(2), White
-        'SendAparencia i
-        Exit Sub
-    Case 2
-        PlayerMsg index, "Criando...", BrightRed
-    Case 3
-        PlayerMsg index, "Criando...", BrightRed
-    End Select
-    
 End Sub
 
 Private Sub HandlePlayerRun(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
@@ -4339,7 +4284,7 @@ End Sub
 Private Sub HandleComandoGym(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
 Dim Buffer As clsBuffer
 Dim Comando As Byte, QntPoke As Byte, GymMap As Byte
-Dim SendToBattle As Boolean, i As Long
+Dim SendToBattle As Boolean, I As Long
 Dim MapBattle As Integer, MapXBattle As Integer, MapYBattle As Integer
 
     Set Buffer = New clsBuffer
@@ -4363,10 +4308,10 @@ Dim MapBattle As Integer, MapXBattle As Integer, MapYBattle As Integer
     
     If SendToBattle = True Then
         'Curar Os Pokémons
-        For i = 1 To MAX_INV
-            If Player(index).Inv(i).PokeInfo.Pokemon > 0 Then
-                Player(index).Inv(i).PokeInfo.Vital(1) = Player(index).Inv(i).PokeInfo.MaxVital(1)
-                Player(index).Inv(i).PokeInfo.Vital(2) = Player(index).Inv(i).PokeInfo.MaxVital(2)
+        For I = 1 To MAX_INV
+            If Player(index).Inv(I).PokeInfo.Pokemon > 0 Then
+                Player(index).Inv(I).PokeInfo.Vital(1) = Player(index).Inv(I).PokeInfo.MaxVital(1)
+                Player(index).Inv(I).PokeInfo.Vital(2) = Player(index).Inv(I).PokeInfo.MaxVital(2)
                 QntPoke = QntPoke + 1
             End If
         Next
@@ -4422,7 +4367,7 @@ End Sub
 Private Sub HandleGrupoMsg(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
     Dim Msg As String
     Dim S As String
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     Buffer.WriteBytes Data()
@@ -4430,14 +4375,14 @@ Private Sub HandleGrupoMsg(ByVal index As Long, ByRef Data() As Byte, ByVal Star
     Call CheckForSwears(index, Msg)
     
     ' Prevent hacking
-    For i = 1 To Len(Msg)
+    For I = 1 To Len(Msg)
         ' limit the ASCII
-        If AscW(Mid$(Msg, i, 1)) < 32 Or AscW(Mid$(Msg, i, 1)) > 126 Then
+        If AscW(Mid$(Msg, I, 1)) < 32 Or AscW(Mid$(Msg, I, 1)) > 126 Then
             ' limit the extended ASCII
-            If AscW(Mid$(Msg, i, 1)) < 128 Or AscW(Mid$(Msg, i, 1)) > 168 Then
+            If AscW(Mid$(Msg, I, 1)) < 128 Or AscW(Mid$(Msg, I, 1)) > 168 Then
                 ' limit the extended ASCII
-                If AscW(Mid$(Msg, i, 1)) < 224 Or AscW(Mid$(Msg, i, 1)) > 253 Then
-                    Mid$(Msg, i, 1) = ""
+                If AscW(Mid$(Msg, I, 1)) < 224 Or AscW(Mid$(Msg, I, 1)) > 253 Then
+                    Mid$(Msg, I, 1) = ""
                 End If
             End If
         End If
@@ -4449,13 +4394,36 @@ Private Sub HandleGrupoMsg(ByVal index As Long, ByRef Data() As Byte, ByVal Star
     End If
     
     Call AddLog("Grupo #" & TempPlayer(index).inParty & ": " & GetPlayerName(index) & " says, '" & Msg & "'", PLAYER_LOG)
-    For i = 1 To Player_HighIndex
-        If IsPlaying(i) = True Then
-            If TempPlayer(i).inParty = TempPlayer(index).inParty Then
-            Call SayMsg_Gru(i, index, Msg, QBColor(White))
+    For I = 1 To Player_HighIndex
+        If IsPlaying(I) = True Then
+            If TempPlayer(I).inParty = TempPlayer(index).inParty Then
+            Call SayMsg_Gru(I, index, Msg, QBColor(White))
             End If
         End If
     Next
+    Set Buffer = Nothing
+End Sub
+
+Sub HandleSetHair(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
+    Dim n As Long
+    Dim Buffer As clsBuffer
+    Set Buffer = New clsBuffer
+    Buffer.WriteBytes Data()
+
+    ' The sprite
+    n = Buffer.ReadLong 'CLng(Parse(1))
+    Set Buffer = Nothing
+    Call SetPlayerCabelo(index, n)
+    Call SendPlayerData(index)
+    Exit Sub
+End Sub
+
+Sub HandleRequestStatus(ByVal index As Long, ByRef Data() As Byte, ByVal StartAddr As Long, ByVal ExtraVar As Long)
+    Dim Buffer As clsBuffer
+    Set Buffer = New clsBuffer
+    Buffer.WriteLong SServerStatus
+    Buffer.WriteLong Player_HighIndex - 1
+    SendDataTo index, Buffer.ToArray
     Set Buffer = Nothing
 End Sub
 

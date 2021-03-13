@@ -223,9 +223,9 @@ Public Sub MenuState(ByVal state As Long)
             Call SetStatus("Connected, sending character addition data...")
 
             If frmMenu.optMale.value Then
-                Call SendAddChar(frmMenu.txtCName, SEX_MALE, frmMenu.cmbClass.ListIndex + 1, newCharSprite)
+                Call SendAddChar(frmMenu.txtCName, SEX_MALE, frmMenu.cmbClass.ListIndex + 1, newCharSprite, newCharCabelo)
             Else
-                Call SendAddChar(frmMenu.txtCName, SEX_FEMALE, frmMenu.cmbClass.ListIndex + 1, newCharSprite)
+                Call SendAddChar(frmMenu.txtCName, SEX_FEMALE, frmMenu.cmbClass.ListIndex + 1, newCharSprite, newCharCabelo)
             End If
         End If
 
@@ -525,7 +525,7 @@ errorhandler:
     Exit Function
 End Function
 
-Public Sub MovePicture(PB As PictureBox, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Public Sub MovePicture(PB As PictureBox, Button As Integer, Shift As Integer, x As Single, y As Single)
     Dim GlobalX As Long
     Dim GlobalY As Long
 
@@ -536,8 +536,8 @@ Public Sub MovePicture(PB As PictureBox, Button As Integer, Shift As Integer, X 
     GlobalY = PB.top
 
     If Button = 1 Then
-        PB.Left = GlobalX + X - SOffsetX
-        PB.top = GlobalY + Y - SOffsetY
+        PB.Left = GlobalX + x - SOffsetX
+        PB.top = GlobalY + y - SOffsetY
     End If
 
     ' Error handler

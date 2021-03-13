@@ -50,7 +50,6 @@ Sub JoinGame(ByVal Index As Long)
     Call ChecarQntiadePokemons(Index)
     Call SendSurfInit(Index)
     Call SendPlayerTeleport(Index)
-    'Call SendAparencia(Index)
     
     ' send vitals, exp + stats
     For i = 1 To Vitals.Vital_Count - 1
@@ -1850,6 +1849,16 @@ End Function
 Sub SetPlayerSprite(ByVal Index As Long, ByVal Sprite As Long)
     Player(Index).Sprite = Sprite
     Player(Index).MySprite = Sprite
+End Sub
+
+Function GetPlayerCabelo(ByVal Index As Long) As Byte
+
+    If Index <= 0 Or Index > MAX_PLAYERS Then Exit Function
+    GetPlayerCabelo = Player(Index).Cabelo
+End Function
+
+Sub SetPlayerCabelo(ByVal Index As Long, ByVal Cabelo As Byte)
+    Player(Index).Cabelo = Cabelo
 End Sub
 
 Function GetPlayerLevel(ByVal Index As Long) As Long
@@ -4031,7 +4040,19 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     'Retirar o Item
                     Call TakeInvItem(Index, ItemNum, 0)
                 End If
+            Case ITEM_TYPE_VISUAL
+                i = GetPlayerVisuais(Index, Item(ItemNum).VSlot)
+                If i = 0 Then
+                    Call SetPlayerVisuais(Index, Item(ItemNum).VSlot, Item(ItemNum).VNum)
+                    Call TakeInvItem(Index, ItemNum, 0)
+                Else
+                    PlayerMsg Index, "vc já possui este visual", BrightRed
+                End If
                 
+                SendPlayerData Index
+                SendPlayerSound Index, GetPlayerX(Index), GetPlayerY(Index), SoundEntity.seItem, ItemNum
+                Call SendAnimation(GetPlayerMap(Index), Item(ItemNum).Animation, X, Y)
+                '123
         End Select
     End If
 End Sub

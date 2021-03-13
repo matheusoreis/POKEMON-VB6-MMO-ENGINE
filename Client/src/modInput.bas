@@ -243,7 +243,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
         If KeyAscii = vbKeyReturn Then
         
         ' Grupo message
-        If frmMain.cmbEscolha.ListIndex = 4 Then
+        If frmMain.cmbEscolha.ListIndex = 3 Then
 
             If Len(ChatText) > 0 Then
                 Call GrupoMsg(ChatText)
@@ -255,7 +255,7 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
         End If
         
         'msg global
-        If frmMain.cmbEscolha.ListIndex = 3 Then
+        If frmMain.cmbEscolha.ListIndex = 2 Then
             If Len(ChatText) > 0 Then
                     Call BroadcastMsg(ChatText)
                 End If
@@ -325,8 +325,8 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     Case "/v"
                 For i = 1 To 30 '123
                 'AddText "Num:" & Player(MyIndex).Visuais(MyIndex), Yellow
-                'AddText "SLot: " & i & " Visual: " & GetPlayerVisuais(MyIndex, i), Yellow
-                AddText "SLot: " & i & " Tp: " & GetPlayerTeleport(MyIndex, i), Yellow
+                AddText "SLot: " & i & " Visual: " & GetPlayerVisuais(MyIndex, i), Yellow
+                'AddText "SLot: " & i & " Tp: " & GetPlayerTeleport(MyIndex, i), Yellow
                 Next '123
                 Case "/vit"
                    ' If txtMyChat.Visible = False Then
@@ -470,6 +470,21 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then GoTo Continue
 
                     SendMapReport
+                Case "/sethair"
+                    If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then GoTo Continue
+                    
+                    If UBound(Command) < 1 Then
+                        AddText "Use: /sethair (gráfico #)", AlertColor
+                        GoTo Continue
+                    End If
+
+                    If Not IsNumeric(Command(1)) Then
+                        AddText "Use: /sethair (gráfico #)", AlertColor
+                        GoTo Continue
+                    End If
+
+                    SendSetHair CLng(Command(1))
+                    
                     ' Respawn request
                 Case "/respawn"
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then GoTo Continue

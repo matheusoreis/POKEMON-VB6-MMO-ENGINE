@@ -103,11 +103,11 @@ Public Enum ServerPackets
     SOrgShop
     SChatBubble
     SVipInfo
-    'SAparencia
     SRunning
     SComandGym
     SContagem
     STeleport
+    SServerStatus
     ' Make sure SMSG_COUNT is below everything else
     SMSG_COUNT
 End Enum
@@ -133,6 +133,7 @@ Public Enum ClientPackets
     CWarpToMe
     CWarpTo
     CSetSprite
+    CSetHair
     CGetStats
     CRequestNewMap
     CMapData
@@ -223,10 +224,10 @@ Public Enum ClientPackets
     CRecoverPass
     CNewPass
     CGiveVip
-    CSetVisual
     CPlayerRun
     CComandGym
     CGrupoMsg
+    CRequestStatus
     ' Make sure CMSG_COUNT is below everything else
     CMSG_COUNT
 End Enum

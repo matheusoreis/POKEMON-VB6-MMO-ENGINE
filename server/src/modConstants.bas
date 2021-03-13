@@ -147,6 +147,7 @@ Public Const ITEM_TYPE_ROD As Byte = 10
 Public Const ITEM_TYPE_UP As Byte = 11
 Public Const ITEM_TYPE_POKEDEX As Byte = 12
 Public Const ITEM_TYPE_BAU As Byte = 13
+Public Const ITEM_TYPE_VISUAL As Byte = 14
 
 
 ' Direction constants
