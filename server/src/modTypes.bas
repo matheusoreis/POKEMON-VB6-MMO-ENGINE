@@ -157,7 +157,7 @@ Private Type PlayerRec
     
     ' Position
     Map As Long
-    X As Byte
+    x As Byte
     Y As Byte
     Dir As Byte
     MySprite As Long
@@ -287,7 +287,7 @@ Public Type TempPlayerRec
 End Type
 
 Private Type TileDataRec
-    X As Long
+    x As Long
     Y As Long
     Tileset As Long
 End Type
@@ -391,7 +391,7 @@ End Type
 Private Type MapItemRec
     Num As Long
     Value As Long
-    X As Byte
+    x As Byte
     Y As Byte
     ' despawn
     canDespawn As Boolean
@@ -420,6 +420,7 @@ Private Type NpcRec
     Chance As Long
     Pokemon As Long
     Quest(1 To MAX_NPC_QUESTS) As Integer
+    Money As Long
 End Type
 
 Private Type MapNpcRec
@@ -427,7 +428,7 @@ Private Type MapNpcRec
     target As Long
     targetType As Byte
     Vital(1 To Vitals.Vital_Count - 1) As Long
-    X As Byte
+    x As Byte
     Y As Byte
     Dir As Byte
     ' For server use only
@@ -479,7 +480,7 @@ Private Type SpellRec
     CDTime As Long
     Icon As Long
     Map As Long
-    X As Long
+    x As Long
     Y As Long
     Dir As Byte
     Vital As Long
@@ -514,7 +515,7 @@ End Type
 Private Type MapResourceRec
     ResourceState As Byte
     ResourceTimer As Long
-    X As Long
+    x As Long
     Y As Long
     cur_health As Long
 End Type

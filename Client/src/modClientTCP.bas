@@ -368,8 +368,8 @@ Public Sub SendPlayerMove()
     Buffer.WriteLong CPlayerMove
     Buffer.WriteLong GetPlayerDir(MyIndex)
     Buffer.WriteLong Player(MyIndex).Moving
-    Buffer.WriteLong Player(MyIndex).x
-    Buffer.WriteLong Player(MyIndex).y
+    Buffer.WriteLong Player(MyIndex).X
+    Buffer.WriteLong Player(MyIndex).Y
     SendData Buffer.ToArray()
     Set Buffer = Nothing
 
@@ -423,8 +423,8 @@ End Sub
 
 Public Sub SendMap()
     Dim packet As String
-    Dim x As Long
-    Dim y As Long
+    Dim X As Long
+    Dim Y As Long
     Dim i As Long
     Dim Buffer As clsBuffer
 
@@ -450,18 +450,18 @@ Public Sub SendMap()
         Buffer.WriteByte .MaxY
         Buffer.WriteLong .Weather
         Buffer.WriteLong .Intensity
-        For x = 1 To 2
-            Buffer.WriteLong .LevelPoke(x)
+        For X = 1 To 2
+            Buffer.WriteLong .LevelPoke(X)
         Next
     End With
 
-    For x = 0 To Map.MaxX
-        For y = 0 To Map.MaxY
+    For X = 0 To Map.MaxX
+        For Y = 0 To Map.MaxY
 
-            With Map.Tile(x, y)
+            With Map.Tile(X, Y)
                 For i = 1 To MapLayer.Layer_Count - 1
-                    Buffer.WriteLong .Layer(i).x
-                    Buffer.WriteLong .Layer(i).y
+                    Buffer.WriteLong .Layer(i).X
+                    Buffer.WriteLong .Layer(i).Y
                     Buffer.WriteLong .Layer(i).Tileset
                 Next
                 Buffer.WriteByte .Type
@@ -476,8 +476,8 @@ Public Sub SendMap()
 
     With Map
 
-        For x = 1 To MAX_MAP_NPCS
-            Buffer.WriteLong .Npc(x)
+        For X = 1 To MAX_MAP_NPCS
+            Buffer.WriteLong .Npc(X)
         Next
 
     End With
@@ -549,6 +549,28 @@ Public Sub WarpTo(ByVal MapNum As Long)
     Exit Sub
 errorhandler:
     HandleError "WarpTo", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
+    Err.Clear
+    Exit Sub
+End Sub
+
+Public Sub WarpPlayer(ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long)
+    Dim Buffer As clsBuffer
+
+    ' If debug mode, handle error then exit out
+    If Options.Debug = 1 Then On Error GoTo errorhandler
+
+    Set Buffer = New clsBuffer
+    Buffer.WriteLong CWarpPlayer
+    Buffer.WriteLong MapNum
+    Buffer.WriteLong X
+    Buffer.WriteLong Y
+    SendData Buffer.ToArray()
+    Set Buffer = Nothing
+
+    ' Error handler
+    Exit Sub
+errorhandler:
+    HandleError "WarpPlayer", "modClientTCP", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
 End Sub
@@ -1502,7 +1524,7 @@ errorhandler:
     Exit Sub
 End Sub
 
-Public Sub AdminWarp(ByVal x As Long, ByVal y As Long)
+Public Sub AdminWarp(ByVal X As Long, ByVal Y As Long)
     Dim Buffer As clsBuffer
 
     ' If debug mode, handle error then exit out
@@ -1510,8 +1532,8 @@ Public Sub AdminWarp(ByVal x As Long, ByVal y As Long)
 
     Set Buffer = New clsBuffer
     Buffer.WriteLong CAdminWarp
-    Buffer.WriteLong x
-    Buffer.WriteLong y
+    Buffer.WriteLong X
+    Buffer.WriteLong Y
     SendData Buffer.ToArray()
     Set Buffer = Nothing
 
@@ -1627,18 +1649,18 @@ End Sub
 
 Public Sub SendHotbarUse(ByVal Slot As Long)
     Dim Buffer As clsBuffer
-    Dim x As Long
+    Dim X As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     ' check if spell
     If Hotbar(Slot).sType = 2 Then    ' spell
-        For x = 1 To MAX_PLAYER_SPELLS
+        For X = 1 To MAX_PLAYER_SPELLS
             ' is the spell matching the hotbar?
-            If PlayerSpells(x) = Hotbar(Slot).Slot Then
+            If PlayerSpells(X) = Hotbar(Slot).Slot Then
                 ' found it, cast it
-                CastSpell x
+                CastSpell X
                 Exit Sub
             End If
         Next

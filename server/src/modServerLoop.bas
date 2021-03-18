@@ -297,17 +297,17 @@ Sub ServerLoop()
                 If IsPlaying(FindPlayer(Leilao(I).Vendedor)) = True Then
                     ' Check to see if inventory is full
                     'If I <> 0 Then
-                    GiveInvItem FindPlayer(Leilao(I).Vendedor), Leilao(I).ItemNum, 1, True, _
-                    Leilao(I).Poke.Pokemon, Leilao(I).Poke.Pokeball, _
-                    Leilao(I).Poke.Level, Leilao(I).Poke.EXP, _
-                    Leilao(I).Poke.Vital(1), Leilao(I).Poke.Vital(2), _
-                    Leilao(I).Poke.MaxVital(1), Leilao(I).Poke.MaxVital(2), _
-                    Leilao(I).Poke.Stat(1), Leilao(I).Poke.Stat(4), _
-                    Leilao(I).Poke.Stat(2), Leilao(I).Poke.Stat(3), _
-                    Leilao(I).Poke.Stat(5), Leilao(I).Poke.Spells(1), _
-                    Leilao(I).Poke.Spells(2), Leilao(I).Poke.Spells(3), _
-                    Leilao(I).Poke.Spells(4)
-                    PlayerMsg FindPlayer(Leilao(I).Vendedor), "Leilão falhou, tempo expirado.", BrightRed
+                        GiveInvItem FindPlayer(Leilao(I).Vendedor), Leilao(I).ItemNum, 1, True, _
+                        Leilao(I).Poke.Pokemon, Leilao(I).Poke.Pokeball, _
+                        Leilao(I).Poke.Level, Leilao(I).Poke.EXP, _
+                        Leilao(I).Poke.Vital(1), Leilao(I).Poke.Vital(2), _
+                        Leilao(I).Poke.MaxVital(1), Leilao(I).Poke.MaxVital(2), _
+                        Leilao(I).Poke.Stat(1), Leilao(I).Poke.Stat(4), _
+                        Leilao(I).Poke.Stat(2), Leilao(I).Poke.Stat(3), _
+                        Leilao(I).Poke.Stat(5), Leilao(I).Poke.Spells(1), _
+                        Leilao(I).Poke.Spells(2), Leilao(I).Poke.Spells(3), _
+                        Leilao(I).Poke.Spells(4)
+                        PlayerMsg FindPlayer(Leilao(I).Vendedor), "Leilão falhou, tempo expirado.", BrightRed
                 Else
                     PendNum = FindPend
                     

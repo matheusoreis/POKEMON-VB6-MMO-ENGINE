@@ -2,13 +2,13 @@ Attribute VB_Name = "modGameLogic"
 Option Explicit
 
 Function FindOpenPlayerSlot() As Long
-    Dim i As Long
+    Dim I As Long
     FindOpenPlayerSlot = 0
 
-    For i = 1 To MAX_PLAYERS
+    For I = 1 To MAX_PLAYERS
 
-        If Not IsConnected(i) Then
-            FindOpenPlayerSlot = i
+        If Not IsConnected(I) Then
+            FindOpenPlayerSlot = I
             Exit Function
         End If
 
@@ -17,7 +17,7 @@ Function FindOpenPlayerSlot() As Long
 End Function
 
 Function FindOpenMapItemSlot(ByVal MapNum As Long) As Long
-    Dim i As Long
+    Dim I As Long
     FindOpenMapItemSlot = 0
 
     ' Check for subscript out of range
@@ -25,10 +25,10 @@ Function FindOpenMapItemSlot(ByVal MapNum As Long) As Long
         Exit Function
     End If
 
-    For i = 1 To MAX_MAP_ITEMS
+    For I = 1 To MAX_MAP_ITEMS
 
-        If MapItem(MapNum, i).Num = 0 Then
-            FindOpenMapItemSlot = i
+        If MapItem(MapNum, I).Num = 0 Then
+            FindOpenMapItemSlot = I
             Exit Function
         End If
 
@@ -37,12 +37,12 @@ Function FindOpenMapItemSlot(ByVal MapNum As Long) As Long
 End Function
 
 Function TotalOnlinePlayers() As Long
-    Dim i As Long
+    Dim I As Long
     TotalOnlinePlayers = 0
 
-    For i = 1 To Player_HighIndex
+    For I = 1 To Player_HighIndex
 
-        If IsPlaying(i) Then
+        If IsPlaying(I) Then
             TotalOnlinePlayers = TotalOnlinePlayers + 1
         End If
 
@@ -51,16 +51,16 @@ Function TotalOnlinePlayers() As Long
 End Function
 
 Function FindPlayer(ByVal Name As String) As Long
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To Player_HighIndex
+    For I = 1 To Player_HighIndex
 
-        If IsPlaying(i) Then
+        If IsPlaying(I) Then
 
             ' Make sure we dont try to check a name thats to small
-            If Len(GetPlayerName(i)) >= Len(Trim$(Name)) Then
-                If UCase$(Mid$(GetPlayerName(i), 1, Len(Trim$(Name)))) = UCase$(Trim$(Name)) Then
-                    FindPlayer = i
+            If Len(GetPlayerName(I)) >= Len(Trim$(Name)) Then
+                If UCase$(Mid$(GetPlayerName(I), 1, Len(Trim$(Name)))) = UCase$(Trim$(Name)) Then
+                    FindPlayer = I
                     Exit Function
                 End If
             End If
@@ -71,14 +71,14 @@ Function FindPlayer(ByVal Name As String) As Long
     FindPlayer = 0
 End Function
 
-Sub SpawnItem(ByVal ItemNum As Long, ByVal ItemVal As Long, ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal playerName As String = vbNullString, Optional ByVal Pokemon As Long, Optional ByVal Pokeball As Long, Optional ByVal Level As Long, Optional ByVal EXP As Long, Optional ByVal VitalHP As Long, Optional ByVal VitalMP As Long, Optional ByVal MaxVitalHp As Long, Optional ByVal MaxVitalMp As Long, Optional ByVal StatStr As Long, Optional ByVal StatAgi As Long, Optional ByVal StatEnd As Long, Optional ByVal StatInt As Long, Optional ByVal StatWill As Long, Optional ByVal Spell1 As Long, Optional ByVal Spell2 As Long, Optional ByVal Spell3 As Long, Optional ByVal Spell4 As Long, _
+Sub SpawnItem(ByVal ItemNum As Long, ByVal ItemVal As Long, ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal playerName As String = vbNullString, Optional ByVal Pokemon As Long, Optional ByVal Pokeball As Long, Optional ByVal Level As Long, Optional ByVal EXP As Long, Optional ByVal VitalHP As Long, Optional ByVal VitalMP As Long, Optional ByVal MaxVitalHp As Long, Optional ByVal MaxVitalMp As Long, Optional ByVal StatStr As Long, Optional ByVal StatAgi As Long, Optional ByVal StatEnd As Long, Optional ByVal StatInt As Long, Optional ByVal StatWill As Long, Optional ByVal Spell1 As Long, Optional ByVal Spell2 As Long, Optional ByVal Spell3 As Long, Optional ByVal Spell4 As Long, _
 Optional ByVal Ngt1 As Long, Optional ByVal Ngt2 As Long, Optional ByVal Ngt3 As Long, Optional ByVal Ngt4 As Long, _
 Optional ByVal Ngt5 As Long, Optional ByVal Ngt6 As Long, Optional ByVal Ngt7 As Long, Optional ByVal Ngt8 As Long, _
 Optional ByVal Ngt9 As Long, Optional ByVal Ngt10 As Long, Optional ByVal Ngt11 As Long, Optional ByVal Felicidade As Long, _
 Optional ByVal Sexo As Byte, Optional ByVal Shiny As Long, Optional ByVal Bry1 As Long, Optional ByVal Bry2 As Long, Optional ByVal Bry3 As Long, _
 Optional ByVal Bry4 As Long, Optional ByVal Bry5 As Long)
 
-    Dim i As Long
+    Dim I As Long
 
     ' Check for subscript out of range
     If ItemNum < 1 Or ItemNum > MAX_ITEMS Or MapNum <= 0 Or MapNum > MAX_MAPS Then
@@ -86,11 +86,11 @@ Optional ByVal Bry4 As Long, Optional ByVal Bry5 As Long)
     End If
 
     ' Find open map item slot
-    i = FindOpenMapItemSlot(MapNum)
-    Call SpawnItemSlot(i, ItemNum, ItemVal, MapNum, X, Y, playerName, False, Pokemon, Pokeball, Level, EXP, VitalHP, VitalMP, MaxVitalHp, MaxVitalMp, StatStr, StatAgi, StatEnd, StatInt, StatWill, Spell1, Spell2, Spell3, Spell4, Ngt1, Ngt2, Ngt3, Ngt4, Ngt5, Ngt6, Ngt7, Ngt8, Ngt9, Ngt10, Ngt11, Felicidade, Sexo, Shiny, Bry1, Bry2, Bry3, Bry4, Bry5)
+    I = FindOpenMapItemSlot(MapNum)
+    Call SpawnItemSlot(I, ItemNum, ItemVal, MapNum, x, Y, playerName, False, Pokemon, Pokeball, Level, EXP, VitalHP, VitalMP, MaxVitalHp, MaxVitalMp, StatStr, StatAgi, StatEnd, StatInt, StatWill, Spell1, Spell2, Spell3, Spell4, Ngt1, Ngt2, Ngt3, Ngt4, Ngt5, Ngt6, Ngt7, Ngt8, Ngt9, Ngt10, Ngt11, Felicidade, Sexo, Shiny, Bry1, Bry2, Bry3, Bry4, Bry5)
 End Sub
 
-Sub SpawnItemSlot(ByVal MapItemSlot As Long, ByVal ItemNum As Long, ByVal ItemVal As Long, ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal playerName As String = vbNullString, Optional ByVal canDespawn As Boolean = True, Optional ByVal Pokemon As Long, Optional ByVal Pokeball As Long, Optional ByVal Level As Long, Optional ByVal EXP As Long, Optional ByVal VitalHP As Long, Optional ByVal VitalMP As Long, Optional ByVal MaxVitalHp As Long, Optional ByVal MaxVitalMp As Long, Optional ByVal StatStr As Long, Optional ByVal StatAgi As Long, Optional ByVal StatEnd As Long, Optional ByVal StatInt As Long, Optional ByVal StatWill As Long, Optional ByVal Spell1 As Long, Optional ByVal Spell2 As Long, Optional ByVal Spell3 As Long, Optional ByVal Spell4 As Long, _
+Sub SpawnItemSlot(ByVal MapItemSlot As Long, ByVal ItemNum As Long, ByVal ItemVal As Long, ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal playerName As String = vbNullString, Optional ByVal canDespawn As Boolean = True, Optional ByVal Pokemon As Long, Optional ByVal Pokeball As Long, Optional ByVal Level As Long, Optional ByVal EXP As Long, Optional ByVal VitalHP As Long, Optional ByVal VitalMP As Long, Optional ByVal MaxVitalHp As Long, Optional ByVal MaxVitalMp As Long, Optional ByVal StatStr As Long, Optional ByVal StatAgi As Long, Optional ByVal StatEnd As Long, Optional ByVal StatInt As Long, Optional ByVal StatWill As Long, Optional ByVal Spell1 As Long, Optional ByVal Spell2 As Long, Optional ByVal Spell3 As Long, Optional ByVal Spell4 As Long, _
 Optional ByVal Ngt1 As Long, Optional ByVal Ngt2 As Long, _
 Optional ByVal Ngt3 As Long, Optional ByVal Ngt4 As Long, _
 Optional ByVal Ngt5 As Long, Optional ByVal Ngt6 As Long, _
@@ -101,7 +101,7 @@ Optional ByVal Sexo As Byte, Optional ByVal Shiny As Long, _
 Optional ByVal Bry1 As Long, Optional ByVal Bry2 As Long, Optional ByVal Bry3 As Long, Optional ByVal Bry4 As Long, Optional ByVal Bry5 As Long)
     
     Dim packet As String
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
 
     ' Check for subscript out of range
@@ -109,70 +109,70 @@ Optional ByVal Bry1 As Long, Optional ByVal Bry2 As Long, Optional ByVal Bry3 As
         Exit Sub
     End If
 
-    i = MapItemSlot
+    I = MapItemSlot
 
-    If i <> 0 Then
+    If I <> 0 Then
         If ItemNum >= 0 And ItemNum <= MAX_ITEMS Then
 
-            MapItem(MapNum, i).Num = ItemNum
-            MapItem(MapNum, i).Value = ItemVal
-            MapItem(MapNum, i).X = X
-            MapItem(MapNum, i).Y = Y
-            MapItem(MapNum, i).PokeInfo.Pokemon = Pokemon
-            MapItem(MapNum, i).PokeInfo.Pokeball = Pokeball
-            MapItem(MapNum, i).PokeInfo.Level = Level
-            MapItem(MapNum, i).PokeInfo.EXP = EXP
+            MapItem(MapNum, I).Num = ItemNum
+            MapItem(MapNum, I).Value = ItemVal
+            MapItem(MapNum, I).x = x
+            MapItem(MapNum, I).Y = Y
+            MapItem(MapNum, I).PokeInfo.Pokemon = Pokemon
+            MapItem(MapNum, I).PokeInfo.Pokeball = Pokeball
+            MapItem(MapNum, I).PokeInfo.Level = Level
+            MapItem(MapNum, I).PokeInfo.EXP = EXP
             
-            MapItem(MapNum, i).PokeInfo.Vital(1) = VitalHP
-            MapItem(MapNum, i).PokeInfo.Vital(2) = VitalMP
-            MapItem(MapNum, i).PokeInfo.MaxVital(1) = MaxVitalHp
-            MapItem(MapNum, i).PokeInfo.MaxVital(2) = MaxVitalMp
+            MapItem(MapNum, I).PokeInfo.Vital(1) = VitalHP
+            MapItem(MapNum, I).PokeInfo.Vital(2) = VitalMP
+            MapItem(MapNum, I).PokeInfo.MaxVital(1) = MaxVitalHp
+            MapItem(MapNum, I).PokeInfo.MaxVital(2) = MaxVitalMp
             
-            MapItem(MapNum, i).PokeInfo.Stat(1) = StatStr
-            MapItem(MapNum, i).PokeInfo.Stat(2) = StatEnd
-            MapItem(MapNum, i).PokeInfo.Stat(3) = StatInt
-            MapItem(MapNum, i).PokeInfo.Stat(4) = StatAgi
-            MapItem(MapNum, i).PokeInfo.Stat(5) = StatWill
+            MapItem(MapNum, I).PokeInfo.Stat(1) = StatStr
+            MapItem(MapNum, I).PokeInfo.Stat(2) = StatEnd
+            MapItem(MapNum, I).PokeInfo.Stat(3) = StatInt
+            MapItem(MapNum, I).PokeInfo.Stat(4) = StatAgi
+            MapItem(MapNum, I).PokeInfo.Stat(5) = StatWill
             
-            MapItem(MapNum, i).PokeInfo.Spells(1) = Spell1
-            MapItem(MapNum, i).PokeInfo.Spells(2) = Spell2
-            MapItem(MapNum, i).PokeInfo.Spells(3) = Spell3
-            MapItem(MapNum, i).PokeInfo.Spells(4) = Spell4
+            MapItem(MapNum, I).PokeInfo.Spells(1) = Spell1
+            MapItem(MapNum, I).PokeInfo.Spells(2) = Spell2
+            MapItem(MapNum, I).PokeInfo.Spells(3) = Spell3
+            MapItem(MapNum, I).PokeInfo.Spells(4) = Spell4
             
-            MapItem(MapNum, i).PokeInfo.Negatives(1) = Ngt1
-            MapItem(MapNum, i).PokeInfo.Negatives(2) = Ngt2
-            MapItem(MapNum, i).PokeInfo.Negatives(3) = Ngt3
-            MapItem(MapNum, i).PokeInfo.Negatives(4) = Ngt4
-            MapItem(MapNum, i).PokeInfo.Negatives(5) = Ngt5
-            MapItem(MapNum, i).PokeInfo.Negatives(6) = Ngt6
-            MapItem(MapNum, i).PokeInfo.Negatives(7) = Ngt7
-            MapItem(MapNum, i).PokeInfo.Negatives(8) = Ngt8
-            MapItem(MapNum, i).PokeInfo.Negatives(9) = Ngt9
-            MapItem(MapNum, i).PokeInfo.Negatives(10) = Ngt10
-            MapItem(MapNum, i).PokeInfo.Negatives(11) = Ngt11
+            MapItem(MapNum, I).PokeInfo.Negatives(1) = Ngt1
+            MapItem(MapNum, I).PokeInfo.Negatives(2) = Ngt2
+            MapItem(MapNum, I).PokeInfo.Negatives(3) = Ngt3
+            MapItem(MapNum, I).PokeInfo.Negatives(4) = Ngt4
+            MapItem(MapNum, I).PokeInfo.Negatives(5) = Ngt5
+            MapItem(MapNum, I).PokeInfo.Negatives(6) = Ngt6
+            MapItem(MapNum, I).PokeInfo.Negatives(7) = Ngt7
+            MapItem(MapNum, I).PokeInfo.Negatives(8) = Ngt8
+            MapItem(MapNum, I).PokeInfo.Negatives(9) = Ngt9
+            MapItem(MapNum, I).PokeInfo.Negatives(10) = Ngt10
+            MapItem(MapNum, I).PokeInfo.Negatives(11) = Ngt11
             
-            MapItem(MapNum, i).PokeInfo.Felicidade = Felicidade
-            MapItem(MapNum, i).PokeInfo.Sexo = Sexo
-            MapItem(MapNum, i).PokeInfo.Shiny = Shiny
+            MapItem(MapNum, I).PokeInfo.Felicidade = Felicidade
+            MapItem(MapNum, I).PokeInfo.Sexo = Sexo
+            MapItem(MapNum, I).PokeInfo.Shiny = Shiny
             
             ' send to map
-            SendSpawnItemToMap MapNum, i
+            SendSpawnItemToMap MapNum, I
         End If
     End If
 
 End Sub
 
 Sub SpawnAllMapsItems()
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To MAX_MAPS
-        Call SpawnMapItems(i)
+    For I = 1 To MAX_MAPS
+        Call SpawnMapItems(I)
     Next
 
 End Sub
 
 Sub SpawnMapItems(ByVal MapNum As Long)
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
 
     ' Check for subscript out of range
@@ -181,17 +181,17 @@ Sub SpawnMapItems(ByVal MapNum As Long)
     End If
 
     ' Spawn what we have
-    For X = 0 To Map(MapNum).MaxX
+    For x = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
 
             ' Check if the tile type is an item or a saved tile incase someone drops something
-            If (Map(MapNum).Tile(X, Y).Type = TILE_TYPE_ITEM) Then
+            If (Map(MapNum).Tile(x, Y).Type = TILE_TYPE_ITEM) Then
 
                 ' Check to see if its a currency and if they set the value to 0 set it to 1 automatically
-                If Item(Map(MapNum).Tile(X, Y).Data1).Type = ITEM_TYPE_CURRENCY And Map(MapNum).Tile(X, Y).Data2 <= 0 Then
-                    Call SpawnItem(Map(MapNum).Tile(X, Y).Data1, 1, MapNum, X, Y)
+                If Item(Map(MapNum).Tile(x, Y).Data1).Type = ITEM_TYPE_CURRENCY And Map(MapNum).Tile(x, Y).Data2 <= 0 Then
+                    Call SpawnItem(Map(MapNum).Tile(x, Y).Data1, 1, MapNum, x, Y)
                 Else
-                    Call SpawnItem(Map(MapNum).Tile(X, Y).Data1, Map(MapNum).Tile(X, Y).Data2, MapNum, X, Y)
+                    Call SpawnItem(Map(MapNum).Tile(x, Y).Data1, Map(MapNum).Tile(x, Y).Data2, MapNum, x, Y)
                 End If
             End If
 
@@ -208,8 +208,8 @@ Function Porcento(ByVal ValorTotal As Long, ByVal Porcentagem As Long) As Long
     Porcento = (ValorTotal * Porcentagem) / 100
 End Function
 
-Public Sub SpawnPokeGym(ByVal MapNpcNum As Byte, ByVal MapNum As Integer, ByVal NpcNum As Byte, ByVal X As Integer, ByVal Y As Integer, ByVal DirNum As Byte, ByVal Sex As Boolean, ByVal Level As Integer)
-Dim Buffer As clsBuffer, i As Long
+Public Sub SpawnPokeGym(ByVal MapNpcNum As Byte, ByVal MapNum As Integer, ByVal NpcNum As Byte, ByVal x As Integer, ByVal Y As Integer, ByVal DirNum As Byte, ByVal Sex As Boolean, ByVal Level As Integer)
+Dim Buffer As clsBuffer, I As Long
 Dim Sumir As Boolean
 
     If NpcNum > 0 Then
@@ -217,7 +217,7 @@ Dim Sumir As Boolean
         
         With MapNpc(MapNum).Npc(MapNpcNum)
             .Num = NpcNum
-            .X = X
+            .x = x
             .Y = Y
             .Dir = DirNum
             .Sexo = Sex
@@ -241,7 +241,7 @@ Dim Sumir As Boolean
     Else
         With MapNpc(MapNum).Npc(MapNpcNum)
             .Num = NpcNum
-            .X = X
+            .x = x
             .Y = Y
             .Dir = DirNum
             .Sexo = Sex
@@ -292,9 +292,9 @@ Dim Sumir As Boolean
     Call MapCache_Create(MapNum)
     
     'Mandar Desmaiado
-    For i = 1 To Player_HighIndex
-        If GetPlayerMap(i) = MapNum Then
-            SendNpcDesmaiado MapNum, MapNpcNum, Sumir, i
+    For I = 1 To Player_HighIndex
+        If GetPlayerMap(I) = MapNum Then
+            SendNpcDesmaiado MapNum, MapNpcNum, Sumir, I
         End If
     Next
     
@@ -304,7 +304,7 @@ End Sub
 
 Public Sub SpawnNpc(ByVal MapNpcNum As Long, ByVal MapNum As Long, Optional ByVal SetX As Long, Optional ByVal SetY As Long)
     Dim Buffer As clsBuffer
-    Dim NpcNum As Long, i As Long, X As Long, Y As Long
+    Dim NpcNum As Long, I As Long, x As Long, Y As Long
     Dim Spawned As Boolean, ShinyValue As Integer, ControlSex As Byte
     Dim Random50 As Long, Random100 As Long
 
@@ -401,39 +401,39 @@ Public Sub SpawnNpc(ByVal MapNpcNum As Long, ByVal MapNum As Long, Optional ByVa
         End If
         
         'Check if theres a spawn tile for the specific npc
-        For X = 0 To Map(MapNum).MaxX
+        For x = 0 To Map(MapNum).MaxX
             For Y = 0 To Map(MapNum).MaxY
-                If Map(MapNum).Tile(X, Y).Type = TILE_TYPE_NPCSPAWN Then
-                    If Map(MapNum).Tile(X, Y).Data1 = MapNpcNum Then
-                        MapNpc(MapNum).Npc(MapNpcNum).X = X
+                If Map(MapNum).Tile(x, Y).Type = TILE_TYPE_NPCSPAWN Then
+                    If Map(MapNum).Tile(x, Y).Data1 = MapNpcNum Then
+                        MapNpc(MapNum).Npc(MapNpcNum).x = x
                         MapNpc(MapNum).Npc(MapNpcNum).Y = Y
-                        MapNpc(MapNum).Npc(MapNpcNum).Dir = Map(MapNum).Tile(X, Y).Data2
+                        MapNpc(MapNum).Npc(MapNpcNum).Dir = Map(MapNum).Tile(x, Y).Data2
                         Spawned = True
                         Exit For
                     End If
                 End If
             Next Y
-        Next X
+        Next x
         
         If Not Spawned Then
     
             ' Well try 100 times to randomly place the sprite
-            For i = 1 To 100
+            For I = 1 To 100
                 
                 If SetX = 0 And SetY = 0 Then
-                    X = Random(0, Map(MapNum).MaxX)
+                    x = Random(0, Map(MapNum).MaxX)
                     Y = Random(0, Map(MapNum).MaxY)
                 Else
-                    X = SetX
+                    x = SetX
                     Y = SetY
                 End If
     
-                If X > Map(MapNum).MaxX Then X = Map(MapNum).MaxX
+                If x > Map(MapNum).MaxX Then x = Map(MapNum).MaxX
                 If Y > Map(MapNum).MaxY Then Y = Map(MapNum).MaxY
     
                 ' Check if the tile is walkable
-                If NpcTileIsOpen(MapNum, X, Y) Then
-                    MapNpc(MapNum).Npc(MapNpcNum).X = X
+                If NpcTileIsOpen(MapNum, x, Y) Then
+                    MapNpc(MapNum).Npc(MapNpcNum).x = x
                     MapNpc(MapNum).Npc(MapNpcNum).Y = Y
                     Spawned = True
                     Exit For
@@ -446,11 +446,11 @@ Public Sub SpawnNpc(ByVal MapNpcNum As Long, ByVal MapNum As Long, Optional ByVa
         ' Didn't spawn, so now we'll just try to find a free tile
         If Not Spawned Then
 
-            For X = 0 To Map(MapNum).MaxX
+            For x = 0 To Map(MapNum).MaxX
                 For Y = 0 To Map(MapNum).MaxY
 
-                    If NpcTileIsOpen(MapNum, X, Y) Then
-                        MapNpc(MapNum).Npc(MapNpcNum).X = X
+                    If NpcTileIsOpen(MapNum, x, Y) Then
+                        MapNpc(MapNum).Npc(MapNpcNum).x = x
                         MapNpc(MapNum).Npc(MapNpcNum).Y = Y
                         Spawned = True
                     End If
@@ -466,7 +466,7 @@ Public Sub SpawnNpc(ByVal MapNpcNum As Long, ByVal MapNum As Long, Optional ByVa
             Buffer.WriteLong SSpawnNpc
             Buffer.WriteLong MapNpcNum
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Num
-            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).X
+            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).x
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Y
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Dir
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Sexo
@@ -481,7 +481,7 @@ Public Sub SpawnNpc(ByVal MapNpcNum As Long, ByVal MapNum As Long, Optional ByVa
 
 End Sub
 
-Public Function NpcTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long) As Boolean
+Public Function NpcTileIsOpen(ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long) As Boolean
     Dim LoopI As Long
     NpcTileIsOpen = True
 
@@ -490,7 +490,7 @@ Public Function NpcTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As 
         For LoopI = 1 To Player_HighIndex
 
             If GetPlayerMap(LoopI) = MapNum Then
-                If GetPlayerX(LoopI) = X Then
+                If GetPlayerX(LoopI) = x Then
                     If GetPlayerY(LoopI) = Y Then
                         NpcTileIsOpen = False
                         Exit Function
@@ -505,7 +505,7 @@ Public Function NpcTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As 
     For LoopI = 1 To MAX_MAP_NPCS
 
         If MapNpc(MapNum).Npc(LoopI).Num > 0 Then
-            If MapNpc(MapNum).Npc(LoopI).X = X Then
+            If MapNpc(MapNum).Npc(LoopI).x = x Then
                 If MapNpc(MapNum).Npc(LoopI).Y = Y Then
                     NpcTileIsOpen = False
                     Exit Function
@@ -515,10 +515,10 @@ Public Function NpcTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As 
 
     Next
 
-    If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_WALKABLE Then
-        If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_NPCSPAWN Then
-            If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_ITEM Then
-                If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_GRASS Then
+    If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_WALKABLE Then
+        If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_NPCSPAWN Then
+            If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_ITEM Then
+                If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_GRASS Then
                 NpcTileIsOpen = False
                 End If
             End If
@@ -527,27 +527,27 @@ Public Function NpcTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As 
 End Function
 
 Sub SpawnMapNpcs(ByVal MapNum As Long)
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To MAX_MAP_NPCS
-        Call SpawnNpc(i, MapNum)
+    For I = 1 To MAX_MAP_NPCS
+        Call SpawnNpc(I, MapNum)
     Next
 
 End Sub
 
 Sub SpawnAllMapNpcs()
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To MAX_MAPS
-        Call SpawnMapNpcs(i)
+    For I = 1 To MAX_MAPS
+        Call SpawnMapNpcs(I)
     Next
 
 End Sub
 
 Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As Byte) As Boolean
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
 
     ' Check for subscript out of range
@@ -555,7 +555,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
         Exit Function
     End If
 
-    X = MapNpc(MapNum).Npc(MapNpcNum).X
+    x = MapNpc(MapNum).Npc(MapNpcNum).x
     Y = MapNpc(MapNum).Npc(MapNpcNum).Y
     CanNpcMove = True
     
@@ -569,7 +569,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
 
             ' Check to make sure not outside of boundries
             If Y > 0 Then
-                n = Map(MapNum).Tile(X, Y - 1).Type
+                n = Map(MapNum).Tile(x, Y - 1).Type
 
                 ' Check to make sure that the tile is walkable
                 If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN And n <> TILE_TYPE_GRASS Then
@@ -578,9 +578,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 End If
 
                 ' Check to make sure that there is not a player in the way
-                For i = 1 To Player_HighIndex
-                    If IsPlaying(i) Then
-                        If (GetPlayerMap(i) = MapNum) And (GetPlayerX(i) = MapNpc(MapNum).Npc(MapNpcNum).X) And (GetPlayerY(i) = MapNpc(MapNum).Npc(MapNpcNum).Y - 1) Then
+                For I = 1 To Player_HighIndex
+                    If IsPlaying(I) Then
+                        If (GetPlayerMap(I) = MapNum) And (GetPlayerX(I) = MapNpc(MapNum).Npc(MapNpcNum).x) And (GetPlayerY(I) = MapNpc(MapNum).Npc(MapNpcNum).Y - 1) Then
                             CanNpcMove = False
                             Exit Function
                         End If
@@ -588,9 +588,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
 
                 ' Check to make sure that there is not another npc in the way
-                For i = 1 To MAX_MAP_NPCS
-                    If MapNpc(MapNum).Npc(i).Desmaiado = False Then
-                    If (i <> MapNpcNum) And (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = MapNpc(MapNum).Npc(MapNpcNum).X) And (MapNpc(MapNum).Npc(i).Y = MapNpc(MapNum).Npc(MapNpcNum).Y - 1) Then
+                For I = 1 To MAX_MAP_NPCS
+                    If MapNpc(MapNum).Npc(I).Desmaiado = False Then
+                    If (I <> MapNpcNum) And (MapNpc(MapNum).Npc(I).Num > 0) And (MapNpc(MapNum).Npc(I).x = MapNpc(MapNum).Npc(MapNpcNum).x) And (MapNpc(MapNum).Npc(I).Y = MapNpc(MapNum).Npc(MapNpcNum).Y - 1) Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -598,7 +598,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
                 
                 ' Directional blocking
-                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).X, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_UP + 1) Then
+                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_UP + 1) Then
                     CanNpcMove = False
                     Exit Function
                 End If
@@ -610,7 +610,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
 
             ' Check to make sure not outside of boundries
             If Y < Map(MapNum).MaxY Then
-                n = Map(MapNum).Tile(X, Y + 1).Type
+                n = Map(MapNum).Tile(x, Y + 1).Type
 
                 ' Check to make sure that the tile is walkable
                 If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN And n <> TILE_TYPE_GRASS Then
@@ -619,9 +619,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 End If
 
                 ' Check to make sure that there is not a player in the way
-                For i = 1 To Player_HighIndex
-                    If IsPlaying(i) Then
-                        If (GetPlayerMap(i) = MapNum) And (GetPlayerX(i) = MapNpc(MapNum).Npc(MapNpcNum).X) And (GetPlayerY(i) = MapNpc(MapNum).Npc(MapNpcNum).Y + 1) Then
+                For I = 1 To Player_HighIndex
+                    If IsPlaying(I) Then
+                        If (GetPlayerMap(I) = MapNum) And (GetPlayerX(I) = MapNpc(MapNum).Npc(MapNpcNum).x) And (GetPlayerY(I) = MapNpc(MapNum).Npc(MapNpcNum).Y + 1) Then
                             CanNpcMove = False
                             Exit Function
                         End If
@@ -629,9 +629,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
 
                 ' Check to make sure that there is not another npc in the way
-                For i = 1 To MAX_MAP_NPCS
-                    If MapNpc(MapNum).Npc(i).Desmaiado = False Then
-                    If (i <> MapNpcNum) And (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = MapNpc(MapNum).Npc(MapNpcNum).X) And (MapNpc(MapNum).Npc(i).Y = MapNpc(MapNum).Npc(MapNpcNum).Y + 1) Then
+                For I = 1 To MAX_MAP_NPCS
+                    If MapNpc(MapNum).Npc(I).Desmaiado = False Then
+                    If (I <> MapNpcNum) And (MapNpc(MapNum).Npc(I).Num > 0) And (MapNpc(MapNum).Npc(I).x = MapNpc(MapNum).Npc(MapNpcNum).x) And (MapNpc(MapNum).Npc(I).Y = MapNpc(MapNum).Npc(MapNpcNum).Y + 1) Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -639,7 +639,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
                 
                 ' Directional blocking
-                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).X, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_DOWN + 1) Then
+                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_DOWN + 1) Then
                     CanNpcMove = False
                     Exit Function
                 End If
@@ -650,8 +650,8 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
         Case DIR_LEFT
 
             ' Check to make sure not outside of boundries
-            If X > 0 Then
-                n = Map(MapNum).Tile(X - 1, Y).Type
+            If x > 0 Then
+                n = Map(MapNum).Tile(x - 1, Y).Type
 
                 ' Check to make sure that the tile is walkable
                 If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN And n <> TILE_TYPE_GRASS Then
@@ -660,9 +660,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 End If
 
                 ' Check to make sure that there is not a player in the way
-                For i = 1 To Player_HighIndex
-                    If IsPlaying(i) Then
-                        If (GetPlayerMap(i) = MapNum) And (GetPlayerX(i) = MapNpc(MapNum).Npc(MapNpcNum).X - 1) And (GetPlayerY(i) = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
+                For I = 1 To Player_HighIndex
+                    If IsPlaying(I) Then
+                        If (GetPlayerMap(I) = MapNum) And (GetPlayerX(I) = MapNpc(MapNum).Npc(MapNpcNum).x - 1) And (GetPlayerY(I) = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
                         End If
@@ -670,9 +670,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
 
                 ' Check to make sure that there is not another npc in the way
-                For i = 1 To MAX_MAP_NPCS
-                    If MapNpc(MapNum).Npc(i).Desmaiado = False Then
-                    If (i <> MapNpcNum) And (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = MapNpc(MapNum).Npc(MapNpcNum).X - 1) And (MapNpc(MapNum).Npc(i).Y = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
+                For I = 1 To MAX_MAP_NPCS
+                    If MapNpc(MapNum).Npc(I).Desmaiado = False Then
+                    If (I <> MapNpcNum) And (MapNpc(MapNum).Npc(I).Num > 0) And (MapNpc(MapNum).Npc(I).x = MapNpc(MapNum).Npc(MapNpcNum).x - 1) And (MapNpc(MapNum).Npc(I).Y = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -680,7 +680,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
                 
                 ' Directional blocking
-                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).X, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_LEFT + 1) Then
+                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_LEFT + 1) Then
                     CanNpcMove = False
                     Exit Function
                 End If
@@ -691,8 +691,8 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
         Case DIR_RIGHT
 
             ' Check to make sure not outside of boundries
-            If X < Map(MapNum).MaxX Then
-                n = Map(MapNum).Tile(X + 1, Y).Type
+            If x < Map(MapNum).MaxX Then
+                n = Map(MapNum).Tile(x + 1, Y).Type
 
                 ' Check to make sure that the tile is walkable
                 If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN And n <> TILE_TYPE_GRASS Then
@@ -701,9 +701,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 End If
 
                 ' Check to make sure that there is not a player in the way
-                For i = 1 To Player_HighIndex
-                    If IsPlaying(i) Then
-                        If (GetPlayerMap(i) = MapNum) And (GetPlayerX(i) = MapNpc(MapNum).Npc(MapNpcNum).X + 1) And (GetPlayerY(i) = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
+                For I = 1 To Player_HighIndex
+                    If IsPlaying(I) Then
+                        If (GetPlayerMap(I) = MapNum) And (GetPlayerX(I) = MapNpc(MapNum).Npc(MapNpcNum).x + 1) And (GetPlayerY(I) = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
                         End If
@@ -711,9 +711,9 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
 
                 ' Check to make sure that there is not another npc in the way
-                For i = 1 To MAX_MAP_NPCS
-                    If MapNpc(MapNum).Npc(i).Desmaiado = False Then
-                    If (i <> MapNpcNum) And (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = MapNpc(MapNum).Npc(MapNpcNum).X + 1) And (MapNpc(MapNum).Npc(i).Y = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
+                For I = 1 To MAX_MAP_NPCS
+                    If MapNpc(MapNum).Npc(I).Desmaiado = False Then
+                    If (I <> MapNpcNum) And (MapNpc(MapNum).Npc(I).Num > 0) And (MapNpc(MapNum).Npc(I).x = MapNpc(MapNum).Npc(MapNpcNum).x + 1) And (MapNpc(MapNum).Npc(I).Y = MapNpc(MapNum).Npc(MapNpcNum).Y) Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -721,7 +721,7 @@ Function CanNpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As 
                 Next
                 
                 ' Directional blocking
-                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).X, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_RIGHT + 1) Then
+                If isDirBlocked(Map(MapNum).Tile(MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).Y).DirBlock, DIR_RIGHT + 1) Then
                     CanNpcMove = False
                     Exit Function
                 End If
@@ -750,7 +750,7 @@ Sub NpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As Long, By
             Set Buffer = New clsBuffer
             Buffer.WriteLong SNpcMove
             Buffer.WriteLong MapNpcNum
-            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).X
+            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).x
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Y
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Dir
             Buffer.WriteLong movement
@@ -761,29 +761,29 @@ Sub NpcMove(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As Long, By
             Set Buffer = New clsBuffer
             Buffer.WriteLong SNpcMove
             Buffer.WriteLong MapNpcNum
-            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).X
+            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).x
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Y
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Dir
             Buffer.WriteLong movement
             SendDataToMap MapNum, Buffer.ToArray()
             Set Buffer = Nothing
         Case DIR_LEFT
-            MapNpc(MapNum).Npc(MapNpcNum).X = MapNpc(MapNum).Npc(MapNpcNum).X - 1
+            MapNpc(MapNum).Npc(MapNpcNum).x = MapNpc(MapNum).Npc(MapNpcNum).x - 1
             Set Buffer = New clsBuffer
             Buffer.WriteLong SNpcMove
             Buffer.WriteLong MapNpcNum
-            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).X
+            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).x
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Y
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Dir
             Buffer.WriteLong movement
             SendDataToMap MapNum, Buffer.ToArray()
             Set Buffer = Nothing
         Case DIR_RIGHT
-            MapNpc(MapNum).Npc(MapNpcNum).X = MapNpc(MapNum).Npc(MapNpcNum).X + 1
+            MapNpc(MapNum).Npc(MapNpcNum).x = MapNpc(MapNum).Npc(MapNpcNum).x + 1
             Set Buffer = New clsBuffer
             Buffer.WriteLong SNpcMove
             Buffer.WriteLong MapNpcNum
-            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).X
+            Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).x
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Y
             Buffer.WriteLong MapNpc(MapNum).Npc(MapNpcNum).Dir
             Buffer.WriteLong movement
@@ -812,13 +812,13 @@ Sub NpcDir(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal Dir As Long)
 End Sub
 
 Function GetTotalMapPlayers(ByVal MapNum As Long) As Long
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
     n = 0
 
-    For i = 1 To Player_HighIndex
+    For I = 1 To Player_HighIndex
 
-        If IsPlaying(i) And GetPlayerMap(i) = MapNum Then
+        If IsPlaying(I) And GetPlayerMap(I) = MapNum Then
             n = n + 1
         End If
 
@@ -828,41 +828,41 @@ Function GetTotalMapPlayers(ByVal MapNum As Long) As Long
 End Function
 
 Sub ClearTempTiles()
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To MAX_MAPS
-        ClearTempTile i
+    For I = 1 To MAX_MAPS
+        ClearTempTile I
     Next
 
 End Sub
 
 Sub ClearTempTile(ByVal MapNum As Long)
     Dim Y As Long
-    Dim X As Long
+    Dim x As Long
     TempTile(MapNum).DoorTimer = 0
     ReDim TempTile(MapNum).DoorOpen(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 
-    For X = 0 To Map(MapNum).MaxX
+    For x = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
-            TempTile(MapNum).DoorOpen(X, Y) = NO
+            TempTile(MapNum).DoorOpen(x, Y) = NO
         Next
     Next
 
 End Sub
 
 Public Sub CacheResources(ByVal MapNum As Long)
-    Dim X As Long, Y As Long, Resource_Count As Long
+    Dim x As Long, Y As Long, Resource_Count As Long
     Resource_Count = 0
 
-    For X = 0 To Map(MapNum).MaxX
+    For x = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
 
-            If Map(MapNum).Tile(X, Y).Type = TILE_TYPE_RESOURCE Then
+            If Map(MapNum).Tile(x, Y).Type = TILE_TYPE_RESOURCE Then
                 Resource_Count = Resource_Count + 1
                 ReDim Preserve ResourceCache(MapNum).ResourceData(0 To Resource_Count)
-                ResourceCache(MapNum).ResourceData(Resource_Count).X = X
+                ResourceCache(MapNum).ResourceData(Resource_Count).x = x
                 ResourceCache(MapNum).ResourceData(Resource_Count).Y = Y
-                ResourceCache(MapNum).ResourceData(Resource_Count).cur_health = Resource(Map(MapNum).Tile(X, Y).Data1).health
+                ResourceCache(MapNum).ResourceData(Resource_Count).cur_health = Resource(Map(MapNum).Tile(x, Y).Data1).health
             End If
 
         Next
@@ -872,7 +872,7 @@ Public Sub CacheResources(ByVal MapNum As Long)
 End Sub
 
 Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSlot As Long)
-    Dim i As Long
+    Dim I As Long
     Dim OldNum As Long
     Dim OldValue As Long
     Dim OldPokemon As Long
@@ -916,25 +916,25 @@ Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newS
     OldLevel = GetPlayerBankItemLevel(Index, oldSlot)
     OldExp = GetPlayerBankItemExp(Index, oldSlot)
     
-    For i = 1 To Vitals.Vital_Count - 1
-        OldVital(i) = GetPlayerBankItemVital(Index, oldSlot, i)
-        OldMaxVital(i) = GetPlayerBankItemMaxVital(Index, oldSlot, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        OldVital(I) = GetPlayerBankItemVital(Index, oldSlot, I)
+        OldMaxVital(I) = GetPlayerBankItemMaxVital(Index, oldSlot, I)
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        OldStat(i) = GetPlayerBankItemStat(Index, oldSlot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        OldStat(I) = GetPlayerBankItemStat(Index, oldSlot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        OldSpell(i) = GetPlayerBankItemSpell(Index, oldSlot, i)
+    For I = 1 To MAX_POKE_SPELL
+        OldSpell(I) = GetPlayerBankItemSpell(Index, oldSlot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        OldNegatives(i) = GetPlayerBankItemNgt(Index, oldSlot, i)
+    For I = 1 To MAX_NEGATIVES
+        OldNegatives(I) = GetPlayerBankItemNgt(Index, oldSlot, I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        OldBry(i) = GetPlayerBankItemBerry(Index, oldSlot, i)
+    For I = 1 To MAX_BERRYS
+        OldBry(I) = GetPlayerBankItemBerry(Index, oldSlot, I)
     Next
     
     OldFelicidade = GetPlayerBankItemFelicidade(Index, oldSlot)
@@ -948,25 +948,25 @@ Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newS
     NewLevel = GetPlayerBankItemLevel(Index, newSlot)
     NewExp = GetPlayerBankItemExp(Index, newSlot)
     
-    For i = 1 To Vitals.Vital_Count - 1
-        NewVital(i) = GetPlayerBankItemVital(Index, newSlot, i)
-        NewMaxVital(i) = GetPlayerBankItemMaxVital(Index, newSlot, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        NewVital(I) = GetPlayerBankItemVital(Index, newSlot, I)
+        NewMaxVital(I) = GetPlayerBankItemMaxVital(Index, newSlot, I)
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        NewStat(i) = GetPlayerBankItemStat(Index, newSlot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        NewStat(I) = GetPlayerBankItemStat(Index, newSlot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        NewSpell(i) = GetPlayerBankItemSpell(Index, newSlot, i)
+    For I = 1 To MAX_POKE_SPELL
+        NewSpell(I) = GetPlayerBankItemSpell(Index, newSlot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        NewNegatives(i) = GetPlayerBankItemNgt(Index, newSlot, i)
+    For I = 1 To MAX_NEGATIVES
+        NewNegatives(I) = GetPlayerBankItemNgt(Index, newSlot, I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        NewBry(i) = GetPlayerBankItemBerry(Index, newSlot, i)
+    For I = 1 To MAX_BERRYS
+        NewBry(I) = GetPlayerBankItemBerry(Index, newSlot, I)
     Next
     
     NewFelicidade = GetPlayerBankItemFelicidade(Index, newSlot)
@@ -980,25 +980,25 @@ Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newS
     SetPlayerBankItemLevel Index, newSlot, OldLevel
     SetPlayerBankItemExp Index, newSlot, OldExp
     
-    For i = 1 To Vitals.Vital_Count - 1
-        SetPlayerBankItemVital Index, newSlot, OldVital(i), i
-        SetPlayerBankItemMaxVital Index, newSlot, OldVital(i), i
+    For I = 1 To Vitals.Vital_Count - 1
+        SetPlayerBankItemVital Index, newSlot, OldVital(I), I
+        SetPlayerBankItemMaxVital Index, newSlot, OldVital(I), I
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        SetPlayerBankItemStat Index, newSlot, OldStat(i), i
+    For I = 1 To Stats.Stat_Count - 1
+        SetPlayerBankItemStat Index, newSlot, OldStat(I), I
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        SetPlayerBankItemSpell Index, newSlot, OldSpell(i), i
+    For I = 1 To MAX_POKE_SPELL
+        SetPlayerBankItemSpell Index, newSlot, OldSpell(I), I
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        SetPlayerBankItemNgt Index, newSlot, OldNegatives(i), i
+    For I = 1 To MAX_NEGATIVES
+        SetPlayerBankItemNgt Index, newSlot, OldNegatives(I), I
     Next
     
-    For i = 1 To MAX_BERRYS
-        SetPlayerBankItemBerry Index, newSlot, i, OldBry(i)
+    For I = 1 To MAX_BERRYS
+        SetPlayerBankItemBerry Index, newSlot, I, OldBry(I)
     Next
     
     SetPlayerBankItemFelicidade Index, newSlot, OldFelicidade
@@ -1014,25 +1014,25 @@ Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newS
     SetPlayerBankItemLevel Index, oldSlot, NewLevel
     SetPlayerBankItemExp Index, oldSlot, NewExp
     
-    For i = 1 To Vitals.Vital_Count - 1
-        SetPlayerBankItemVital Index, oldSlot, NewVital(i), i
-        SetPlayerBankItemMaxVital Index, oldSlot, NewVital(i), i
+    For I = 1 To Vitals.Vital_Count - 1
+        SetPlayerBankItemVital Index, oldSlot, NewVital(I), I
+        SetPlayerBankItemMaxVital Index, oldSlot, NewVital(I), I
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        SetPlayerBankItemStat Index, oldSlot, NewStat(i), i
+    For I = 1 To Stats.Stat_Count - 1
+        SetPlayerBankItemStat Index, oldSlot, NewStat(I), I
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        SetPlayerBankItemSpell Index, oldSlot, NewSpell(i), i
+    For I = 1 To MAX_POKE_SPELL
+        SetPlayerBankItemSpell Index, oldSlot, NewSpell(I), I
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        SetPlayerBankItemNgt Index, oldSlot, NewNegatives(i), i
+    For I = 1 To MAX_NEGATIVES
+        SetPlayerBankItemNgt Index, oldSlot, NewNegatives(I), I
     Next
     
-    For i = 1 To MAX_BERRYS
-        SetPlayerBankItemBerry Index, oldSlot, i, NewBry(i)
+    For I = 1 To MAX_BERRYS
+        SetPlayerBankItemBerry Index, oldSlot, I, NewBry(I)
     Next
     
     SetPlayerBankItemFelicidade Index, oldSlot, NewFelicidade
@@ -1043,7 +1043,7 @@ Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newS
 End Sub
 
 Sub PlayerSwitchInvSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSlot As Long)
-    Dim i As Long
+    Dim I As Long
     Dim OldNum As Long
     Dim OldValue As Long
     Dim OldPokemon As Long
@@ -1089,25 +1089,25 @@ Sub PlayerSwitchInvSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSl
     OldLevel = GetPlayerInvItemPokeInfoLevel(Index, oldSlot)
     OldExp = GetPlayerInvItemPokeInfoExp(Index, oldSlot)
     
-    For i = 1 To Vitals.Vital_Count - 1
-        OldVital(i) = GetPlayerInvItemPokeInfoVital(Index, oldSlot, i)
-        OldMaxVital(i) = GetPlayerInvItemPokeInfoMaxVital(Index, oldSlot, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        OldVital(I) = GetPlayerInvItemPokeInfoVital(Index, oldSlot, I)
+        OldMaxVital(I) = GetPlayerInvItemPokeInfoMaxVital(Index, oldSlot, I)
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        OldStat(i) = GetPlayerInvItemPokeInfoStat(Index, oldSlot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        OldStat(I) = GetPlayerInvItemPokeInfoStat(Index, oldSlot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        OldSpell(i) = GetPlayerInvItemPokeInfoSpell(Index, oldSlot, i)
+    For I = 1 To MAX_POKE_SPELL
+        OldSpell(I) = GetPlayerInvItemPokeInfoSpell(Index, oldSlot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        OldNegatives(i) = GetPlayerInvItemNgt(Index, oldSlot, i)
+    For I = 1 To MAX_NEGATIVES
+        OldNegatives(I) = GetPlayerInvItemNgt(Index, oldSlot, I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        OldBerry(i) = GetPlayerInvItemBerry(Index, oldSlot, i)
+    For I = 1 To MAX_BERRYS
+        OldBerry(I) = GetPlayerInvItemBerry(Index, oldSlot, I)
     Next
     
     OldFelicidade = GetPlayerInvItemFelicidade(Index, oldSlot)
@@ -1123,25 +1123,25 @@ Sub PlayerSwitchInvSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSl
     NewLevel = GetPlayerInvItemPokeInfoLevel(Index, newSlot)
     NewExp = GetPlayerInvItemPokeInfoExp(Index, newSlot)
     
-    For i = 1 To Vitals.Vital_Count - 1
-        NewVital(i) = GetPlayerInvItemPokeInfoVital(Index, newSlot, i)
-        NewMaxVital(i) = GetPlayerInvItemPokeInfoMaxVital(Index, newSlot, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        NewVital(I) = GetPlayerInvItemPokeInfoVital(Index, newSlot, I)
+        NewMaxVital(I) = GetPlayerInvItemPokeInfoMaxVital(Index, newSlot, I)
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        NewStat(i) = GetPlayerInvItemPokeInfoStat(Index, newSlot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        NewStat(I) = GetPlayerInvItemPokeInfoStat(Index, newSlot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        NewSpell(i) = GetPlayerInvItemPokeInfoSpell(Index, newSlot, i)
+    For I = 1 To MAX_POKE_SPELL
+        NewSpell(I) = GetPlayerInvItemPokeInfoSpell(Index, newSlot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        NewNegatives(i) = GetPlayerInvItemNgt(Index, newSlot, i)
+    For I = 1 To MAX_NEGATIVES
+        NewNegatives(I) = GetPlayerInvItemNgt(Index, newSlot, I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        NewBerry(i) = GetPlayerInvItemBerry(Index, newSlot, i)
+    For I = 1 To MAX_BERRYS
+        NewBerry(I) = GetPlayerInvItemBerry(Index, newSlot, I)
     Next
     
     NewFelicidade = GetPlayerInvItemFelicidade(Index, newSlot)
@@ -1157,25 +1157,25 @@ Sub PlayerSwitchInvSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSl
     SetPlayerInvItemPokeInfoLevel Index, newSlot, OldLevel
     SetPlayerInvItemPokeInfoExp Index, newSlot, OldExp
     
-    For i = 1 To Vitals.Vital_Count - 1
-        SetPlayerInvItemPokeInfoVital Index, newSlot, OldVital(i), i
-        SetPlayerInvItemPokeInfoMaxVital Index, newSlot, OldMaxVital(i), i
+    For I = 1 To Vitals.Vital_Count - 1
+        SetPlayerInvItemPokeInfoVital Index, newSlot, OldVital(I), I
+        SetPlayerInvItemPokeInfoMaxVital Index, newSlot, OldMaxVital(I), I
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        SetPlayerInvItemPokeInfoStat Index, newSlot, i, OldStat(i)
+    For I = 1 To Stats.Stat_Count - 1
+        SetPlayerInvItemPokeInfoStat Index, newSlot, I, OldStat(I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        SetPlayerInvItemPokeInfoSpell Index, newSlot, OldSpell(i), i
+    For I = 1 To MAX_POKE_SPELL
+        SetPlayerInvItemPokeInfoSpell Index, newSlot, OldSpell(I), I
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        SetPlayerInvItemNgt Index, newSlot, i, OldNegatives(i)
+    For I = 1 To MAX_NEGATIVES
+        SetPlayerInvItemNgt Index, newSlot, I, OldNegatives(I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        SetPlayerInvItemBerry Index, newSlot, i, OldBerry(i)
+    For I = 1 To MAX_BERRYS
+        SetPlayerInvItemBerry Index, newSlot, I, OldBerry(I)
     Next
     
     SetPlayerInvItemFelicidade Index, newSlot, OldFelicidade
@@ -1191,25 +1191,25 @@ Sub PlayerSwitchInvSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSl
     SetPlayerInvItemPokeInfoLevel Index, oldSlot, NewLevel
     SetPlayerInvItemPokeInfoExp Index, oldSlot, NewExp
     
-    For i = 1 To Vitals.Vital_Count - 1
-        SetPlayerInvItemPokeInfoVital Index, oldSlot, NewVital(i), i
-        SetPlayerInvItemPokeInfoMaxVital Index, oldSlot, NewMaxVital(i), i
+    For I = 1 To Vitals.Vital_Count - 1
+        SetPlayerInvItemPokeInfoVital Index, oldSlot, NewVital(I), I
+        SetPlayerInvItemPokeInfoMaxVital Index, oldSlot, NewMaxVital(I), I
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        SetPlayerInvItemPokeInfoStat Index, oldSlot, i, NewStat(i)
+    For I = 1 To Stats.Stat_Count - 1
+        SetPlayerInvItemPokeInfoStat Index, oldSlot, I, NewStat(I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        SetPlayerInvItemPokeInfoSpell Index, oldSlot, NewSpell(i), i
+    For I = 1 To MAX_POKE_SPELL
+        SetPlayerInvItemPokeInfoSpell Index, oldSlot, NewSpell(I), I
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        SetPlayerInvItemNgt Index, oldSlot, i, NewNegatives(i)
+    For I = 1 To MAX_NEGATIVES
+        SetPlayerInvItemNgt Index, oldSlot, I, NewNegatives(I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        SetPlayerInvItemBerry Index, oldSlot, i, NewBerry(i)
+    For I = 1 To MAX_BERRYS
+        SetPlayerInvItemBerry Index, oldSlot, I, NewBerry(I)
     Next
     
     SetPlayerInvItemFelicidade Index, oldSlot, NewFelicidade
@@ -1235,7 +1235,7 @@ Sub PlayerSwitchSpellSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal new
 End Sub
 
 Sub PlayerUnequipItem(ByVal Index As Long, ByVal EqSlot As Long)
-Dim i As Long
+Dim I As Long
 
 Dim ItemNum As Long, Pokemon As Long, Pokeball As Long, Level As Long
 Dim EXP As Long, VitalHP As Long, VitalMP As Long, MVitalHp As Long, MVitalMP As Long
@@ -1273,8 +1273,8 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS)
     If Item(GetPlayerEquipment(Index, weapon)).Type = ITEM_TYPE_WEAPON Then
     
     'Limpar Spells
-    For i = 1 To MAX_PLAYER_SPELLS
-        Call SetPlayerSpell(Index, i, 0)
+    For I = 1 To MAX_PLAYER_SPELLS
+        Call SetPlayerSpell(Index, I, 0)
             SendSpells Index
         Next
     End If
@@ -1292,24 +1292,24 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS)
     Sexo = GetPlayerEquipmentSexo(Index, EqSlot)
     Shiny = GetPlayerEquipmentShiny(Index, EqSlot)
     
-    For i = 1 To Stats.Stat_Count - 1
-        Stat(i) = GetPlayerEquipmentPokeInfoStat(Index, EqSlot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        Stat(I) = GetPlayerEquipmentPokeInfoStat(Index, EqSlot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        Spell(i) = GetPlayerEquipmentPokeInfoSpell(Index, EqSlot, i)
+    For I = 1 To MAX_POKE_SPELL
+        Spell(I) = GetPlayerEquipmentPokeInfoSpell(Index, EqSlot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        Ngt(i) = GetPlayerEquipmentNgt(Index, EqSlot, i)
+    For I = 1 To MAX_NEGATIVES
+        Ngt(I) = GetPlayerEquipmentNgt(Index, EqSlot, I)
         
-        If TempPlayer(Index).NgtTick(i) > 0 Then
-            TempPlayer(Index).NgtTick(i) = 0
+        If TempPlayer(Index).NgtTick(I) > 0 Then
+            TempPlayer(Index).NgtTick(I) = 0
         End If
     Next
     
-    For i = 1 To MAX_BERRYS
-        Bry(i) = GetPlayerEquipmentBerry(Index, EqSlot, i)
+    For I = 1 To MAX_BERRYS
+        Bry(I) = GetPlayerEquipmentBerry(Index, EqSlot, I)
     Next
     
         'GiveinvItem
@@ -1325,7 +1325,7 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS)
 
         'Retirar Pokémon
         If GetPlayerEquipmentPokeInfoPokemon(Index, EqSlot) > 0 Then
-            Player(Index).X = Player(Index).TPX
+            Player(Index).x = Player(Index).TPX
             Player(Index).Y = Player(Index).TPY
             Player(Index).Dir = Player(Index).TPDir
             Player(Index).TPDir = 0
@@ -1351,8 +1351,8 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS)
         SetPlayerEquipmentPokeInfoLevel Index, 0, EqSlot
         SetPlayerEquipmentPokeInfoExp Index, 0, EqSlot
         
-        For i = 1 To MAX_NEGATIVES
-            SetPlayerEquipmentNgt Index, i, weapon, 0
+        For I = 1 To MAX_NEGATIVES
+            SetPlayerEquipmentNgt Index, I, weapon, 0
         Next
         
         SendWornEquipment Index
@@ -1416,7 +1416,7 @@ End Function
 ' ## Party functions ##
 ' #####################
 Public Sub Party_PlayerLeave(ByVal Index As Long)
-Dim partynum As Long, i As Long
+Dim partynum As Long, I As Long
 
     partynum = TempPlayer(Index).inParty
     If partynum > 0 Then
@@ -1427,9 +1427,9 @@ Dim partynum As Long, i As Long
             ' check if leader
             If Party(partynum).Leader = Index Then
                 ' set next person down as leader
-                For i = 1 To MAX_PARTY_MEMBERS
-                    If Party(partynum).Member(i) > 0 And Party(partynum).Member(i) <> Index Then
-                        Party(partynum).Leader = Party(partynum).Member(i)
+                For I = 1 To MAX_PARTY_MEMBERS
+                    If Party(partynum).Member(I) > 0 And Party(partynum).Member(I) <> Index Then
+                        Party(partynum).Leader = Party(partynum).Member(I)
                         PartyMsg partynum, GetPlayerName(Party(partynum).Leader) & " is now the party leader.", BrightBlue
                         Exit For
                     End If
@@ -1437,9 +1437,9 @@ Dim partynum As Long, i As Long
                 ' leave party
                 PartyMsg partynum, GetPlayerName(Index) & " has left the party.", BrightRed
                 ' remove from array
-                For i = 1 To MAX_PARTY_MEMBERS
-                    If Party(partynum).Member(i) = Index Then
-                        Party(partynum).Member(i) = 0
+                For I = 1 To MAX_PARTY_MEMBERS
+                    If Party(partynum).Member(I) = Index Then
+                        Party(partynum).Member(I) = 0
                         Exit For
                     End If
                 Next
@@ -1457,9 +1457,9 @@ Dim partynum As Long, i As Long
                 ' not the leader, just leave
                 PartyMsg partynum, GetPlayerName(Index) & " has left the party.", BrightRed
                 ' remove from array
-                For i = 1 To MAX_PARTY_MEMBERS
-                    If Party(partynum).Member(i) = Index Then
-                        Party(partynum).Member(i) = 0
+                For I = 1 To MAX_PARTY_MEMBERS
+                    If Party(partynum).Member(I) = Index Then
+                        Party(partynum).Member(I) = 0
                         Exit For
                     End If
                 Next
@@ -1480,8 +1480,8 @@ Dim partynum As Long, i As Long
             ' only 2 people, disband
             PartyMsg partynum, "Party disbanded.", BrightRed
             ' clear out everyone's party
-            For i = 1 To MAX_PARTY_MEMBERS
-                Index = Party(partynum).Member(i)
+            For I = 1 To MAX_PARTY_MEMBERS
+                Index = Party(partynum).Member(I)
                 ' player exist?
                 If Index > 0 Then
                     ' remove them
@@ -1497,7 +1497,7 @@ Dim partynum As Long, i As Long
 End Sub
 
 Public Sub Party_Invite(ByVal Index As Long, ByVal targetPlayer As Long)
-Dim partynum As Long, i As Long
+Dim partynum As Long, I As Long
 
     ' check if the person is a valid target
     If Not IsConnected(targetPlayer) Or Not IsPlaying(targetPlayer) Then Exit Sub
@@ -1523,8 +1523,8 @@ Dim partynum As Long, i As Long
         ' make sure we're the leader
         If Party(partynum).Leader = Index Then
             ' got a blank slot?
-            For i = 1 To MAX_PARTY_MEMBERS
-                If Party(partynum).Member(i) = 0 Then
+            For I = 1 To MAX_PARTY_MEMBERS
+                If Party(partynum).Member(I) = 0 Then
                     ' send the invitation
                     SendPartyInvite targetPlayer, Index
                     ' set the invite target
@@ -1554,25 +1554,25 @@ Dim partynum As Long, i As Long
 End Sub
 
 Public Sub Party_InviteAccept(ByVal Index As Long, ByVal targetPlayer As Long)
-Dim partynum As Long, i As Long, X As Long
+Dim partynum As Long, I As Long, x As Long
 
     ' check if already in a party
     If TempPlayer(Index).inParty > 0 Then
         ' get the partynumber
         partynum = TempPlayer(Index).inParty
         ' got a blank slot?
-        For i = 1 To MAX_PARTY_MEMBERS
-            If Party(partynum).Member(i) = 0 Then
+        For I = 1 To MAX_PARTY_MEMBERS
+            If Party(partynum).Member(I) = 0 Then
                 'add to the party
-                Party(partynum).Member(i) = targetPlayer
+                Party(partynum).Member(I) = targetPlayer
                 ' recount party
                 Party_CountMembers partynum
                 ' send update to all - including new player
                 SendPartyUpdate partynum
                 
-                For X = 1 To MAX_PARTY_MEMBERS
-                    If Party(partynum).Member(X) > 0 Then
-                        SendPartyVitals partynum, Party(partynum).Member(X)
+                For x = 1 To MAX_PARTY_MEMBERS
+                    If Party(partynum).Member(x) > 0 Then
+                        SendPartyVitals partynum, Party(partynum).Member(x)
                     End If
                 Next
                 ' let everyone know they've joined
@@ -1589,10 +1589,10 @@ Dim partynum As Long, i As Long, X As Long
         Exit Sub
     Else
         ' not in a party. Create one with the new person.
-        For i = 1 To MAX_PARTYS
+        For I = 1 To MAX_PARTYS
             ' find blank party
-            If Not Party(i).Leader > 0 Then
-                partynum = i
+            If Not Party(I).Leader > 0 Then
+                partynum = I
                 Exit For
             End If
         Next
@@ -1625,24 +1625,24 @@ Public Sub Party_InviteDecline(ByVal Index As Long, ByVal targetPlayer As Long)
 End Sub
 
 Public Sub Party_CountMembers(ByVal partynum As Long)
-Dim i As Long, highIndex As Long, X As Long
+Dim I As Long, highIndex As Long, x As Long
     ' find the high index
-    For i = MAX_PARTY_MEMBERS To 1 Step -1
-        If Party(partynum).Member(i) > 0 Then
-            highIndex = i
+    For I = MAX_PARTY_MEMBERS To 1 Step -1
+        If Party(partynum).Member(I) > 0 Then
+            highIndex = I
             Exit For
         End If
     Next
     ' count the members
-    For i = 1 To MAX_PARTY_MEMBERS
+    For I = 1 To MAX_PARTY_MEMBERS
         ' we've got a blank member
-        If Party(partynum).Member(i) = 0 Then
+        If Party(partynum).Member(I) = 0 Then
             ' is it lower than the high index?
-            If i < highIndex Then
+            If I < highIndex Then
                 ' move everyone down a slot
-                For X = i To MAX_PARTY_MEMBERS - 1
-                    Party(partynum).Member(X) = Party(partynum).Member(X + 1)
-                    Party(partynum).Member(X + 1) = 0
+                For x = I To MAX_PARTY_MEMBERS - 1
+                    Party(partynum).Member(x) = Party(partynum).Member(x + 1)
+                    Party(partynum).Member(x + 1) = 0
                 Next
             Else
                 ' not lower - highindex is count
@@ -1651,8 +1651,8 @@ Dim i As Long, highIndex As Long, X As Long
             End If
         End If
         ' check if we've reached the max
-        If i = MAX_PARTY_MEMBERS Then
-            If highIndex = i Then
+        If I = MAX_PARTY_MEMBERS Then
+            If highIndex = I Then
                 Party(partynum).MemberCount = MAX_PARTY_MEMBERS
                 Exit Sub
             End If
@@ -1663,7 +1663,7 @@ Dim i As Long, highIndex As Long, X As Long
 End Sub
 
 Public Sub Party_ShareExp(ByVal partynum As Long, ByVal EXP As Long, ByVal Index As Long)
-Dim expShare As Long, leftOver As Long, i As Long, tmpIndex As Long
+Dim expShare As Long, leftOver As Long, I As Long, tmpIndex As Long
 
 If Party(partynum).MemberCount <= 0 Then Exit Sub
 
@@ -1679,8 +1679,8 @@ If Party(partynum).MemberCount <= 0 Then Exit Sub
     leftOver = EXP Mod Party(partynum).MemberCount
     
     ' loop through and give everyone exp
-    For i = 1 To MAX_PARTY_MEMBERS
-        tmpIndex = Party(partynum).Member(i)
+    For I = 1 To MAX_PARTY_MEMBERS
+        tmpIndex = Party(partynum).Member(I)
         ' existing member?Kn
         If tmpIndex > 0 Then
             ' playing?
@@ -1736,7 +1736,7 @@ End If
 End Function
 
 Public Sub PescarPokemon(ByVal Index As Long)
-Dim i As Long, X As Long
+Dim I As Long, x As Long
 Dim ExtraChance As Integer, RandomPokeId As Integer
 Dim LevelMin As Integer, PokeList(1 To 20) As Integer
 
@@ -1752,9 +1752,9 @@ End If
 
 
 ExtraChance = Player(Index).UltRodLevel * 0.08
-i = Random(1, 100)
+I = Random(1, 100)
 
-If i <= 25 + Int(ExtraChance) Then
+If I <= 25 + Int(ExtraChance) Then
 
     Select Case LevelMin
     Case 1 To 10
@@ -1788,16 +1788,16 @@ End If
 End Sub
 
 Public Sub SpawnPokePescado(ByVal Index As Long, ByVal NpcNum As Long)
-Dim i As Long, OpenSlot As Long, PlayerMap As Long
+Dim I As Long, OpenSlot As Long, PlayerMap As Long
 Dim Buffer As clsBuffer
 Dim Random50 As Long, Random100 As Long, ShinyValue As Integer, ControlSex As Byte
 
 PlayerMap = GetPlayerMap(Index)
 
         'Verificar Slot Vazio...
-        For i = 1 To MAX_MAP_NPCS
-            If Map(PlayerMap).Npc(i) = 0 Then
-                OpenSlot = i
+        For I = 1 To MAX_MAP_NPCS
+            If Map(PlayerMap).Npc(I) = 0 Then
+                OpenSlot = I
                 Exit For
             End If
         Next
@@ -1895,10 +1895,10 @@ PlayerMap = GetPlayerMap(Index)
         Call MapCache_Create(PlayerMap)
         
         'Enviar informações do mapa
-        For i = 1 To Player_HighIndex
-            If IsPlaying(i) Then
-                If GetPlayerMap(i) = GetPlayerMap(Index) Then
-                    SendMap i, PlayerMap
+        For I = 1 To Player_HighIndex
+            If IsPlaying(I) Then
+                If GetPlayerMap(I) = GetPlayerMap(Index) Then
+                    SendMap I, PlayerMap
                 End If
             End If
         Next
@@ -1906,19 +1906,19 @@ PlayerMap = GetPlayerMap(Index)
         'Setar Posição do Npc Pescado!
         Select Case GetPlayerDir(Index)
             Case DIR_UP
-                MapNpc(PlayerMap).Npc(OpenSlot).X = GetPlayerX(Index)
+                MapNpc(PlayerMap).Npc(OpenSlot).x = GetPlayerX(Index)
                 MapNpc(PlayerMap).Npc(OpenSlot).Y = GetPlayerY(Index) + 1
                 MapNpc(PlayerMap).Npc(OpenSlot).Dir = DIR_UP
             Case DIR_DOWN
-                MapNpc(PlayerMap).Npc(OpenSlot).X = GetPlayerX(Index)
+                MapNpc(PlayerMap).Npc(OpenSlot).x = GetPlayerX(Index)
                 MapNpc(PlayerMap).Npc(OpenSlot).Y = GetPlayerY(Index) - 1
                 MapNpc(PlayerMap).Npc(OpenSlot).Dir = DIR_DOWN
             Case DIR_LEFT
-                MapNpc(PlayerMap).Npc(OpenSlot).X = GetPlayerX(Index) + 1
+                MapNpc(PlayerMap).Npc(OpenSlot).x = GetPlayerX(Index) + 1
                 MapNpc(PlayerMap).Npc(OpenSlot).Y = GetPlayerY(Index)
                 MapNpc(PlayerMap).Npc(OpenSlot).Dir = DIR_LEFT
             Case DIR_RIGHT
-                MapNpc(PlayerMap).Npc(OpenSlot).X = GetPlayerX(Index) - 1
+                MapNpc(PlayerMap).Npc(OpenSlot).x = GetPlayerX(Index) - 1
                 MapNpc(PlayerMap).Npc(OpenSlot).Y = GetPlayerY(Index)
                 MapNpc(PlayerMap).Npc(OpenSlot).Dir = DIR_RIGHT
             End Select
@@ -1932,11 +1932,11 @@ PlayerMap = GetPlayerMap(Index)
             SendDataToMap GetPlayerMap(Index), Buffer.ToArray()
             Set Buffer = Nothing
             
-            For i = 1 To MAX_MAP_NPCS
-                If MapNpc(PlayerMap).Npc(i).Num > 0 Then
-                    If MapNpc(PlayerMap).Npc(i).Desmaiado = True And Map(PlayerMap).Npc(i) > 0 Then
-                        SendNpcDesmaiado PlayerMap, i, False
-                        SendMapNpcVitals PlayerMap, i
+            For I = 1 To MAX_MAP_NPCS
+                If MapNpc(PlayerMap).Npc(I).Num > 0 Then
+                    If MapNpc(PlayerMap).Npc(I).Desmaiado = True And Map(PlayerMap).Npc(I) > 0 Then
+                        SendNpcDesmaiado PlayerMap, I, False
+                        SendMapNpcVitals PlayerMap, I
                     End If
                 End If
             Next
@@ -1944,7 +1944,7 @@ PlayerMap = GetPlayerMap(Index)
 End Sub
 
 Public Sub RemoverNpcPescado(ByVal MapNpcNum As Long, ByVal MapNum As Long)
-Dim i As Long, Buffer As clsBuffer, PlayerMap As Long
+Dim I As Long, Buffer As clsBuffer, PlayerMap As Long
 
 PlayerMap = GetPlayerMap(MapNum)
 
@@ -1959,19 +1959,19 @@ If MapNpcNum = 0 Then Exit Sub
             Call MapCache_Create(MapNum)
             
             'Enviar informações do mapa
-            For i = 1 To Player_HighIndex
-                If IsPlaying(i) Then
-                    If GetPlayerMap(i) = MapNum Then
-                        SendMap i, MapNum
+            For I = 1 To Player_HighIndex
+                If IsPlaying(I) Then
+                    If GetPlayerMap(I) = MapNum Then
+                        SendMap I, MapNum
                     End If
                 End If
             Next
             
-            For i = 1 To MAX_MAP_NPCS
-                If MapNpc(MapNum).Npc(i).Num > 0 Then
-                    If MapNpc(MapNum).Npc(i).Desmaiado = True And Map(MapNum).Npc(i) > 0 Then
-                        SendNpcDesmaiado MapNum, i, False
-                        SendMapNpcVitals MapNum, i
+            For I = 1 To MAX_MAP_NPCS
+                If MapNpc(MapNum).Npc(I).Num > 0 Then
+                    If MapNpc(MapNum).Npc(I).Desmaiado = True And Map(MapNum).Npc(I) > 0 Then
+                        SendNpcDesmaiado MapNum, I, False
+                        SendMapNpcVitals MapNum, I
                     End If
                 End If
             Next
@@ -1979,7 +1979,7 @@ If MapNpcNum = 0 Then Exit Sub
             SendMapNpcsToMap PlayerMap
 End Sub
 
-Public Function PokeTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long) As Boolean
+Public Function PokeTileIsOpen(ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long) As Boolean
     Dim LoopI As Long
     PokeTileIsOpen = True
 
@@ -1988,7 +1988,7 @@ Public Function PokeTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As
         For LoopI = 1 To Player_HighIndex
 
             If GetPlayerMap(LoopI) = MapNum Then
-                If GetPlayerX(LoopI) = X Then
+                If GetPlayerX(LoopI) = x Then
                     If GetPlayerY(LoopI) = Y Then
                         PokeTileIsOpen = False
                         Exit Function
@@ -2003,7 +2003,7 @@ Public Function PokeTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As
     For LoopI = 1 To MAX_MAP_NPCS
 
         If MapNpc(MapNum).Npc(LoopI).Num > 0 Then
-            If MapNpc(MapNum).Npc(LoopI).X = X Then
+            If MapNpc(MapNum).Npc(LoopI).x = x Then
                 If MapNpc(MapNum).Npc(LoopI).Y = Y Then
                     PokeTileIsOpen = False
                     Exit Function
@@ -2013,17 +2013,17 @@ Public Function PokeTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As
 
     Next
 
-    If X < 0 Then X = 0
+    If x < 0 Then x = 0
     If Y < 0 Then Y = 0
-    If X > Map(MapNum).MaxX Then X = 0
+    If x > Map(MapNum).MaxX Then x = 0
     If Y > Map(MapNum).MaxY Then Y = 0
 
-    If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_WALKABLE Then
-        If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_NPCSPAWN Then
-            If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_ITEM Then
-                If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_GRASS Then
-                    If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_FISHING Then
-                        If Map(MapNum).Tile(X, Y).Type <> TILE_TYPE_NPCAVOID Then
+    If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_WALKABLE Then
+        If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_NPCSPAWN Then
+            If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_ITEM Then
+                If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_GRASS Then
+                    If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_FISHING Then
+                        If Map(MapNum).Tile(x, Y).Type <> TILE_TYPE_NPCAVOID Then
                             PokeTileIsOpen = False
                         End If
                     End If
@@ -2034,11 +2034,11 @@ Public Function PokeTileIsOpen(ByVal MapNum As Long, ByVal X As Long, ByVal Y As
 End Function
 
 Public Function FindRankLevel(Level As Long) As Byte
-Dim i As Byte
+Dim I As Byte
     
-    For i = 1 To MAX_RANKS
-        If RankLevel(i).Level < Level Then
-            FindRankLevel = i
+    For I = 1 To MAX_RANKS
+        If RankLevel(I).Level < Level Then
+            FindRankLevel = I
             Exit Function
         End If
     Next
@@ -2074,7 +2074,7 @@ SaveRankLevel
 End Sub
 
 Public Sub CheckVipDays(ByVal Index As Long, MsgDiasRest As Boolean)
-Dim i As Long
+Dim I As Long
 
     'Evitar OverFlow
     If Player(Index).MyVip > 0 And Player(Index).VipStart = "00/00/0000" Then Exit Sub
@@ -2096,10 +2096,10 @@ Dim i As Long
                     Player(Index).VipDays(Player(Index).MyVip) = 0
                     
                     'Verificar se há Outros Vips com Dias Restantes!
-                    For i = Player(Index).MyVip To 1 Step -1
-                        If Player(Index).VipDays(i) > 0 Then
-                            PlayerMsg Index, "Seu dias de #Vip " & Player(Index).MyVip & " acabou, e foi alterado para #Vip " & i & " por " & Player(Index).VipDays(i) & " Dias.", BrightCyan
-                            Player(Index).MyVip = i
+                    For I = Player(Index).MyVip To 1 Step -1
+                        If Player(Index).VipDays(I) > 0 Then
+                            PlayerMsg Index, "Seu dias de #Vip " & Player(Index).MyVip & " acabou, e foi alterado para #Vip " & I & " por " & Player(Index).VipDays(I) & " Dias.", BrightCyan
+                            Player(Index).MyVip = I
                             Player(Index).VipStart = Trim$(DateValue(Date))
                             SendVipPointsInfo Index
                             Exit Sub
@@ -2116,10 +2116,10 @@ Dim i As Long
             End If
         Else
             'Verificar se Há algum Vip com dias Restantes!
-            For i = 6 To 1 Step -1
-                If Player(Index).VipDays(i) > 0 Then
-                    PlayerMsg Index, "#Vip " & i & " foi ativado por: " & Player(Index).VipDays(i) & " Dias.", BrightCyan
-                    Player(Index).MyVip = i
+            For I = 6 To 1 Step -1
+                If Player(Index).VipDays(I) > 0 Then
+                    PlayerMsg Index, "#Vip " & I & " foi ativado por: " & Player(Index).VipDays(I) & " Dias.", BrightCyan
+                    Player(Index).MyVip = I
                     Player(Index).VipStart = Trim$(DateValue(Date))
                     Exit For
                 End If

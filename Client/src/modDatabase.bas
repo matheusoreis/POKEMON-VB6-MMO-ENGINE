@@ -198,8 +198,8 @@ End Sub
 Public Sub SaveMap(ByVal MapNum As Long)
     Dim filename As String
     Dim f As Long
-    Dim x As Long
-    Dim y As Long
+    Dim X As Long
+    Dim Y As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -224,20 +224,20 @@ Public Sub SaveMap(ByVal MapNum As Long)
     Put #f, , Map.Weather
     Put #f, , Map.Intensity
 
-    For x = 1 To 2
-        Put #f, , Map.LevelPoke(x)
+    For X = 1 To 2
+        Put #f, , Map.LevelPoke(X)
     Next
 
-    For x = 0 To Map.MaxX
-        For y = 0 To Map.MaxY
-            Put #f, , Map.Tile(x, y)
+    For X = 0 To Map.MaxX
+        For Y = 0 To Map.MaxY
+            Put #f, , Map.Tile(X, Y)
         Next
 
         DoEvents
     Next
 
-    For x = 1 To MAX_MAP_NPCS
-        Put #f, , Map.Npc(x)
+    For X = 1 To MAX_MAP_NPCS
+        Put #f, , Map.Npc(X)
     Next
 
     Close #f
@@ -253,8 +253,8 @@ End Sub
 Public Sub LoadMap(ByVal MapNum As Long)
     Dim filename As String
     Dim f As Long
-    Dim x As Long
-    Dim y As Long
+    Dim X As Long
+    Dim Y As Long
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -279,21 +279,21 @@ Public Sub LoadMap(ByVal MapNum As Long)
     Get #f, , Map.Weather
     Get #f, , Map.Intensity
 
-    For x = 1 To 2
-        Get #f, , Map.LevelPoke(x)
+    For X = 1 To 2
+        Get #f, , Map.LevelPoke(X)
     Next
 
     ' have to set the tile()
     ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
 
-    For x = 0 To Map.MaxX
-        For y = 0 To Map.MaxY
-            Get #f, , Map.Tile(x, y)
+    For X = 0 To Map.MaxX
+        For Y = 0 To Map.MaxY
+            Get #f, , Map.Tile(X, Y)
         Next
     Next
 
-    For x = 1 To MAX_MAP_NPCS
-        Get #f, , Map.Npc(x)
+    For X = 1 To MAX_MAP_NPCS
+        Get #f, , Map.Npc(X)
     Next
 
     Close #f
@@ -1372,7 +1372,7 @@ Function GetPlayerX(ByVal Index As Long) As Long
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Index > MAX_PLAYERS Then Exit Function
-    GetPlayerX = Player(Index).x
+    GetPlayerX = Player(Index).X
 
     ' Error handler
     Exit Function
@@ -1382,12 +1382,12 @@ errorhandler:
     Exit Function
 End Function
 
-Sub SetPlayerX(ByVal Index As Long, ByVal x As Long)
+Sub SetPlayerX(ByVal Index As Long, ByVal X As Long)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Index > MAX_PLAYERS Then Exit Sub
-    Player(Index).x = x
+    Player(Index).X = X
 
     ' Error handler
     Exit Sub
@@ -1402,7 +1402,7 @@ Function GetPlayerY(ByVal Index As Long) As Long
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Index > MAX_PLAYERS Then Exit Function
-    GetPlayerY = Player(Index).y
+    GetPlayerY = Player(Index).Y
 
     ' Error handler
     Exit Function
@@ -1412,12 +1412,12 @@ errorhandler:
     Exit Function
 End Function
 
-Sub SetPlayerY(ByVal Index As Long, ByVal y As Long)
+Sub SetPlayerY(ByVal Index As Long, ByVal Y As Long)
 ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
 
     If Index > MAX_PLAYERS Then Exit Sub
-    Player(Index).y = y
+    Player(Index).Y = Y
 
     ' Error handler
     Exit Sub
@@ -1937,7 +1937,7 @@ End Sub
 '################
 
 Sub ClearQuest(ByVal Index As Long)
-    Dim i As Byte, x As Byte
+    Dim i As Byte, X As Byte
 
     ' If debug mode, handle error then exit out
     If Options.Debug = 1 Then On Error GoTo errorhandler
@@ -1947,8 +1947,8 @@ Sub ClearQuest(ByVal Index As Long)
     Quest(Index).Description = ""
 
     For i = 1 To MAX_QUEST_TASKS
-        For x = 1 To 3
-            Quest(Index).Task(i).Message(x) = ""
+        For X = 1 To 3
+            Quest(Index).Task(i).Message(X) = ""
         Next
 
         Quest(Index).Task(i).num = 1

@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{BF38D12B-22A9-4B10-B26E-019F2B5F9C22}#1.0#0"; "Ani Gif.ocx"
 Begin VB.Form frmMenu 
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
@@ -37,7 +38,7 @@ Begin VB.Form frmMenu
       BorderStyle     =   0  'None
       Height          =   7320
       Left            =   0
-      Picture         =   "frmMenu.frx":21CD0E
+      Picture         =   "frmMenu.frx":D4414
       ScaleHeight     =   488
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   554
@@ -53,7 +54,7 @@ Begin VB.Form frmMenu
          Height          =   390
          Index           =   11
          Left            =   7965
-         Picture         =   "frmMenu.frx":2E3152
+         Picture         =   "frmMenu.frx":19A858
          ScaleHeight     =   390
          ScaleWidth      =   330
          TabIndex        =   47
@@ -69,7 +70,7 @@ Begin VB.Form frmMenu
          Height          =   345
          Index           =   12
          Left            =   3330
-         Picture         =   "frmMenu.frx":2E387E
+         Picture         =   "frmMenu.frx":19AF84
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   46
@@ -83,7 +84,7 @@ Begin VB.Form frmMenu
       BorderStyle     =   0  'None
       Height          =   4545
       Left            =   6525
-      Picture         =   "frmMenu.frx":2E574E
+      Picture         =   "frmMenu.frx":19CE54
       ScaleHeight     =   303
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
@@ -100,7 +101,7 @@ Begin VB.Form frmMenu
          Height          =   390
          Index           =   10
          Left            =   3900
-         Picture         =   "frmMenu.frx":3247FE
+         Picture         =   "frmMenu.frx":1DBF04
          ScaleHeight     =   390
          ScaleWidth      =   330
          TabIndex        =   0
@@ -116,7 +117,7 @@ Begin VB.Form frmMenu
          Height          =   345
          Index           =   9
          Left            =   1275
-         Picture         =   "frmMenu.frx":324F2A
+         Picture         =   "frmMenu.frx":1DC630
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   1
@@ -318,7 +319,7 @@ Begin VB.Form frmMenu
       ForeColor       =   &H80000008&
       Height          =   405
       Left            =   0
-      Picture         =   "frmMenu.frx":326DFA
+      Picture         =   "frmMenu.frx":1DE500
       ScaleHeight     =   405
       ScaleWidth      =   17280
       TabIndex        =   32
@@ -410,7 +411,7 @@ Begin VB.Form frmMenu
       EndProperty
       Height          =   2355
       Left            =   6525
-      Picture         =   "frmMenu.frx":33DABE
+      Picture         =   "frmMenu.frx":1F51C4
       ScaleHeight     =   157
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
@@ -426,7 +427,7 @@ Begin VB.Form frmMenu
          Height          =   390
          Index           =   1
          Left            =   3900
-         Picture         =   "frmMenu.frx":35E586
+         Picture         =   "frmMenu.frx":215C8C
          ScaleHeight     =   390
          ScaleWidth      =   330
          TabIndex        =   9
@@ -442,7 +443,7 @@ Begin VB.Form frmMenu
          Height          =   345
          Index           =   2
          Left            =   1275
-         Picture         =   "frmMenu.frx":35ECB2
+         Picture         =   "frmMenu.frx":2163B8
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   8
@@ -454,7 +455,7 @@ Begin VB.Form frmMenu
          BorderStyle     =   0  'None
          Height          =   225
          Left            =   480
-         Picture         =   "frmMenu.frx":360B82
+         Picture         =   "frmMenu.frx":218288
          ScaleHeight     =   225
          ScaleWidth      =   240
          TabIndex        =   31
@@ -546,7 +547,7 @@ Begin VB.Form frmMenu
       BorderStyle     =   0  'None
       Height          =   4260
       Left            =   6525
-      Picture         =   "frmMenu.frx":362A6A
+      Picture         =   "frmMenu.frx":21A170
       ScaleHeight     =   284
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
@@ -563,7 +564,7 @@ Begin VB.Form frmMenu
          Height          =   390
          Index           =   4
          Left            =   3900
-         Picture         =   "frmMenu.frx":3B127E
+         Picture         =   "frmMenu.frx":268984
          ScaleHeight     =   390
          ScaleWidth      =   330
          TabIndex        =   11
@@ -579,7 +580,7 @@ Begin VB.Form frmMenu
          Height          =   345
          Index           =   3
          Left            =   1275
-         Picture         =   "frmMenu.frx":3B19AA
+         Picture         =   "frmMenu.frx":2690B0
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   7
@@ -710,7 +711,7 @@ Begin VB.Form frmMenu
       FontTransparent =   0   'False
       Height          =   4260
       Left            =   6525
-      Picture         =   "frmMenu.frx":3B387A
+      Picture         =   "frmMenu.frx":26AF80
       ScaleHeight     =   284
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
@@ -727,7 +728,7 @@ Begin VB.Form frmMenu
          Height          =   390
          Index           =   6
          Left            =   3900
-         Picture         =   "frmMenu.frx":3EE9EE
+         Picture         =   "frmMenu.frx":2A60F4
          ScaleHeight     =   390
          ScaleWidth      =   330
          TabIndex        =   10
@@ -743,7 +744,7 @@ Begin VB.Form frmMenu
          Height          =   345
          Index           =   5
          Left            =   1275
-         Picture         =   "frmMenu.frx":3EF11A
+         Picture         =   "frmMenu.frx":2A6820
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   6
@@ -881,7 +882,7 @@ Begin VB.Form frmMenu
       FontTransparent =   0   'False
       Height          =   3075
       Left            =   6525
-      Picture         =   "frmMenu.frx":3F0FEA
+      Picture         =   "frmMenu.frx":2A86F0
       ScaleHeight     =   205
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   283
@@ -898,7 +899,7 @@ Begin VB.Form frmMenu
          Height          =   345
          Index           =   7
          Left            =   1275
-         Picture         =   "frmMenu.frx":41BA72
+         Picture         =   "frmMenu.frx":2D3178
          ScaleHeight     =   345
          ScaleWidth      =   1695
          TabIndex        =   2
@@ -914,7 +915,7 @@ Begin VB.Form frmMenu
          Height          =   390
          Index           =   8
          Left            =   3900
-         Picture         =   "frmMenu.frx":41D942
+         Picture         =   "frmMenu.frx":2D5048
          ScaleHeight     =   390
          ScaleWidth      =   330
          TabIndex        =   12
@@ -989,6 +990,15 @@ Begin VB.Form frmMenu
          Top             =   1395
          Width           =   3495
       End
+   End
+   Begin Project1.PictureG PictureG1 
+      Height          =   10500
+      Left            =   0
+      Top             =   0
+      Width           =   18000
+      _ExtentX        =   31750
+      _ExtentY        =   18521
+      GIF             =   "frmMenu.frx":2D5774
    End
 End
 Attribute VB_Name = "frmMenu"

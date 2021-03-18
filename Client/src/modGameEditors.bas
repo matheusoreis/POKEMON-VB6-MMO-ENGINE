@@ -1032,6 +1032,7 @@ Public Sub NpcEditorInit()
         .ScrlChance.value = Npc(EditorIndex).Chance
         .scrlPokemon.value = Npc(EditorIndex).Pokemon
         .scrlQuest.value = Npc(EditorIndex).Quest(.scrlQuestSlot.value)
+        .txtMoney.text = Npc(EditorIndex).Money
 
         ' find the sound we have set
         If .cmbSound.ListCount >= 0 Then

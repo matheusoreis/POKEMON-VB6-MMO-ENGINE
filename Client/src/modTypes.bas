@@ -333,6 +333,7 @@ Private Type NpcRec
     Chance As Long
     Pokemon As Long
     Quest(1 To MAX_NPC_QUESTS) As Integer
+    Money As Long
 End Type
 
 Private Type MapNpcRec

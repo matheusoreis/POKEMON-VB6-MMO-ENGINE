@@ -64,3 +64,17 @@ Janela de visuais Usar não usar(Adicionado)
 Menu:
 
 Server status Online/Offline(Adicionado)
+
+
+Leilão:
+
+Bug q ao vender item por + de 2 dollares ou credits ganhava apenas 1 (Arrumado )
+Bug em q o player nao recebia o valor na bag(Arrumado)
+
+Drop:
+
+Matar o npc e receber o dinheiro direto na bag(Adicionado)
+
+Teleport:
+
+Implemento do warp player(adicionado)

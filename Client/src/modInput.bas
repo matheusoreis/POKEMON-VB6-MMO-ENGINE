@@ -325,8 +325,8 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     Case "/v"
                 For i = 1 To 30 '123
                 'AddText "Num:" & Player(MyIndex).Visuais(MyIndex), Yellow
-                AddText "SLot: " & i & " Visual: " & GetPlayerVisuais(MyIndex, i), Yellow
-                'AddText "SLot: " & i & " Tp: " & GetPlayerTeleport(MyIndex, i), Yellow
+                'AddText "SLot: " & i & " Visual: " & GetPlayerVisuais(MyIndex, i), Yellow
+                AddText "SLot: " & i & " Tp: " & GetPlayerTeleport(MyIndex, i), Yellow
                 Next '123
                 Case "/vit"
                    ' If txtMyChat.Visible = False Then

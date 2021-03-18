@@ -26,6 +26,15 @@ Begin VB.Form frmEditor_NPC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.TextBox txtMoney 
+      Alignment       =   2  'Center
+      Height          =   270
+      Left            =   8520
+      TabIndex        =   61
+      Text            =   "0"
+      Top             =   5040
+      Width           =   2895
+   End
    Begin VB.Frame FrameBlank 
       Caption         =   "Data"
       Height          =   1455
@@ -917,6 +926,11 @@ errorhandler:
     HandleError "txtlevel_Change", "frmEditor_NPC", Err.Number, Err.Description, Err.Source, Err.HelpContext
     Err.Clear
     Exit Sub
+End Sub
+
+Private Sub txtMoney_Change()
+If Not Len(txtMoney.text) > 0 Then Exit Sub
+    Npc(EditorIndex).Money = Val(txtMoney.text)
 End Sub
 
 Private Sub txtName_Validate(Cancel As Boolean)

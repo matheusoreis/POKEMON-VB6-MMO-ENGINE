@@ -11,7 +11,7 @@ Sub HandleUseChar(ByVal Index As Long)
 End Sub
 
 Sub JoinGame(ByVal Index As Long)
-    Dim i As Long, X As Long
+    Dim I As Long, x As Long
     
     ' Set the flag so we know the person is in the game
     TempPlayer(Index).InGame = True
@@ -52,8 +52,8 @@ Sub JoinGame(ByVal Index As Long)
     Call SendPlayerTeleport(Index)
     
     ' send vitals, exp + stats
-    For i = 1 To Vitals.Vital_Count - 1
-        Call SendVital(Index, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        Call SendVital(Index, I)
     Next
     
     ' Teleportar jogador para local salvo
@@ -82,8 +82,8 @@ Sub JoinGame(ByVal Index As Long)
     End If
 
     ' Send Resource cache
-    For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
-        SendResourceCacheTo Index, i
+    For I = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
+        SendResourceCacheTo Index, I
     Next
     
     'Evoluir Pokémon - Pedra
@@ -96,9 +96,9 @@ Sub JoinGame(ByVal Index As Long)
     
     'Atualizar Lista de Membros ON!
     If Player(Index).ORG > 0 Then
-        For i = 1 To MAX_ORG_MEMBERS
-            If Trim$(Organization(Player(Index).ORG).OrgMember(i).User_Name) = Trim$(GetPlayerName(Index)) Then
-                Organization(Player(Index).ORG).OrgMember(i).Online = True
+        For I = 1 To MAX_ORG_MEMBERS
+            If Trim$(Organization(Player(Index).ORG).OrgMember(I).User_Name) = Trim$(GetPlayerName(Index)) Then
+                Organization(Player(Index).ORG).OrgMember(I).Online = True
                 SendOrganizaçãoToOrg Player(Index).ORG
             End If
         Next
@@ -110,37 +110,38 @@ Sub JoinGame(ByVal Index As Long)
 End Sub
 
 Public Sub VerificarPendencias(ByVal Index As Integer)
-Dim i As Long, X As Long
+Dim I As Long, x As Long
 
-For i = 1 To MAX_LEILAO
-        If Pendencia(i).Vendedor = GetPlayerName(Index) Then
+For I = 1 To MAX_LEILAO
+        If Pendencia(I).Vendedor = GetPlayerName(Index) Then
             
             'Dar o item
-            If Pendencia(i).Poke.Pokemon > 0 Then
+            If Pendencia(I).Poke.Pokemon > 0 Then
             
             
             
-            DirectBankItemPokemon Index, Pendencia(i).ItemNum, _
-            Pendencia(i).Poke.Pokemon, Pendencia(i).Poke.Pokeball, _
-            Pendencia(i).Poke.Level, Pendencia(i).Poke.EXP, _
-            Pendencia(i).Poke.Vital(1), Pendencia(i).Poke.Vital(2), _
-            Pendencia(i).Poke.MaxVital(1), Pendencia(i).Poke.MaxVital(2), _
-            Pendencia(i).Poke.Stat(1), Pendencia(i).Poke.Stat(4), _
-            Pendencia(i).Poke.Stat(2), Pendencia(i).Poke.Stat(3), _
-            Pendencia(i).Poke.Stat(5), Pendencia(i).Poke.Spells(1), _
-            Pendencia(i).Poke.Spells(2), Pendencia(i).Poke.Spells(3), _
-            Pendencia(i).Poke.Spells(4), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Pendencia(i).Poke.Felicidade, Pendencia(i).Poke.Sexo, Pendencia(i).Poke.Shiny, _
-            Pendencia(i).Poke.Berry(1), Pendencia(i).Poke.Berry(2), Pendencia(i).Poke.Berry(3), Pendencia(i).Poke.Berry(4), Pendencia(i).Poke.Berry(5)
+            DirectBankItemPokemon Index, Pendencia(I).ItemNum, _
+            Pendencia(I).Poke.Pokemon, Pendencia(I).Poke.Pokeball, _
+            Pendencia(I).Poke.Level, Pendencia(I).Poke.EXP, _
+            Pendencia(I).Poke.Vital(1), Pendencia(I).Poke.Vital(2), _
+            Pendencia(I).Poke.MaxVital(1), Pendencia(I).Poke.MaxVital(2), _
+            Pendencia(I).Poke.Stat(1), Pendencia(I).Poke.Stat(4), _
+            Pendencia(I).Poke.Stat(2), Pendencia(I).Poke.Stat(3), _
+            Pendencia(I).Poke.Stat(5), Pendencia(I).Poke.Spells(1), _
+            Pendencia(I).Poke.Spells(2), Pendencia(I).Poke.Spells(3), _
+            Pendencia(I).Poke.Spells(4), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Pendencia(I).Poke.Felicidade, Pendencia(I).Poke.Sexo, Pendencia(I).Poke.Shiny, _
+            Pendencia(I).Poke.Berry(1), Pendencia(I).Poke.Berry(2), Pendencia(I).Poke.Berry(3), Pendencia(I).Poke.Berry(4), Pendencia(I).Poke.Berry(5)
             
             'Enviar Msg
-            If Pendencia(i).Tipo > 0 Then
-                PlayerMsg Index, "O pokémon " & Trim$(Pokemon(Pendencia(i).Poke.Pokemon).Name) & "foi vendido por " & Pendencia(i).Price & " " & Trim$(Item(Pendencia(i).Tipo).Name), BrightGreen
+            If Pendencia(I).Tipo > 0 Then
+                PlayerMsg Index, "O pokémon " & Trim$(Pokemon(Pendencia(I).Poke.Pokemon).Name) & "foi vendido por " & Pendencia(I).Price & " " & Trim$(Item(Pendencia(I).Tipo).Name), BrightGreen
             Else
-                PlayerMsg Index, "O pokémon " & Trim$(Pokemon(Pendencia(i).Poke.Pokemon).Name) & " não foi vendido e foi enviado para o computador!", Yellow
+                PlayerMsg Index, "O pokémon " & Trim$(Pokemon(Pendencia(I).Poke.Pokemon).Name) & " não foi vendido e foi enviado para o computador!", Yellow
             End If
             
             Else
-            DirectBankItemPokemon Index, Pendencia(i).ItemNum, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False
+            'DirectBankItemPokemon Index, Pendencia(I).ItemNum, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False
+            GiveInvItem Index, Pendencia(I).ItemNum, Pendencia(I).Price, False, False, False, False, False, False, , False, False, False, False, False, False, , False, False, False, False, False, False, , False, False, False, False, False, False, , False, False, False, False, False, False, , False, False
             'GiveInvItem Index, Pendencia(I).ItemNum, Pendencia(I).Price, False, _
             Pendencia(I).Poke.Pokemon, Pendencia(I).Poke.Pokeball, _
             Pendencia(I).Poke.Level, Pendencia(I).Poke.EXP, _
@@ -154,51 +155,51 @@ For i = 1 To MAX_LEILAO
             Pendencia(I).Poke.Berry(1), Pendencia(I).Poke.Berry(2), Pendencia(I).Poke.Berry(3), Pendencia(I).Poke.Berry(4), Pendencia(I).Poke.Berry(5)
             
             'Enviar Msg
-            If Pendencia(i).Tipo > 0 Then
+            If Pendencia(I).Tipo > 0 Then
                 PlayerMsg Index, "Venda Concluida!", White
             Else
-                PlayerMsg Index, "O Item " & Trim$(Item(Pendencia(i).ItemNum).Name) & " não foi vendido!", BrightRed
+                PlayerMsg Index, "O Item " & Trim$(Item(Pendencia(I).ItemNum).Name) & " não foi vendido!", BrightRed
             End If
             
             End If
             
             'Limpar a pendencia em questão...
-            Pendencia(i).Vendedor = vbNullString
-            Pendencia(i).ItemNum = 0
-            Pendencia(i).Price = 0
-            Pendencia(i).Tipo = 0
-            Pendencia(i).Poke.Pokemon = 0
-            Pendencia(i).Poke.Pokeball = 0
-            Pendencia(i).Poke.Level = 0
-            Pendencia(i).Poke.EXP = 0
-            Pendencia(i).Poke.Felicidade = 0
-            Pendencia(i).Poke.Sexo = 0
-            Pendencia(i).Poke.Shiny = 0
+            Pendencia(I).Vendedor = vbNullString
+            Pendencia(I).ItemNum = 0
+            Pendencia(I).Price = 0
+            Pendencia(I).Tipo = 0
+            Pendencia(I).Poke.Pokemon = 0
+            Pendencia(I).Poke.Pokeball = 0
+            Pendencia(I).Poke.Level = 0
+            Pendencia(I).Poke.EXP = 0
+            Pendencia(I).Poke.Felicidade = 0
+            Pendencia(I).Poke.Sexo = 0
+            Pendencia(I).Poke.Shiny = 0
             
-            For X = 1 To Vitals.Vital_Count - 1
-                Pendencia(i).Poke.Vital(X) = 0
-                Pendencia(i).Poke.MaxVital(X) = 0
+            For x = 1 To Vitals.Vital_Count - 1
+                Pendencia(I).Poke.Vital(x) = 0
+                Pendencia(I).Poke.MaxVital(x) = 0
             Next
             
-            For X = 1 To Stats.Stat_Count - 1
-                Pendencia(i).Poke.Stat(X) = 0
+            For x = 1 To Stats.Stat_Count - 1
+                Pendencia(I).Poke.Stat(x) = 0
             Next
             
-            For X = 1 To MAX_POKE_SPELL
-                Pendencia(i).Poke.Spells(X) = 0
+            For x = 1 To MAX_POKE_SPELL
+                Pendencia(I).Poke.Spells(x) = 0
             Next
             
-            For X = 1 To MAX_BERRYS
-                Pendencia(i).Poke.Berry(X) = 0
+            For x = 1 To MAX_BERRYS
+                Pendencia(I).Poke.Berry(x) = 0
             Next
             
-            SavePendencia i
+            SavePendencia I
         End If
-    Next i
+    Next I
 End Sub
 
 Sub LeftGame(ByVal Index As Long)
-    Dim n As Long, i As Long
+    Dim n As Long, I As Long
     Dim tradeTarget As Long
     
     Select Case TempPlayer(Index).InBattleGym
@@ -207,9 +208,9 @@ Sub LeftGame(ByVal Index As Long)
     End Select
     
     If Player(Index).ORG > 0 Then
-        For i = 1 To MAX_ORG_MEMBERS
-            If Trim$(Organization(Player(Index).ORG).OrgMember(i).User_Name) = Trim$(GetPlayerName(Index)) Then
-                Organization(Player(Index).ORG).OrgMember(i).Online = False
+        For I = 1 To MAX_ORG_MEMBERS
+            If Trim$(Organization(Player(Index).ORG).OrgMember(I).User_Name) = Trim$(GetPlayerName(Index)) Then
+                Organization(Player(Index).ORG).OrgMember(I).Online = False
                 SendOrganizaçãoToOrg Player(Index).ORG
                 Exit For
             End If
@@ -227,7 +228,7 @@ Sub LeftGame(ByVal Index As Long)
                 
                 SendLeaveMap Index, GetPlayerMap(Index)
                 Player(Index).Map = Player(Index).MyMap(1)
-                Player(Index).X = Player(Index).MyMap(2)
+                Player(Index).x = Player(Index).MyMap(2)
                 Player(Index).Y = Player(Index).MyMap(3)
                 If TempPlayer(Index).Lutando > 0 Then
                     Dim p As Long
@@ -266,14 +267,14 @@ Sub LeftGame(ByVal Index As Long)
         TempPlayer(Index).InGame = False
         
           ' Loop through entire map and purge NPC from targets
-        For i = 1 To Player_HighIndex
-            If IsPlaying(i) And IsConnected(i) Then
-                If GetPlayerMap(i) = GetPlayerMap(Index) Then
-                    If TempPlayer(i).targetType = TARGET_TYPE_PLAYER Then
-                        If TempPlayer(i).target = Index Then
-                            TempPlayer(i).target = 0
-                            TempPlayer(i).targetType = TARGET_TYPE_NONE
-                            SendTarget i
+        For I = 1 To Player_HighIndex
+            If IsPlaying(I) And IsConnected(I) Then
+                If GetPlayerMap(I) = GetPlayerMap(Index) Then
+                    If TempPlayer(I).targetType = TARGET_TYPE_PLAYER Then
+                        If TempPlayer(I).target = Index Then
+                            TempPlayer(I).target = 0
+                            TempPlayer(I).targetType = TARGET_TYPE_NONE
+                            SendTarget I
                         End If
                     End If
                 End If
@@ -290,9 +291,9 @@ Sub LeftGame(ByVal Index As Long)
             tradeTarget = TempPlayer(Index).InTrade
             PlayerMsg tradeTarget, Trim$(GetPlayerName(Index)) & " has declined the trade.", BrightRed
             ' clear out trade
-            For i = 1 To MAX_INV
-                TempPlayer(tradeTarget).TradeOffer(i).Num = 0
-                TempPlayer(tradeTarget).TradeOffer(i).Value = 0
+            For I = 1 To MAX_INV
+                TempPlayer(tradeTarget).TradeOffer(I).Num = 0
+                TempPlayer(tradeTarget).TradeOffer(I).Value = 0
             Next
             TempPlayer(tradeTarget).InTrade = 0
             SendCloseTrade tradeTarget
@@ -302,14 +303,14 @@ Sub LeftGame(ByVal Index As Long)
         Party_PlayerLeave Index
         
          ' clear target
-        For i = 1 To Player_HighIndex
+        For I = 1 To Player_HighIndex
             ' Prevent subscript out range
-            If IsPlaying(i) And GetPlayerMap(i) = GetPlayerMap(Index) Then
+            If IsPlaying(I) And GetPlayerMap(I) = GetPlayerMap(Index) Then
                 ' clear players target
-                If TempPlayer(i).targetType = TARGET_TYPE_PLAYER And TempPlayer(i).target = Index Then
-                    TempPlayer(i).target = 0
-                    TempPlayer(i).targetType = TARGET_TYPE_NONE
-                    SendTarget i
+                If TempPlayer(I).targetType = TARGET_TYPE_PLAYER And TempPlayer(I).target = Index Then
+                    TempPlayer(I).target = 0
+                    TempPlayer(I).targetType = TARGET_TYPE_NONE
+                    SendTarget I
                 End If
             End If
         Next
@@ -360,17 +361,17 @@ End Function
 
 Function CanPlayerCriticalHit(ByVal Index As Long) As Boolean
     On Error Resume Next
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
 
     If GetPlayerEquipment(Index, weapon) > 0 Then
         n = (Rnd) * 2
 
         If n = 1 Then
-            i = ((GetPlayerEquipmentPokeInfoStat(Index, weapon, Stats.Agility) + GetPlayerEquipmentBerry(Index, weapon, 4)) \ 2) + (GetPlayerEquipmentPokeInfoLevel(Index, weapon) \ 2)
+            I = ((GetPlayerEquipmentPokeInfoStat(Index, weapon, Stats.Agility) + GetPlayerEquipmentBerry(Index, weapon, 4)) \ 2) + (GetPlayerEquipmentPokeInfoLevel(Index, weapon) \ 2)
             n = Int(Rnd * 100) + 1
 
-            If n <= i Then
+            If n <= I Then
                 CanPlayerCriticalHit = True
             End If
         End If
@@ -379,7 +380,7 @@ Function CanPlayerCriticalHit(ByVal Index As Long) As Boolean
 End Function
 
 Function CanPlayerBlockHit(ByVal Index As Long) As Boolean
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
     Dim ShieldSlot As Long
     ShieldSlot = GetPlayerEquipment(Index, Shield)
@@ -388,10 +389,10 @@ Function CanPlayerBlockHit(ByVal Index As Long) As Boolean
         n = Int(Rnd * 2)
 
         If n = 1 Then
-            i = (GetPlayerStat(Index, Stats.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
+            I = (GetPlayerStat(Index, Stats.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
             n = Int(Rnd * 100) + 1
 
-            If n <= i Then
+            If n <= I Then
                 CanPlayerBlockHit = True
             End If
         End If
@@ -399,10 +400,10 @@ Function CanPlayerBlockHit(ByVal Index As Long) As Boolean
 
 End Function
 
-Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long)
+Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long)
     Dim shopNum As Long
     Dim OldMap As Long
-    Dim i As Long
+    Dim I As Long
     Dim Buffer As clsBuffer
 
     ' Check for subscript out of range
@@ -411,9 +412,9 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
     End If
 
     ' Check if you are out of bounds
-    If X > Map(MapNum).MaxX Then X = Map(MapNum).MaxX
+    If x > Map(MapNum).MaxX Then x = Map(MapNum).MaxX
     If Y > Map(MapNum).MaxY Then Y = Map(MapNum).MaxY
-    If X < 0 Then X = 0
+    If x < 0 Then x = 0
     If Y < 0 Then Y = 0
     
     ' if same map then just send their co-ordinates
@@ -427,13 +428,13 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
     SendTarget Index
     
     ' clear target
-    For i = 1 To Player_HighIndex
+    For I = 1 To Player_HighIndex
         ' Prevent subscript out range
-        If IsPlaying(i) And GetPlayerMap(i) = GetPlayerMap(Index) Then
-            If TempPlayer(i).targetType = TARGET_TYPE_PLAYER And TempPlayer(i).target = Index Then
-                TempPlayer(i).target = 0
-                TempPlayer(i).targetType = TARGET_TYPE_NONE
-                SendTarget i
+        If IsPlaying(I) And GetPlayerMap(I) = GetPlayerMap(Index) Then
+            If TempPlayer(I).targetType = TARGET_TYPE_PLAYER And TempPlayer(I).target = Index Then
+                TempPlayer(I).target = 0
+                TempPlayer(I).targetType = TARGET_TYPE_NONE
+                SendTarget I
             End If
         End If
     Next
@@ -446,7 +447,7 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
     End If
 
     Call SetPlayerMap(Index, MapNum)
-    Call SetPlayerX(Index, X)
+    Call SetPlayerX(Index, x)
     Call SetPlayerY(Index, Y)
     TempPlayer(Index).StunDuration = 0.6
     TempPlayer(Index).StunTimer = GetTickCount
@@ -457,11 +458,11 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
     
     ' send equipment of all people on new map
     If GetTotalMapPlayers(MapNum) > 0 Then
-        For i = 1 To Player_HighIndex
-            If IsPlaying(i) Then
-                If GetPlayerMap(i) = MapNum Then
-                    SendMapEquipmentTo i, Index
-                    SendSurfInit i, Index
+        For I = 1 To Player_HighIndex
+            If IsPlaying(I) Then
+                If GetPlayerMap(I) = MapNum Then
+                    SendMapEquipmentTo I, Index
+                    SendSurfInit I, Index
                 End If
             End If
         Next
@@ -472,12 +473,12 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
         PlayersOnMap(OldMap) = NO
 
         ' Regenerate all NPCs' health
-        For i = 1 To MAX_MAP_NPCS
-            If MapNpc(OldMap).Npc(i).Num > 0 Then
-                If Npc(MapNpc(OldMap).Npc(i).Num).Pokemon > 0 Then
-                    MapNpc(OldMap).Npc(i).Vital(Vitals.HP) = GetPokemonMaxVital(MapNpc(OldMap).Npc(i).Num, Vitals.HP, MapNpc(OldMap).Npc(i).Level)
+        For I = 1 To MAX_MAP_NPCS
+            If MapNpc(OldMap).Npc(I).Num > 0 Then
+                If Npc(MapNpc(OldMap).Npc(I).Num).Pokemon > 0 Then
+                    MapNpc(OldMap).Npc(I).Vital(Vitals.HP) = GetPokemonMaxVital(MapNpc(OldMap).Npc(I).Num, Vitals.HP, MapNpc(OldMap).Npc(I).Level)
                 Else
-                    MapNpc(OldMap).Npc(i).Vital(Vitals.HP) = GetNpcMaxVital(MapNpc(OldMap).Npc(i).Num, Vitals.HP)
+                    MapNpc(OldMap).Npc(I).Vital(Vitals.HP) = GetNpcMaxVital(MapNpc(OldMap).Npc(I).Num, Vitals.HP)
                 End If
             End If
         Next
@@ -500,11 +501,11 @@ Sub PlayerWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal
     SendDataTo Index, Buffer.ToArray()
     Set Buffer = Nothing
     
-    For i = 1 To MAX_MAP_NPCS
-        If MapNpc(MapNum).Npc(i).Num > 0 Then
-            If MapNpc(MapNum).Npc(i).Desmaiado = True And Map(MapNum).Npc(i) > 0 Then
-                SendNpcDesmaiado MapNum, i, False, Index
-                SendMapNpcVitals MapNum, i, Index
+    For I = 1 To MAX_MAP_NPCS
+        If MapNpc(MapNum).Npc(I).Num > 0 Then
+            If MapNpc(MapNum).Npc(I).Desmaiado = True And Map(MapNum).Npc(I) > 0 Then
+                SendNpcDesmaiado MapNum, I, False, Index
+                SendMapNpcVitals MapNum, I, Index
             End If
         End If
     Next
@@ -513,7 +514,7 @@ End Sub
 
 Sub PlayerMoveFly(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, Optional ByVal sendToSelf As Boolean = False)
     Dim Buffer As clsBuffer, MapNum As Long
-    Dim X As Long, Y As Long
+    Dim x As Long, Y As Long
     Dim Moved As Byte, MovedSoFar As Boolean
     Dim NewMapX As Byte, NewMapY As Byte
     Dim TileType As Long, VitalType As Long, Colour As Long, Amount As Long
@@ -565,7 +566,7 @@ End Sub
 
 Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, Optional ByVal sendToSelf As Boolean = False)
     Dim Buffer As clsBuffer, MapNum As Long
-    Dim X As Long, Y As Long
+    Dim x As Long, Y As Long
     Dim Moved As Byte, MovedSoFar As Boolean
     Dim NewMapX As Byte, NewMapY As Byte, NgtNum As Byte
     Dim TileType As Long, VitalType As Long, Colour As Long, Amount As Long
@@ -734,10 +735,10 @@ Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, O
         ' Check to see if the tile is a warp tile, and if so warp them
         If .Type = TILE_TYPE_WARP Then
             MapNum = .Data1
-            X = .Data2
+            x = .Data2
             Y = .Data3
             If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) = 0 Then
-            Call PlayerWarp(Index, MapNum, X, Y)
+            Call PlayerWarp(Index, MapNum, x, Y)
             Moved = YES
             End If
         End If
@@ -745,34 +746,34 @@ Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, O
         ' Check to see if the tile is a door tile, and if so warp them
         If .Type = TILE_TYPE_DOOR Then
             MapNum = .Data1
-            X = .Data2
+            x = .Data2
             Y = .Data3
             ' send the animation to the map
             SendDoorAnimation GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index)
-            Call PlayerWarp(Index, MapNum, X, Y)
+            Call PlayerWarp(Index, MapNum, x, Y)
             Moved = YES
         End If
     
         ' Check for key trigger open
         If .Type = TILE_TYPE_KEYOPEN Then
-            X = .Data1
+            x = .Data1
             Y = .Data2
     
-            If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(X, Y) = NO Then
-                TempTile(GetPlayerMap(Index)).DoorOpen(X, Y) = YES
+            If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(x, Y) = NO Then
+                TempTile(GetPlayerMap(Index)).DoorOpen(x, Y) = YES
                 TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount
-                SendMapKey Index, X, Y, 1
+                SendMapKey Index, x, Y, 1
                 Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
             End If
         End If
         
         ' Check for a shop, and if so open it
         If .Type = TILE_TYPE_SHOP Then
-            X = .Data1
-            If X > 0 Then ' shop exists?
-                If Len(Trim$(Shop(X).Name)) > 0 Then ' name exists?
-                    SendOpenShop Index, X
-                    TempPlayer(Index).InShop = X ' stops movement and the like
+            x = .Data1
+            If x > 0 Then ' shop exists?
+                If Len(Trim$(Shop(x).Name)) > 0 Then ' name exists?
+                    SendOpenShop Index, x
+                    TempPlayer(Index).InShop = x ' stops movement and the like
                 End If
             End If
         End If
@@ -786,7 +787,7 @@ Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, O
         
         ' PokeCentro
         If .Type = TILE_TYPE_HEAL Then
-            Dim i As Long
+            Dim I As Long
             
             If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
                 Call PlayerUnequipItem(Index, weapon)
@@ -804,18 +805,18 @@ Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, O
             
             Dim PokeQntiaCurado As Byte
             
-            For i = 1 To MAX_INV
-            If GetPlayerInvItemPokeInfoPokemon(Index, i) > 0 Then
-                If GetPlayerInvItemPokeInfoVital(Index, i, 1) < GetPlayerInvItemPokeInfoMaxVital(Index, i, 1) Or GetPlayerInvItemPokeInfoVital(Index, i, 2) < GetPlayerInvItemPokeInfoMaxVital(Index, i, 2) Then
-                    SetPlayerInvItemPokeInfoVital Index, i, GetPlayerInvItemPokeInfoMaxVital(Index, i, 1), 1
-                    SetPlayerInvItemPokeInfoVital Index, i, GetPlayerInvItemPokeInfoMaxVital(Index, i, 2), 2
+            For I = 1 To MAX_INV
+            If GetPlayerInvItemPokeInfoPokemon(Index, I) > 0 Then
+                If GetPlayerInvItemPokeInfoVital(Index, I, 1) < GetPlayerInvItemPokeInfoMaxVital(Index, I, 1) Or GetPlayerInvItemPokeInfoVital(Index, I, 2) < GetPlayerInvItemPokeInfoMaxVital(Index, I, 2) Then
+                    SetPlayerInvItemPokeInfoVital Index, I, GetPlayerInvItemPokeInfoMaxVital(Index, I, 1), 1
+                    SetPlayerInvItemPokeInfoVital Index, I, GetPlayerInvItemPokeInfoMaxVital(Index, I, 2), 2
                     PokeQntiaCurado = PokeQntiaCurado + 1
                 End If
                 
                 'limpar status negativos
                 For NgtNum = 1 To MAX_NEGATIVES
-                    If GetPlayerInvItemNgt(Index, i, NgtNum) > 0 Then
-                        SetPlayerInvItemNgt Index, i, NgtNum, 0
+                    If GetPlayerInvItemNgt(Index, I, NgtNum) > 0 Then
+                        SetPlayerInvItemNgt Index, I, NgtNum, 0
                     End If
                 Next
                 
@@ -930,31 +931,31 @@ End Sub
 Sub CheckEquippedItems(ByVal Index As Long)
     Dim Slot As Long
     Dim ItemNum As Long
-    Dim i As Long
+    Dim I As Long
 
     ' We want to check incase an admin takes away an object but they had it equipped
-    For i = 1 To Equipment.Equipment_Count - 1
-        ItemNum = GetPlayerEquipment(Index, i)
+    For I = 1 To Equipment.Equipment_Count - 1
+        ItemNum = GetPlayerEquipment(Index, I)
 
         If ItemNum > 0 Then
 
-            Select Case i
+            Select Case I
                 Case Equipment.weapon
 
-                    If Item(ItemNum).Type <> ITEM_TYPE_WEAPON Then SetPlayerEquipment Index, 0, i
+                    If Item(ItemNum).Type <> ITEM_TYPE_WEAPON Then SetPlayerEquipment Index, 0, I
                 Case Equipment.Armor
 
-                    If Item(ItemNum).Type <> ITEM_TYPE_ARMOR Then SetPlayerEquipment Index, 0, i
+                    If Item(ItemNum).Type <> ITEM_TYPE_ARMOR Then SetPlayerEquipment Index, 0, I
                 Case Equipment.Helmet
 
-                    If Item(ItemNum).Type <> ITEM_TYPE_HELMET Then SetPlayerEquipment Index, 0, i
+                    If Item(ItemNum).Type <> ITEM_TYPE_HELMET Then SetPlayerEquipment Index, 0, I
                 Case Equipment.Shield
 
-                    If Item(ItemNum).Type <> ITEM_TYPE_SHIELD Then SetPlayerEquipment Index, 0, i
+                    If Item(ItemNum).Type <> ITEM_TYPE_SHIELD Then SetPlayerEquipment Index, 0, I
             End Select
 
         Else
-            SetPlayerEquipment Index, 0, i
+            SetPlayerEquipment Index, 0, I
         End If
 
     Next
@@ -962,7 +963,7 @@ Sub CheckEquippedItems(ByVal Index As Long)
 End Sub
 
 Function FindOpenInvSlot(ByVal Index As Long, ByVal ItemNum As Long) As Long
-    Dim i As Long
+    Dim I As Long
 
     ' Check for subscript out of range
     If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
@@ -972,10 +973,10 @@ Function FindOpenInvSlot(ByVal Index As Long, ByVal ItemNum As Long) As Long
     If Item(ItemNum).Type = ITEM_TYPE_CURRENCY Then
 
         ' If currency then check to see if they already have an instance of the item and add it to that
-        For i = 1 To MAX_INV
+        For I = 1 To MAX_INV
 
-            If GetPlayerInvItemNum(Index, i) = ItemNum Then
-                FindOpenInvSlot = i
+            If GetPlayerInvItemNum(Index, I) = ItemNum Then
+                FindOpenInvSlot = I
                 'PlayerMsg Index, "Slot: " & i, BrightRed
                 Exit Function
             End If
@@ -984,11 +985,11 @@ Function FindOpenInvSlot(ByVal Index As Long, ByVal ItemNum As Long) As Long
 
     End If
 
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
 
         ' Try to find an open free slot
-        If GetPlayerInvItemNum(Index, i) = 0 Then
-            FindOpenInvSlot = i
+        If GetPlayerInvItemNum(Index, I) = 0 Then
+            FindOpenInvSlot = I
             'PlayerMsg Index, GetPlayerInvItemNum(Index, i), BrightRed
             'PlayerMsg Index, "Slot: " & i, BrightRed
             Exit Function
@@ -999,57 +1000,57 @@ Function FindOpenInvSlot(ByVal Index As Long, ByVal ItemNum As Long) As Long
 End Function
 
 Function FindOpenBankSlot(ByVal Index As Long, ByVal ItemNum As Long, Optional ByVal Pokemon As Long, Optional ByVal Pokeball As Long, Optional ByVal Level As Long, Optional ByVal EXP As Long, Optional ByVal VitalHP As Long, Optional ByVal VitalMP As Long, Optional ByVal MaxVitalHp As Long, Optional ByVal MaxVitalMp As Long, Optional ByVal StatStr As Long, Optional ByVal StatAgi As Long, Optional ByVal StatEnd As Long, Optional ByVal StatInt As Long, Optional ByVal StatWill As Long, Optional ByVal Spell1 As Long, Optional ByVal Spell2 As Long, Optional ByVal Spell3 As Long, Optional ByVal Spell4 As Long) As Long
-    Dim i As Long
+    Dim I As Long
 
     If Not IsPlaying(Index) Then Exit Function
     If ItemNum <= 0 Or ItemNum > MAX_ITEMS Then Exit Function
     
-        For i = 1 To MAX_BANK
-            If GetPlayerBankItemNum(Index, i) = ItemNum Then
-                FindOpenBankSlot = i
+        For I = 1 To MAX_BANK
+            If GetPlayerBankItemNum(Index, I) = ItemNum Then
+                FindOpenBankSlot = I
                 Exit Function
             End If
-        Next i
+        Next I
 
-    For i = 1 To MAX_BANK
-        If GetPlayerBankItemNum(Index, i) = 0 Then
-            FindOpenBankSlot = i
+    For I = 1 To MAX_BANK
+        If GetPlayerBankItemNum(Index, I) = 0 Then
+            FindOpenBankSlot = I
             Exit Function
         End If
-    Next i
+    Next I
 
 End Function
 
 Function FindOpenBankSlotPokemon(ByVal Index As Long) As Long
-    Dim i As Long
+    Dim I As Long
 
     If Not IsPlaying(Index) Then Exit Function
 
-    For i = 1 To MAX_BANK
-        If GetPlayerBankItemNum(Index, i) = 0 Then
-            If GetPlayerBankItemPokemon(Index, i) = 0 Then
-                FindOpenBankSlotPokemon = i
+    For I = 1 To MAX_BANK
+        If GetPlayerBankItemNum(Index, I) = 0 Then
+            If GetPlayerBankItemPokemon(Index, I) = 0 Then
+                FindOpenBankSlotPokemon = I
                 Exit Function
             End If
         End If
-    Next i
+    Next I
 
 End Function
 
 Function HasItem(ByVal Index As Long, ByVal ItemNum As Long) As Long
-    Dim i As Long
+    Dim I As Long
 
     ' Check for subscript out of range
     If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
         Exit Function
     End If
 
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
 
         ' Check to see if the player has the item
-        If GetPlayerInvItemNum(Index, i) = ItemNum Then
+        If GetPlayerInvItemNum(Index, I) = ItemNum Then
             If Item(ItemNum).Type = ITEM_TYPE_CURRENCY Then
-                HasItem = GetPlayerInvItemValue(Index, i)
+                HasItem = GetPlayerInvItemValue(Index, I)
             Else
                 HasItem = 1
             End If
@@ -1062,9 +1063,9 @@ Function HasItem(ByVal Index As Long, ByVal ItemNum As Long) As Long
 End Function
 
 Function TakeInvItem(ByVal Index As Long, ByVal ItemNum As Long, ByVal ItemVal As Long, Optional ByVal QuestMessage As Boolean = True) As Boolean
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
-    Dim X As Long
+    Dim x As Long
     
     TakeInvItem = False
 
@@ -1073,18 +1074,18 @@ Function TakeInvItem(ByVal Index As Long, ByVal ItemNum As Long, ByVal ItemVal A
         Exit Function
     End If
 
-    For i = 1 To MAX_INV
+    For I = 1 To MAX_INV
 
         ' Check to see if the player has the item
-        If GetPlayerInvItemNum(Index, i) = ItemNum Then
+        If GetPlayerInvItemNum(Index, I) = ItemNum Then
             If Item(ItemNum).Type = ITEM_TYPE_CURRENCY Then
 
                 ' Is what we are trying to take away more then what they have?  If so just set it to zero
-                If ItemVal >= GetPlayerInvItemValue(Index, i) Then
+                If ItemVal >= GetPlayerInvItemValue(Index, I) Then
                     TakeInvItem = True
                 Else
-                    Call SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) - ItemVal)
-                    Call SendInventoryUpdate(Index, i)
+                    Call SetPlayerInvItemValue(Index, I, GetPlayerInvItemValue(Index, I) - ItemVal)
+                    Call SendInventoryUpdate(Index, I)
                 End If
             Else
                 TakeInvItem = True
@@ -1092,51 +1093,51 @@ Function TakeInvItem(ByVal Index As Long, ByVal ItemNum As Long, ByVal ItemVal A
 
             If TakeInvItem Then
             
-                Call SetPlayerInvItemNum(Index, i, 0)
-                Call SetPlayerInvItemValue(Index, i, 0)
+                Call SetPlayerInvItemNum(Index, I, 0)
+                Call SetPlayerInvItemValue(Index, I, 0)
                 
                 'PokeInfo
-                Call SetPlayerInvItemPokeInfoPokemon(Index, i, 0)
-                Call SetPlayerInvItemPokeInfoPokeball(Index, i, 0)
-                Call SetPlayerInvItemPokeInfoLevel(Index, i, 0)
-                Call SetPlayerInvItemPokeInfoExp(Index, i, 0)
+                Call SetPlayerInvItemPokeInfoPokemon(Index, I, 0)
+                Call SetPlayerInvItemPokeInfoPokeball(Index, I, 0)
+                Call SetPlayerInvItemPokeInfoLevel(Index, I, 0)
+                Call SetPlayerInvItemPokeInfoExp(Index, I, 0)
                 
                 'Max/Vitals
-                For X = 1 To 2
-                    Call SetPlayerInvItemPokeInfoVital(Index, i, 0, X)
-                    Call SetPlayerInvItemPokeInfoMaxVital(Index, i, 0, X)
+                For x = 1 To 2
+                    Call SetPlayerInvItemPokeInfoVital(Index, I, 0, x)
+                    Call SetPlayerInvItemPokeInfoMaxVital(Index, I, 0, x)
                 Next
                 
                 'Stats Pokemon
-                For X = 1 To 5
-                    Call SetPlayerInvItemPokeInfoStat(Index, i, X, 0)
+                For x = 1 To 5
+                    Call SetPlayerInvItemPokeInfoStat(Index, I, x, 0)
                 Next
                 
                 'Spells Pokemon
-                For X = 1 To MAX_POKE_SPELL
-                    Call SetPlayerInvItemPokeInfoSpell(Index, i, 0, X)
+                For x = 1 To MAX_POKE_SPELL
+                    Call SetPlayerInvItemPokeInfoSpell(Index, I, 0, x)
                 Next
                 
                 'Negative
-                For X = 1 To MAX_NEGATIVES
-                    Call SetPlayerInvItemNgt(Index, i, 0, X)
+                For x = 1 To MAX_NEGATIVES
+                    Call SetPlayerInvItemNgt(Index, I, 0, x)
                 Next
                 
                 'Berry
-                For X = 1 To MAX_BERRYS
-                    Call SetPlayerInvItemBerry(Index, i, X, 0)
+                For x = 1 To MAX_BERRYS
+                    Call SetPlayerInvItemBerry(Index, I, x, 0)
                 Next
                 
                 'Felicidade,Shiny e Sexo
-                Call SetPlayerInvItemFelicidade(Index, i, 0)
-                Call SetPlayerInvItemShiny(Index, i, 0)
-                Call SetPlayerInvItemSexo(Index, i, 0)
+                Call SetPlayerInvItemFelicidade(Index, I, 0)
+                Call SetPlayerInvItemShiny(Index, I, 0)
+                Call SetPlayerInvItemSexo(Index, I, 0)
                  
                 ' Check if the player completed a quest
                 ChecarTarefasAtuais Index, QUEST_TYPE_COLLECTITEMS, ItemNum
                 
                 ' Send the inventory update
-                Call SendInventoryUpdate(Index, i)
+                Call SendInventoryUpdate(Index, I)
 
                 Exit Function
             End If
@@ -1147,9 +1148,9 @@ Function TakeInvItem(ByVal Index As Long, ByVal ItemNum As Long, ByVal ItemVal A
 End Function
 
 Function TakeInvSlot(ByVal Index As Long, ByVal invslot As Long, ByVal ItemVal As Long) As Boolean
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
-    Dim X As Long
+    Dim x As Long
     Dim ItemNum
     
     TakeInvSlot = False
@@ -1186,29 +1187,29 @@ Function TakeInvSlot(ByVal Index As Long, ByVal invslot As Long, ByVal ItemVal A
         Call SetPlayerInvItemPokeInfoExp(Index, invslot, 0)
         
         'Max/Vitals
-        For X = 1 To 2
-            Call SetPlayerInvItemPokeInfoVital(Index, invslot, 0, X)
-            Call SetPlayerInvItemPokeInfoMaxVital(Index, invslot, 0, X)
+        For x = 1 To 2
+            Call SetPlayerInvItemPokeInfoVital(Index, invslot, 0, x)
+            Call SetPlayerInvItemPokeInfoMaxVital(Index, invslot, 0, x)
         Next
         
         'Stats Pokemon
-        For X = 1 To 5
-            Call SetPlayerInvItemPokeInfoStat(Index, invslot, X, 0)
+        For x = 1 To 5
+            Call SetPlayerInvItemPokeInfoStat(Index, invslot, x, 0)
         Next
         
         'Spells Pokemon
-        For X = 1 To MAX_POKE_SPELL
-            Call SetPlayerInvItemPokeInfoSpell(Index, invslot, 0, X)
+        For x = 1 To MAX_POKE_SPELL
+            Call SetPlayerInvItemPokeInfoSpell(Index, invslot, 0, x)
         Next
         
         'Negative
-        For X = 1 To MAX_NEGATIVES
-            Call SetPlayerInvItemNgt(Index, invslot, 0, X)
+        For x = 1 To MAX_NEGATIVES
+            Call SetPlayerInvItemNgt(Index, invslot, 0, x)
         Next
         
         'Berrys
-        For X = 1 To MAX_BERRYS
-            Call SetPlayerInvItemBerry(Index, invslot, X, 0)
+        For x = 1 To MAX_BERRYS
+            Call SetPlayerInvItemBerry(Index, invslot, x, 0)
         Next
         
         'Felicidade,Shiny e Sexo
@@ -1244,7 +1245,7 @@ Optional ByVal Bry5 As Long) As Boolean
 
 'Função pequena...
 
-    Dim i As Long
+    Dim I As Long
     
     ' Check for subscript out of range
     If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
@@ -1252,68 +1253,68 @@ Optional ByVal Bry5 As Long) As Boolean
         Exit Function
     End If
 
-    i = FindOpenInvSlot(Index, ItemNum)
+    I = FindOpenInvSlot(Index, ItemNum)
 
     ' Check to see if inventory is full
-    If i <> 0 Then
+    If I <> 0 Then
     
-        Call SetPlayerInvItemNum(Index, i, ItemNum)
-        Call SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) + ItemVal)
+        Call SetPlayerInvItemNum(Index, I, ItemNum)
+        Call SetPlayerInvItemValue(Index, I, GetPlayerInvItemValue(Index, I) + ItemVal)
         
         'PokeInfo
-        Call SetPlayerInvItemPokeInfoPokemon(Index, i, Pokemon)
-        Call SetPlayerInvItemPokeInfoPokeball(Index, i, Pokeball)
-        Call SetPlayerInvItemPokeInfoLevel(Index, i, Level)
-        Call SetPlayerInvItemPokeInfoExp(Index, i, EXP)
+        Call SetPlayerInvItemPokeInfoPokemon(Index, I, Pokemon)
+        Call SetPlayerInvItemPokeInfoPokeball(Index, I, Pokeball)
+        Call SetPlayerInvItemPokeInfoLevel(Index, I, Level)
+        Call SetPlayerInvItemPokeInfoExp(Index, I, EXP)
         
         'Max/Vitals
-        Call SetPlayerInvItemPokeInfoVital(Index, i, VitalHP, 1)
-        Call SetPlayerInvItemPokeInfoVital(Index, i, VitalMP, 2)
-        Call SetPlayerInvItemPokeInfoMaxVital(Index, i, MaxVitalHp, 1)
-        Call SetPlayerInvItemPokeInfoMaxVital(Index, i, MaxVitalMp, 2)
+        Call SetPlayerInvItemPokeInfoVital(Index, I, VitalHP, 1)
+        Call SetPlayerInvItemPokeInfoVital(Index, I, VitalMP, 2)
+        Call SetPlayerInvItemPokeInfoMaxVital(Index, I, MaxVitalHp, 1)
+        Call SetPlayerInvItemPokeInfoMaxVital(Index, I, MaxVitalMp, 2)
         
         'Stats Pokemon
-        Call SetPlayerInvItemPokeInfoStat(Index, i, 1, StatStr)
-        Call SetPlayerInvItemPokeInfoStat(Index, i, 2, StatEnd)
-        Call SetPlayerInvItemPokeInfoStat(Index, i, 3, StatInt)
-        Call SetPlayerInvItemPokeInfoStat(Index, i, 4, StatAgi)
-        Call SetPlayerInvItemPokeInfoStat(Index, i, 5, StatWill)
+        Call SetPlayerInvItemPokeInfoStat(Index, I, 1, StatStr)
+        Call SetPlayerInvItemPokeInfoStat(Index, I, 2, StatEnd)
+        Call SetPlayerInvItemPokeInfoStat(Index, I, 3, StatInt)
+        Call SetPlayerInvItemPokeInfoStat(Index, I, 4, StatAgi)
+        Call SetPlayerInvItemPokeInfoStat(Index, I, 5, StatWill)
         
         'Spells Pokemon
-        Call SetPlayerInvItemPokeInfoSpell(Index, i, Spell1, 1)
-        Call SetPlayerInvItemPokeInfoSpell(Index, i, Spell2, 2)
-        Call SetPlayerInvItemPokeInfoSpell(Index, i, Spell3, 3)
-        Call SetPlayerInvItemPokeInfoSpell(Index, i, Spell4, 4)
+        Call SetPlayerInvItemPokeInfoSpell(Index, I, Spell1, 1)
+        Call SetPlayerInvItemPokeInfoSpell(Index, I, Spell2, 2)
+        Call SetPlayerInvItemPokeInfoSpell(Index, I, Spell3, 3)
+        Call SetPlayerInvItemPokeInfoSpell(Index, I, Spell4, 4)
         
         'Negative
-        Call SetPlayerInvItemNgt(Index, i, 1, Ngt1)
-        Call SetPlayerInvItemNgt(Index, i, 2, Ngt2)
-        Call SetPlayerInvItemNgt(Index, i, 3, Ngt3)
-        Call SetPlayerInvItemNgt(Index, i, 4, Ngt4)
-        Call SetPlayerInvItemNgt(Index, i, 5, Ngt5)
-        Call SetPlayerInvItemNgt(Index, i, 6, Ngt6)
-        Call SetPlayerInvItemNgt(Index, i, 7, Ngt7)
-        Call SetPlayerInvItemNgt(Index, i, 8, Ngt8)
-        Call SetPlayerInvItemNgt(Index, i, 9, Ngt9)
-        Call SetPlayerInvItemNgt(Index, i, 10, Ngt10)
-        Call SetPlayerInvItemNgt(Index, i, 11, Ngt11)
+        Call SetPlayerInvItemNgt(Index, I, 1, Ngt1)
+        Call SetPlayerInvItemNgt(Index, I, 2, Ngt2)
+        Call SetPlayerInvItemNgt(Index, I, 3, Ngt3)
+        Call SetPlayerInvItemNgt(Index, I, 4, Ngt4)
+        Call SetPlayerInvItemNgt(Index, I, 5, Ngt5)
+        Call SetPlayerInvItemNgt(Index, I, 6, Ngt6)
+        Call SetPlayerInvItemNgt(Index, I, 7, Ngt7)
+        Call SetPlayerInvItemNgt(Index, I, 8, Ngt8)
+        Call SetPlayerInvItemNgt(Index, I, 9, Ngt9)
+        Call SetPlayerInvItemNgt(Index, I, 10, Ngt10)
+        Call SetPlayerInvItemNgt(Index, I, 11, Ngt11)
         
         'Berry
-        Call SetPlayerInvItemBerry(Index, i, 1, Bry1)
-        Call SetPlayerInvItemBerry(Index, i, 2, Bry2)
-        Call SetPlayerInvItemBerry(Index, i, 3, Bry3)
-        Call SetPlayerInvItemBerry(Index, i, 4, Bry4)
-        Call SetPlayerInvItemBerry(Index, i, 5, Bry5)
+        Call SetPlayerInvItemBerry(Index, I, 1, Bry1)
+        Call SetPlayerInvItemBerry(Index, I, 2, Bry2)
+        Call SetPlayerInvItemBerry(Index, I, 3, Bry3)
+        Call SetPlayerInvItemBerry(Index, I, 4, Bry4)
+        Call SetPlayerInvItemBerry(Index, I, 5, Bry5)
         
         'Felicidade,Shiny e Sexo
-        Call SetPlayerInvItemFelicidade(Index, i, Felicidade)
-        Call SetPlayerInvItemShiny(Index, i, Shiny)
-        Call SetPlayerInvItemSexo(Index, i, Sexo)
+        Call SetPlayerInvItemFelicidade(Index, I, Felicidade)
+        Call SetPlayerInvItemShiny(Index, I, Shiny)
+        Call SetPlayerInvItemSexo(Index, I, Sexo)
         
         ' Check if the player completed a quest
         ChecarTarefasAtuais Index, QUEST_TYPE_COLLECTITEMS, ItemNum
         
-        Call SendInventoryUpdate(Index, i)
+        Call SendInventoryUpdate(Index, I)
         GiveInvItem = True
     Else
         Call PlayerMsg(Index, "Your inventory is full.", BrightRed)
@@ -1323,11 +1324,11 @@ Optional ByVal Bry5 As Long) As Boolean
 End Function
 
 Function HasSpell(ByVal Index As Long, ByVal SpellNum As Long) As Boolean
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To MAX_PLAYER_SPELLS
+    For I = 1 To MAX_PLAYER_SPELLS
 
-        If GetPlayerSpell(Index, i) = SpellNum Then
+        If GetPlayerSpell(Index, I) = SpellNum Then
             HasSpell = True
             Exit Function
         End If
@@ -1337,12 +1338,12 @@ Function HasSpell(ByVal Index As Long, ByVal SpellNum As Long) As Boolean
 End Function
 
 Function FindOpenSpellSlot(ByVal Index As Long) As Long
-    Dim i As Long
+    Dim I As Long
 
-    For i = 1 To MAX_PLAYER_SPELLS
+    For I = 1 To MAX_PLAYER_SPELLS
 
-        If GetPlayerSpell(Index, i) = 0 Then
-            FindOpenSpellSlot = i
+        If GetPlayerSpell(Index, I) = 0 Then
+            FindOpenSpellSlot = I
             Exit Function
         End If
 
@@ -1351,11 +1352,11 @@ Function FindOpenSpellSlot(ByVal Index As Long) As Long
 End Function
 
 Sub PlayerMapGetItem(ByVal Index As Long)
-    Dim i As Long
+    Dim I As Long
     Dim n As Long
     Dim MapNum As Long
     Dim Msg As String
-    Dim X As Long
+    Dim x As Long
     Dim ItemPokemon As Long, ItemPokeball As Long, ItemLevel As Long
     Dim ItemExp As Long, ItemVital(1 To Vitals.Vital_Count - 1) As Long
     Dim ItemStat(1 To Stats.Stat_Count - 1) As Long, ItemSpell(1 To MAX_POKE_SPELL) As Long
@@ -1365,46 +1366,46 @@ Sub PlayerMapGetItem(ByVal Index As Long)
     If Not IsPlaying(Index) Then Exit Sub
     MapNum = GetPlayerMap(Index)
 
-    For i = MAX_MAP_ITEMS To 1 Step -1
+    For I = MAX_MAP_ITEMS To 1 Step -1
         ' See if theres even an item here
-        If (MapItem(MapNum, i).Num > 0) And (MapItem(MapNum, i).Num <= MAX_ITEMS) Then
+        If (MapItem(MapNum, I).Num > 0) And (MapItem(MapNum, I).Num <= MAX_ITEMS) Then
             ' Check if item is at the same location as the player
-            If (MapItem(MapNum, i).X = GetPlayerX(Index)) Then
-                If (MapItem(MapNum, i).Y = GetPlayerY(Index)) Then
+            If (MapItem(MapNum, I).x = GetPlayerX(Index)) Then
+                If (MapItem(MapNum, I).Y = GetPlayerY(Index)) Then
                         ' Find open slot
-                        n = FindOpenInvSlot(Index, MapItem(MapNum, i).Num)
+                        n = FindOpenInvSlot(Index, MapItem(MapNum, I).Num)
                         
-                        If MapItem(MapNum, i).Num = 3 Then
+                        If MapItem(MapNum, I).Num = 3 Then
                         If Player(Index).PokeQntia >= 6 Then
-                        PlayerMsg Index, "Você já possui 6 pokémons, o pokémon " & Trim$(Pokemon(MapItem(MapNum, i).PokeInfo.Pokemon).Name) & " foi enviado para o computador!", BrightGreen
+                        PlayerMsg Index, "Você já possui 6 pokémons, o pokémon " & Trim$(Pokemon(MapItem(MapNum, I).PokeInfo.Pokemon).Name) & " foi enviado para o computador!", BrightGreen
                             
-                        ItemPokemon = MapItem(MapNum, i).PokeInfo.Pokemon
-                        ItemPokeball = MapItem(MapNum, i).PokeInfo.Pokeball
-                        ItemLevel = MapItem(MapNum, i).PokeInfo.Level
-                        ItemExp = MapItem(MapNum, i).PokeInfo.EXP
-                        Felicidade = MapItem(MapNum, i).PokeInfo.Felicidade
-                        Sexo = MapItem(MapNum, i).PokeInfo.Sexo
-                        Shiny = MapItem(MapNum, i).PokeInfo.Shiny
+                        ItemPokemon = MapItem(MapNum, I).PokeInfo.Pokemon
+                        ItemPokeball = MapItem(MapNum, I).PokeInfo.Pokeball
+                        ItemLevel = MapItem(MapNum, I).PokeInfo.Level
+                        ItemExp = MapItem(MapNum, I).PokeInfo.EXP
+                        Felicidade = MapItem(MapNum, I).PokeInfo.Felicidade
+                        Sexo = MapItem(MapNum, I).PokeInfo.Sexo
+                        Shiny = MapItem(MapNum, I).PokeInfo.Shiny
                         
-                        For X = 1 To 2
-                            ItemVital(X) = MapItem(MapNum, i).PokeInfo.Vital(X)
-                            ItemMaxVital(X) = MapItem(MapNum, i).PokeInfo.MaxVital(X)
+                        For x = 1 To 2
+                            ItemVital(x) = MapItem(MapNum, I).PokeInfo.Vital(x)
+                            ItemMaxVital(x) = MapItem(MapNum, I).PokeInfo.MaxVital(x)
                         Next
                         
-                        For X = 1 To Stats.Stat_Count - 1
-                            ItemStat(X) = MapItem(MapNum, i).PokeInfo.Stat(X)
+                        For x = 1 To Stats.Stat_Count - 1
+                            ItemStat(x) = MapItem(MapNum, I).PokeInfo.Stat(x)
                         Next
                         
-                        For X = 1 To MAX_POKE_SPELL
-                            ItemSpell(X) = MapItem(MapNum, i).PokeInfo.Spells(X)
+                        For x = 1 To MAX_POKE_SPELL
+                            ItemSpell(x) = MapItem(MapNum, I).PokeInfo.Spells(x)
                         Next
                         
-                        For X = 1 To MAX_NEGATIVES
-                            Ngt(X) = MapItem(MapNum, i).PokeInfo.Negatives(X)
+                        For x = 1 To MAX_NEGATIVES
+                            Ngt(x) = MapItem(MapNum, I).PokeInfo.Negatives(x)
                         Next
                         
-                        For X = 1 To MAX_BERRYS
-                            Bry(X) = MapItem(MapNum, i).PokeInfo.Berry(X)
+                        For x = 1 To MAX_BERRYS
+                            Bry(x) = MapItem(MapNum, I).PokeInfo.Berry(x)
                         Next
                         
                         DirectBankItemPokemon Index, 3, ItemPokemon, ItemPokeball, ItemLevel, ItemExp, ItemVital(1), ItemVital(2), ItemMaxVital(1), ItemMaxVital(2), ItemStat(1), ItemStat(4), ItemStat(2), ItemStat(3), ItemStat(5), ItemSpell(1), ItemSpell(2), ItemSpell(3), ItemSpell(4), _
@@ -1412,13 +1413,13 @@ Sub PlayerMapGetItem(ByVal Index As Long)
                         Ngt(9), Ngt(10), Ngt(11), Felicidade, Sexo, Shiny, Bry(1), Bry(2), Bry(3), Bry(4), Bry(5)
                              
                         ' Erase item from the map
-                        ClearMapItem i, MapNum
+                        ClearMapItem I, MapNum
                             
                         ' Check if the player completed a quest
-                        ChecarTarefasAtuais Index, QUEST_TYPE_COLLECTITEMS, MapItem(MapNum, i).Num
+                        ChecarTarefasAtuais Index, QUEST_TYPE_COLLECTITEMS, MapItem(MapNum, I).Num
                                 
                         Call SendInventoryUpdate(Index, n)
-                        Call SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0, vbNullString, False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        Call SpawnItemSlot(I, 0, 0, GetPlayerMap(Index), 0, 0, vbNullString, False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                         SendActionMsg GetPlayerMap(Index), Msg, White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32)
                         Exit Sub
                     Else
@@ -1429,57 +1430,57 @@ Sub PlayerMapGetItem(ByVal Index As Long)
                     ' Open slot available?
                     If n <> 0 Then
                         ' Set item in players inventor
-                        Call SetPlayerInvItemNum(Index, n, MapItem(MapNum, i).Num)
+                        Call SetPlayerInvItemNum(Index, n, MapItem(MapNum, I).Num)
     
                         If Item(GetPlayerInvItemNum(Index, n)).Type = ITEM_TYPE_CURRENCY Then
-                            Call SetPlayerInvItemValue(Index, n, GetPlayerInvItemValue(Index, n) + MapItem(MapNum, i).Value)
-                            Msg = MapItem(MapNum, i).Value & " " & Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)
+                            Call SetPlayerInvItemValue(Index, n, GetPlayerInvItemValue(Index, n) + MapItem(MapNum, I).Value)
+                            Msg = MapItem(MapNum, I).Value & " " & Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)
                         Else
                             Call SetPlayerInvItemValue(Index, n, 0)
                             Msg = Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)
                         End If
                         
                         'PokeInfo
-                        Call SetPlayerInvItemPokeInfoPokemon(Index, n, MapItem(MapNum, i).PokeInfo.Pokemon)
-                        Call SetPlayerInvItemPokeInfoPokeball(Index, n, MapItem(MapNum, i).PokeInfo.Pokeball)
-                        Call SetPlayerInvItemPokeInfoLevel(Index, n, MapItem(MapNum, i).PokeInfo.Level)
-                        Call SetPlayerInvItemPokeInfoExp(Index, n, MapItem(MapNum, i).PokeInfo.EXP)
+                        Call SetPlayerInvItemPokeInfoPokemon(Index, n, MapItem(MapNum, I).PokeInfo.Pokemon)
+                        Call SetPlayerInvItemPokeInfoPokeball(Index, n, MapItem(MapNum, I).PokeInfo.Pokeball)
+                        Call SetPlayerInvItemPokeInfoLevel(Index, n, MapItem(MapNum, I).PokeInfo.Level)
+                        Call SetPlayerInvItemPokeInfoExp(Index, n, MapItem(MapNum, I).PokeInfo.EXP)
                         
                         'Max/Vitals
-                        For X = 1 To Vitals.Vital_Count - 1
-                            Call SetPlayerInvItemPokeInfoVital(Index, n, MapItem(MapNum, i).PokeInfo.Vital(X), X)
-                            Call SetPlayerInvItemPokeInfoMaxVital(Index, n, MapItem(MapNum, i).PokeInfo.MaxVital(X), X)
+                        For x = 1 To Vitals.Vital_Count - 1
+                            Call SetPlayerInvItemPokeInfoVital(Index, n, MapItem(MapNum, I).PokeInfo.Vital(x), x)
+                            Call SetPlayerInvItemPokeInfoMaxVital(Index, n, MapItem(MapNum, I).PokeInfo.MaxVital(x), x)
                         Next
                         
                         'Stats Pokemon
-                        For X = 1 To Stats.Stat_Count - 1
-                            Call SetPlayerInvItemPokeInfoStat(Index, n, X, MapItem(MapNum, i).PokeInfo.Stat(X))
+                        For x = 1 To Stats.Stat_Count - 1
+                            Call SetPlayerInvItemPokeInfoStat(Index, n, x, MapItem(MapNum, I).PokeInfo.Stat(x))
                         Next
                         
                         'Spells Pokemon
-                        For X = 1 To MAX_POKE_SPELL
-                            Call SetPlayerInvItemPokeInfoSpell(Index, n, MapItem(MapNum, i).PokeInfo.Spells(X), X)
+                        For x = 1 To MAX_POKE_SPELL
+                            Call SetPlayerInvItemPokeInfoSpell(Index, n, MapItem(MapNum, I).PokeInfo.Spells(x), x)
                         Next
                         
                         'Negative
-                        For X = 1 To MAX_NEGATIVES
-                            Call SetPlayerInvItemNgt(Index, n, MapItem(MapNum, i).PokeInfo.Negatives(X), X)
+                        For x = 1 To MAX_NEGATIVES
+                            Call SetPlayerInvItemNgt(Index, n, MapItem(MapNum, I).PokeInfo.Negatives(x), x)
                         Next
                         
                         'Berrys
-                        For X = 1 To MAX_BERRYS
-                            Call SetPlayerInvItemBerry(Index, n, X, MapItem(MapNum, i).PokeInfo.Berry(X))
+                        For x = 1 To MAX_BERRYS
+                            Call SetPlayerInvItemBerry(Index, n, x, MapItem(MapNum, I).PokeInfo.Berry(x))
                         Next
                         
-                        Call SetPlayerInvItemFelicidade(Index, n, MapItem(MapNum, i).PokeInfo.Felicidade)
-                        Call SetPlayerInvItemSexo(Index, n, MapItem(MapNum, i).PokeInfo.Sexo)
-                        Call SetPlayerInvItemShiny(Index, n, MapItem(MapNum, i).PokeInfo.Shiny)
+                        Call SetPlayerInvItemFelicidade(Index, n, MapItem(MapNum, I).PokeInfo.Felicidade)
+                        Call SetPlayerInvItemSexo(Index, n, MapItem(MapNum, I).PokeInfo.Sexo)
+                        Call SetPlayerInvItemShiny(Index, n, MapItem(MapNum, I).PokeInfo.Shiny)
                         
                         ' Erase item from the map
-                        ClearMapItem i, MapNum
+                        ClearMapItem I, MapNum
                             
                         Call SendInventoryUpdate(Index, n)
-                        Call SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0, vbNullString, False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        Call SpawnItemSlot(I, 0, 0, GetPlayerMap(Index), 0, 0, vbNullString, False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                         SendActionMsg GetPlayerMap(Index), Msg, White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32)
 
                         Exit For
@@ -1494,10 +1495,10 @@ Sub PlayerMapGetItem(ByVal Index As Long)
 End Sub
 
 Sub ChecarQntiadePokemons(ByVal Index As Long)
-Dim i As Long, PokeQntia As Byte
+Dim I As Long, PokeQntia As Byte
 
-For i = 1 To MAX_INV
-    If GetPlayerInvItemPokeInfoPokemon(Index, i) Then
+For I = 1 To MAX_INV
+    If GetPlayerInvItemPokeInfoPokemon(Index, I) Then
         PokeQntia = PokeQntia + 1
     End If
 Next
@@ -1515,7 +1516,7 @@ Player(Index).PokeQntia = PokeQntia
 End Sub
 
 Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As Long)
-    Dim i As Long, X As Long
+    Dim I As Long, x As Long
 
     ' Check for subscript out of range
     If IsPlaying(Index) = False Or InvNum <= 0 Or InvNum > MAX_INV Then
@@ -1527,7 +1528,7 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
 
     If (GetPlayerInvItemNum(Index, InvNum) > 0) Then
         If (GetPlayerInvItemNum(Index, InvNum) <= MAX_ITEMS) Then
-            i = FindOpenMapItemSlot(GetPlayerMap(Index))
+            I = FindOpenMapItemSlot(GetPlayerMap(Index))
             
             If Item(GetPlayerInvItemNum(Index, InvNum)).NDrop = True Then
                 Call PlayerMsg(Index, "Você não pode dropar este item", BrightRed) 'ué ta certo .-.
@@ -1543,48 +1544,48 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
                 End If
             End If
 
-            If i <> 0 Then
-                MapItem(GetPlayerMap(Index), i).Num = GetPlayerInvItemNum(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).X = GetPlayerX(Index)
-                MapItem(GetPlayerMap(Index), i).Y = GetPlayerY(Index)
-                MapItem(GetPlayerMap(Index), i).canDespawn = True
-                MapItem(GetPlayerMap(Index), i).despawnTimer = GetTickCount + ITEM_DESPAWN_TIME
+            If I <> 0 Then
+                MapItem(GetPlayerMap(Index), I).Num = GetPlayerInvItemNum(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).x = GetPlayerX(Index)
+                MapItem(GetPlayerMap(Index), I).Y = GetPlayerY(Index)
+                MapItem(GetPlayerMap(Index), I).canDespawn = True
+                MapItem(GetPlayerMap(Index), I).despawnTimer = GetTickCount + ITEM_DESPAWN_TIME
                 
                 'Poke Info
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Sexo = GetPlayerInvItemSexo(Index, InvNum)
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Shiny = GetPlayerInvItemShiny(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Pokemon = GetPlayerInvItemPokeInfoPokemon(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Pokeball = GetPlayerInvItemPokeInfoPokeball(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Level = GetPlayerInvItemPokeInfoLevel(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.EXP = GetPlayerInvItemPokeInfoExp(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Felicidade = GetPlayerInvItemFelicidade(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Sexo = GetPlayerInvItemSexo(Index, InvNum)
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Shiny = GetPlayerInvItemShiny(Index, InvNum)
                 
-                For X = 1 To Vitals.Vital_Count - 1
-                    MapItem(GetPlayerMap(Index), i).PokeInfo.Vital(X) = GetPlayerInvItemPokeInfoVital(Index, InvNum, X)
-                    MapItem(GetPlayerMap(Index), i).PokeInfo.MaxVital(X) = GetPlayerInvItemPokeInfoMaxVital(Index, InvNum, X)
+                For x = 1 To Vitals.Vital_Count - 1
+                    MapItem(GetPlayerMap(Index), I).PokeInfo.Vital(x) = GetPlayerInvItemPokeInfoVital(Index, InvNum, x)
+                    MapItem(GetPlayerMap(Index), I).PokeInfo.MaxVital(x) = GetPlayerInvItemPokeInfoMaxVital(Index, InvNum, x)
                 Next
                 
-                For X = 1 To Stats.Stat_Count - 1
-                    MapItem(GetPlayerMap(Index), i).PokeInfo.Stat(X) = GetPlayerInvItemPokeInfoStat(Index, InvNum, X)
+                For x = 1 To Stats.Stat_Count - 1
+                    MapItem(GetPlayerMap(Index), I).PokeInfo.Stat(x) = GetPlayerInvItemPokeInfoStat(Index, InvNum, x)
                 Next
                 
-                For X = 1 To MAX_POKE_SPELL
-                    MapItem(GetPlayerMap(Index), i).PokeInfo.Spells(X) = GetPlayerInvItemPokeInfoSpell(Index, InvNum, X)
+                For x = 1 To MAX_POKE_SPELL
+                    MapItem(GetPlayerMap(Index), I).PokeInfo.Spells(x) = GetPlayerInvItemPokeInfoSpell(Index, InvNum, x)
                 Next
                 
-                For X = 1 To MAX_NEGATIVES
-                    MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(X) = GetPlayerInvItemNgt(Index, InvNum, X)
+                For x = 1 To MAX_NEGATIVES
+                    MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(x) = GetPlayerInvItemNgt(Index, InvNum, x)
                 Next
                 
-                For X = 1 To MAX_BERRYS
-                    MapItem(GetPlayerMap(Index), i).PokeInfo.Berry(X) = GetPlayerInvItemBerry(Index, InvNum, X)
+                For x = 1 To MAX_BERRYS
+                    MapItem(GetPlayerMap(Index), I).PokeInfo.Berry(x) = GetPlayerInvItemBerry(Index, InvNum, x)
                 Next
                 
                 If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ITEM_TYPE_CURRENCY Then
 
                     ' Check if its more then they have and if so drop it all
                     If Amount >= GetPlayerInvItemValue(Index, InvNum) Then
-                        MapItem(GetPlayerMap(Index), i).Value = GetPlayerInvItemValue(Index, InvNum)
+                        MapItem(GetPlayerMap(Index), I).Value = GetPlayerInvItemValue(Index, InvNum)
                         Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & GetPlayerInvItemValue(Index, InvNum) & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", Yellow)
                         Call SetPlayerInvItemNum(Index, InvNum, 0)
                         Call SetPlayerInvItemValue(Index, InvNum, 0)
@@ -1599,33 +1600,33 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
                         Call SetPlayerInvItemShiny(Index, InvNum, 0)
                         
                         'Max/Vitals
-                        For X = 1 To Vitals.Vital_Count - 1
-                        Call SetPlayerInvItemPokeInfoVital(Index, InvNum, 0, i)
-                        Call SetPlayerInvItemPokeInfoMaxVital(Index, InvNum, 0, i)
+                        For x = 1 To Vitals.Vital_Count - 1
+                        Call SetPlayerInvItemPokeInfoVital(Index, InvNum, 0, I)
+                        Call SetPlayerInvItemPokeInfoMaxVital(Index, InvNum, 0, I)
                         Next
                         
                         'Stats Pokemon
-                        For X = 1 To Stats.Stat_Count - 1
-                        Call SetPlayerInvItemPokeInfoStat(Index, InvNum, i, 0)
+                        For x = 1 To Stats.Stat_Count - 1
+                        Call SetPlayerInvItemPokeInfoStat(Index, InvNum, I, 0)
                         Next
                         
                         'Spells Pokemon
-                        For X = 1 To MAX_POKE_SPELL
-                            Call SetPlayerInvItemPokeInfoSpell(Index, InvNum, 0, i)
+                        For x = 1 To MAX_POKE_SPELL
+                            Call SetPlayerInvItemPokeInfoSpell(Index, InvNum, 0, I)
                         Next
                         
                         'Negative
-                        For X = 1 To MAX_NEGATIVES
-                            Call SetPlayerInvItemNgt(Index, InvNum, 0, i)
+                        For x = 1 To MAX_NEGATIVES
+                            Call SetPlayerInvItemNgt(Index, InvNum, 0, I)
                         Next
                         
                         'Berry
-                        For X = 1 To MAX_BERRYS
-                            Call SetPlayerInvItemBerry(Index, InvNum, i, 0)
+                        For x = 1 To MAX_BERRYS
+                            Call SetPlayerInvItemBerry(Index, InvNum, I, 0)
                         Next
                         
                     Else
-                        MapItem(GetPlayerMap(Index), i).Value = Amount
+                        MapItem(GetPlayerMap(Index), I).Value = Amount
                         Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & Amount & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", Yellow)
                         Call SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - Amount)
                     End If
@@ -1633,7 +1634,7 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
                 Else
                 
                     ' Its not a currency object so this is easy
-                    MapItem(GetPlayerMap(Index), i).Value = 0
+                    MapItem(GetPlayerMap(Index), I).Value = 0
                     
                     ' send message
                     Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)) & ".", Yellow)
@@ -1650,29 +1651,29 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
                     Call SetPlayerInvItemShiny(Index, InvNum, 0)
                     
                     'Max/Vitals
-                    For X = 1 To Vitals.Vital_Count - 1
-                        Call SetPlayerInvItemPokeInfoVital(Index, InvNum, 0, i)
-                        Call SetPlayerInvItemPokeInfoMaxVital(Index, InvNum, 0, i)
+                    For x = 1 To Vitals.Vital_Count - 1
+                        Call SetPlayerInvItemPokeInfoVital(Index, InvNum, 0, I)
+                        Call SetPlayerInvItemPokeInfoMaxVital(Index, InvNum, 0, I)
                     Next
                     
                     'Stats Pokemon
-                    For X = 1 To Stats.Stat_Count - 1
-                        Call SetPlayerInvItemPokeInfoStat(Index, InvNum, i, 0)
+                    For x = 1 To Stats.Stat_Count - 1
+                        Call SetPlayerInvItemPokeInfoStat(Index, InvNum, I, 0)
                     Next
                     
                     'Spells Pokemon
-                    For X = 1 To MAX_POKE_SPELL
-                        Call SetPlayerInvItemPokeInfoSpell(Index, InvNum, 0, i)
+                    For x = 1 To MAX_POKE_SPELL
+                        Call SetPlayerInvItemPokeInfoSpell(Index, InvNum, 0, I)
                     Next
                     
                     'Negatives
-                    For X = 1 To MAX_NEGATIVES
-                        Call SetPlayerInvItemNgt(Index, InvNum, 0, i)
+                    For x = 1 To MAX_NEGATIVES
+                        Call SetPlayerInvItemNgt(Index, InvNum, 0, I)
                     Next
                     
                     'Berrys
-                    For X = 1 To MAX_BERRYS
-                        Call SetPlayerInvItemBerry(Index, InvNum, i, 0)
+                    For x = 1 To MAX_BERRYS
+                        Call SetPlayerInvItemBerry(Index, InvNum, I, 0)
                     Next
                     
                 End If
@@ -1684,14 +1685,14 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
                 Call SendInventoryUpdate(Index, InvNum)
          
                 ' Spawn the item before we set the num or we'll get a different free map item slot
-                Call SpawnItemSlot(i, MapItem(GetPlayerMap(Index), i).Num, Amount, _
+                Call SpawnItemSlot(I, MapItem(GetPlayerMap(Index), I).Num, Amount, _
                 GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index), _
-                Trim$(GetPlayerName(Index)), MapItem(GetPlayerMap(Index), i).canDespawn, _
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Pokemon, MapItem(GetPlayerMap(Index), i).PokeInfo.Pokeball, _
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Level, MapItem(GetPlayerMap(Index), i).PokeInfo.EXP, _
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Vital(1), MapItem(GetPlayerMap(Index), i).PokeInfo.Vital(2), MapItem(GetPlayerMap(Index), i).PokeInfo.MaxVital(1), MapItem(GetPlayerMap(Index), i).PokeInfo.MaxVital(2), MapItem(GetPlayerMap(Index), i).PokeInfo.Stat(1), MapItem(GetPlayerMap(Index), i).PokeInfo.Stat(4), MapItem(GetPlayerMap(Index), i).PokeInfo.Stat(2), MapItem(GetPlayerMap(Index), i).PokeInfo.Stat(3), MapItem(GetPlayerMap(Index), i).PokeInfo.Stat(5), MapItem(GetPlayerMap(Index), i).PokeInfo.Spells(1), MapItem(GetPlayerMap(Index), i).PokeInfo.Spells(2), MapItem(GetPlayerMap(Index), i).PokeInfo.Spells(3), MapItem(GetPlayerMap(Index), i).PokeInfo.Spells(4), _
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(1), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(2), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(3), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(4), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(5), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(6), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(7), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(8), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(9), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(10), MapItem(GetPlayerMap(Index), i).PokeInfo.Negatives(11), MapItem(GetPlayerMap(Index), i).PokeInfo.Felicidade, MapItem(GetPlayerMap(Index), i).PokeInfo.Sexo, _
-                MapItem(GetPlayerMap(Index), i).PokeInfo.Shiny, MapItem(GetPlayerMap(Index), i).PokeInfo.Berry(1), MapItem(GetPlayerMap(Index), i).PokeInfo.Berry(2), MapItem(GetPlayerMap(Index), i).PokeInfo.Berry(3), MapItem(GetPlayerMap(Index), i).PokeInfo.Berry(4), MapItem(GetPlayerMap(Index), i).PokeInfo.Berry(5))
+                Trim$(GetPlayerName(Index)), MapItem(GetPlayerMap(Index), I).canDespawn, _
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Pokemon, MapItem(GetPlayerMap(Index), I).PokeInfo.Pokeball, _
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Level, MapItem(GetPlayerMap(Index), I).PokeInfo.EXP, _
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Vital(1), MapItem(GetPlayerMap(Index), I).PokeInfo.Vital(2), MapItem(GetPlayerMap(Index), I).PokeInfo.MaxVital(1), MapItem(GetPlayerMap(Index), I).PokeInfo.MaxVital(2), MapItem(GetPlayerMap(Index), I).PokeInfo.Stat(1), MapItem(GetPlayerMap(Index), I).PokeInfo.Stat(4), MapItem(GetPlayerMap(Index), I).PokeInfo.Stat(2), MapItem(GetPlayerMap(Index), I).PokeInfo.Stat(3), MapItem(GetPlayerMap(Index), I).PokeInfo.Stat(5), MapItem(GetPlayerMap(Index), I).PokeInfo.Spells(1), MapItem(GetPlayerMap(Index), I).PokeInfo.Spells(2), MapItem(GetPlayerMap(Index), I).PokeInfo.Spells(3), MapItem(GetPlayerMap(Index), I).PokeInfo.Spells(4), _
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(1), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(2), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(3), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(4), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(5), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(6), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(7), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(8), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(9), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(10), MapItem(GetPlayerMap(Index), I).PokeInfo.Negatives(11), MapItem(GetPlayerMap(Index), I).PokeInfo.Felicidade, MapItem(GetPlayerMap(Index), I).PokeInfo.Sexo, _
+                MapItem(GetPlayerMap(Index), I).PokeInfo.Shiny, MapItem(GetPlayerMap(Index), I).PokeInfo.Berry(1), MapItem(GetPlayerMap(Index), I).PokeInfo.Berry(2), MapItem(GetPlayerMap(Index), I).PokeInfo.Berry(3), MapItem(GetPlayerMap(Index), I).PokeInfo.Berry(4), MapItem(GetPlayerMap(Index), I).PokeInfo.Berry(5))
                 
             Else
                 Call PlayerMsg(Index, "Too many items already on the ground.", BrightRed)
@@ -1702,7 +1703,7 @@ Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal Amount As
 End Sub
 
 Sub CheckPlayerLevelUp(ByVal Index As Long)
-    Dim i As Long, X As Long, Z As Long, SlotVazio As Boolean
+    Dim I As Long, x As Long, Z As Long, SlotVazio As Boolean
     Dim expRollover As Long
     Dim level_count As Long
     
@@ -1726,32 +1727,32 @@ Sub CheckPlayerLevelUp(ByVal Index As Long)
         End If
         
         'Setar atributos pronto Up = +3 all stats
-        For i = 1 To Stats.Stat_Count - 1
-            Call SetPlayerEquipmentPokeInfoStat(Index, GetPlayerEquipmentPokeInfoStat(Index, weapon, i) + 3, weapon, i)
+        For I = 1 To Stats.Stat_Count - 1
+            Call SetPlayerEquipmentPokeInfoStat(Index, GetPlayerEquipmentPokeInfoStat(Index, weapon, I) + 3, weapon, I)
         Next
         
         'Setar Felicidade
         Call SetPlayerEquipmentFelicidade(Index, weapon, GetPlayerEquipmentFelicidade(Index, weapon) + 2)
         
         'Setar Novas Habilidade
-        For X = 1 To 20
+        For x = 1 To 20
         SlotVazio = False
         
-        If Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(X).Level > 0 Then
-            If GetPlayerEquipmentPokeInfoLevel(Index, weapon) = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(X).Level Then
+        If Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(x).Level > 0 Then
+            If GetPlayerEquipmentPokeInfoLevel(Index, weapon) = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(x).Level Then
             
                 If Player(Index).LearnSpell(1) > 0 Then
                     For Z = 1 To 10
                         If Player(Index).LearnFila(Z) = 0 Then
-                            Player(Index).LearnFila(Z) = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(X).Spell
+                            Player(Index).LearnFila(Z) = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(x).Spell
                             Exit For
                         End If
                     Next
                 Else
                     For Z = 1 To MAX_POKE_SPELL
                         If GetPlayerEquipmentPokeInfoSpell(Index, weapon, Z) = 0 Then
-                            Call SetPlayerEquipmentPokeInfoSpell(Index, Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(X).Spell, weapon, Z)
-                            Call SetPlayerSpell(Index, Z, Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(X).Spell)
+                            Call SetPlayerEquipmentPokeInfoSpell(Index, Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(x).Spell, weapon, Z)
+                            Call SetPlayerSpell(Index, Z, Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(x).Spell)
                             SendPlayerSpells Index
                             SlotVazio = True
                             Exit For
@@ -1760,7 +1761,7 @@ Sub CheckPlayerLevelUp(ByVal Index As Long)
                     
                     If SlotVazio = False Then
                         Player(Index).LearnSpell(1) = 1
-                        Player(Index).LearnSpell(2) = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(X).Spell
+                        Player(Index).LearnSpell(2) = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Habilidades(x).Spell
                         Player(Index).LearnSpell(3) = 0
                         SendAprenderSpell Index, 0
                     End If
@@ -1792,8 +1793,8 @@ Sub CheckPlayerLevelUp(ByVal Index As Long)
         SetPlayerVital Index, HP, GetPlayerMaxVital(Index, HP)
         SetPlayerVital Index, HP, GetPlayerMaxVital(Index, MP)
 
-        For i = 1 To Vitals.Vital_Count - 1
-            SendVital Index, i
+        For I = 1 To Vitals.Vital_Count - 1
+            SendVital Index, I
         Next
         
         SendEXP Index
@@ -1958,7 +1959,7 @@ Function GetPlayerVital(ByVal Index As Long, ByVal Vital As Vitals) As Long
 End Function
 
 Sub SetPlayerVital(ByVal Index As Long, ByVal Vital As Vitals, ByVal Value As Long)
-Dim i As Long
+Dim I As Long
 
     If Vital = 0 Then Exit Sub
     
@@ -1985,20 +1986,20 @@ Dim i As Long
 End Sub
 
 Public Function GetPlayerStat(ByVal Index As Long, ByVal Stat As Stats) As Long
-    Dim X As Long, i As Long
+    Dim x As Long, I As Long
     If Index > MAX_PLAYERS Then Exit Function
     
-    X = Player(Index).Stat(Stat)
+    x = Player(Index).Stat(Stat)
     
-    For i = 1 To Equipment.Equipment_Count - 1
-        If Player(Index).Equipment(i) > 0 Then
-            If Item(Player(Index).Equipment(i)).Add_Stat(Stat) > 0 Then
-                X = X + Item(Player(Index).Equipment(i)).Add_Stat(Stat)
+    For I = 1 To Equipment.Equipment_Count - 1
+        If Player(Index).Equipment(I) > 0 Then
+            If Item(Player(Index).Equipment(I)).Add_Stat(Stat) > 0 Then
+                x = x + Item(Player(Index).Equipment(I)).Add_Stat(Stat)
             End If
         End If
     Next
     
-    GetPlayerStat = X
+    GetPlayerStat = x
 End Function
 
 Public Function GetPlayerRawStat(ByVal Index As Long, ByVal Stat As Stats) As Long
@@ -2039,11 +2040,11 @@ End Sub
 Function GetPlayerX(ByVal Index As Long) As Long
 
     If Index > MAX_PLAYERS Then Exit Function
-    GetPlayerX = Player(Index).X
+    GetPlayerX = Player(Index).x
 End Function
 
-Sub SetPlayerX(ByVal Index As Long, ByVal X As Long)
-    Player(Index).X = X
+Sub SetPlayerX(ByVal Index As Long, ByVal x As Long)
+    Player(Index).x = x
 End Sub
 
 Function GetPlayerY(ByVal Index As Long) As Long
@@ -2138,20 +2139,20 @@ End Sub
 
 ' ToDo
 Sub OnDeath(ByVal Index As Long)
-    Dim i As Long, X As Long
+    Dim I As Long, x As Long
     
     ' Set HP to nothing
     Call SetPlayerVital(Index, Vitals.HP, 0)
     
         ' Loop through entire map and purge NPC from targets
-    For i = 1 To Player_HighIndex
-        If IsPlaying(i) And IsConnected(i) Then
-            If GetPlayerMap(i) = GetPlayerMap(Index) Then
-                If TempPlayer(i).targetType = TARGET_TYPE_PLAYER Then
-                    If TempPlayer(i).target = Index Then
-                        TempPlayer(i).target = 0
-                        TempPlayer(i).targetType = TARGET_TYPE_NONE
-                        SendTarget i
+    For I = 1 To Player_HighIndex
+        If IsPlaying(I) And IsConnected(I) Then
+            If GetPlayerMap(I) = GetPlayerMap(Index) Then
+                If TempPlayer(I).targetType = TARGET_TYPE_PLAYER Then
+                    If TempPlayer(I).target = Index Then
+                        TempPlayer(I).target = 0
+                        TempPlayer(I).targetType = TARGET_TYPE_NONE
+                        SendTarget I
                     End If
                 End If
             End If
@@ -2159,9 +2160,9 @@ Sub OnDeath(ByVal Index As Long)
     Next
 
     ' Drop all worn items
-    For i = 1 To Equipment.Equipment_Count - 1
-        If GetPlayerEquipment(Index, i) > 0 Then
-            PlayerMapDropItem Index, GetPlayerEquipment(Index, i), 0
+    For I = 1 To Equipment.Equipment_Count - 1
+        If GetPlayerEquipment(Index, I) > 0 Then
+            PlayerMapDropItem Index, GetPlayerEquipment(Index, I), 0
         End If
     Next
 
@@ -2188,8 +2189,8 @@ Sub OnDeath(ByVal Index As Long)
     End With
     
     ' clear all DoTs and HoTs
-    For i = 1 To MAX_DOTS
-        With TempPlayer(Index).DoT(i)
+    For I = 1 To MAX_DOTS
+        With TempPlayer(Index).DoT(I)
             .Used = False
             .Spell = 0
             .Timer = 0
@@ -2197,7 +2198,7 @@ Sub OnDeath(ByVal Index As Long)
             .StartTime = 0
         End With
         
-        With TempPlayer(Index).HoT(i)
+        With TempPlayer(Index).HoT(I)
             .Used = False
             .Spell = 0
             .Timer = 0
@@ -2216,51 +2217,51 @@ Sub OnDeath(ByVal Index As Long)
     TempPlayer(Index).InBank = False
     TempPlayer(Index).InShop = 0
     If TempPlayer(Index).InTrade > 0 Then
-        For i = 1 To MAX_INV
-            TempPlayer(Index).TradeOffer(i).Num = 0
-            TempPlayer(Index).TradeOffer(i).Value = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.Pokemon = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.Pokeball = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.Level = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.EXP = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.Felicidade = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.Sexo = 0
-            TempPlayer(Index).TradeOffer(i).PokeInfo.Shiny = 0
+        For I = 1 To MAX_INV
+            TempPlayer(Index).TradeOffer(I).Num = 0
+            TempPlayer(Index).TradeOffer(I).Value = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.Pokemon = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.Pokeball = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.Level = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.EXP = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.Felicidade = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.Sexo = 0
+            TempPlayer(Index).TradeOffer(I).PokeInfo.Shiny = 0
             
-            For X = 1 To Vitals.Vital_Count - 1
-                    TempPlayer(Index).TradeOffer(i).PokeInfo.Vital(X) = 0
-                    TempPlayer(Index).TradeOffer(i).PokeInfo.MaxVital(X) = 0
+            For x = 1 To Vitals.Vital_Count - 1
+                    TempPlayer(Index).TradeOffer(I).PokeInfo.Vital(x) = 0
+                    TempPlayer(Index).TradeOffer(I).PokeInfo.MaxVital(x) = 0
             Next
             
-            For X = 1 To Stats.Stat_Count - 1
-                    TempPlayer(Index).TradeOffer(i).PokeInfo.Stat(X) = 0
+            For x = 1 To Stats.Stat_Count - 1
+                    TempPlayer(Index).TradeOffer(I).PokeInfo.Stat(x) = 0
             Next
             
-            For X = 1 To MAX_POKE_SPELL
-                    TempPlayer(Index).TradeOffer(i).PokeInfo.Spells(X) = 0
+            For x = 1 To MAX_POKE_SPELL
+                    TempPlayer(Index).TradeOffer(I).PokeInfo.Spells(x) = 0
             Next
             
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).Num = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).Value = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Pokemon = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Pokeball = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Level = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.EXP = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Felicidade = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Sexo = 0
-            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Shiny = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).Num = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).Value = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Pokemon = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Pokeball = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Level = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.EXP = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Felicidade = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Sexo = 0
+            TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Shiny = 0
             
-            For X = 1 To Vitals.Vital_Count - 1
-                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Vital(X) = 0
-                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.MaxVital(X) = 0
+            For x = 1 To Vitals.Vital_Count - 1
+                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Vital(x) = 0
+                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.MaxVital(x) = 0
             Next
             
-            For X = 1 To Stats.Stat_Count - 1
-                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Stat(X) = 0
+            For x = 1 To Stats.Stat_Count - 1
+                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Stat(x) = 0
             Next
             
-            For X = 1 To MAX_POKE_SPELL
-                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(i).PokeInfo.Spells(X) = 0
+            For x = 1 To MAX_POKE_SPELL
+                    TempPlayer(TempPlayer(Index).InTrade).TradeOffer(I).PokeInfo.Spells(x) = 0
             Next
         Next
 
@@ -2287,11 +2288,11 @@ Sub OnDeath(ByVal Index As Long)
 
 End Sub
 
-Sub CheckResource(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal SpellNum As Long)
+Sub CheckResource(ByVal Index As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal SpellNum As Long)
     Dim Resource_num As Long
     Dim Resource_index As Long
     Dim rX As Long, rY As Long
-    Dim i As Long
+    Dim I As Long
     Dim Damage As Long
     
     ' Check attack timer
@@ -2301,16 +2302,16 @@ Sub CheckResource(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, Optiona
         If GetTickCount < TempPlayer(Index).AttackTimer + 1000 Then Exit Sub
     End If
     
-    If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_RESOURCE Then
+    If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_RESOURCE Then
         Resource_num = 0
-        Resource_index = Map(GetPlayerMap(Index)).Tile(X, Y).Data1
+        Resource_index = Map(GetPlayerMap(Index)).Tile(x, Y).Data1
 
         ' Get the cache number
-        For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
+        For I = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
 
-            If ResourceCache(GetPlayerMap(Index)).ResourceData(i).X = X Then
-                If ResourceCache(GetPlayerMap(Index)).ResourceData(i).Y = Y Then
-                    Resource_num = i
+            If ResourceCache(GetPlayerMap(Index)).ResourceData(I).x = x Then
+                If ResourceCache(GetPlayerMap(Index)).ResourceData(I).Y = Y Then
+                    Resource_num = I
                 End If
             End If
 
@@ -2331,7 +2332,7 @@ Sub CheckResource(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, Optiona
                     ' check if already cut down
                     If ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).ResourceState = 0 Then
                     
-                        rX = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).X
+                        rX = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).x
                         rY = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).Y
                         
                         'Item Break
@@ -2393,20 +2394,20 @@ Sub CheckResource(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, Optiona
     End If
 End Sub
 
-Public Function CheckResourceStatCut(ByVal Index As Long, ByVal X As Long, ByVal Y As Long) As Boolean
-Dim i As Long, Resource_num As Long
+Public Function CheckResourceStatCut(ByVal Index As Long, ByVal x As Long, ByVal Y As Long) As Boolean
+Dim I As Long, Resource_num As Long
 
 CheckResourceStatCut = False
 
-    If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_RESOURCE Then
+    If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_RESOURCE Then
         Resource_num = 0
 
         ' Get the cache number
-        For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
+        For I = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
 
-            If ResourceCache(GetPlayerMap(Index)).ResourceData(i).X = X Then
-                If ResourceCache(GetPlayerMap(Index)).ResourceData(i).Y = Y Then
-                    Resource_num = i
+            If ResourceCache(GetPlayerMap(Index)).ResourceData(I).x = x Then
+                If ResourceCache(GetPlayerMap(Index)).ResourceData(I).Y = Y Then
+                    Resource_num = I
                 End If
             End If
 
@@ -2559,7 +2560,7 @@ Optional ByVal Sexo As Byte, Optional ByVal Shiny As Long, _
 Optional ByVal Bry1 As Long, Optional ByVal Bry2 As Long, Optional ByVal Bry3 As Long, _
 Optional ByVal Bry4 As Long, Optional ByVal Bry5 As Long)
 
-Dim BankSlot As Long, i As Long
+Dim BankSlot As Long, I As Long
 
     BankSlot = FindOpenBankSlotPokemon(Index)
     
@@ -2620,7 +2621,7 @@ Dim BankSlot As Long, i As Long
 End Sub
 
 Sub GiveBankItemPokemon(ByVal Index As Long, ByVal invslot As Long, ByVal Amount As Long)
-Dim BankSlot As Long, i As Long
+Dim BankSlot As Long, I As Long
 Dim ItemNum As Long, ItemPokemon As Long, ItemPokeball As Long, ItemLevel As Long
 Dim ItemExp As Long, ItemVital(1 To Vitals.Vital_Count - 1) As Long
 Dim ItemStat(1 To Stats.Stat_Count - 1) As Long, ItemSpell(1 To MAX_POKE_SPELL) As Long
@@ -2641,25 +2642,25 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS) As Lon
         Exit Sub
     End If
 
-    For i = 1 To Vitals.Vital_Count - 1
-        ItemVital(i) = GetPlayerInvItemPokeInfoVital(Index, invslot, i)
-        ItemMaxVital(i) = GetPlayerInvItemPokeInfoMaxVital(Index, invslot, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        ItemVital(I) = GetPlayerInvItemPokeInfoVital(Index, invslot, I)
+        ItemMaxVital(I) = GetPlayerInvItemPokeInfoMaxVital(Index, invslot, I)
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        ItemStat(i) = GetPlayerInvItemPokeInfoStat(Index, invslot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        ItemStat(I) = GetPlayerInvItemPokeInfoStat(Index, invslot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        ItemSpell(i) = GetPlayerInvItemPokeInfoSpell(Index, invslot, i)
+    For I = 1 To MAX_POKE_SPELL
+        ItemSpell(I) = GetPlayerInvItemPokeInfoSpell(Index, invslot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        Ngt(i) = GetPlayerInvItemNgt(Index, invslot, i)
+    For I = 1 To MAX_NEGATIVES
+        Ngt(I) = GetPlayerInvItemNgt(Index, invslot, I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        Bry(i) = GetPlayerInvItemBerry(Index, invslot, i)
+    For I = 1 To MAX_BERRYS
+        Bry(I) = GetPlayerInvItemBerry(Index, invslot, I)
     Next
 
     If invslot < 0 Or invslot > MAX_INV Then
@@ -2698,25 +2699,25 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS) As Lon
                 SetPlayerBankItemSexo Index, BankSlot, Sexo
                 SetPlayerBankItemShiny Index, BankSlot, Shiny
                 
-                For i = 1 To Vitals.Vital_Count - 1
-                    SetPlayerBankItemVital Index, BankSlot, ItemVital(i), i
-                    SetPlayerBankItemMaxVital Index, BankSlot, ItemMaxVital(i), i
+                For I = 1 To Vitals.Vital_Count - 1
+                    SetPlayerBankItemVital Index, BankSlot, ItemVital(I), I
+                    SetPlayerBankItemMaxVital Index, BankSlot, ItemMaxVital(I), I
                 Next
                 
-                For i = 1 To Stats.Stat_Count - 1
-                    SetPlayerBankItemStat Index, BankSlot, ItemStat(i), i
+                For I = 1 To Stats.Stat_Count - 1
+                    SetPlayerBankItemStat Index, BankSlot, ItemStat(I), I
                 Next
                 
-                For i = 1 To MAX_POKE_SPELL
-                    SetPlayerBankItemSpell Index, BankSlot, ItemSpell(i), i
+                For I = 1 To MAX_POKE_SPELL
+                    SetPlayerBankItemSpell Index, BankSlot, ItemSpell(I), I
                 Next
                 
-                For i = 1 To MAX_NEGATIVES
-                    SetPlayerBankItemNgt Index, BankSlot, Ngt(i), i
+                For I = 1 To MAX_NEGATIVES
+                    SetPlayerBankItemNgt Index, BankSlot, Ngt(I), I
                 Next
                 
-                For i = 1 To MAX_BERRYS
-                    SetPlayerBankItemBerry Index, BankSlot, i, Bry(i)
+                For I = 1 To MAX_BERRYS
+                    SetPlayerBankItemBerry Index, BankSlot, I, Bry(I)
                 Next
                 
                 'Pegar item do inventario
@@ -2735,7 +2736,7 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS) As Lon
 End Sub
 
 Sub TakeBankItemPokemon(ByVal Index As Long, ByVal BankSlot As Long)
-Dim invslot, i As Long
+Dim invslot, I As Long
 Dim ItemNum As Long, ItemPokemon As Long, ItemPokeball As Long, ItemLevel As Long
 Dim ItemExp As Long, ItemVital(1 To Vitals.Vital_Count - 1) As Long
 Dim ItemStat(1 To Stats.Stat_Count - 1) As Long, ItemSpell(1 To MAX_POKE_SPELL) As Long
@@ -2751,25 +2752,25 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS) As Lon
     Sexo = GetPlayerBankItemSexo(Index, BankSlot)
     Shiny = GetPlayerBankItemShiny(Index, BankSlot)
     
-    For i = 1 To Vitals.Vital_Count - 1
-        ItemVital(i) = GetPlayerBankItemVital(Index, BankSlot, i)
-        ItemMaxVital(i) = GetPlayerBankItemMaxVital(Index, BankSlot, i)
+    For I = 1 To Vitals.Vital_Count - 1
+        ItemVital(I) = GetPlayerBankItemVital(Index, BankSlot, I)
+        ItemMaxVital(I) = GetPlayerBankItemMaxVital(Index, BankSlot, I)
     Next
     
-    For i = 1 To Stats.Stat_Count - 1
-        ItemStat(i) = GetPlayerBankItemStat(Index, BankSlot, i)
+    For I = 1 To Stats.Stat_Count - 1
+        ItemStat(I) = GetPlayerBankItemStat(Index, BankSlot, I)
     Next
     
-    For i = 1 To MAX_POKE_SPELL
-        ItemSpell(i) = GetPlayerBankItemSpell(Index, BankSlot, i)
+    For I = 1 To MAX_POKE_SPELL
+        ItemSpell(I) = GetPlayerBankItemSpell(Index, BankSlot, I)
     Next
     
-    For i = 1 To MAX_NEGATIVES
-        Ngt(i) = GetPlayerBankItemNgt(Index, BankSlot, i)
+    For I = 1 To MAX_NEGATIVES
+        Ngt(I) = GetPlayerBankItemNgt(Index, BankSlot, I)
     Next
     
-    For i = 1 To MAX_BERRYS
-        Bry(i) = GetPlayerBankItemBerry(Index, BankSlot, i)
+    For I = 1 To MAX_BERRYS
+        Bry(I) = GetPlayerBankItemBerry(Index, BankSlot, I)
     Next
 
     If BankSlot < 0 Or BankSlot > MAX_BANK Then
@@ -2805,25 +2806,25 @@ Dim Felicidade As Long, Sexo As Byte, Shiny As Byte, Bry(1 To MAX_BERRYS) As Lon
         SetPlayerBankItemSexo Index, BankSlot, 0
         SetPlayerBankItemShiny Index, BankSlot, 0
         
-        For i = 1 To Vitals.Vital_Count - 1
-            SetPlayerBankItemVital Index, BankSlot, 0, i
-            SetPlayerBankItemMaxVital Index, BankSlot, 0, i
+        For I = 1 To Vitals.Vital_Count - 1
+            SetPlayerBankItemVital Index, BankSlot, 0, I
+            SetPlayerBankItemMaxVital Index, BankSlot, 0, I
         Next
         
-        For i = 1 To Stats.Stat_Count - 1
-            SetPlayerBankItemStat Index, BankSlot, 0, i
+        For I = 1 To Stats.Stat_Count - 1
+            SetPlayerBankItemStat Index, BankSlot, 0, I
         Next
         
-        For i = 1 To MAX_POKE_SPELL
-            SetPlayerBankItemSpell Index, BankSlot, 0, i
+        For I = 1 To MAX_POKE_SPELL
+            SetPlayerBankItemSpell Index, BankSlot, 0, I
         Next
         
-        For i = 1 To MAX_NEGATIVES
-            SetPlayerBankItemNgt Index, BankSlot, 0, i
+        For I = 1 To MAX_NEGATIVES
+            SetPlayerBankItemNgt Index, BankSlot, 0, I
         Next
         
-        For i = 1 To MAX_BERRYS
-            SetPlayerBankItemBerry Index, BankSlot, i, 0
+        For I = 1 To MAX_BERRYS
+            SetPlayerBankItemBerry Index, BankSlot, I, 0
         Next
         
     Else
@@ -2951,7 +2952,7 @@ Dim EXP As Long
 End Sub
 
 Public Sub UseItem(ByVal Index As Long, ByVal InvNum As Long)
-Dim n As Long, i As Long, tempItem As Long, X As Long, Y As Long, ItemNum As Long
+Dim n As Long, I As Long, tempItem As Long, x As Long, Y As Long, ItemNum As Long
 Dim Chance As Long, R As Long, InvVazio As Byte, BauItemQnt As Byte
 Dim Buffer As clsBuffer
 
@@ -2999,25 +3000,25 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
         ItemSexo = GetPlayerInvItemSexo(Index, InvNum)
         ItemShiny = GetPlayerInvItemShiny(Index, InvNum)
         
-        For i = 1 To Vitals.Vital_Count - 1
-            ItemVital(i) = GetPlayerInvItemPokeInfoVital(Index, InvNum, i)
-            ItemMaxVital(i) = GetPlayerInvItemPokeInfoMaxVital(Index, InvNum, i)
+        For I = 1 To Vitals.Vital_Count - 1
+            ItemVital(I) = GetPlayerInvItemPokeInfoVital(Index, InvNum, I)
+            ItemMaxVital(I) = GetPlayerInvItemPokeInfoMaxVital(Index, InvNum, I)
         Next
         
-        For i = 1 To Stats.Stat_Count - 1
-            ItemStat(i) = GetPlayerInvItemPokeInfoStat(Index, InvNum, i)
+        For I = 1 To Stats.Stat_Count - 1
+            ItemStat(I) = GetPlayerInvItemPokeInfoStat(Index, InvNum, I)
         Next
         
-        For i = 1 To MAX_POKE_SPELL
-            ItemSpell(i) = GetPlayerInvItemPokeInfoSpell(Index, InvNum, i)
+        For I = 1 To MAX_POKE_SPELL
+            ItemSpell(I) = GetPlayerInvItemPokeInfoSpell(Index, InvNum, I)
         Next
         
-        For i = 1 To MAX_NEGATIVES
-            ItemNgt(i) = GetPlayerInvItemNgt(Index, InvNum, i)
+        For I = 1 To MAX_NEGATIVES
+            ItemNgt(I) = GetPlayerInvItemNgt(Index, InvNum, I)
         Next
         
-        For i = 1 To MAX_BERRYS
-            ItemBry(i) = GetPlayerInvItemBerry(Index, InvNum, i)
+        For I = 1 To MAX_BERRYS
+            ItemBry(I) = GetPlayerInvItemBerry(Index, InvNum, I)
         Next
         
         ' Find out what kind of item it is
@@ -3049,14 +3050,14 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
             Case ITEM_TYPE_STONE
             
             If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
-                For i = 1 To 8
+                For I = 1 To 8
                 
-                If Item(ItemNum).Tipo = (Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Evolução(i).Pedra - 1) Then
-                    If Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Evolução(i).Level <= GetPlayerEquipmentPokeInfoLevel(Index, weapon) Then
-                        Player(Index).EvolStone = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Evolução(i).Pokemon
+                If Item(ItemNum).Tipo = (Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Evolução(I).Pedra - 1) Then
+                    If Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Evolução(I).Level <= GetPlayerEquipmentPokeInfoLevel(Index, weapon) Then
+                        Player(Index).EvolStone = Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Evolução(I).Pokemon
                         Player(Index).EvolTimerStone = 9000 + GetTickCount
                         Player(Index).EvolPermition = 1
-                        Player(Index).EvoId = i
+                        Player(Index).EvoId = I
                         SendPokeEvolution Index, 1
                         TakeInvItem Index, ItemNum, 1
                     Else
@@ -3130,13 +3131,13 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 TempItemShiny = 1
             End If
             
-            For i = 1 To Stats.Stat_Count - 1
-                TempItemStat(i) = Pokemon(Npc(MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Num).Pokemon).Add_Stat(i)
-                TempItemStat(i) = Random(TempItemStat(i) * 75 / 100, TempItemStat(i)) + (TempItemLevel * 3)
+            For I = 1 To Stats.Stat_Count - 1
+                TempItemStat(I) = Pokemon(Npc(MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Num).Pokemon).Add_Stat(I)
+                TempItemStat(I) = Random(TempItemStat(I) * 75 / 100, TempItemStat(I)) + (TempItemLevel * 3)
             Next
             
-            For i = 1 To MAX_POKE_SPELL
-                TempItemSpell(i) = 0
+            For I = 1 To MAX_POKE_SPELL
+                TempItemSpell(I) = 0
             Next
             
             If Npc(MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Num).Pokemon = 0 Then Exit Sub
@@ -3168,7 +3169,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
             End If
             
             If PokebolaUsada = 4 Then
-                SendAnimation GetPlayerMap(Index), 34, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                SendAnimation GetPlayerMap(Index), 34, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
             End If
             
             ' Now set HP to 0 so we know to actually kill them in the server loop (this prevents subscript out of range)
@@ -3217,20 +3218,20 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
             
             Select Case PokebolaUsada
                 Case 2
-                    SendAnimation GetPlayerMap(Index), 29, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                    SendAnimation GetPlayerMap(Index), 29, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
                 Case 3
-                    SendAnimation GetPlayerMap(Index), 31, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                    SendAnimation GetPlayerMap(Index), 31, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
                 Case Else
-                    SendAnimation GetPlayerMap(Index), 27, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                    SendAnimation GetPlayerMap(Index), 27, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
                 End Select
             Else
                 Select Case PokebolaUsada
                 Case 2
-                    SendAnimation GetPlayerMap(Index), 28, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                    SendAnimation GetPlayerMap(Index), 28, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
                 Case 3
-                    SendAnimation GetPlayerMap(Index), 30, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                    SendAnimation GetPlayerMap(Index), 30, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
                 Case Else
-                    SendAnimation GetPlayerMap(Index), 26, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).X, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
+                    SendAnimation GetPlayerMap(Index), 26, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).x, MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Y
                 End Select
                 PlayerMsg Index, "O " & Trim$(Npc(MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).target).Num).Name) & " Escapou!", BrightRed
                 TakeInvItem Index, ItemNum, 1 'pegar pokebola vazia
@@ -3261,8 +3262,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
             Case ITEM_TYPE_ARMOR
             
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
-                    If GetPlayerRawStat(Index, i) < Item(ItemNum).Stat_Req(i) Then
+                For I = 1 To Stats.Stat_Count - 1
+                    If GetPlayerRawStat(Index, I) < Item(ItemNum).Stat_Req(I) Then
                         PlayerMsg Index, "You do not meet the stat requirements to equip this item.", BrightRed
                         Exit Sub
                     End If
@@ -3369,25 +3370,25 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     TempItemSexo = GetPlayerEquipmentSexo(Index, weapon)
                     TempItemShiny = GetPlayerEquipmentShiny(Index, weapon)
                     
-                    For i = 1 To Vitals.Vital_Count - 1
-                        TempItemVital(i) = GetPlayerEquipmentPokeInfoVital(Index, weapon, i)
-                        TempItemMaxVital(i) = GetPlayerEquipmentPokeInfoMaxVital(Index, weapon, i)
+                    For I = 1 To Vitals.Vital_Count - 1
+                        TempItemVital(I) = GetPlayerEquipmentPokeInfoVital(Index, weapon, I)
+                        TempItemMaxVital(I) = GetPlayerEquipmentPokeInfoMaxVital(Index, weapon, I)
                     Next
                     
-                    For i = 1 To Stats.Stat_Count - 1
-                        TempItemStat(i) = GetPlayerEquipmentPokeInfoStat(Index, weapon, i)
+                    For I = 1 To Stats.Stat_Count - 1
+                        TempItemStat(I) = GetPlayerEquipmentPokeInfoStat(Index, weapon, I)
                     Next
                     
-                    For i = 1 To MAX_POKE_SPELL
-                        TempItemSpell(i) = GetPlayerEquipmentPokeInfoSpell(Index, weapon, i)
+                    For I = 1 To MAX_POKE_SPELL
+                        TempItemSpell(I) = GetPlayerEquipmentPokeInfoSpell(Index, weapon, I)
                     Next
                     
-                    For i = 1 To MAX_NEGATIVES
-                        TempItemNgt(i) = GetPlayerEquipmentNgt(Index, weapon, i)
+                    For I = 1 To MAX_NEGATIVES
+                        TempItemNgt(I) = GetPlayerEquipmentNgt(Index, weapon, I)
                     Next
                     
-                    For i = 1 To MAX_BERRYS
-                        TempItemBry(i) = GetPlayerEquipmentBerry(Index, weapon, i)
+                    For I = 1 To MAX_BERRYS
+                        TempItemBry(I) = GetPlayerEquipmentBerry(Index, weapon, I)
                     Next
                 
                 End If
@@ -3400,9 +3401,9 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 SetPlayerEquipmentPokeInfoLevel Index, ItemLevel, weapon
                 SetPlayerEquipmentPokeInfoExp Index, ItemExp, weapon
                 
-                For i = 1 To Vitals.Vital_Count - 1
-                    SetPlayerEquipmentPokeInfoVital Index, ItemVital(i), weapon, i
-                    SetPlayerEquipmentPokeInfoMaxVital Index, ItemMaxVital(i), weapon, i
+                For I = 1 To Vitals.Vital_Count - 1
+                    SetPlayerEquipmentPokeInfoVital Index, ItemVital(I), weapon, I
+                    SetPlayerEquipmentPokeInfoMaxVital Index, ItemMaxVital(I), weapon, I
                 Next
                 
                 If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
@@ -3410,20 +3411,20 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     SetPlayerVital Index, MP, GetPlayerEquipmentPokeInfoVital(Index, weapon, 2)
                 End If
                 
-                For i = 1 To Stats.Stat_Count - 1
-                    SetPlayerEquipmentPokeInfoStat Index, ItemStat(i), weapon, i
+                For I = 1 To Stats.Stat_Count - 1
+                    SetPlayerEquipmentPokeInfoStat Index, ItemStat(I), weapon, I
                 Next
                 
-                For i = 1 To MAX_POKE_SPELL
-                    SetPlayerEquipmentPokeInfoSpell Index, ItemSpell(i), weapon, i
+                For I = 1 To MAX_POKE_SPELL
+                    SetPlayerEquipmentPokeInfoSpell Index, ItemSpell(I), weapon, I
                 Next
                 
-                For i = 1 To MAX_NEGATIVES
-                    SetPlayerEquipmentNgt Index, i, weapon, ItemNgt(i)
+                For I = 1 To MAX_NEGATIVES
+                    SetPlayerEquipmentNgt Index, I, weapon, ItemNgt(I)
                 Next
                 
-                For i = 1 To MAX_BERRYS
-                    SetPlayerEquipmentBerry Index, ItemBry(i), weapon, i
+                For I = 1 To MAX_BERRYS
+                    SetPlayerEquipmentBerry Index, ItemBry(I), weapon, I
                 Next
                 
                 SetPlayerEquipmentFelicidade Index, weapon, ItemFelicidade
@@ -3468,7 +3469,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     
                     SendActionMsg GetPlayerMap(Index), "Vai " & Trim$(Pokemon(GetPlayerEquipmentPokeInfoPokemon(Index, weapon)).Name) & " eu escolho você!", White, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32
                 Else
-                    Player(Index).X = Player(Index).TPX
+                    Player(Index).x = Player(Index).TPX
                     Player(Index).Y = Player(Index).TPY
                     
                     SetPlayerPokePosition Index
@@ -3500,24 +3501,24 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 SendPlayerSound Index, GetPlayerX(Index), GetPlayerY(Index), SoundEntity.seItem, ItemNum
                 
                 'Limpar Spells
-                For i = 1 To MAX_PLAYER_SPELLS
-                    Call SetPlayerSpell(Index, i, 0)
+                For I = 1 To MAX_PLAYER_SPELLS
+                    Call SetPlayerSpell(Index, I, 0)
                 Next
                 
                 'Setar Spell do Pokémon no Inv Spell :)!
-                For i = 1 To MAX_POKE_SPELL
+                For I = 1 To MAX_POKE_SPELL
                     If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
-                        If GetPlayerEquipmentPokeInfoSpell(Index, weapon, i) > 0 Then
-                        Call SetPlayerSpell(Index, i, GetPlayerEquipmentPokeInfoSpell(Index, weapon, i))
+                        If GetPlayerEquipmentPokeInfoSpell(Index, weapon, I) > 0 Then
+                        Call SetPlayerSpell(Index, I, GetPlayerEquipmentPokeInfoSpell(Index, weapon, I))
                         End If
                     End If
                 Next
                 SendSpells Index
                 
-                For i = 1 To MAX_NEGATIVES
+                For I = 1 To MAX_NEGATIVES
                     If GetPlayerEquipment(Index, weapon) > 0 Then
-                        If GetPlayerEquipmentNgt(Index, weapon, i) > 0 Then
-                            TempPlayer(Index).NgtTick(i) = 1 + GetTickCount
+                        If GetPlayerEquipmentNgt(Index, weapon, I) > 0 Then
+                            TempPlayer(Index).NgtTick(I) = 1 + GetTickCount
                         End If
                     End If
                 Next
@@ -3525,8 +3526,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 Case ITEM_TYPE_HELMET
             
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
-                    If GetPlayerRawStat(Index, i) < Item(ItemNum).Stat_Req(i) Then
+                For I = 1 To Stats.Stat_Count - 1
+                    If GetPlayerRawStat(Index, I) < Item(ItemNum).Stat_Req(I) Then
                         PlayerMsg Index, "You do not meet the stat requirements to equip this item.", BrightRed
                         Exit Sub
                     End If
@@ -3580,8 +3581,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
             Case ITEM_TYPE_SHIELD
             
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
-                    If GetPlayerRawStat(Index, i) < Item(ItemNum).Stat_Req(i) Then
+                For I = 1 To Stats.Stat_Count - 1
+                    If GetPlayerRawStat(Index, I) < Item(ItemNum).Stat_Req(I) Then
                         PlayerMsg Index, "You do not meet the stat requirements to equip this item.", BrightRed
                         Exit Sub
                     End If
@@ -3635,8 +3636,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
             ' consumable
             Case ITEM_TYPE_CONSUME
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
-                    If GetPlayerRawStat(Index, i) < Item(ItemNum).Stat_Req(i) Then
+                For I = 1 To Stats.Stat_Count - 1
+                    If GetPlayerRawStat(Index, I) < Item(ItemNum).Stat_Req(I) Then
                         PlayerMsg Index, "You do not meet the stat requirements to use this item.", BrightRed
                         Exit Sub
                     End If
@@ -3701,16 +3702,16 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     
                     Select Case Item(ItemNum).Berry
                         Case 1
-                            For i = 1 To MAX_BERRYS
-                                If Item(ItemNum).Add_Stat(i) = 0 Then
+                            For I = 1 To MAX_BERRYS
+                                If Item(ItemNum).Add_Stat(I) = 0 Then
                                     StatVazio = StatVazio + 1
                                 Else
-                                    If Item(ItemNum).YesNo(i) = True Then
-                                            Call SetPlayerEquipmentBerry(Index, GetPlayerEquipmentBerry(Index, weapon, i) + Item(ItemNum).Add_Stat(i), weapon, i)
-                                            SendActionMsg GetPlayerMap(Index), "+" & Item(ItemNum).Add_Stat(i) & StatName(i), BrightGreen, 0, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32) - ((i - StatVazio) * 15)
+                                    If Item(ItemNum).YesNo(I) = True Then
+                                            Call SetPlayerEquipmentBerry(Index, GetPlayerEquipmentBerry(Index, weapon, I) + Item(ItemNum).Add_Stat(I), weapon, I)
+                                            SendActionMsg GetPlayerMap(Index), "+" & Item(ItemNum).Add_Stat(I) & StatName(I), BrightGreen, 0, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32) - ((I - StatVazio) * 15)
                                         Else
-                                            Call SetPlayerEquipmentBerry(Index, GetPlayerEquipmentBerry(Index, weapon, i) - Item(ItemNum).Add_Stat(i), weapon, i)
-                                            SendActionMsg GetPlayerMap(Index), "-" & Item(ItemNum).Add_Stat(i) & StatName(i), BrightGreen, 0, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32) - ((i - StatVazio) * 15)
+                                            Call SetPlayerEquipmentBerry(Index, GetPlayerEquipmentBerry(Index, weapon, I) - Item(ItemNum).Add_Stat(I), weapon, I)
+                                            SendActionMsg GetPlayerMap(Index), "-" & Item(ItemNum).Add_Stat(I) & StatName(I), BrightGreen, 0, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32) - ((I - StatVazio) * 15)
                                     End If
                                 End If
                             Next
@@ -3757,8 +3758,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 SendPlayerSound Index, GetPlayerX(Index), GetPlayerY(Index), SoundEntity.seItem, ItemNum
             Case ITEM_TYPE_KEY
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
-                    If GetPlayerRawStat(Index, i) < Item(ItemNum).Stat_Req(i) Then
+                For I = 1 To Stats.Stat_Count - 1
+                    If GetPlayerRawStat(Index, I) < Item(ItemNum).Stat_Req(I) Then
                         PlayerMsg Index, "You do not meet the stat requirements to use this item.", BrightRed
                         Exit Sub
                     End If
@@ -3788,7 +3789,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     Case DIR_UP
 
                         If GetPlayerY(Index) > 0 Then
-                            X = GetPlayerX(Index)
+                            x = GetPlayerX(Index)
                             Y = GetPlayerY(Index) - 1
                         Else
                             Exit Sub
@@ -3797,7 +3798,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     Case DIR_DOWN
 
                         If GetPlayerY(Index) < Map(GetPlayerMap(Index)).MaxY Then
-                            X = GetPlayerX(Index)
+                            x = GetPlayerX(Index)
                             Y = GetPlayerY(Index) + 1
                         Else
                             Exit Sub
@@ -3806,7 +3807,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     Case DIR_LEFT
 
                         If GetPlayerX(Index) > 0 Then
-                            X = GetPlayerX(Index) - 1
+                            x = GetPlayerX(Index) - 1
                             Y = GetPlayerY(Index)
                         Else
                             Exit Sub
@@ -3815,7 +3816,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     Case DIR_RIGHT
 
                         If GetPlayerX(Index) < Map(GetPlayerMap(Index)).MaxX Then
-                            X = GetPlayerX(Index) + 1
+                            x = GetPlayerX(Index) + 1
                             Y = GetPlayerY(Index)
                         Else
                             Exit Sub
@@ -3824,19 +3825,19 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 End Select
 
                 ' Check if a key exists
-                If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_KEY Then
+                If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_KEY Then
 
                     ' Check if the key they are using matches the map key
-                    If ItemNum = Map(GetPlayerMap(Index)).Tile(X, Y).Data1 Then
-                        TempTile(GetPlayerMap(Index)).DoorOpen(X, Y) = YES
+                    If ItemNum = Map(GetPlayerMap(Index)).Tile(x, Y).Data1 Then
+                        TempTile(GetPlayerMap(Index)).DoorOpen(x, Y) = YES
                         TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount
-                        SendMapKey Index, X, Y, 1
+                        SendMapKey Index, x, Y, 1
                         Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
                         
-                        Call SendAnimation(GetPlayerMap(Index), Item(ItemNum).Animation, X, Y)
+                        Call SendAnimation(GetPlayerMap(Index), Item(ItemNum).Animation, x, Y)
 
                         ' Check if we are supposed to take away the item
-                        If Map(GetPlayerMap(Index)).Tile(X, Y).Data2 = 1 Then
+                        If Map(GetPlayerMap(Index)).Tile(x, Y).Data2 = 1 Then
                             Call TakeInvItem(Index, ItemNum, 0)
                             Call PlayerMsg(Index, "The key is destroyed in the lock.", Yellow)
                         End If
@@ -3856,17 +3857,17 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     ' Make sure they are the right class
                     If Spell(n).ClassReq = GetPlayerClass(Index) Or Spell(n).ClassReq = 0 Then
                         ' Make sure they are the right level
-                        i = Spell(n).LevelReq
+                        I = Spell(n).LevelReq
 
-                        If i <= GetPlayerLevel(Index) Then
-                            i = FindOpenSpellSlot(Index)
+                        If I <= GetPlayerLevel(Index) Then
+                            I = FindOpenSpellSlot(Index)
 
                             ' Make sure they have an open spell slot
-                            If i > 0 Then
+                            If I > 0 Then
 
                                 ' Make sure they dont already have the spell
                                 If Not HasSpell(Index, n) Then
-                                    Call SetPlayerSpell(Index, i, n)
+                                    Call SetPlayerSpell(Index, I, n)
                                     Call SendAnimation(GetPlayerMap(Index), Item(ItemNum).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                                     If GetPlayerEquipment(Index, weapon) > 0 Then
                                         If GetPlayerEquipmentPokeInfoPokemon(Index, weapon) > 0 Then
@@ -3902,7 +3903,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                             End If
 
                         Else
-                            Call PlayerMsg(Index, "Sem level necessario para aprender " & i & ".", BrightRed)
+                            Call PlayerMsg(Index, "Sem level necessario para aprender " & I & ".", BrightRed)
                         End If
 
                     Else
@@ -3962,8 +3963,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 Case ITEM_TYPE_BAU
             
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
-                    If GetPlayerRawStat(Index, i) < Item(ItemNum).Stat_Req(i) Then
+                For I = 1 To Stats.Stat_Count - 1
+                    If GetPlayerRawStat(Index, I) < Item(ItemNum).Stat_Req(I) Then
                         PlayerMsg Index, "You do not meet the stat requirements to use this item.", BrightRed
                         Exit Sub
                     End If
@@ -3990,8 +3991,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 End If
                 
                 'Calcular Espaço
-                For i = 1 To MAX_INV
-                    If GetPlayerInvItemNum(Index, i) = 0 Then
+                For I = 1 To MAX_INV
+                    If GetPlayerInvItemNum(Index, I) = 0 Then
                         InvVazio = InvVazio + 1
                     End If
                 Next
@@ -4004,22 +4005,22 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     End If
                     
                     'Calcular QntiaDeItensNoBau
-                    For i = 1 To MAX_BAU
-                        If Item(ItemNum).BauItem(i) = 0 Then
+                    For I = 1 To MAX_BAU
+                        If Item(ItemNum).BauItem(I) = 0 Then
                             Exit For
                         End If
                     Next
                     
                     'Entregar o Item!
-                    If i - 1 > 0 Then
-                        n = RAND(1, i - 1)
+                    If I - 1 > 0 Then
+                        n = RAND(1, I - 1)
                         Call GiveInvItem(Index, Item(ItemNum).BauItem(n), Item(ItemNum).BauValue(n))
                         Call TakeInvItem(Index, ItemNum, 0)
                     End If
                 Else
                     'Calcular QntiaDeItensNoBau
-                    For i = 1 To MAX_BAU
-                        If Item(ItemNum).BauItem(i) > 0 Then
+                    For I = 1 To MAX_BAU
+                        If Item(ItemNum).BauItem(I) > 0 Then
                             BauItemQnt = BauItemQnt + 1
                         End If
                     Next
@@ -4031,9 +4032,9 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     End If
                 
                     'Entregar os Itens!
-                    For i = 1 To MAX_BAU
-                        If Item(ItemNum).BauItem(i) > 0 Then
-                            Call GiveInvItem(Index, Item(ItemNum).BauItem(i), Item(ItemNum).BauValue(i))
+                    For I = 1 To MAX_BAU
+                        If Item(ItemNum).BauItem(I) > 0 Then
+                            Call GiveInvItem(Index, Item(ItemNum).BauItem(I), Item(ItemNum).BauValue(I))
                         End If
                     Next
                     
@@ -4041,8 +4042,8 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                     Call TakeInvItem(Index, ItemNum, 0)
                 End If
             Case ITEM_TYPE_VISUAL
-                i = GetPlayerVisuais(Index, Item(ItemNum).VSlot)
-                If i = 0 Then
+                I = GetPlayerVisuais(Index, Item(ItemNum).VSlot)
+                If I = 0 Then
                     Call SetPlayerVisuais(Index, Item(ItemNum).VSlot, Item(ItemNum).VNum)
                     Call TakeInvItem(Index, ItemNum, 0)
                 Else
@@ -4051,7 +4052,7 @@ Dim PokebolaUsada As Byte, ItemBry(1 To MAX_BERRYS) As Long
                 
                 SendPlayerData Index
                 SendPlayerSound Index, GetPlayerX(Index), GetPlayerY(Index), SoundEntity.seItem, ItemNum
-                Call SendAnimation(GetPlayerMap(Index), Item(ItemNum).Animation, X, Y)
+                Call SendAnimation(GetPlayerMap(Index), Item(ItemNum).Animation, x, Y)
                 '123
         End Select
     End If
@@ -4390,59 +4391,59 @@ Sub SetPlayerEquipmentBerry(ByVal Index As Long, ByVal Value As Long, ByVal Equi
 End Sub
 
 Sub SetPlayerPokePosition(ByVal Index As Long)
-Dim X As Long, Y As Long, MapNum As Long
+Dim x As Long, Y As Long, MapNum As Long
 Dim n As Long, N2 As Long, N3 As Long, N4 As Long
 
-X = GetPlayerX(Index)
+x = GetPlayerX(Index)
 Y = GetPlayerY(Index)
 MapNum = GetPlayerMap(Index)
 
 Select Case GetPlayerDir(Index)
 Case DIR_UP
 
-If PokeTileIsOpen(MapNum, X, Y - 1) = True Then
+If PokeTileIsOpen(MapNum, x, Y - 1) = True Then
 SetPlayerY Index, Y - 1
-ElseIf PokeTileIsOpen(MapNum, X, Y + 1) = True Then
+ElseIf PokeTileIsOpen(MapNum, x, Y + 1) = True Then
 SetPlayerY Index, Y + 1
-ElseIf PokeTileIsOpen(MapNum, X + 1, Y) = True Then
-SetPlayerX Index, X + 1
-ElseIf PokeTileIsOpen(MapNum, X - 1, Y) = True Then
-SetPlayerX Index, X - 1
+ElseIf PokeTileIsOpen(MapNum, x + 1, Y) = True Then
+SetPlayerX Index, x + 1
+ElseIf PokeTileIsOpen(MapNum, x - 1, Y) = True Then
+SetPlayerX Index, x - 1
 End If
 
 Case DIR_DOWN
 
-If PokeTileIsOpen(MapNum, X, Y + 1) = True Then
+If PokeTileIsOpen(MapNum, x, Y + 1) = True Then
 SetPlayerY Index, Y + 1
-ElseIf PokeTileIsOpen(MapNum, X, Y - 1) = True Then
+ElseIf PokeTileIsOpen(MapNum, x, Y - 1) = True Then
 SetPlayerY Index, Y - 1
-ElseIf PokeTileIsOpen(MapNum, X + 1, Y) = True Then
-SetPlayerX Index, X + 1
-ElseIf PokeTileIsOpen(MapNum, X - 1, Y) = True Then
-SetPlayerX Index, X - 1
+ElseIf PokeTileIsOpen(MapNum, x + 1, Y) = True Then
+SetPlayerX Index, x + 1
+ElseIf PokeTileIsOpen(MapNum, x - 1, Y) = True Then
+SetPlayerX Index, x - 1
 End If
 
 Case DIR_LEFT
 
-If PokeTileIsOpen(MapNum, X - 1, Y) = True Then
-SetPlayerX Index, X - 1
-ElseIf PokeTileIsOpen(MapNum, X + 1, Y) = True Then
-SetPlayerX Index, X + 1
-ElseIf PokeTileIsOpen(MapNum, X, Y + 1) = True Then
+If PokeTileIsOpen(MapNum, x - 1, Y) = True Then
+SetPlayerX Index, x - 1
+ElseIf PokeTileIsOpen(MapNum, x + 1, Y) = True Then
+SetPlayerX Index, x + 1
+ElseIf PokeTileIsOpen(MapNum, x, Y + 1) = True Then
 SetPlayerY Index, Y + 1
-ElseIf PokeTileIsOpen(MapNum, X, Y - 1) = True Then
+ElseIf PokeTileIsOpen(MapNum, x, Y - 1) = True Then
 SetPlayerY Index, Y - 1
 End If
 
 Case DIR_RIGHT
 
-If PokeTileIsOpen(MapNum, X + 1, Y) = True Then
-SetPlayerX Index, X + 1
-ElseIf PokeTileIsOpen(MapNum, X - 1, Y) = True Then
-SetPlayerX Index, X - 1
-ElseIf PokeTileIsOpen(MapNum, X, Y + 1) = True Then
+If PokeTileIsOpen(MapNum, x + 1, Y) = True Then
+SetPlayerX Index, x + 1
+ElseIf PokeTileIsOpen(MapNum, x - 1, Y) = True Then
+SetPlayerX Index, x - 1
+ElseIf PokeTileIsOpen(MapNum, x, Y + 1) = True Then
 SetPlayerY Index, Y + 1
-ElseIf PokeTileIsOpen(MapNum, X, Y - 1) = True Then
+ElseIf PokeTileIsOpen(MapNum, x, Y - 1) = True Then
 SetPlayerY Index, Y - 1
 End If
 
@@ -4476,7 +4477,7 @@ Sub SetPlayerFlying(ByVal Index As Long, ByVal Flying As Long)
     Player(Index).Flying = Flying
 End Sub
 
-Function CanBlockedTile(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal FlyDown As Boolean = False) As Boolean
+Function CanBlockedTile(ByVal Index As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal FlyDown As Boolean = False) As Boolean
     ' Verifica sobrecarga
     If IsPlaying(Index) = False Then Exit Function
     
@@ -4491,18 +4492,18 @@ Function CanBlockedTile(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, O
     End If
         
     ' Check to make sure that the tile is walkable
-    If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_BLOCKED Then CanBlockedTile = True
-    If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_RESOURCE Then CanBlockedTile = True
-    If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_KEY Then CanBlockedTile = True
-    If Map(GetPlayerMap(Index)).Tile(X, Y).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(X, Y) = YES Then CanBlockedTile = True
+    If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_BLOCKED Then CanBlockedTile = True
+    If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_RESOURCE Then CanBlockedTile = True
+    If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_KEY Then CanBlockedTile = True
+    If Map(GetPlayerMap(Index)).Tile(x, Y).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(x, Y) = YES Then CanBlockedTile = True
 End Function
 
 Public Function PokDispBattle(ByVal Index, ByVal Numero As Long) As Boolean
-Dim i As Long, QntiaVivo As Byte
+Dim I As Long, QntiaVivo As Byte
 
-For i = 1 To MAX_INV
-    If GetPlayerInvItemPokeInfoPokemon(Index, i) > 0 Then
-        If GetPlayerInvItemPokeInfoVital(Index, i, 1) > 0 Then
+For I = 1 To MAX_INV
+    If GetPlayerInvItemPokeInfoPokemon(Index, I) > 0 Then
+        If GetPlayerInvItemPokeInfoVital(Index, I, 1) > 0 Then
             QntiaVivo = QntiaVivo + 1
         End If
     End If
@@ -4519,7 +4520,7 @@ End If
 End Function
 
 Sub CheckAORGlevelUP(ByVal Index As Long)
-    Dim i As Long
+    Dim I As Long
     Dim expRollover As Long
     Dim level_count As Long
     
@@ -4537,10 +4538,10 @@ Sub CheckAORGlevelUP(ByVal Index As Long)
     level_count = level_count + 1
     Loop
     
-    For i = 1 To MAX_PLAYERS
-    If IsPlaying(i) = True Then
-    If Player(i).ORG = Player(Index).ORG Then
-    Call SendOrganização(i)
+    For I = 1 To MAX_PLAYERS
+    If IsPlaying(I) = True Then
+    If Player(I).ORG = Player(Index).ORG Then
+    Call SendOrganização(I)
     If level_count > 0 Then
         If level_count = 1 Then
             'singular

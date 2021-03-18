@@ -132,6 +132,7 @@ Public Enum ClientPackets
     CWarpMeTo
     CWarpToMe
     CWarpTo
+    CWarpPlayer
     CSetSprite
     CSetHair
     CGetStats
