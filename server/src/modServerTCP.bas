@@ -79,37 +79,12 @@ Function IsMultiIPOnline(ByVal IP As String) As Boolean
 
 End Function
 
-Function IsBanned(ByVal IP As String) As Boolean
-    Dim filename As String
-    Dim fIP As String
-    Dim fName As String
-    Dim F As Long
-    filename = App.Path & "\data\banlist.txt"
-
-    ' Check if file exists
-    If Not FileExist("data\banlist.txt") Then
-        F = FreeFile
-        Open filename For Output As #F
-        Close #F
+Public Function isBanned_Account(ByVal Index As Long) As Boolean
+    If Player(Index).isBanned = 1 Then
+        isBanned_Account = True
+    Else
+        isBanned_Account = False
     End If
-
-    F = FreeFile
-    Open filename For Input As #F
-
-    Do While Not EOF(F)
-        Input #F, fIP
-        Input #F, fName
-
-        ' Is banned?
-        If Trim$(LCase$(fIP)) = Trim$(LCase$(Mid$(IP, 1, Len(fIP)))) Then
-            IsBanned = True
-            Close #F
-            Exit Function
-        End If
-
-    Loop
-
-    Close #F
 End Function
 
 Function IsInventoryFull(ByVal tradeTarget As Long, ByVal Index As Long) As Boolean
@@ -336,10 +311,10 @@ Dim i As Long
 
     If Index <> 0 Then
         ' make sure they're not banned
-        If Not IsBanned(GetPlayerIP(Index)) Then
-            Call TextAdd("Received connection from " & GetPlayerIP(Index) & ".")
+        If Not isBanned_IP(GetPlayerIP(Index)) Then
+            Call TextAdd("Conexão recebida de " & GetPlayerIP(Index) & ".")
         Else
-            Call AlertMsg(Index, "You have been banned from " & Options.Game_Name & ", and can no longer play.")
+            Call AlertMsg(Index, "Você foi banido de " & Options.Game_Name & ", e não pode mais jogar.")
         End If
         ' re-set the high index
         Player_HighIndex = 0
@@ -428,7 +403,7 @@ End Sub
 
 Public Sub MapCache_Create(ByVal MapNum As Long)
     Dim MapData As String
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
     Dim i As Long
     Dim Buffer As clsBuffer
@@ -451,16 +426,16 @@ Public Sub MapCache_Create(ByVal MapNum As Long)
     Buffer.WriteLong Map(MapNum).Weather
     Buffer.WriteLong Map(MapNum).Intensity
     
-    For X = 1 To 2
-        Buffer.WriteLong Map(MapNum).LevelPoke(X)
+    For x = 1 To 2
+        Buffer.WriteLong Map(MapNum).LevelPoke(x)
     Next
 
-    For X = 0 To Map(MapNum).MaxX
+    For x = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
 
-            With Map(MapNum).Tile(X, Y)
+            With Map(MapNum).Tile(x, Y)
                 For i = 1 To MapLayer.Layer_Count - 1
-                    Buffer.WriteLong .Layer(i).X
+                    Buffer.WriteLong .Layer(i).x
                     Buffer.WriteLong .Layer(i).Y
                     Buffer.WriteLong .Layer(i).Tileset
                 Next
@@ -474,8 +449,8 @@ Public Sub MapCache_Create(ByVal MapNum As Long)
         Next
     Next
 
-    For X = 1 To MAX_MAP_NPCS
-        Buffer.WriteLong Map(MapNum).Npc(X)
+    For x = 1 To MAX_MAP_NPCS
+        Buffer.WriteLong Map(MapNum).Npc(x)
     Next
 
     MapCache(MapNum).Data = Buffer.ToArray()
@@ -639,7 +614,7 @@ Sub SendMapItemsTo(ByVal Index As Long, ByVal MapNum As Long)
     For i = 1 To MAX_MAP_ITEMS
         Buffer.WriteLong MapItem(MapNum, i).Num
         Buffer.WriteLong MapItem(MapNum, i).Value
-        Buffer.WriteLong MapItem(MapNum, i).X
+        Buffer.WriteLong MapItem(MapNum, i).x
         Buffer.WriteLong MapItem(MapNum, i).Y
     Next
 
@@ -659,7 +634,7 @@ Sub SendMapItemsToAll(ByVal MapNum As Long)
     For i = 1 To MAX_MAP_ITEMS
         Buffer.WriteLong MapItem(MapNum, i).Num
         Buffer.WriteLong MapItem(MapNum, i).Value
-        Buffer.WriteLong MapItem(MapNum, i).X
+        Buffer.WriteLong MapItem(MapNum, i).x
         Buffer.WriteLong MapItem(MapNum, i).Y
     Next
 
@@ -698,7 +673,7 @@ Sub SendMapNpcsTo(ByVal Index As Long, ByVal MapNum As Long)
 
     For i = 1 To MAX_MAP_NPCS
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Num
-        Buffer.WriteLong MapNpc(MapNum).Npc(i).X
+        Buffer.WriteLong MapNpc(MapNum).Npc(i).x
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Y
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Dir
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Vital(HP)
@@ -734,7 +709,7 @@ Sub SendMapNpcsToMap(ByVal MapNum As Long)
 
     For i = 1 To MAX_MAP_NPCS
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Num
-        Buffer.WriteLong MapNpc(MapNum).Npc(i).X
+        Buffer.WriteLong MapNpc(MapNum).Npc(i).x
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Y
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Dir
         Buffer.WriteLong MapNpc(MapNum).Npc(i).Vital(HP)
@@ -813,7 +788,7 @@ End Sub
 
 Sub SendInventory(ByVal Index As Long)
     Dim packet As String
-    Dim i As Long, X As Long
+    Dim i As Long, x As Long
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
     
@@ -827,25 +802,25 @@ Sub SendInventory(ByVal Index As Long)
         Buffer.WriteLong GetPlayerInvItemPokeInfoLevel(Index, i)
         Buffer.WriteLong GetPlayerInvItemPokeInfoExp(Index, i)
         
-        For X = 1 To Vitals.Vital_Count - 1
-            Buffer.WriteLong GetPlayerInvItemPokeInfoVital(Index, i, X)
-            Buffer.WriteLong GetPlayerInvItemPokeInfoMaxVital(Index, i, X)
+        For x = 1 To Vitals.Vital_Count - 1
+            Buffer.WriteLong GetPlayerInvItemPokeInfoVital(Index, i, x)
+            Buffer.WriteLong GetPlayerInvItemPokeInfoMaxVital(Index, i, x)
         Next
         
-        For X = 1 To Stats.Stat_Count - 1
-            Buffer.WriteLong GetPlayerInvItemPokeInfoStat(Index, i, X)
+        For x = 1 To Stats.Stat_Count - 1
+            Buffer.WriteLong GetPlayerInvItemPokeInfoStat(Index, i, x)
         Next
         
-        For X = 1 To MAX_POKE_SPELL
-            Buffer.WriteLong GetPlayerInvItemPokeInfoSpell(Index, i, X)
+        For x = 1 To MAX_POKE_SPELL
+            Buffer.WriteLong GetPlayerInvItemPokeInfoSpell(Index, i, x)
         Next
         
-        For X = 1 To MAX_NEGATIVES
-            Buffer.WriteLong GetPlayerInvItemNgt(Index, i, X)
+        For x = 1 To MAX_NEGATIVES
+            Buffer.WriteLong GetPlayerInvItemNgt(Index, i, x)
         Next
         
-        For X = 1 To MAX_BERRYS
-            Buffer.WriteLong GetPlayerInvItemBerry(Index, i, X)
+        For x = 1 To MAX_BERRYS
+            Buffer.WriteLong GetPlayerInvItemBerry(Index, i, x)
         Next
         
         Buffer.WriteLong GetPlayerInvItemFelicidade(Index, i)
@@ -863,7 +838,7 @@ Sub SendInventoryUpdate(ByVal Index As Long, ByVal invslot As Long)
     Dim packet As String
     Dim Buffer As clsBuffer
     Set Buffer = New clsBuffer
-    Dim X As Long
+    Dim x As Long
     
     Buffer.WriteLong SPlayerInvUpdate
     Buffer.WriteLong invslot
@@ -874,25 +849,25 @@ Sub SendInventoryUpdate(ByVal Index As Long, ByVal invslot As Long)
     Buffer.WriteLong GetPlayerInvItemPokeInfoLevel(Index, invslot)
     Buffer.WriteLong GetPlayerInvItemPokeInfoExp(Index, invslot)
     
-    For X = 1 To Vitals.Vital_Count - 1
-        Buffer.WriteLong GetPlayerInvItemPokeInfoVital(Index, invslot, X)
-        Buffer.WriteLong GetPlayerInvItemPokeInfoMaxVital(Index, invslot, X)
+    For x = 1 To Vitals.Vital_Count - 1
+        Buffer.WriteLong GetPlayerInvItemPokeInfoVital(Index, invslot, x)
+        Buffer.WriteLong GetPlayerInvItemPokeInfoMaxVital(Index, invslot, x)
     Next
     
-    For X = 1 To Stats.Stat_Count - 1
-        Buffer.WriteLong GetPlayerInvItemPokeInfoStat(Index, invslot, X)
+    For x = 1 To Stats.Stat_Count - 1
+        Buffer.WriteLong GetPlayerInvItemPokeInfoStat(Index, invslot, x)
     Next
     
-    For X = 1 To MAX_POKE_SPELL
-        Buffer.WriteLong GetPlayerInvItemPokeInfoSpell(Index, invslot, X)
+    For x = 1 To MAX_POKE_SPELL
+        Buffer.WriteLong GetPlayerInvItemPokeInfoSpell(Index, invslot, x)
     Next
     
-    For X = 1 To MAX_NEGATIVES
-        Buffer.WriteLong GetPlayerInvItemNgt(Index, invslot, X)
+    For x = 1 To MAX_NEGATIVES
+        Buffer.WriteLong GetPlayerInvItemNgt(Index, invslot, x)
     Next
         
-    For X = 1 To MAX_BERRYS
-        Buffer.WriteLong GetPlayerInvItemBerry(Index, invslot, X)
+    For x = 1 To MAX_BERRYS
+        Buffer.WriteLong GetPlayerInvItemBerry(Index, invslot, x)
     Next
     
     Buffer.WriteLong GetPlayerInvItemFelicidade(Index, invslot)
@@ -1536,7 +1511,7 @@ Sub SendResourceCacheTo(ByVal Index As Long, ByVal Resource_num As Long)
 
         For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
             Buffer.WriteByte ResourceCache(GetPlayerMap(Index)).ResourceData(i).ResourceState
-            Buffer.WriteLong ResourceCache(GetPlayerMap(Index)).ResourceData(i).X
+            Buffer.WriteLong ResourceCache(GetPlayerMap(Index)).ResourceData(i).x
             Buffer.WriteLong ResourceCache(GetPlayerMap(Index)).ResourceData(i).Y
         Next
 
@@ -1557,7 +1532,7 @@ Sub SendResourceCacheToMap(ByVal MapNum As Long, ByVal Resource_num As Long)
 
         For i = 0 To ResourceCache(MapNum).Resource_Count
             Buffer.WriteByte ResourceCache(MapNum).ResourceData(i).ResourceState
-            Buffer.WriteLong ResourceCache(MapNum).ResourceData(i).X
+            Buffer.WriteLong ResourceCache(MapNum).ResourceData(i).x
             Buffer.WriteLong ResourceCache(MapNum).ResourceData(i).Y
         Next
 
@@ -1567,19 +1542,19 @@ Sub SendResourceCacheToMap(ByVal MapNum As Long, ByVal Resource_num As Long)
     Set Buffer = Nothing
 End Sub
 
-Sub SendDoorAnimation(ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long)
+Sub SendDoorAnimation(ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long)
     Dim Buffer As clsBuffer
     
     Set Buffer = New clsBuffer
     Buffer.WriteLong SDoorAnimation
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     
     SendDataToMap MapNum, Buffer.ToArray()
     Set Buffer = Nothing
 End Sub
 
-Sub SendActionMsg(ByVal MapNum As Long, ByVal message As String, ByVal color As Long, ByVal MsgType As Long, ByVal X As Long, ByVal Y As Long, Optional PlayerOnlyNum As Long = 0)
+Sub SendActionMsg(ByVal MapNum As Long, ByVal message As String, ByVal color As Long, ByVal MsgType As Long, ByVal x As Long, ByVal Y As Long, Optional PlayerOnlyNum As Long = 0)
     Dim Buffer As clsBuffer
     
     Set Buffer = New clsBuffer
@@ -1587,7 +1562,7 @@ Sub SendActionMsg(ByVal MapNum As Long, ByVal message As String, ByVal color As 
     Buffer.WriteString message
     Buffer.WriteLong color
     Buffer.WriteLong MsgType
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     
     If PlayerOnlyNum > 0 Then
@@ -1599,13 +1574,13 @@ Sub SendActionMsg(ByVal MapNum As Long, ByVal message As String, ByVal color As 
     Set Buffer = Nothing
 End Sub
 
-Sub SendAnimation(ByVal MapNum As Long, ByVal Anim As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal LockType As Byte = 0, Optional ByVal LockIndex As Long = 0)
+Sub SendAnimation(ByVal MapNum As Long, ByVal Anim As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal LockType As Byte = 0, Optional ByVal LockIndex As Long = 0)
     Dim Buffer As clsBuffer
     
     Set Buffer = New clsBuffer
     Buffer.WriteLong SAnimation
     Buffer.WriteLong Anim
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     Buffer.WriteByte LockType
     Buffer.WriteLong LockIndex
@@ -1712,7 +1687,7 @@ End Sub
 
 Sub SendBank(ByVal Index As Long)
     Dim Buffer As clsBuffer
-    Dim i As Long, X As Long
+    Dim i As Long, x As Long
     
     Set Buffer = New clsBuffer
     Buffer.WriteLong SBank
@@ -1725,25 +1700,25 @@ Sub SendBank(ByVal Index As Long)
         Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Level
         Buffer.WriteLong Bank(Index).Item(i).PokeInfo.EXP
         
-        For X = 1 To Vitals.Vital_Count - 1
-            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Vital(X)
-            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.MaxVital(X)
+        For x = 1 To Vitals.Vital_Count - 1
+            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Vital(x)
+            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.MaxVital(x)
         Next
         
-        For X = 1 To Stats.Stat_Count - 1
-            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Stat(X)
+        For x = 1 To Stats.Stat_Count - 1
+            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Stat(x)
         Next
         
-        For X = 1 To MAX_POKE_SPELL
-            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Spells(X)
+        For x = 1 To MAX_POKE_SPELL
+            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Spells(x)
         Next
         
-        For X = 1 To MAX_NEGATIVES
-            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Negatives(X)
+        For x = 1 To MAX_NEGATIVES
+            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Negatives(x)
         Next
         
-        For X = 1 To MAX_BERRYS
-            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Berry(X)
+        For x = 1 To MAX_BERRYS
+            Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Berry(x)
         Next
         
         Buffer.WriteLong Bank(Index).Item(i).PokeInfo.Felicidade
@@ -1756,12 +1731,12 @@ Sub SendBank(ByVal Index As Long)
     Set Buffer = Nothing
 End Sub
 
-Sub SendMapKey(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, ByVal Value As Byte)
+Sub SendMapKey(ByVal Index As Long, ByVal x As Long, ByVal Y As Long, ByVal Value As Byte)
     Dim Buffer As clsBuffer
     
     Set Buffer = New clsBuffer
     Buffer.WriteLong SMapKey
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     Buffer.WriteByte Value
     SendDataTo Index, Buffer.ToArray()
@@ -1769,12 +1744,12 @@ Sub SendMapKey(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, ByVal Valu
     Set Buffer = Nothing
 End Sub
 
-Sub SendMapKeyToMap(ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long, ByVal Value As Byte)
+Sub SendMapKeyToMap(ByVal MapNum As Long, ByVal x As Long, ByVal Y As Long, ByVal Value As Byte)
     Dim Buffer As clsBuffer
     
     Set Buffer = New clsBuffer
     Buffer.WriteLong SMapKey
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     Buffer.WriteByte Value
     SendDataToMap MapNum, Buffer.ToArray()
@@ -1840,7 +1815,7 @@ Dim Buffer As clsBuffer
 Dim i As Long
 Dim tradeTarget As Long
 Dim totalWorth As Long
-Dim X As Long
+Dim x As Long
     
     tradeTarget = TempPlayer(Index).InTrade
     
@@ -1861,21 +1836,21 @@ Dim X As Long
             Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Sexo
             Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Shiny
             
-            For X = 1 To Vitals.Vital_Count - 1
-                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Vital(X)
-                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.MaxVital(X)
+            For x = 1 To Vitals.Vital_Count - 1
+                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Vital(x)
+                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.MaxVital(x)
             Next
             
-            For X = 1 To Stats.Stat_Count - 1
-                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Stat(X)
+            For x = 1 To Stats.Stat_Count - 1
+                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Stat(x)
             Next
             
-            For X = 1 To MAX_POKE_SPELL
-                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Spells(X)
+            For x = 1 To MAX_POKE_SPELL
+                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Spells(x)
             Next
             
-            For X = 1 To MAX_BERRYS
-                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Berry(X)
+            For x = 1 To MAX_BERRYS
+                Buffer.WriteLong TempPlayer(Index).TradeOffer(i).PokeInfo.Berry(x)
             Next
             
             ' add total worth
@@ -1901,21 +1876,21 @@ Dim X As Long
             Buffer.WriteLong GetPlayerInvItemSexo(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
             Buffer.WriteLong GetPlayerInvItemShiny(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
             
-            For X = 1 To Vitals.Vital_Count - 1
-                Buffer.WriteLong GetPlayerInvItemPokeInfoVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, X)
-                Buffer.WriteLong GetPlayerInvItemPokeInfoMaxVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, X)
+            For x = 1 To Vitals.Vital_Count - 1
+                Buffer.WriteLong GetPlayerInvItemPokeInfoVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
+                Buffer.WriteLong GetPlayerInvItemPokeInfoMaxVital(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
             Next
             
-            For X = 1 To Stats.Stat_Count - 1
-                Buffer.WriteLong GetPlayerInvItemPokeInfoStat(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, X)
+            For x = 1 To Stats.Stat_Count - 1
+                Buffer.WriteLong GetPlayerInvItemPokeInfoStat(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
             Next
             
-            For X = 1 To MAX_POKE_SPELL
-                Buffer.WriteLong GetPlayerInvItemPokeInfoSpell(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, X)
+            For x = 1 To MAX_POKE_SPELL
+                Buffer.WriteLong GetPlayerInvItemPokeInfoSpell(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
             Next
             
-            For X = 1 To MAX_BERRYS
-                Buffer.WriteLong GetPlayerInvItemBerry(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, X)
+            For x = 1 To MAX_BERRYS
+                Buffer.WriteLong GetPlayerInvItemBerry(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num, x)
             Next
             
             ' add total worth
@@ -2014,12 +1989,12 @@ Dim Buffer As clsBuffer
     Set Buffer = Nothing
 End Sub
 
-Sub SendPlayerSound(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, ByVal entityType As Long, ByVal entityNum As Long)
+Sub SendPlayerSound(ByVal Index As Long, ByVal x As Long, ByVal Y As Long, ByVal entityType As Long, ByVal entityNum As Long)
 Dim Buffer As clsBuffer
 
     Set Buffer = New clsBuffer
     Buffer.WriteLong SSound
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     Buffer.WriteLong entityType
     Buffer.WriteLong entityNum
@@ -2027,12 +2002,12 @@ Dim Buffer As clsBuffer
     Set Buffer = Nothing
 End Sub
 
-Sub SendMapSound(ByVal Index As Long, ByVal X As Long, ByVal Y As Long, ByVal entityType As Long, ByVal entityNum As Long)
+Sub SendMapSound(ByVal Index As Long, ByVal x As Long, ByVal Y As Long, ByVal entityType As Long, ByVal entityNum As Long)
 Dim Buffer As clsBuffer
 
     Set Buffer = New clsBuffer
     Buffer.WriteLong SSound
-    Buffer.WriteLong X
+    Buffer.WriteLong x
     Buffer.WriteLong Y
     Buffer.WriteLong entityType
     Buffer.WriteLong entityNum
@@ -2123,7 +2098,7 @@ Dim i As Long
     Buffer.WriteLong Index
     Buffer.WriteLong MapItem(MapNum, Index).Num
     Buffer.WriteLong MapItem(MapNum, Index).Value
-    Buffer.WriteLong MapItem(MapNum, Index).X
+    Buffer.WriteLong MapItem(MapNum, Index).x
     Buffer.WriteLong MapItem(MapNum, Index).Y
     
     Buffer.WriteLong MapItem(MapNum, Index).PokeInfo.Pokemon
@@ -2304,7 +2279,7 @@ End Sub
 
 Sub SendAttLeilao()
 Dim Buffer As clsBuffer
-Dim i As Long, X As Long
+Dim i As Long, x As Long
 
     Set Buffer = New clsBuffer
     Buffer.WriteLong SLeiloar
@@ -2324,25 +2299,25 @@ Dim i As Long, X As Long
         Buffer.WriteLong Leilao(i).Poke.Sexo
         Buffer.WriteLong Leilao(i).Poke.Shiny
         
-        For X = 1 To Vitals.Vital_Count - 1
-            Buffer.WriteLong Leilao(i).Poke.Vital(X)
-            Buffer.WriteLong Leilao(i).Poke.MaxVital(X)
+        For x = 1 To Vitals.Vital_Count - 1
+            Buffer.WriteLong Leilao(i).Poke.Vital(x)
+            Buffer.WriteLong Leilao(i).Poke.MaxVital(x)
         Next
         
-        For X = 1 To Stats.Stat_Count - 1
-            Buffer.WriteLong Leilao(i).Poke.Stat(X)
+        For x = 1 To Stats.Stat_Count - 1
+            Buffer.WriteLong Leilao(i).Poke.Stat(x)
         Next
         
-        For X = 1 To MAX_POKE_SPELL
-            Buffer.WriteLong Leilao(i).Poke.Spells(X)
+        For x = 1 To MAX_POKE_SPELL
+            Buffer.WriteLong Leilao(i).Poke.Spells(x)
         Next
         
-        For X = 1 To MAX_NEGATIVES
-            Buffer.WriteLong Leilao(i).Poke.Negatives(X)
+        For x = 1 To MAX_NEGATIVES
+            Buffer.WriteLong Leilao(i).Poke.Negatives(x)
         Next
         
-        For X = 1 To MAX_BERRYS
-            Buffer.WriteLong Leilao(i).Poke.Berry(X)
+        For x = 1 To MAX_BERRYS
+            Buffer.WriteLong Leilao(i).Poke.Berry(x)
         Next
     Next
     
@@ -2352,7 +2327,7 @@ End Sub
 
 Sub SendAttLeilaoTo(ByVal Index As Long)
 Dim Buffer As clsBuffer
-Dim i As Long, X As Long
+Dim i As Long, x As Long
 
     Set Buffer = New clsBuffer
     Buffer.WriteLong SLeiloar
@@ -2372,25 +2347,25 @@ Dim i As Long, X As Long
         Buffer.WriteLong Leilao(i).Poke.Sexo
         Buffer.WriteLong Leilao(i).Poke.Shiny
         
-        For X = 1 To Vitals.Vital_Count - 1
-            Buffer.WriteLong Leilao(i).Poke.Vital(X)
-            Buffer.WriteLong Leilao(i).Poke.MaxVital(X)
+        For x = 1 To Vitals.Vital_Count - 1
+            Buffer.WriteLong Leilao(i).Poke.Vital(x)
+            Buffer.WriteLong Leilao(i).Poke.MaxVital(x)
         Next
         
-        For X = 1 To Stats.Stat_Count - 1
-            Buffer.WriteLong Leilao(i).Poke.Stat(X)
+        For x = 1 To Stats.Stat_Count - 1
+            Buffer.WriteLong Leilao(i).Poke.Stat(x)
         Next
         
-        For X = 1 To MAX_POKE_SPELL
-            Buffer.WriteLong Leilao(i).Poke.Spells(X)
+        For x = 1 To MAX_POKE_SPELL
+            Buffer.WriteLong Leilao(i).Poke.Spells(x)
         Next
         
-        For X = 1 To MAX_NEGATIVES
-            Buffer.WriteLong Leilao(i).Poke.Negatives(X)
+        For x = 1 To MAX_NEGATIVES
+            Buffer.WriteLong Leilao(i).Poke.Negatives(x)
         Next
         
-        For X = 1 To MAX_BERRYS
-            Buffer.WriteLong Leilao(i).Poke.Berry(X)
+        For x = 1 To MAX_BERRYS
+            Buffer.WriteLong Leilao(i).Poke.Berry(x)
         Next
     Next
     

@@ -82,3 +82,7 @@ Implemento do warp player(adicionado)
 Menu:
 
 Termos; aparecer toda vez que inicia o cliente, ao concordar não irá mais aparecer(Adicionado)
+
+Servidor:
+
+Sistema de ban refeito, agora funcionando perfeitamente(Adicionado)

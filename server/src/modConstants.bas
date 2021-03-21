@@ -8,6 +8,7 @@ Public Declare Function CallWindowProc Lib "user32" Alias "CallWindowProcA" (ByV
 ' path constants
 Public Const ADMIN_LOG As String = "admin.log"
 Public Const PLAYER_LOG As String = "player.log"
+Public Const TP_LOG As String = "tp.log"
 
 ' Version constants
 Public Const CLIENT_MAJOR As Byte = 1

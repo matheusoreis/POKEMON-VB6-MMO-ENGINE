@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.ocx"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "Tabctl32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL32.OCX"
 Begin VB.Form frmServer 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Loading..."
@@ -249,6 +249,7 @@ Begin VB.Form frmServer
             Left            =   120
             TabIndex        =   24
             Top             =   1200
+            Value           =   1  'Checked
             Width           =   1575
          End
       End
@@ -565,21 +566,21 @@ Private Sub Check1_Click(Index As Integer)
 End Sub
 
 Private Sub CmdReloadOrgShop_Click()
-Dim I As Long
+Dim i As Long
 
     Call LoadOrgShop
-    For I = 1 To Player_HighIndex
-        Call SendOrgShop(I)
+    For i = 1 To Player_HighIndex
+        Call SendOrgShop(i)
     Next
 End Sub
 
 Private Sub cmdReloadQuests_Click()
-    Dim I As Long
+    Dim i As Long
     Call LoadQuests
     Call TextAdd("All quests reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendQuests I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendQuests i
         End If
     Next
 End Sub
@@ -656,89 +657,89 @@ Private Sub cmdExit_Click()
 End Sub
 
 Private Sub cmdReloadClasses_Click()
-Dim I As Long
+Dim i As Long
     Call LoadClasses
     Call TextAdd("All classes reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendClasses I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendClasses i
         End If
     Next
 End Sub
 
 Private Sub cmdReloadItems_Click()
-Dim I As Long
+Dim i As Long
     Call LoadItems
     Call TextAdd("All items reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendItems I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendItems i
         End If
     Next
 End Sub
 
 Private Sub cmdReloadMaps_Click()
-Dim I As Long
+Dim i As Long
     Call LoadMaps
     Call TextAdd("All maps reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            PlayerWarp I, GetPlayerMap(I), GetPlayerX(I), GetPlayerY(I)
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            PlayerWarp i, GetPlayerMap(i), GetPlayerX(i), GetPlayerY(i)
         End If
     Next
 End Sub
 
 Private Sub cmdReloadNPCs_Click()
-Dim I As Long
+Dim i As Long
     Call LoadNpcs
     Call TextAdd("All npcs reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendNpcs I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendNpcs i
         End If
     Next
 End Sub
 
 Private Sub cmdReloadShops_Click()
-Dim I As Long
+Dim i As Long
     Call LoadShops
     Call TextAdd("All shops reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendShops I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendShops i
         End If
     Next
 End Sub
 
 Private Sub cmdReloadSpells_Click()
-Dim I As Long
+Dim i As Long
     Call LoadSpells
     Call TextAdd("All spells reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendSpells I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendSpells i
         End If
     Next
 End Sub
 
 Private Sub cmdReloadResources_Click()
-Dim I As Long
+Dim i As Long
     Call LoadResources
     Call TextAdd("All Resources reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendResources I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendResources i
         End If
     Next
 End Sub
 
 Private Sub cmdReloadAnimations_Click()
-Dim I As Long
+Dim i As Long
     Call LoadAnimations
     Call TextAdd("All Animations reloaded.")
-    For I = 1 To Player_HighIndex
-        If IsPlaying(I) Then
-            SendAnimations I
+    For i = 1 To Player_HighIndex
+        If IsPlaying(i) Then
+            SendAnimations i
         End If
     Next
 End Sub
@@ -788,16 +789,16 @@ End Sub
 
 
 Private Sub TmrNoticias_Timer()
-Dim I As Long
+Dim i As Long
   
-    For I = 1 To 5
-        If Check1(I).Value = 1 Then
-            If NotVInicial(I) > 0 Then
-                If NotTick(I) <= 0 Then
-                    NotTick(I) = NotVInicial(I)
-                    SendNoticia Text1(I), Yellow
+    For i = 1 To 5
+        If Check1(i).Value = 1 Then
+            If NotVInicial(i) > 0 Then
+                If NotTick(i) <= 0 Then
+                    NotTick(i) = NotVInicial(i)
+                    SendNoticia Text1(i), Yellow
                 Else
-                    NotTick(I) = NotTick(I) - 1
+                    NotTick(i) = NotTick(i) - 1
                 End If
             End If
         End If
@@ -824,22 +825,22 @@ Private Sub txtChat_KeyPress(KeyAscii As Integer)
 End Sub
 
 Sub UsersOnline_Start()
-    Dim I As Long
+    Dim i As Long
 
-    For I = 1 To MAX_PLAYERS
-        frmServer.lvwInfo.ListItems.Add (I)
+    For i = 1 To MAX_PLAYERS
+        frmServer.lvwInfo.ListItems.Add (i)
 
-        If I < 10 Then
-            frmServer.lvwInfo.ListItems(I).Text = "00" & I
-        ElseIf I < 100 Then
-            frmServer.lvwInfo.ListItems(I).Text = "0" & I
+        If i < 10 Then
+            frmServer.lvwInfo.ListItems(i).Text = "00" & i
+        ElseIf i < 100 Then
+            frmServer.lvwInfo.ListItems(i).Text = "0" & i
         Else
-            frmServer.lvwInfo.ListItems(I).Text = I
+            frmServer.lvwInfo.ListItems(i).Text = i
         End If
 
-        frmServer.lvwInfo.ListItems(I).SubItems(1) = vbNullString
-        frmServer.lvwInfo.ListItems(I).SubItems(2) = vbNullString
-        frmServer.lvwInfo.ListItems(I).SubItems(3) = vbNullString
+        frmServer.lvwInfo.ListItems(i).SubItems(1) = vbNullString
+        frmServer.lvwInfo.ListItems(i).SubItems(2) = vbNullString
+        frmServer.lvwInfo.ListItems(i).SubItems(3) = vbNullString
     Next
 
 End Sub
@@ -876,8 +877,8 @@ Sub mnuBanPlayer_click()
     Dim Name As String
     Name = frmServer.lvwInfo.SelectedItem.SubItems(3)
 
-    If Not Name = "Not Playing" Then
-        Call ServerBanIndex(FindPlayer(Name))
+    If Not Name = "Not Playing" And IsPlaying(FindPlayer(Name)) Then
+        Call BanIndex(FindPlayer(Name))
     End If
 
 End Sub

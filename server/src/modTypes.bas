@@ -213,6 +213,7 @@ Private Type PlayerRec
     Visuais(1 To 50) As Long
     Teleport(1 To 30) As Long
     Cabelo As Byte
+    isBanned As Byte
 End Type
 
 Public Type SpellBufferRec

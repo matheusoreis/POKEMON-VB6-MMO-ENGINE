@@ -94,76 +94,64 @@ Public Sub LoadOptions()
     
 End Sub
 
-Sub BanIndex(ByVal BanPlayerIndex As Long, ByVal BannedByIndex As Long)
-    Dim filename As String
-    Dim IP As String
-    Dim F As Long
-    Dim i As Long
-    filename = App.Path & "\data\banlist.txt"
+Public Sub BanIndex(ByVal BanPlayerIndex As Long)
+Dim filename As String, IP As String, F As Long, i As Long
+
+    ' Add banned to the player's index
+    Player(BanPlayerIndex).isBanned = 1
+    SavePlayer BanPlayerIndex
+
+    ' IP banning
+    filename = App.Path & "\data\banlist_ip.txt"
 
     ' Make sure the file exists
-    If Not FileExist(filename) Then
+    If Not FileExist(filename, True) Then
         F = FreeFile
         Open filename For Output As #F
         Close #F
     End If
 
-    ' Cut off last portion of ip
+    ' Print the IP in the ip ban list
     IP = GetPlayerIP(BanPlayerIndex)
-
-    For i = Len(IP) To 1 Step -1
-
-        If Mid$(IP, i, 1) = "." Then
-            Exit For
-        End If
-
-    Next
-
-    IP = Mid$(IP, 1, i)
     F = FreeFile
     Open filename For Append As #F
-    Print #F, IP & "," & GetPlayerName(BannedByIndex)
+        Print #F, IP
     Close #F
-    Call GlobalMsg(GetPlayerName(BanPlayerIndex) & " has been banned from " & Options.Game_Name & " by " & GetPlayerName(BannedByIndex) & "!", White)
-    Call AddLog(GetPlayerName(BannedByIndex) & " has banned " & GetPlayerName(BanPlayerIndex) & ".", ADMIN_LOG)
-    Call AlertMsg(BanPlayerIndex, "You have been banned by " & GetPlayerName(BannedByIndex) & "!")
+    
+    ' Tell them they're banned
+    Call GlobalMsg(GetPlayerName(BanPlayerIndex) & " foi banido do " & Options.Game_Name & ".", White)
+    Call AddLog(GetPlayerName(BanPlayerIndex) & " foi banido.", ADMIN_LOG)
+    Call AlertMsg(BanPlayerIndex, "Você foi banido.")
 End Sub
 
-Sub ServerBanIndex(ByVal BanPlayerIndex As Long)
-    Dim filename As String
-    Dim IP As String
-    Dim F As Long
-    Dim i As Long
-    filename = App.Path & "\data\banlist.txt"
+Public Function isBanned_IP(ByVal IP As String) As Boolean
+Dim filename As String, fIP As String, F As Long
+    
+    filename = App.Path & "\data\banlist_ip.txt"
 
-
-    ' Make sure the file exists
-    If Not FileExist(filename) Then
+    ' Check if file exists
+    If Not FileExist(filename, True) Then
         F = FreeFile
         Open filename For Output As #F
         Close #F
     End If
 
-    ' Cut off last portion of ip
-    IP = GetPlayerIP(BanPlayerIndex)
-
-    For i = Len(IP) To 1 Step -1
-
-        If Mid$(IP, i, 1) = "." Then
-            Exit For
-        End If
-
-    Next
-
-    IP = Mid$(IP, 1, i)
     F = FreeFile
-    Open filename For Append As #F
-    Print #F, IP & "," & "Server"
+    Open filename For Input As #F
+
+    Do While Not EOF(F)
+        Input #F, fIP
+
+        ' Is banned?
+        If Trim$(LCase$(fIP)) = Trim$(LCase$(Mid$(IP, 1, Len(fIP)))) Then
+            isBanned_IP = True
+            Close #F
+            Exit Function
+        End If
+    Loop
+
     Close #F
-    Call GlobalMsg(GetPlayerName(BanPlayerIndex) & " has been banned from " & Options.Game_Name & " by " & "the Server" & "!", White)
-    Call AddLog("The Server" & " has banned " & GetPlayerName(BanPlayerIndex) & ".", ADMIN_LOG)
-    Call AlertMsg(BanPlayerIndex, "You have been banned by " & "The Server" & "!")
-End Sub
+End Function
 
 ' **************
 ' ** Accounts **
@@ -276,7 +264,7 @@ Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal 
 
         Player(Index).Dir = DIR_DOWN
         Player(Index).Map = START_MAP
-        Player(Index).X = START_X
+        Player(Index).x = START_X
         Player(Index).Y = START_Y
         Player(Index).Dir = DIR_DOWN
         Player(Index).Vital(Vitals.HP) = GetPlayerMaxVital(Index, Vitals.HP)
@@ -400,7 +388,7 @@ Sub LoadClasses()
     Dim tmpSprite As String
     Dim tmpArray() As String
     Dim startItemCount As Long, startSpellCount As Long
-    Dim X As Long
+    Dim x As Long
 
     If CheckClasses Then
         ReDim Class(1 To Max_Classes)
@@ -460,9 +448,9 @@ Sub LoadClasses()
         ' loop for items & values
         Class(i).startItemCount = startItemCount
         If startItemCount >= 1 And startItemCount <= MAX_INV Then
-            For X = 1 To startItemCount
-                Class(i).StartItem(X) = Val(GetVar(filename, "CLASS" & i, "StartItem" & X))
-                Class(i).StartValue(X) = Val(GetVar(filename, "CLASS" & i, "StartValue" & X))
+            For x = 1 To startItemCount
+                Class(i).StartItem(x) = Val(GetVar(filename, "CLASS" & i, "StartItem" & x))
+                Class(i).StartValue(x) = Val(GetVar(filename, "CLASS" & i, "StartValue" & x))
             Next
         End If
         
@@ -473,8 +461,8 @@ Sub LoadClasses()
         ' loop for spells
         Class(i).startSpellCount = startSpellCount
         If startSpellCount >= 1 And startSpellCount <= MAX_PLAYER_SPELLS Then
-            For X = 1 To startSpellCount
-                Class(i).StartSpell(X) = Val(GetVar(filename, "CLASS" & i, "StartSpell" & X))
+            For x = 1 To startSpellCount
+                Class(i).StartSpell(x) = Val(GetVar(filename, "CLASS" & i, "StartSpell" & x))
             Next
         End If
     Next
@@ -484,7 +472,7 @@ End Sub
 Sub SaveClasses()
     Dim filename As String
     Dim i As Long
-    Dim X As Long
+    Dim x As Long
     
     filename = App.Path & "\data\classes.ini"
 
@@ -498,13 +486,13 @@ Sub SaveClasses()
         Call PutVar(filename, "CLASS" & i, "Agility", STR(Class(i).Stat(Stats.Agility)))
         Call PutVar(filename, "CLASS" & i, "Willpower", STR(Class(i).Stat(Stats.Willpower)))
         ' loop for items & values
-        For X = 1 To UBound(Class(i).StartItem)
-            Call PutVar(filename, "CLASS" & i, "StartItem" & X, STR(Class(i).StartItem(X)))
-            Call PutVar(filename, "CLASS" & i, "StartValue" & X, STR(Class(i).StartValue(X)))
+        For x = 1 To UBound(Class(i).StartItem)
+            Call PutVar(filename, "CLASS" & i, "StartItem" & x, STR(Class(i).StartItem(x)))
+            Call PutVar(filename, "CLASS" & i, "StartValue" & x, STR(Class(i).StartValue(x)))
         Next
         ' loop for spells
-        For X = 1 To UBound(Class(i).StartSpell)
-            Call PutVar(filename, "CLASS" & i, "StartSpell" & X, STR(Class(i).StartSpell(X)))
+        For x = 1 To UBound(Class(i).StartSpell)
+            Call PutVar(filename, "CLASS" & i, "StartSpell" & x, STR(Class(i).StartSpell(x)))
         Next
     Next
 
@@ -939,7 +927,7 @@ End Sub
 Sub SaveMap(ByVal MapNum As Long)
     Dim filename As String
     Dim F As Long
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
     filename = App.Path & "\data\maps\map" & MapNum & ".dat"
     F = FreeFile
@@ -961,18 +949,18 @@ Sub SaveMap(ByVal MapNum As Long)
     Put #F, , Map(MapNum).Weather
     Put #F, , Map(MapNum).Intensity
     
-    For X = 1 To 2
-        Put #F, , Map(MapNum).LevelPoke(X)
+    For x = 1 To 2
+        Put #F, , Map(MapNum).LevelPoke(x)
     Next
     
-    For X = 0 To Map(MapNum).MaxX
+    For x = 0 To Map(MapNum).MaxX
         For Y = 0 To Map(MapNum).MaxY
-            Put #F, , Map(MapNum).Tile(X, Y)
+            Put #F, , Map(MapNum).Tile(x, Y)
         Next
     Next
 
-    For X = 1 To MAX_MAP_NPCS
-        Put #F, , Map(MapNum).Npc(X)
+    For x = 1 To MAX_MAP_NPCS
+        Put #F, , Map(MapNum).Npc(x)
     Next
     Close #F
     
@@ -992,7 +980,7 @@ Sub LoadMaps()
     Dim filename As String
     Dim i As Long
     Dim F As Long
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
     Call CheckMaps
 
@@ -1016,22 +1004,22 @@ Sub LoadMaps()
         Get #F, , Map(i).Weather
         Get #F, , Map(i).Intensity
         
-        For X = 1 To 2
-            Get #F, , Map(i).LevelPoke(X)
+        For x = 1 To 2
+            Get #F, , Map(i).LevelPoke(x)
         Next
         
         ' have to set the tile()
         ReDim Map(i).Tile(0 To Map(i).MaxX, 0 To Map(i).MaxY)
 
-        For X = 0 To Map(i).MaxX
+        For x = 0 To Map(i).MaxX
             For Y = 0 To Map(i).MaxY
-                Get #F, , Map(i).Tile(X, Y)
+                Get #F, , Map(i).Tile(x, Y)
             Next
         Next
 
-        For X = 1 To MAX_MAP_NPCS
-            Get #F, , Map(i).Npc(X)
-            MapNpc(i).Npc(X).Num = Map(i).Npc(X)
+        For x = 1 To MAX_MAP_NPCS
+            Get #F, , Map(i).Npc(x)
+            MapNpc(i).Npc(x).Num = Map(i).Npc(x)
         Next
 
         Close #F
@@ -1061,7 +1049,7 @@ Sub ClearMapItem(ByVal Index As Long, ByVal MapNum As Long)
     Call ZeroMemory(ByVal VarPtr(MapItem(MapNum, Index)), LenB(MapItem(MapNum, Index)))
     MapItem(MapNum, Index).Num = 0
     MapItem(MapNum, Index).Value = 0
-    MapItem(MapNum, Index).X = 0
+    MapItem(MapNum, Index).x = 0
     MapItem(MapNum, Index).Y = 0
     MapItem(MapNum, Index).canDespawn = False
     MapItem(MapNum, Index).despawnTimer = 0
@@ -1096,12 +1084,12 @@ Sub ClearMapItem(ByVal Index As Long, ByVal MapNum As Long)
 End Sub
 
 Sub ClearMapItems()
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
 
     For Y = 1 To MAX_MAPS
-        For X = 1 To MAX_MAP_ITEMS
-            Call ClearMapItem(X, Y)
+        For x = 1 To MAX_MAP_ITEMS
+            Call ClearMapItem(x, Y)
         Next
     Next
 
@@ -1113,12 +1101,12 @@ Sub ClearMapNpc(ByVal Index As Long, ByVal MapNum As Long)
 End Sub
 
 Sub ClearMapNpcs()
-    Dim X As Long
+    Dim x As Long
     Dim Y As Long
 
     For Y = 1 To MAX_MAPS
-        For X = 1 To MAX_MAP_NPCS
-            Call ClearMapNpc(X, Y)
+        For x = 1 To MAX_MAP_NPCS
+            Call ClearMapNpc(x, Y)
         Next
     Next
 
@@ -1259,15 +1247,15 @@ Sub CheckQuests()
 End Sub
 
 Sub ClearQuest(ByVal Index As Long)
-    Dim i As Byte, X As Byte
+    Dim i As Byte, x As Byte
 
     Call ZeroMemory(ByVal VarPtr(Quest(Index)), LenB(Quest(Index)))
     Quest(Index).Name = ""
     Quest(Index).Description = ""
     
     For i = 1 To MAX_QUEST_TASKS
-        For X = 1 To 3
-            Quest(Index).Task(i).message(X) = ""
+        For x = 1 To 3
+            Quest(Index).Task(i).message(x) = ""
         Next
     
         Quest(Index).Task(i).Num = 1
@@ -1478,7 +1466,7 @@ End Sub
 
 Sub SaveOrgExp(ByVal OrgNum As Byte)
     Dim filename As String
-    Dim i As Long, X As Long
+    Dim i As Long, x As Long
     i = OrgNum
     
     ' Declaração
