@@ -37,8 +37,8 @@ Public Options As OptionsRec
 
 'Sounds
 Public Type MapSoundRec
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     SoundHandle As Long
     InUse As Boolean
     channel As Long
@@ -67,6 +67,7 @@ Private Type OptionsRec
     Debug As Byte
     MiniMap As Byte
     Quest As Byte
+    Termos As Byte
 End Type
 
 Private Type PokeRec
@@ -153,8 +154,8 @@ Private Type PlayerRec
 
     ' Position
     Map As Long
-    x As Byte
-    y As Byte
+    X As Byte
+    Y As Byte
     Dir As Byte
     ' Client use only
     XOffset As Integer
@@ -206,8 +207,8 @@ Private Type PlayerRec
 End Type
 
 Private Type TileDataRec
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     Tileset As Long
 End Type
 
@@ -307,8 +308,8 @@ Private Type MapItemRec
     num As Long
     value As Long
     Frame As Byte
-    x As Byte
-    y As Byte
+    X As Byte
+    Y As Byte
     PokeInfo As PokeRec
 End Type
 
@@ -342,8 +343,8 @@ Private Type MapNpcRec
     targetType As Byte
     Vital(1 To Vitals.Vital_Count - 1) As Long
     Map As Long
-    x As Byte
-    y As Byte
+    X As Byte
+    Y As Byte
     Dir As Byte
     ' Client use only
     XOffset As Long
@@ -386,8 +387,8 @@ Type As Byte
     CDTime As Long
     Icon As Long
     Map As Long
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     Dir As Byte
     Vital As Long
     Duration As Long
@@ -417,8 +418,8 @@ Private Type TempTileRec
 End Type
 
 Public Type MapResourceRec
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     ResourceState As Byte
 End Type
 
@@ -446,8 +447,8 @@ Private Type ActionMsgRec
 Type As Long
     color As Long
     Scroll As Long
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     timer As Long
 End Type
 
@@ -463,8 +464,8 @@ End Type
 
 Private Type AnimInstanceRec
     Animation As Long
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     ' used for locking to players/npcs
     lockindex As Long
     LockType As Byte
@@ -490,8 +491,8 @@ Public Type ButtonRec
 End Type
 
 Type DropRec
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
     ySpeed As Long
     xSpeed As Long
     Init As Boolean

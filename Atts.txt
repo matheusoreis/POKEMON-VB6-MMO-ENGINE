@@ -78,3 +78,7 @@ Matar o npc e receber o dinheiro direto na bag(Adicionado)
 Teleport:
 
 Implemento do warp player(adicionado)
+
+Menu:
+
+Termos; aparecer toda vez que inicia o cliente, ao concordar não irá mais aparecer(Adicionado)

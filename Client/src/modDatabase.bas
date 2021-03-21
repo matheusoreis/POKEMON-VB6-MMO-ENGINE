@@ -120,6 +120,7 @@ Public Sub SaveOptions()
     Call PutVar(filename, "Options", "Debug", str(Options.Debug))
     Call PutVar(filename, "Options", "MiniMap", str(Options.MiniMap))
     Call PutVar(filename, "Options", "Quest", str(Options.Quest))
+    Call PutVar(filename, "Options", "Termos", str(Options.Termos))
 
     ' Error handler
     Exit Sub
@@ -151,6 +152,7 @@ Public Sub LoadOptions()
         Options.Debug = 0
         Options.MiniMap = 1
         Options.Quest = 1
+        Options.Termos = 1
         SaveOptions
     Else
         Options.Game_Name = GetVar(filename, "Options", "Game_Name")
@@ -166,6 +168,7 @@ Public Sub LoadOptions()
         Options.Debug = GetVar(filename, "Options", "Debug")
         Options.MiniMap = GetVar(filename, "Options", "MiniMap")
         Options.Quest = GetVar(filename, "Options", "Quest")
+        Options.Termos = GetVar(filename, "Options", "Termos")
     End If
 
     ' show in GUI
