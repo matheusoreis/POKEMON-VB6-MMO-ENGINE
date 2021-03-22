@@ -1365,6 +1365,11 @@ Select Case Index
         
         'Modificar Sprite
         Call SendSetSprite(Trim$(txtAName.text), CLng(Trim$(txtInfo(0).text)))
+    Case 5
+        If Len(Trim$(txtAName.text)) < 2 Then Exit Sub
+        If IsNumeric(Trim$(txtAName.text)) Or Not IsNumeric(Trim$(txtInfo(0).text)) Then Exit Sub
+        
+        Call SendSetOrganization(Trim$(txtAName.text), CLng(Trim$(txtInfo(5).text)))
 End Select
 End Sub
 

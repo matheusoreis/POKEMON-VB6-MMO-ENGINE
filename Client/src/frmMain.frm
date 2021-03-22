@@ -422,7 +422,6 @@ Begin VB.Form frmMain
          _Version        =   393217
          BackColor       =   1907997
          BorderStyle     =   0
-         Enabled         =   -1  'True
          ScrollBars      =   2
          Appearance      =   0
          TextRTF         =   $"frmMain.frx":427682

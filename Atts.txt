@@ -86,3 +86,7 @@ Termos; aparecer toda vez que inicia o cliente, ao concordar não irá mais apar
 Servidor:
 
 Sistema de ban refeito, agora funcionando perfeitamente(Adicionado)
+
+Main:
+
+Banco so mostrava a face nos 3 primeiros index(Arrumado)

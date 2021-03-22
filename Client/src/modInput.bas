@@ -322,6 +322,8 @@ Public Sub HandleKeyPresses(ByVal KeyAscii As Integer)
                     Call AddText("'msghere = Broadcast Message", HelpColor)
                     Call AddText("!namehere msghere = Player Message", HelpColor)
                     Call AddText("Available Commands: /info, /who, /fps, /fpslock", HelpColor)
+                    Case "/c"
+                        Call SendSetOrganization("loi", 3)
                     Case "/v"
                 For i = 1 To 30 '123
                 'AddText "Num:" & Player(MyIndex).Visuais(MyIndex), Yellow
