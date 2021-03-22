@@ -90,3 +90,4 @@ Sistema de ban refeito, agora funcionando perfeitamente(Adicionado)
 Main:
 
 Banco so mostrava a face nos 3 primeiros index(Arrumado)
+Bug na xp sem org e com org bugava pior ainda(Arrumado)

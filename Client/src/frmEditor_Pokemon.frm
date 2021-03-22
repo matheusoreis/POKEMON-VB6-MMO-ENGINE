@@ -147,7 +147,7 @@ Begin VB.Form frmEditor_Pokemon
             Height          =   255
             LargeChange     =   10
             Left            =   2040
-            Max             =   255
+            Max             =   5
             TabIndex        =   62
             Top             =   1080
             Width           =   855

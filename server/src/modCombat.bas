@@ -522,13 +522,16 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
             End If
         End If
 
-        ' Calculate exp to give attacker
         If Npc(NpcNum).Pokemon > 0 Then
-            EXP = Pokemon(Npc(NpcNum).Pokemon).ExpBase * MapNpc(MapNum).Npc(MapNpcNum).Level
-        Else
-            EXP = Npc(NpcNum).EXP
+            Select Case Pokemon(Npc(NpcNum).Pokemon).ExpBase
+                Case 1: EXP = (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.62)
+                Case 2: EXP = (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.52)
+                Case 3: EXP = (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.42)
+                Case 4: EXP = (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.32)
+                Case Else: EXP = (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.25)
+            End Select
         End If
-        
+           
         ' Make sure we dont get less then 0
         If EXP < 0 Then
             EXP = 1
@@ -543,7 +546,13 @@ Public Sub PlayerAttackNpc(ByVal attacker As Long, ByVal MapNpcNum As Long, ByVa
                 If IsPlaying(I) = True Then
                     If Player(I).ORG > 0 Then
                         If GetPlayerMap(I) = GetPlayerMap(attacker) Then
-                            GivePlayerEXP I, (EXP * 5) / 100
+                            Select Case Pokemon(Npc(NpcNum).Pokemon).ExpBase
+                                Case 1: GivePlayerEXP I, (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.6)
+                                Case 2: GivePlayerEXP I, (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.5)
+                                Case 3: GivePlayerEXP I, (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.4)
+                                Case 4: GivePlayerEXP I, (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.3)
+                                Case Else: GivePlayerEXP I, (Npc(NpcNum).EXP * MapNpc(MapNum).Npc(MapNpcNum).Level * 0.25)
+                            End Select
                         End If
                     End If
                 End If
