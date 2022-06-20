@@ -142,7 +142,7 @@ Public Sub LoadOptions()
         Options.SavePass = 0
         Options.Username = vbNullString
         Options.IP = "127.0.0.1"
-        Options.Port = 7001
+        Options.Port = 7777
         Options.MenuMusic = vbNullString
         Options.Music = 1
         Options.sound = 1

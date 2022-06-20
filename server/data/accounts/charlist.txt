@@ -1,11 +1,2 @@
-Admin
-kasadim
-batalha
-batalhar
-PokDispBattle
-org12
-org123
-org1234
-org125
-Hurgete
-thales
+admin
+Everton
