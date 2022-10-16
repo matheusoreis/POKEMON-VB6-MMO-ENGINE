@@ -640,6 +640,7 @@ Begin VB.Form frmPanel
       Begin VB.HScrollBar scrlAItem 
          Height          =   375
          Left            =   240
+         Max             =   255
          Min             =   1
          TabIndex        =   23
          Top             =   7080
